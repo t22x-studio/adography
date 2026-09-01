@@ -1,0 +1,3522 @@
+<!DOCTYPE html>
+<html lang="en" class="min-h-full bg-[#f4f1ea] dark:bg-[#0f0f10] text-stone-800">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Short, clean browser tab title (No UI clutter) -->
+  <title class="notranslate">Adography - Curated Ado Video Archive</title>
+
+  <!-- 100% INVISIBLE to users, visible ONLY to Google Search & Discord/X Link Previews -->
+  <meta name="description" content="Curated Ado video directory & music archive. Stream official music videos, live stadium concerts, Vocaloid covers, and playlists." />
+  <meta name="keywords" content="Ado, アド, Adography, Ado live, Ado ライブ映像, Ado 歌ってみた, Ado MV, Ado songs list, Ado concert, Ado 心臓, Ado 国立競技場, Ado モナ・リザの横顔, Ado カムパネルラ, Ado 喜劇, Ado Hibana, Uta One Piece, Ado playlist, Vocaloid, Utaite" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Invisible Rich Social Preview Card (Discord, X/Twitter, LINE) -->
+  <meta property="og:title" content="Adography - Curated Ado Video Archive" />
+  <meta property="og:description" content="Curated Ado video directory & continuous music player. Stream official MVs, live stages, and covers." />
+  <meta property="og:image" content="https://img.youtube.com/vi/NVutx0Olj8E/hqdefault.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎵</text></svg>">
+  <!-- Google Structured Data (JSON-LD Schema for Rich Google Results) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    "name": "Ado (アド)",
+    "description": "Curated Ado music video and live concert performance archive.",
+    "genre": ["J-Pop", "Vocaloid", "Rock"],
+    "subjectOf": {
+      "@type": "WebSite",
+      "name": "Adography",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "#main?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  }
+  </script>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter, Space Grotesk & Newsreader -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Fuse.js Fuzzy Search Engine CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js"></script>
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            vibe: {
+              bg: '#f4f1ea',
+              card: '#faf8f5',
+              border: '#e2ddd3',
+              navy: '#1d2a3a',
+              accent: '#2b5075',
+              muted: '#78716c'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Space Grotesk', 'sans-serif'],
+            serif: ['Newsreader', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Translate Element Initialization Callback -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+  <style>
+    /* Custom Scrollbar for Warm Palette */
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #e8e4dc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c2bbb0;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a195;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .scrollbar-none::-webkit-scrollbar {
+      display: none;
+    }
+    .scrollbar-none {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Google Translate Widget Styling - Clean Compact Fit */
+    #google_translate_element {
+      display: inline-flex !important;
+      align-items: center !important;
+      height: 26px !important;
+    }
+    #google_translate_element .goog-te-gadget-simple {
+      background-color: #faf8f5 !important;
+      border: 1px solid #d6d3cd !important;
+      padding: 2px 6px !important;
+      border-radius: 6px !important;
+      font-size: 10px !important;
+      font-family: inherit !important;
+      color: #44403c !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      height: 26px !important;
+      box-sizing: border-box !important;
+      white-space: nowrap !important;
+    }
+    #google_translate_element .goog-te-gadget-icon {
+      display: none !important;
+    }
+    #google_translate_element .goog-te-menu-value {
+      color: #44403c !important;
+      font-size: 10px !important;
+      margin: 0 !important;
+      line-height: 1.2 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+    #google_translate_element .goog-te-menu-value span {
+      color: #44403c !important;
+      font-size: 10px !important;
+    }
+    #google_translate_element .goog-te-menu-value img {
+      display: none !important;
+    }
+    body {
+      top: 0px !important;
+      position: static !important;
+    }
+
+    /* Theatre Mode Smooth Overlay transition */
+    #theatreBackdrop {
+      transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    /* Theatre Mode Top Header Lights-Out Overrides */
+    body.theatre-active header {
+      background-color: #0a0a0b !important;
+      border-color: #1a1a1a !important;
+    }
+
+    body.theatre-active header h1,
+    body.theatre-active header p,
+    body.theatre-active header button,
+    body.theatre-active header i,
+    body.theatre-active header input,
+    body.theatre-active header div {
+      background-color: #121212 !important;
+      color: #525252 !important;
+      border-color: #222222 !important;
+    }
+
+   /* Hide Google Translate Widget & Mood Filter Bar in Theatre Mode */
+    body.theatre-active #google_translate_element,
+    body.theatre-active .goog-te-gadget-simple,
+    body.theatre-active #moodFilterContainer,
+    body.theatre-active #miniPlayerBar {
+      display: none !important;
+    }
+
+    body.theatre-active header input::placeholder {
+      color: #3f3f46 !important;
+    }
+
+    #view-detail.theatre-active button,
+    #view-detail.theatre-active a,
+    #view-detail.theatre-active #btnPrevTrack,
+    #view-detail.theatre-active #btnTheatreToggle,
+    #view-detail.theatre-active #btnNextTrack {
+      background-color: #0a0a0b !important; /* Pitch dark buttons */
+      color: #212140 !important; /* Muted dark grey text */
+      border-color: #222222 !important;
+    }
+
+    #view-detail.theatre-active button:hover,
+    #view-detail.theatre-active a:hover {
+      color: #a3a3a3 !important;
+      border-color: #333333 !important;
+    }
+
+    /* Notes info box, background containers, and tag chips */
+   #view-detail.theatre-active #detailContent,
+    #view-detail.theatre-active #detailContent div,
+    #view-detail.theatre-active #detailContent div[class*="bg-"],
+    #view-detail.theatre-active #detailContent .p-4,
+    #view-detail.theatre-active #detailContent .bg-stone-200,
+    #view-detail.theatre-active #detailContent span[onclick*="filterByTag"] {
+      background-color: #0a0a0b !important;
+      color: #252532 !important;
+      border-color: #1a1a1d !important;
+    }
+
+    /* Recolor ALL divider lines inside detail view */
+    #view-detail.theatre-active #detailContent .border-stone-200,
+    #view-detail.theatre-active #detailContent .border-stone-300,
+    #view-detail.theatre-active #detailContent .border-t,
+    #view-detail.theatre-active #detailContent .border-b {
+      border-color: #0a0a0b !important;
+    }
+
+    /* All text, titles, notes, and tags fade into dark grey */
+    #view-detail.theatre-active #detailContent h1,
+    #view-detail.theatre-active #detailContent p,
+    #view-detail.theatre-active #detailContent span,
+    #view-detail.theatre-active #detailContent div,
+    #view-detail.theatre-active #detailContent i {
+      color: #171739 !important;
+    }
+
+    /* Mood and Category badges in Theatre Mode match dark button styling */
+    #view-detail.theatre-active #detailContent .bg-red-600,
+    #view-detail.theatre-active #detailContent .bg-orange-600,
+    #view-detail.theatre-active #detailContent .bg-yellow-400,
+    #view-detail.theatre-active #detailContent .bg-blue-900,
+    #view-detail.theatre-active #detailContent .bg-blue-400 {
+      background-color: #121212 !important;
+      color: #171739 !important;
+      border: 1px solid #222222 !important;
+    }
+
+    /* Keep exit icon green beacon */
+    /* ── Mobile Main View: compact strip cards ── */
+    @media (max-width: 767px) {
+      #mainContainer {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+      }
+      #mainContainer article {
+        flex-direction: row !important;
+        border-radius: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-top: none !important;
+        border-bottom: 1px solid #e7e5e4 !important;
+        box-shadow: none !important;
+        min-height: 72px !important;
+      }
+      #mainContainer article > div:first-child {
+        display: flex !important;
+        flex-direction: row !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      #mainContainer .aspect-video {
+        width: 108px !important;
+        min-width: 108px !important;
+        height: 72px !important;
+        aspect-ratio: unset !important;
+        flex-shrink: 0 !important;
+        border-radius: 0 !important;
+      }
+      #mainContainer article > div:first-child > div:last-child {
+        flex: 1 1 auto !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        padding: 8px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+      }
+      #mainContainer .p-4.space-y-2\.5 > p,
+      #mainContainer .p-4.space-y-2\.5 > .flex.flex-wrap.gap-1.pt-1 {
+        display: none !important;
+      }
+      #mainContainer h3 {
+        font-size: 13px !important;
+        line-height: 1.3 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        margin-bottom: 0 !important;
+      }
+      /* Hide action row completely on mobile strip to keep 72px clean height */
+      #mainContainer .card-action-row {
+        display: none !important;
+      }
+      /* Pushes date strictly to the far right edge */
+      #mainContainer .card-meta-row {
+        width: 100% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        margin-bottom: 2px !important;
+      }
+      #mainContainer .card-meta-row .card-date {
+        margin-left: auto !important;
+        text-align: right !important;
+        flex-shrink: 0 !important;
+        font-family: monospace, -apple-system, sans-serif !important;
+        font-size: 10px !important;
+        color: #78716c !important;
+      }
+    }
+
+    #view-detail.theatre-active #btnTheatreToggle i {
+      color: #22c55e !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       DARK MODE THEME SYSTEM (Easy-to-customize Color Tokens) 
+       ═══════════════════════════════════════════════════════ */
+    html.dark {
+      color-scheme: dark;
+    }
+    html.dark,
+    html.dark body {
+      background-color: #0f0f10 !important; /* Full Scroll Canvas & Body */
+      color: #f4f4f5 !important;            /* Main Text Color */
+      min-height: 100vh !important;
+    }
+    /* Sticky Top Header */
+    html.dark header {
+      background-color: rgba(15, 15, 16, 0.92) !important;
+      border-color: #27272a !important;
+    }
+    html.dark header h1 {
+      color: #fafafa !important;
+    }
+    /* Search Bar */
+    html.dark #searchInput {
+      background-color: #1c1c1f !important;
+      border-color: #2e2e33 !important;
+      color: #f4f4f5 !important;
+    }
+    html.dark #searchInput::placeholder {
+      color: #71717a !important;
+    }
+    /* Nav Segmented Pill */
+    html.dark nav .bg-\[\#eae5db\] {
+      background-color: #1c1c1f !important;
+      border-color: #2e2e33 !important;
+    }
+    /* Cards (Main View, Detail View, Playlists, Tag Directory) */
+    html.dark article,
+    html.dark #view-playlists > div,
+    html.dark #view-tags > div,
+    html.dark #detailContent {
+      background-color: #18181b !important; /* Card Surface */
+      border-color: #27272a !important;     /* Card Border */
+      color: #e4e4e7 !important;
+    }
+    html.dark h2, html.dark h3, html.dark h4 {
+      color: #fafafa !important;
+    }
+    /* Dividers & Borders */
+    html.dark .border-stone-300,
+    html.dark .border-stone-200,
+    html.dark section#filterStripSection {
+      border-color: #27272a !important;
+    }
+    /* Tag & Category Chips */
+    html.dark .bg-stone-200,
+    html.dark .bg-stone-200\/80 {
+      background-color: #27272a !important;
+      color: #d4d4d8 !important;
+    }
+    html.dark .bg-\[\#eae5db\] {
+      background-color: #222226 !important;
+      border-color: #2e2e33 !important;
+      color: #e4e4e7 !important;
+    }
+    html.dark .bg-\[\#faf8f5\] {
+      background-color: #1c1c1f !important;
+      border-color: #2e2e33 !important;
+      color: #d4d4d8 !important;
+    }
+    /* Sticky Footer */
+    html.dark footer {
+      background-color: #121214 !important;
+      border-color: #27272a !important;
+      color: #a1a1aa !important;
+    }
+    html.dark footer strong {
+      color: #fafafa !important;
+    }
+    /* Modals (Settings, About Ado, Manager, Dice) */
+    html.dark .bg-\[\#faf8f5\].border-stone-300 {
+      background-color: #18181b !important;
+      border-color: #2e2e33 !important;
+      color: #f4f4f5 !important;
+    }
+    /* Detail View Content Text, Headings & Note Box in Dark Mode */
+    html.dark #detailContent h1,
+    html.dark #detailContent h2,
+    html.dark #detailContent h3,
+    html.dark #detailContent p,
+    html.dark #detailContent a {
+      color: #f4f4f5 !important;
+    }
+    html.dark #detailContent .bg-\[\#f4f1ea\] {
+      background-color: #121214 !important;
+      border-color: #27272a !important;
+    }
+    html.dark #detailContent .bg-stone-200 {
+      background-color: #27272a !important;
+      color: #d4d4d8 !important;
+    }
+    html.dark #detailContent .border-stone-200 {
+      border-color: #27272a !important;
+    }
+
+    /* Mobile Strip Border in Dark Mode */
+    @media (max-width: 767px) {
+      html.dark #mainContainer article {
+        border-bottom-color: #27272a !important;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans antialiased bg-[#f4f1ea] dark:bg-[#0f0f10] text-stone-800 dark:text-stone-100 selection:bg-stone-800 selection:text-white overflow-x-hidden">
+
+  <!-- Top Navigation Header (Strict 1-Row Responsive Squeezing) -->
+  <header class="sticky top-0 z-50 w-full border-b border-stone-300/80 bg-[#f4f1ea]/90 backdrop-blur-md px-3 lg:px-8 pt-6 pb-2">
+    <!--  non-scrollable format <div class="max-w-6xl w-full mx-auto flex items-center justify-between gap-2 sm:gap-3 flex-nowrap"> -->
+      <div class="max-w-6xl w-full mx-auto flex items-center gap-2 sm:gap-3 flex-nowrap overflow-x-auto scrollbar-none">
+      
+      <!-- Brand Logo (Fixed, never shrinks) -->
+      <div class="flex items-center gap-2.5 cursor-pointer group flex-shrink-0" onclick="app.clearSearch(); app.navigateTo('main');">
+        <div class="w-8 h-8 rounded-md bg-stone-900 text-stone-100 flex items-center justify-center font-bold text-xl font-display shadow-xs group-hover:bg-blue-900 transition duration-200">
+          A:
+        </div>
+        <div>
+          <h1 class="font-serif font-bold text-xl sm:text-2xl tracking-tight text-stone-900 leading-none notranslate">Adography</h1>
+          <p class="hidden md:inline text-[10px] text-stone-500 font-sans tracking-wider uppercase mt-0.5">Curated Ado Video Archive</p>
+        </div>
+      </div>
+
+      <!-- Search Bar (Squeezes smoothly down to 100px, never jumps to a 2nd line) -->
+      <div class="flex-1 min-w-[100px] max-w-xs sm:max-w-sm mx-1 flex-shrink">
+        <div class="relative">
+          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
+          <input 
+            type="text" 
+            id="searchInput"
+            placeholder="Search tracks, tags..." 
+            oninput="app.handleSearch(this.value)"
+            class="w-full pl-8 pr-7 py-1.5 bg-[#eae5db] border border-stone-300 rounded-lg text-xs text-stone-800 placeholder-stone-500 focus:outline-none focus:border-stone-600 focus:bg-white transition"
+          >
+          <button id="clearSearchBtn" onclick="app.clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-xs">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Navigation Links (Segmented Toggles + Ghost Links) -->
+      <nav class="flex items-center gap-3 sm:gap-4 flex-shrink-0 flex-nowrap">
+        
+        <!-- View Toggles (Segmented Pill) -->
+                <div class="flex items-center bg-[#eae5db] p-1 rounded-lg border border-stone-300 shadow-inner">
+          
+          <button onclick="app.navigateTo('compact')" id="nav-btn-compact"
+          class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${this.activeView === 'compact' ? 'bg-blue-900 text-stone-600 shadow-sm' : 'text-stone-600 hover:text-stone-900'}">
+            <i class="fa-solid fa-table-cells text-[10px]"></i> <span class="hidden md:inline">Compact</span>
+          </button>
+          <button onclick="app.navigateTo('grid')" id="nav-btn-grid" class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${this.activeView === 'grid' ? 'bg-blue-900 text-stone-600 shadow-sm' : 'text-stone-600 hover:text-stone-900'}">
+            <i class="fa-solid fa-border-all text-[10px]"></i> <span class="hidden md:inline">Grid</span>
+          </button>
+          <button onclick="app.navigateTo('main')" id="nav-btn-home" class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-stone-600 hover:text-stone-900">
+            <i class="fa-regular fa-square-full text-[10px]"></i> <span class="hidden md:inline">Main</span>
+          </button>
+        </div>
+
+        <!-- Directory Links (Ghost Buttons) -->
+        <button onclick="app.triggerDiceShuffle()" title="Random Video Suggestion" class="p-1.5 text-stone-500 hover:text-blue-600 transition">
+            <i class="fa-solid fa-tooth animate-pulse"></i>
+          </button>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <button onclick="app.navigateTo('playlists')" class="text-xs font-bold px-2 py-1.5 text-stone-600 hover:text-blue-900 hover:bg-stone-200/60 rounded-md transition flex items-center gap-1.5">
+            <i class="fa-solid fa-list-ul text-[10px]"></i> <span class="hidden sm:inline">Playlists</span>
+          </button>
+
+          <button onclick="app.navigateTo('tags')" class="text-xs font-bold px-2 py-1.5 text-stone-600 hover:text-blue-900 hover:bg-stone-200/60 rounded-md transition flex items-center gap-1.5">
+            <i class="fa-solid fa-tag text-[10px]"></i> <span class="hidden sm:inline">Tags</span>
+          </button>
+        </div>
+
+        <!-- Utility Icons (Settings) -->
+        <div class="flex items-center gap-1 border-l border-stone-300 dark:border-stone-700 pl-2 sm:pl-3">
+          <button onclick="app.openModal('settingsModal')" class="p-1.5 text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition" title="Settings">
+            <i class="fa-solid fa-gear text-xs"></i>
+          </button>
+        </div>
+
+        <!-- Google Translate Widget -->
+        <div class="hidden lg:flex items-center gap-1 bg-[#faf8f5] px-1.5 py-1 rounded-md border border-stone-300 text-[11px] text-stone-600 flex-shrink-0" title="Translate Page">
+          <div id="google_translate_element"></div>
+        </div>
+      </nav>
+
+    </div>
+  </header>
+
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 lg:px-8 py-6">
+    
+    <!-- Category & Tag Filter Bar -->
+    <section class="mb-6 flex flex-wrap items-center justify-between gap-2 border-b border-stone-300 pb-3" id="filterStripSection">
+      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none" id="categoryContainer">
+        <!-- Categories injected via JS -->
+      </div>
+      <!-- Mood / Vibe Filter Row & Bottom Post Counter -->
+      
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none"  id="moodFilterContainer">
+          <!-- Mood pills injected dynamically -->
+        </div>
+        <div class="text-[11px] text-stone-500 font-medium px-1" id="resultsCount">
+          <span>Showing all posts</span>
+        </div>
+      <div id="topHeaderRight">
+        <!-- Injected dynamically via JS: 'About Ado' on Main Page 1, 'Back' otherwise -->
+      </div>
+    </section>
+
+    <!-- Active Tag Banner Indicator -->
+    <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] border border-stone-300 rounded-lg flex items-center justify-between text-xs text-stone-800">
+      <span>Filtering posts tagged with <strong id="activeTagName" class="font-serif text-stone-900">tag</strong></span>
+      <button onclick="app.clearTagFilter()" class="text-stone-600 hover:text-stone-900 font-semibold text-[11px] underline">
+        Clear Tag Filter
+      </button>
+    </div>
+
+    <!-- 1. MAIN VIEW PAGE -->
+    <div id="view-main" class="hidden space-y-6">
+      <div id="mainContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Post Cards injected dynamically -->
+      </div>
+      
+      <!-- Mood / Vibe Filter Row & Bottom Post Counter -->
+      <div class="pt-4 border-t border-stone-300/80 flex flex-wrap items-center justify-between gap-2">
+        <div class="flex flex-wrap items-center gap-1.5" id="moodFilterContainer">
+          <!-- Mood pills injected dynamically -->
+        </div>
+        <div class="text-[11px] text-stone-500 font-medium px-1" id="resultsCount">
+          <span>Showing all posts</span>
+        </div>
+      </div>
+
+      <!-- Pagination Controls (Now strictly inside view-main) -->
+      <div class="flex items-center justify-between pt-3 border-t border-stone-200" id="mainPagination"></div>
+    </div>
+
+    
+    <!-- 2. COMPACT VIEW PAGE (Tightly packed 1:1 square grid matching ver3_reference.html) -->
+    <div id="view-compact" class="hidden max-w-6xl mx-auto space-y-6">
+      <div id="compactGridContainer" class="space-y-8"></div>
+      <div class="flex items-center justify-between pt-6 border-t border-stone-300" id="compactPagination"></div>
+    </div>
+
+    <!-- 3. GRID VIEW PAGE -->
+    <div id="view-grid" class="hidden max-w-6xl mx-auto space-y-8">
+      <div id="gridMonthGroups" class="space-y-8"></div>
+      <div class="flex items-center justify-between pt-6 border-t border-stone-300" id="gridPagination"></div>
+    </div>
+
+    <!-- 4. PLAYLISTS PAGE -->
+    <div id="view-playlists" class="hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-[#faf8f5] border border-stone-300 rounded-xl p-6 md:p-10 space-y-8 shadow-xs">
+        <div class="flex justify-between items-baseline border-b border-stone-300/60 pb-3">
+          <h2 class="font-serif font-bold text-2xl text-stone-900 tracking-tight">Playlists</h2>
+          <span class="text-xs text-stone-500 font-sans" id="playlistCountBadge">4 Curated Playlists</span>
+        </div>
+        <div id="playlistTocList" class="space-y-4 divide-y divide-stone-200/60"></div>
+      </div>
+    </div>
+
+    <!-- 5. TAGS INDEX PAGE -->
+    <div id="view-tags" class="hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-[#faf8f5] border border-stone-300 rounded-xl p-6 md:p-8 space-y-6 shadow-xs">
+        <div>
+          <h2 class="font-serif font-bold text-2xl text-stone-900">Tag Directory</h2>
+          <p class="text-xs text-stone-500 mt-1">Browse posts grouped by categories and tags.</p>
+        </div>
+        <div id="tagDirectoryContent" class="space-y-6 text-stone-800 leading-relaxed divide-y divide-stone-200"></div>
+      </div>
+    </div>
+
+    <!-- 6. POST DETAIL VIEW PAGE WITH THEATRE DARK MODE & PREV/NEXT -->
+    <div id="theatreBackdrop" class="fixed inset-0 bg-black/95 z-40 hidden transition-all duration-300 pointer-events-none"></div>
+
+    <div id="view-detail" class="hidden max-w-4xl w-full mx-auto px-4 md:px-6 relative z-40">
+      <!-- Top Action Bar in Detail View -->
+      <div class="mb-5 flex items-center justify-between gap-2">
+        <button onclick="app.goBack()" class="px-3 py-1.5 bg-[#faf8f5] dark:bg-stone-800 hover:bg-blue-900 hover:text-white text-stone-700 dark:text-stone-200 rounded-md border border-stone-300 dark:border-stone-700 hover:border-blue-800 text-xs font-medium transition flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-left"></i> Back
+        </button>
+
+        <!-- Prev / Next Navigation & Theatre Mode Toggle -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="app.navigateDetailTrack(-1)" id="btnPrevTrack" title="Previous Track (Left Arrow)" class="px-2.5 py-1.5 bg-[#faf8f5] hover:bg-stone-800 hover:text-white text-stone-700 rounded-md border border-stone-300 text-xs font-medium transition flex items-center gap-1">
+            <i class="fa-solid fa-chevron-left text-[10px]"></i> Prev
+          </button>
+
+          <button onclick="app.addToQueue(app.selectedPostId, event)" title="Add this track to Queue" class="px-2.5 py-1.5 bg-[#faf8f5] dark:bg-stone-800 hover:bg-blue-900 hover:text-white text-stone-700 dark:text-stone-200 rounded-md border border-stone-300 dark:border-stone-700 text-xs font-medium transition flex items-center gap-1">
+            <i class="fa-solid fa-list-plus"></i> + Queue
+          </button>
+
+          <button onclick="app.toggleTheatreMode()" id="btnTheatreToggle" title="Toggle Theatre Dark Mode (Shortcut: T)" class="px-3 py-1.5 bg-[#faf8f5] hover:bg-amber-700 hover:text-white text-stone-800 rounded-md border border-stone-300 text-xs font-semibold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-film text-blue-800"></i> Theatre Mode
+          </button>
+
+          <button onclick="app.navigateDetailTrack(1)" id="btnNextTrack" title="Next Track (Right Arrow)" class="px-2.5 py-1.5 bg-[#faf8f5] hover:bg-stone-800 hover:text-white text-stone-700 rounded-md border border-stone-300 text-xs font-medium transition flex items-center gap-1">
+            Next <i class="fa-solid fa-chevron-right text-[10px]"></i>
+          </button>
+        </div>
+      </div>
+
+      <article id="detailContent" class="bg-[#faf8f5] border border-stone-300 rounded-xl overflow-hidden shadow-xs p-5 space-y-5 transition duration-300"></article>
+    </div>
+
+  </main>
+
+  <!-- FLOATING BACK TO TOP BUTTON -->
+  <button 
+    id="btnBackToTop" 
+    onclick="window.scrollTo({ top: 0, behavior: 'smooth' })" 
+    title="Back to Top (Page Up)"
+    class="hidden fixed bottom-4 right-4 sm:right-8 z-40 w-8 h-8 rounded-lg bg-stone-900/60 hover:bg-stone-900 text-stone-200 backdrop-blur-xs border border-stone-700/50 shadow-lg flex items-center justify-center text-xs transition-all duration-300">
+    <i class="fa-solid fa-chevron-up text-[10px]"></i>
+  </button>
+
+  <!-- STICKY MINI-PLAYER FLOATING BAR (Persistent SPA Audio/Video Host) -->
+  <div id="miniPlayerBar" class="hidden fixed bottom-14 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/55 backdrop-blur-sm text-stone-100 border border-stone-700/60 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2.5">
+    <!-- Persistent Iframe Mount (Hidden from view, never resets on navigation) -->
+    <div id="persistentPlayerHost" class="hidden"></div>
+
+    <div class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
+      <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-10 h-10 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
+      <div class="min-w-0 flex-1">
+        <h4 id="miniPlayerTitle" class="text-xs font-serif font-bold text-stone-100 truncate">Playing Track...</h4>
+        <div class="flex items-center gap-2 text-[10px] text-stone-400 font-sans">
+          <span id="miniPlayerStatus" class="flex items-center gap-1 text-blue-400"><i class="fa-solid fa-compact-disc animate-spin"></i> Playing</span>
+          <span id="miniPlayerQueueCounter" class="text-stone-500 font-mono hidden">1/15</span>
+          <button type="button" onclick="event.stopPropagation(); app.toggleQueueDrawer()" id="btnMiniQueue" class="px-1.5 py-0.5 rounded bg-stone-800/90 hover:bg-stone-700 text-[10px] text-amber-400 font-semibold transition flex items-center gap-1">
+            <i class="fa-solid fa-list-ul text-[9px]"></i> <span id="miniQueueBadge">Queue (0)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Playback Navigation & Autoplay Controls -->
+    <div class="flex items-center gap-1 flex-shrink-0">
+      <button onclick="app.playPrevTrack()" title="Previous Song (⏮)" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs transition">
+        <i class="fa-solid fa-backward-step text-[10px]"></i>
+      </button>
+      <button onclick="app.toggleMiniPlayerPlayPause()" id="btnMiniPlayPause" title="Play / Pause" class="w-8 h-8 rounded-full bg-blue-700 hover:bg-blue-600 text-white flex items-center justify-center text-xs transition shadow-sm">
+        <i class="fa-solid fa-pause"></i>
+      </button>
+      <button onclick="app.playNextTrack()" title="Next Song (⏭)" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs transition">
+        <i class="fa-solid fa-forward-step text-[10px]"></i>
+      </button>
+      <button onclick="app.toggleAutoplay()" id="btnMiniAutoplay" title="Autoplay Loop: ON" class="w-7 h-7 rounded-full bg-stone-800 text-amber-400 hover:text-amber-300 flex items-center justify-center text-xs transition ml-0.5">
+        <i class="fa-solid fa-repeat text-[10px]"></i>
+      </button>
+      <button onclick="app.stopMiniPlayer()" title="Stop & Close" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-rose-900 text-stone-400 hover:text-rose-200 flex items-center justify-center text-xs transition ml-1">
+        <i class="fa-solid fa-xmark text-xs"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- MODAL: PLAYBACK QUEUE DRAWER Playlist queue-->
+  <div id="queueDrawerModal" class="hidden fixed inset-0 z-50 bg-stone-950/60 backdrop-blur-xs flex items-end sm:items-center justify-end sm:justify-center p-0 sm:p-4" onclick="if(event.target===this)app.closeModal('queueDrawerModal')">
+    <div class="bg-[#faf8f5] dark:bg-stone-900 border border-stone-300 dark:border-stone-700/80 rounded-t-2xl sm:rounded-2xl max-w-md w-full p-5 shadow-2xl space-y-4 max-h-[80vh] flex flex-col text-stone-800 dark:text-stone-100">
+      
+      <!-- Drawer Header -->
+      <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-700/70 pb-3 flex-shrink-0">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-list-ul text-blue-800 dark:text-blue-400"></i>
+          <h3 class="font-serif font-bold text-base">Playback Queue</h3>
+          <span id="queueDrawerTotalBadge" class="text-[11px] font-mono text-stone-500 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded">0 tracks</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="app.clearQueue()" class="text-[11px] text-rose-600 dark:text-rose-400 hover:underline font-medium">
+            <i class="fa-solid fa-trash-can text-base"></i>
+             Clear
+          </button>
+          <button onclick="app.closeModal('queueDrawerModal')" class="text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 p-1">
+            <i class="fa-solid fa-xmark text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Drawer Content (Now Playing + Scrollable Next In Queue) -->
+      <div id="queueDrawerListContainer" class="flex-1 overflow-y-auto space-y-3 pr-1 text-xs">
+        <!-- Rendered dynamically by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Bottom Footer with Visit Counter -->
+  <footer class="w-full border-t border-stone-300/70 bg-[#eae5db]/60 py-3 px-4 lg:px-8 text-xs text-stone-600 flex flex-wrap justify-between items-center gap-2 mt-auto">
+    <div class="flex items-center gap-2 font-mono text-[11px] bg-[#faf8f5] px-2.5 py-1 rounded-md border border-stone-300 text-stone-700 shadow-2xs">
+      <i class="fa-solid fa-eye text-stone-500"></i>
+      <span>Visits: <strong id="footerVisitCounter" class="text-stone-900 font-bold">0</strong></span>
+    </div>
+    
+    <div class="text-[11px] text-stone-500 font-serif flex items-center gap-2">
+      <span>Adography &copy; 2026 · Unofficial Adomin Archive</span>
+      <button onclick="app.openModal('disclaimerModal')" class="underline hover:text-stone-900 transition">
+        Disclaimer
+      </button>
+    </div>
+  </footer>
+
+  <!-- MODAL: ABOUT ADO MODAL -->
+  <div id="aboutAdoModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)app.closeModal('aboutAdoModal')">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-md w-full p-6 shadow-xl flex flex-col justify-between max-h-[85vh]">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between border-b border-stone-200 pb-3 flex-shrink-0">
+        <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+          About Ado
+        </h3>
+        <button onclick="app.closeModal('aboutAdoModal')" class="text-stone-400 hover:text-stone-800 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Body (Preserves paragraph containers, click anywhere to skip) -->
+      <div id="aboutAdoTypingBody" class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed space-y-3 font-sans overflow-y-auto my-3 pr-1 cursor-pointer" onclick="app.skipTypingAnimation()" title="Click to display full text immediately">
+        <p>Drawn by a lifelong desire to empower others through song, Ado chose her stage name from the supporting role in traditional Japanese Kyogen theater—a subtle nod to supporting her listeners from behind the scenes. Growing up on Vocaloid culture and inspired by Hatsune Miku, she began her journey in 2017 as a net-native utaite, recording vocals inside a DIY soundproofed closet booth.</p>
+        <p>In late 2020, her major debut single "Usseewa" ignited a cultural phenomenon, shattering domestic charts and turning her overnight into the voice of a modern generation.</p>
+        <p>Known for her astonishing vocal gymnastics—effortlessly switching between delicate whispers, intricate range leaps, and signature growls (ganari)—she made global history in 2022 as the singing voice of Uta in ONE PIECE FILM RED. Her hit "New Genesis" (Shin Jidai) became the first Japanese song in history to reach No. 1 on the Apple Music Global Top 100 Chart, while tracks from the same soundtrack album swept the top positions of the Billboard Japan Hot 100.</p>
+        <p>From her anthem "KIRA", which backed the Japan National Football Team for the 2026 World Cup campaign, to her sold-out global arena tours, Ado continues to reign at the forefront of modern J-pop without revealing her face, proving that pure vocal mastery needs no identity.</p>
+        <p class="text-[11px] text-stone-500 dark:text-stone-400 italic pt-1 border-t border-stone-200 dark:border-stone-700">
+          "Adography" is a curated digital archive dedicated to cataloging her music videos, live stage performances, and Vocaloid covers.
+        </p>
+      </div>
+
+      <!-- Modal Footer (Locked firmly to bottom right) -->
+      <div class="pt-3 border-t border-stone-200 flex justify-end flex-shrink-0">
+        <button onclick="app.closeModal('aboutAdoModal')" class="px-4 py-1.5 bg-stone-800 hover:bg-blue-900 text-white rounded text-xs font-medium transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: LEGAL DISCLAIMER MODAL -->
+  <div id="disclaimerModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-md w-full p-5 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+        <h3 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+          Disclaimer & Attribution
+        </h3>
+        <button onclick="app.closeModal('disclaimerModal')" class="text-stone-400 hover:text-stone-800">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="text-xs text-stone-700 leading-relaxed space-y-2">
+        <p>
+          <strong>Adography</strong> is an unofficial, fan-made curated directory.
+        </p>
+        <p>
+          All music, videos, and media assets are embedded directly via official YouTube and Niconico APIs/iframes and remain the intellectual property of <strong>Ado</strong> and her respective legal rights holders. </p>
+          
+            <p>No video files or copyrighted audio are hosted on this server.
+        </p>
+      </div>
+      <!-- to update Youtube APIs and Niconico when add Niconico videos  -->
+
+      <div class="pt-2 border-t border-stone-200 flex justify-end">
+        <button onclick="app.closeModal('disclaimerModal')" class="px-3.5 py-1.5 bg-blue-900 hover:bg-blue-800 text-white rounded text-xs font-medium transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: SHARE TOOL MODAL -->
+  <div id="shareModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-sm w-full p-5 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-stone-200 pb-2.5">
+        <h3 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+          <i class="fa-solid fa-share-nodes text-stone-600"></i> Share Post
+        </h3>
+        <button onclick="app.closeModal('shareModal')" class="text-stone-400 hover:text-stone-800">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-3">
+        <p id="shareModalTitle" class="text-xs font-serif font-medium text-stone-800 line-clamp-2"></p>
+        
+        <!-- Social Buttons Grid -->
+        <div class="grid grid-cols-3 gap-2 text-center text-xs">
+          <button onclick="app.shareToPlatform('x')" class="p-2.5 bg-stone-900 text-white hover:bg-blue-800 rounded-lg flex flex-col items-center gap-1 transition">
+            <i class="fa-brands fa-x-twitter text-base"></i>
+            <span class="text-[10px]">X / Twitter</span>
+          </button>
+
+          <button onclick="app.shareToPlatform('facebook')" class="p-2.5 bg-[#1877f2] text-white hover:opacity-90 rounded-lg flex flex-col items-center gap-1 transition">
+            <i class="fa-brands fa-facebook-f text-base"></i>
+            <span class="text-[10px]">Facebook</span>
+          </button>
+
+          <button onclick="app.shareToPlatform('whatsapp')" class="p-2.5 bg-[#25d366] text-white hover:opacity-90 rounded-lg flex flex-col items-center gap-1 transition">
+            <i class="fa-brands fa-whatsapp text-base"></i>
+            <span class="text-[10px]">WhatsApp</span>
+          </button>
+        </div>
+
+        <!-- Copy Link Field -->
+        <div class="pt-2 border-t border-stone-200 space-y-1">
+          <label class="text-[10px] font-semibold text-stone-500 uppercase">Direct Link</label>
+          <div class="flex gap-1.5">
+            <input type="text" id="shareCopyUrl" readonly class="w-full px-2.5 py-1.5 bg-white border border-stone-300 rounded text-xs text-stone-700 select-all">
+            <button onclick="app.copyShareLink()" class="px-3 py-1.5 bg-stone-800 hover:bg-blue-900 text-white rounded text-xs transition flex-shrink-0">
+              Copy
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: IN-PAGE POST EDIT MODAL -->
+  <div id="editPostModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-xl w-full p-6 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+        <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+          <i class="fa-solid fa-pen-to-square text-amber-800"></i> Edit Post Details
+        </h3>
+        <button onclick="app.closeModal('editPostModal')" class="text-stone-400 hover:text-stone-800">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <form onsubmit="app.handleSaveEdit(event)" class="space-y-3.5 text-xs">
+        <input type="hidden" id="editPostId">
+        
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Post / Track Title *</label>
+          <input type="text" id="editTitle" required class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+          <label class="font-semibold text-stone-700 block mb-1 mt-2">URL Slug (romaji/English, editable)</label>
+          <input type="text" id="editSlug" placeholder="e.g. himawari" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none font-mono text-xs">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">YouTube URL or Video ID *</label>
+          <input type="text" id="editYtUrl" required onpaste="setTimeout(() => { this.value = app.cleanUrl(this.value); app.fetchVideoMetadata(this.value, 'edit'); }, 100)" onblur="this.value = app.cleanUrl(this.value); app.fetchVideoMetadata(this.value, 'edit');" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1.5">Categories (Check all that apply)</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-white p-2.5 border border-stone-300 rounded-md text-stone-800">
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Cover" class="accent-stone-800"> Cover</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="MV" class="accent-stone-800"> MV</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Collab" class="accent-stone-800"> Collab</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Vocaloid" class="accent-stone-800"> Vocaloid</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Original" class="accent-stone-800"> Original</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Soundtrack" class="accent-stone-800"> Soundtrack</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Live" class="accent-stone-800"> Live</label>
+            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Audio" class="accent-stone-800"> Audio</label>
+          </div>
+        </div>
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Custom Category (Optional, e.g. Instrumental & Off-Vocal, Others)</label>
+          <input type="text" id="editCustomCategory" placeholder="e.g. Instrumental & Off-Vocal, Others" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Mood (Optional)</label>
+            <select id="editMood" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+              <option value="">None (Optional)</option>
+              <option value="Hype / アゲ曲">Hype / アゲ曲</option>
+              <option value="Anthem / エール">Anthem / エール</option>
+              <option value="Melancholy / 切ない">Melancholy / 切ない</option>
+              <option value="Dark / ダーク">Dark / ダーク</option>
+              <option value="Chill / バラード">Chill / バラード</option>
+              <option value="Playful / 遊び心">Playful / 遊び心</option>
+            </select>
+          </div>
+          <div>
+            <label class="font-semibold text-stone-700 block mb-1">Custom Date</label>
+            <input type="date" id="editCustomDate" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+          </div>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Custom Thumbnail URL (Optional)</label>
+          <input type="text" id="editThumbnailUrl" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Tags (Comma separated)</label>
+          <input type="text" id="editTags" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Manual Related Tracks (Unique Post IDs, Slugs, or Full Titles — Comma-separated)</label>
+          <input type="text" id="editRelated" placeholder="e.g. himawari, post-ado-2, hibana-hibana-saitama" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none font-mono text-xs">
+          <p class="text-[10px] text-stone-500 mt-0.5">Pins these specific tracks in order to the front of the related filmstrip.</p>
+        </div>
+
+        <div>
+          <label class="font-semibold text-stone-700 block mb-1">Post Notes & Commentary</label>
+          <textarea id="editNotes" rows="4" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none"></textarea>
+        </div>
+
+        <div class="pt-3 border-t border-stone-200 flex justify-end gap-2">
+          <button type="button" onclick="app.closeModal('editPostModal')" class="px-4 py-2 border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 font-medium rounded-md text-xs transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-4 py-2 bg-stone-800 hover:bg-blue-900 text-white font-medium rounded-md text-xs transition flex items-center gap-1.5">
+            <i class="fa-solid fa-floppy-disk"></i> Save Changes
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: DAILY DICE SHUFFLE MODAL -->
+  <div id="diceModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-lg w-full p-5 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-700/80 pb-3">
+        <div class="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-serif font-bold text-lg">
+          <i class="fa-solid fa-tooth text-blue-500 text-xl animate-pulse"></i> Random Suggestion
+        </div>
+        <button onclick="app.closeModal('diceModal')" class="text-stone-400 hover:text-stone-800 dark:hover:text-stone-200">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="diceResultContainer" class="space-y-4"></div>
+
+      <div class="flex justify-between items-center pt-2 border-t border-stone-200">
+        <button onclick="app.triggerDiceShuffle()" class="px-3.5 py-1.5 bg-blue-900 text-stone-100 hover:bg-blue-700 rounded-md text-xs font-medium transition flex items-center gap-1.5">
+          <i class="fa-solid fa-rotate"></i>  Once More
+        </button>
+        <button onclick="app.closeModal('diceModal')" class="px-3 py-1.5 text-stone-600 hover:text-blue-900 text-xs">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+    <!-- MODAL: QUICK VIEW -->
+  <div id="quickViewModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)app.closeModal('quickViewModal')">
+    <div class="bg-stone-900 border border-stone-600 rounded-xl max-w-lg w-full p-5 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-stone-900 pb-3">
+        <div class="flex items-center gap-2 text-stone-400 font-serif font-bold text-lg">
+          <i class="fa-regular fa-circle-play text-blue-500 text-xl animate-pulse"></i> Viewing
+        </div>
+        <button onclick="app.closeModal('quickViewModal')" class="text-stone-700 hover:text-stone-600">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+      <div id="quickViewContainer" class="space-y-3"></div>
+      <div class="flex justify-between items-center pt-2 border-t border-stone-900">
+        <div class="flex items-center gap-2">
+          <button id="quickViewQueueBtn" onclick="" class="px-3 py-1.5 bg-stone-800 text-amber-400 hover:bg-blue-900 hover:text-white rounded-md text-xs font-semibold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-list-plus"></i> + Queue
+          </button>
+          <button id="quickViewDetailBtn" onclick="" class="px-3 py-1.5 bg-stone-400 text-stone-900 hover:bg-blue-900 hover:text-white rounded-md text-xs font-semibold transition flex items-center gap-1.5">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> View Post
+          </button>
+        </div>
+        <button onclick="app.closeModal('quickViewModal')" class="px-3 py-1.5 text-stone-500 hover:text-stone-300 text-xs">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="settingsModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-sm w-full p-5 shadow-xl space-y-4">
+      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+        <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-stone-600"></i> Settings
+        </h3>
+        <button onclick="app.closeModal('settingsModal')" class="text-stone-400 hover:text-stone-800">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <!-- Theme Mode Switcher (Streamlined Row with FontAwesome Icons) -->
+        <div class="flex items-center justify-between gap-4 py-1">
+          <label class="font-semibold text-stone-700 dark:text-stone-300">Appearance Theme</label>
+          <div class="flex items-center bg-[#eae5db] dark:bg-stone-800 p-0.5 rounded-lg border border-stone-300 dark:border-stone-700 w-24">
+            <button 
+              type="button" 
+              onclick="app.setTheme('light')" 
+              id="theme-btn-light" 
+              title="Light Mode"
+              class="flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition">
+              <i class="fa-regular fa-sun text-[11px]"></i>
+            </button>
+            <button 
+              type="button" 
+              onclick="app.setTheme('dark')" 
+              id="theme-btn-dark" 
+              title="Dark Mode"
+              class="flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition">
+              <i class="fa-solid fa-moon text-[11px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Posts Per Page Range Slider -->
+        <div class="pt-2 border-t border-stone-200">
+          <div class="flex justify-between items-center mb-1">
+            <label class="font-semibold text-stone-700">Posts Per Page</label>
+            <span id="postsPerPageValue" class="text-stone-900 font-bold">12</span>
+          </div>
+          <input type="range" id="postsPerPageRange" min="3" max="36" step="3" value="12" oninput="app.updatePostsPerPage(this.value)" class="w-full accent-stone-800 bg-stone-300">
+        </div>
+      </div>
+
+      <div class="pt-3 border-t border-stone-200 flex justify-end">
+        <button onclick="app.closeModal('settingsModal')" class="px-4 py-1.5 bg-blue-800 text-white font-medium rounded-md text-xs">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 hidden bg-stone-800 text-stone-100 text-xs px-4 py-2.5 rounded-lg shadow-lg flex items-center gap-2">
+    <i class="fa-solid fa-circle-info text-amber-400"></i>
+    <span id="toastMsg">Notification message</span>
+  </div>
+
+  <script>
+    /* --- SINGER TEMPLATE CONFIGURATION --- */
+    const DB_PREFIX = 'ado'; 
+    
+    const CATEGORY_PRIORITY = ['MV', 'Original', 'Live', 'Cover', 'Vocaloid', 'Soundtrack', 'Collab', 'Audio'];
+    
+    // Mood order and color mapping
+    const MOOD_CONFIG = [
+      { name: "Hype / アゲ曲", activeBg: "bg-red-600 text-white border-red-600", hoverBg: "hover:bg-red-600 hover:text-white" },
+      { name: "Anthem / エール", activeBg: "bg-orange-600 text-white border-orange-600", hoverBg: "hover:bg-orange-600 hover:text-white" },
+      { name: "Dark / ダーク", activeBg: "bg-stone-600 text-white border-stone-600", hoverBg: "hover:bg-stone-600 hover:text-white" },
+      { name: "Melancholy / 切ない", activeBg: "bg-blue-900 text-white border-blue-900", hoverBg: "hover:bg-blue-900 hover:text-white" },
+      { name: "Chill / バラード", activeBg: "bg-blue-400 text-white border-blue-400", hoverBg: "hover:bg-blue-400 hover:text-white" },
+      { name: "Playful / 遊び心", activeBg: "bg-yellow-400 text-stone-900 border-yellow-500 font-bold", hoverBg: "hover:bg-yellow-400 hover:text-stone-900" }
+    ];
+
+    const DISPLAY_TAG_LIMIT = 5;
+
+    /* --- CURATED PLAYLISTS CONFIG (Curated & Verified Concert Archives) --- */
+    const PLAYLIST_CONFIG = [
+      // Core Thematic & Mood Collections
+      { id: "pl-top10",      type: "tag",  tag: "Top 10 Playlist",  name: "Top 10 Must-Watch Playlist",                  desc: "Essential Top 10 of Ado's defining performances and music videos." },
+      { id: "pl-vocaloid",   type: "tag",  tag: "Vocaloid",         name: "#1 Vocaloid & Utaite Roots Playlist 💙",      desc: "Ado's love letter to Vocaloid culture-from early Niconico cover uploads, Vocaloid producer collaborations, to the iconic Hatsune Miku duet." },
+      { id: "pl-cover",      type: "tag",  tag: "Cover",            name: "Ado Covers Collection (歌ってみた)",           desc: "Memorable studio and acoustic covers of legendary Vocaloid and J-pop songs." },
+      { id: "pl-hype",       type: "mood", tag: "Hype / アゲ曲",     name: "Ado's Hype Playlist (アゲ曲)",                 desc: "Energetic and feel-good tracks with upbeat rhythms, catchy hooks, and powerful delivery." },
+      { id: "pl-anthem",     type: "mood", tag: "Anthem / エール",    name: "Ado's Anthem Playlist (エール)",               desc: "Uplifting and empowering tracks with inspiring messages of strength, growth, and hope." },
+      { id: "pl-dark",       type: "mood", tag: "Dark / ダーク",     name: "Ado's Dark Playlist (ダーク)",                 desc: "Intense, psychologically heavy tracks with dark atmospheres and powerful vocal delivery." },
+      { id: "pl-melancholy", type: "mood", tag: "Melancholy / 切ない", name: "Ado's Melancholy Playlist (切ない)",             desc: "Bittersweet ballads featuring Ado's expressive vocals, introspective and emotionally vulnerable delivery." },
+      { id: "pl-playful",    type: "mood", tag: "Playful / 遊び心",   name: "Ado's Playful Playlist (遊び心)",              desc: "Playful tracks featuring dynamic vocals, quirky rhythms, and expressive character energy." },
+      { id: "pl-chill",      type: "mood", tag: "Chill / バラード",   name: "Ado's Chill Playlist (バラード)",              desc: "Soothing ballads with gentle melodies and Ado's softer vocals, calm, quiet, and intimate." },
+      { id: "pl-osusume",       type: "tag",  tag: "オススメ",             name: "Ado's Super Cool Playlist",                   desc: "Gyaru." },
+      { id: "pl-uta",        type: "tag",  tag: "Uta",              name: "Uta's Songs from ONE PIECE FILM RED",          desc: "I hope UTA will be a source of comfort for whatever you may be feeling in any situation. And for all of you bursting with excitement in anticipation of the film, I guarantee UTA will deliver above and beyond all expectations. (Ado)" },
+      
+      
+
+      // Chronological Concert & Live Stage Archives (Verified)
+      { id: "pl-live-all",   type: "tag",  tag: "LIVE映像",             name: "Ado Live Stages & Arena Performances",       desc: "List of Ado's stadium, arena, and concert live stages performances." },
+      { id: "pl-kigeki",     type: "tag",  tag: "Kigeki",           name: "2022 · 1st Live「喜劇」Kigeki",              desc: "2022.04.04 at Zepp DiverCity (TOKYO) — Ado's historic debut solo live concert." },
+      { id: "pl-campanella", type: "tag",  tag: "Campanella",       name: "2022 · 2nd Live「カムパネルラ」Campanella",      desc: "2022.08.11 at Saitama Super Arena — Ado's landmark 1st standalone arena performance." },
+      { id: "pl-mars",       type: "tag",  tag: "Mars",             name: "2023 · 全国ツアー「マーズ」Mars Tour",           desc: "2023 at Nippon Budokan — Highlights from Ado's nationwide arena tour." },
+      { id: "pl-wish",       type: "tag",  tag: "Wish",             name: "2024 · THE FIRST WORLD TOUR “Wish”",         desc: "2024 at Peacock Theater (Los Angeles) & world tour stops." },
+      { id: "pl-shinzou",    type: "tag",  tag: "Shinzou",          name: "2024 · 国立競技場「心臓」Shinzou Special Live",  desc: "2024.04.28 at Japan National Stadium — Historic 2-day stadium concert featuring the masterclass 'Unravel' performance." },
+      { id: "pl-monalisa",   type: "tag",  tag: "Monalisa",        name: "2024 · アリーナツアー「モナ・リザの横顔」Profile of Mona Lisa", desc: "2024 at K-Arena Yokohama." },
+      { id: "pl-hibana",     type: "tag",  tag: "Hibana",           name: "2025 · WORLD TOUR 2025 “Hibana”",            desc: "2025 at Saitama Super Arena & Kia Center, Orlando global arena tour." },
+      { id: "pl-yodaka",     type: "tag",  tag: "Yodaka",           name: "2025 · 東京ドーム「よだか」Yodaka Tour",    desc: "2025.11.11–11.12 at Tokyo Dome — Milestone 2-day dome concert performances." },
+      { id: "pl-inst",       type: "tag",  tag: "Instrumental-off-vocal", name: "Ado Official Instrumentals & Off-Vocal", desc: "Official backing tracks, off-vocals, and instrumental arrangements." },
+      { id: "pl-hidden",     type: "tag",  tag: "Hidden Gem",      name: "Ado's Hidden Gems Playlist",                  desc: "Underrated gems and hidden favorites across Ado's catalog that may become your new favorite." }
+    ];
+    /* --------------------------------------------- */
+
+    // Automatically derive the simple list for logic checks
+    const MOOD_LIST = MOOD_CONFIG.map(m => m.name);
+
+    const INITIAL_POSTS = [
+      {
+        id: "post-ado-1",
+        youtubeUrl: "https://www.youtube.com/watch?v=NVutx0Olj8E",
+        title: "【LIVE映像】ロックスター ＠オーランド・Kia Center 【Ado】",
+        category: ["Live", "MV"],
+        mood: "Anthem / エール",
+        tags: ["Live", "Ado", "Kia Center", "Shinzou", "Top 10 Playlist", "Anthem / エール"],
+        customDate: "2026-08-20",
+        notes: "Live performance at Kia Center, Orlando."
+      },
+      {
+        id: "post-ado-2",
+        youtubeUrl: "https://www.youtube.com/watch?v=JsZASL6V0QU",
+        title: "【LIVE映像】ヒバナ さいたまスーパーアリーナ【Ado】",
+        category: ["Live", "Cover"],
+        mood: "Hype / アゲ曲",
+        tags: ["Live", "Ado", "Vocaloid", "Saitama Super Arena", "Shinzou", "Hype / アゲ曲"],
+        customDate: "2026-08-19",
+        notes: "Hibana live at Saitama Super Arena."
+      },
+      {
+        id: "post-ado-3",
+        youtubeUrl: "https://www.youtube.com/watch?v=Vrr2gFTYMGQ",
+        title: "【LIVE映像】桜日和とタイムマシン with 初音ミク 国立競技場 2024.4.28【Ado】",
+        category: ["Live", "Collaboration"],
+        mood: "Anthem / エール",
+        tags: ["Live", "初音ミク", "Vocaloid", "National Stadium", "Shinzou", "Anthem / エール"],
+        customDate: "2026-08-18",
+        notes: "Special collaboration live with Hatsune Miku at Japan National Stadium."
+      },
+      {
+        id: "post-ado-4",
+        youtubeUrl: "https://www.youtube.com/watch?v=oAuKa5NOzWE",
+        title: "風と私の物語 The Story of the Wind and I",
+        category: ["Theme Song", "MV"],
+        mood: "Chill / バラード",
+        tags: ["Theme song","映画主題歌", "主題歌"],
+        customDate: "2026-08-17",
+        notes: "Official movie theme track."
+      },
+      {
+        id: "post-ado-5",
+        youtubeUrl: "https://www.youtube.com/watch?v=YvYii6dluM8",
+        title: "ビバリウム Vivarium",
+        category: ["MV"],
+        mood: "Dark / ダーク",
+        tags: ["MV", "Original", "Top 10 Playlist", "オススメ", "Dark / ダーク"],
+        customDate: "2026-08-16",
+        notes: "Vivarium official track."
+      },
+      {
+        id: "post-ado-6",
+        youtubeUrl: "https://www.youtube.com/watch?v=j3nwow5QXkw",
+        title: "彗星列車のベルが鳴る 歌いました",
+        category: ["Cover", "Vocaloid"],
+        mood: "Chill / バラード",
+        tags: ["Cover", "歌いました","オススメ", "Vocaloid", "Chill / バラード"],
+        customDate: "2026-08-15",
+        notes: "Comet Train Bell cover performance."
+      },
+      {
+        id: "post-ado-7",
+        youtubeUrl: "https://www.youtube.com/watch?v=vKUyCIJfYfY",
+        title: "くちばしにチェリー 20200623",
+        category: ["Cover"],
+        mood: "Chill / バラード",
+        tags: ["Cover", "2020", "hidden gem"],
+        customDate: "2026-08-14",
+        notes: "Kuchibashi ni Cherry cover recording."
+      },
+      {
+        id: "post-ado-8",
+        youtubeUrl: "https://youtu.be/4NA6FJOCmjE",
+        title: "夏夜のマジック 歌いました",
+        category: ["Cover"],
+        mood: "Chill / バラード",
+        tags: ["Cover", "歌いました", "Chill / バラード"],
+        customDate: "2026-08-13",
+        notes: "Natsu Yoru no Magic cover."
+      },
+      {
+        id: "post-ado-9",
+        youtubeUrl: "https://www.youtube.com/watch?v=5Duje_sZko8",
+        title: "Imagine Dragons - Take Me To The Beach (feat. Ado)",
+        category: ["Collaboration"],
+        mood: "Hype / アゲ曲",
+        tags: ["出張", "Collaboration", "Imagine Dragons"],
+        customDate: "2026-08-12",
+        notes: "Official lyric video featuring Ado."
+      },
+      {
+        id: "post-ado-10",
+        youtubeUrl: "https://www.youtube.com/watch?v=aVt90Q2o-Zw",
+        title: "蝸旋 / jon-YAKITORY feat. Ado (Official Video) - Rasen",
+        category: ["Collaboration", "Vocaloid"],
+        mood: "Dark / ダーク",
+        tags: ["出張", "Collaboration", "jon-YAKITORY", "Vocaloid", "Dark / ダーク"],
+        customDate: "2026-08-11",
+        notes: "Rasen official music video."
+      },
+      {
+        id: "post-ado-11",
+        youtubeUrl: "https://youtu.be/qhmrt3ZNgcs",
+        title: "ドライフラワー Dried Flowers",
+        category: ["Cover"],
+        mood: "Chill / バラード",
+        tags: ["歌いました", "Cover", "Adoの歌ってみたアルバム"],
+        customDate: "2026-08-10",
+        notes: "Dried Flowers cover song."
+      },
+      {
+        id: "post-ado-12",
+        youtubeUrl: "https://youtu.be/fZcJLXmHDCk",
+        title: "心という名の不可解 KokoroToIuNanoFukakai (Live At K-Arena Yokohama, 2024)",
+        category: ["Live", "Theme Song"],
+        mood: "Melancholy / 切ない",
+        tags: ["Live", "主題歌", "Theme song", "Yokohama", "Shinzou Playlist"],
+        customDate: "2026-08-09",
+        notes: "Live performance at K-Arena Yokohama 2024."
+      },
+      {
+        id: "post-ado-13",
+        youtubeUrl: "https://www.youtube.com/watch?v=wQceSsMVlA4",
+        title: "Stay With Me (Live At Peacock Theater, Los Angeles, 2024)",
+        category: ["Live", "Cover"],
+        mood: "Chill / バラード",
+        tags: ["Live", "Cover", "Los Angeles", "Shinzou Playlist"],
+        customDate: "2026-08-08",
+        notes: "Stay With Me live cover at Peacock Theater Los Angeles."
+      },
+      {
+        id: "post-demo-1",
+        youtubeUrl: "https://www.youtube.com/watch?v=Cjtt_BlQ6Us",
+        title: "【LIVE映像】綺羅 Brookside at The Rose Bowl 【Ado】",
+        category: ["Live"],
+        mood: "Anthem / エール",
+        tags: ["Live", "LIVE映像", "Zipangu", "Kira"],
+        customDate: "2026-08-01",
+        notes: "Live at The Rose Bowl performance."
+      },
+      {
+        id: "post-nico-1",
+        youtubeUrl: "https://www.nicovideo.jp/watch/sm30407954",
+        title: "【初投稿】君の体温　歌ってみた【Adovance】",
+        category: ["Cover", "Vocaloid"],
+        mood: "Melancholy / 切ない",
+        tags: ["Cover", "歌いました", "Niconico", "Vocaloid", "2017"],
+        customDate: "2017-01-10",
+        notes: "Niconico first upload."
+      },
+      {
+        id: "post-nico-2",
+        youtubeUrl: "https://www.nicovideo.jp/watch/sm35298513",
+        thumbnailUrl: "https://nicovideo.cdn.nimg.jp/thumbnails/35298513/35298513.29254940.L",
+        title: "【オリジナルMV】邪魔 歌いました 【Ado】",
+        category: ["Cover", "Vocaloid"],
+        mood: "Dark / ダーク",
+        tags: ["Cover", "歌いました", "Niconico", "2019", "Vocaloid", "Dark / ダーク"],
+        customDate: "2019-06-22",
+        notes: "Jama."
+      },
+      {
+        id: "post-nico-3",
+        youtubeUrl: "https://www.nicovideo.jp/watch/sm34065291",
+        title: "【誕生日に】エゴロック歌いました【Ado】",
+        category: ["Cover", "Vocaloid"],
+        mood: "Playful / 遊び心",
+        tags: ["Cover", "歌いました", "Niconico", "2018", "Vocaloid", "Playful / 遊び心"],
+        customDate: "2018-10-24",
+        notes: "Niconico video."
+      }
+    ];
+    class VibeBlogApp {
+      constructor() {
+        this.posts = [];
+        this.activeView = 'main';
+        this.activeCategory = 'All';
+        this.activeMood = null;
+        this.activeTag = null;
+        this.searchQuery = '';
+        this.currentPage = 1;
+        this.postsPerPage = parseInt(localStorage.getItem(`${DB_PREFIX}_posts_per_page`)) || 12;
+        this.historyStack = ['main'];
+        history.replaceState({ view: 'main', postId: null }, '', '#main');
+        window.addEventListener('popstate', (e) => {
+          const state = e.state || { view: 'main', postId: null };
+          this.navigateTo(state.view, state.postId, false);
+        });
+        this.selectedPostId = null;
+        this.currentSharePost = null;
+        this.isTheatreMode = false;
+        this.isIframePlaying = false;
+        this.gridGrouping = 'date'; // Options: 'date', 'mood', 'category'
+
+        // Search Engine Index & Multi-Player Registry
+        this.fuse = null;
+        this.activeMountedPlayers = new Map(); // Tracks all concurrently mounted video iframes
+
+        // Continuous Playback & Queue State Machine
+        this.playbackQueue = [];
+        this.currentQueueIndex = 0;
+        this.isAutoplayEnabled = true;
+        this.activePlayingPost = null;
+        this.activePlaylistName = null; // Tracks current active playlist name
+
+        // Bind keyboard shortcuts & YouTube API auto-advance listeners
+        this.initKeyboardShortcuts();
+        this.initContinuousPlaybackListener();
+
+        // Background Analytics State
+        this.analytics = JSON.parse(localStorage.getItem(`${DB_PREFIX}_analytics`)) || {
+          totalVisits: 0,
+          dailyVisits: 0,
+          weeklyVisits: 0,
+          monthlyVisits: 0,
+          lastVisitDate: new Date().toISOString().split('T')[0],
+          postViews: {}
+        };
+
+        this.loadInitialPosts().then(() => this.init());
+      }
+
+      async loadInitialPosts() {
+        // 1. Priority network fetch when deployed on live HTTP/HTTPS server (GitHub Pages / Vercel)
+        if (window.location.protocol.startsWith('http')) {
+          try {
+            const res = await fetch('./posts.json', { cache: 'no-store' });
+            if (res.ok) {
+              const jsonPosts = await res.json();
+              if (Array.isArray(jsonPosts) && jsonPosts.length > 0) {
+                this.posts = jsonPosts;
+                this.sanitizePosts();
+                return;
+              }
+            }
+          } catch (err) {}
+        }
+
+        // 2. Fallback to cached storage or default dataset for offline browsing
+        const stored = localStorage.getItem(`${DB_PREFIX}_posts`);
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              this.posts = parsed;
+              this.sanitizePosts();
+              return;
+            }
+          } catch (e) {}
+        }
+
+        this.posts = [...INITIAL_POSTS];
+        this.sanitizePosts();
+      }
+
+      sanitizePosts() {
+        this.posts.forEach(p => {
+          // 1. Convert string categories into array
+          if (typeof p.category === 'string') {
+            p.category = p.category.split(',').map(c => c.trim()).filter(Boolean);
+          }
+          if (!p.category || !Array.isArray(p.category) || p.category.length === 0) {
+            p.category = ["General"];
+          }
+
+          // 2. Normalize category names (e.g. "Collaboration" -> "Collab")
+          p.category = p.category.map(c => {
+            const trimmed = c.trim();
+            if (trimmed.toLowerCase() === 'collaboration') return 'Collab';
+            return trimmed;
+          });
+
+          // 3. Clean up tags
+          if (p.tags && typeof p.tags === 'string') {
+            p.tags = p.tags.split(',').map(t => t.trim()).filter(Boolean);
+          }
+        });
+      }
+
+      init() {
+        this.initFuse();
+        this.initTheme();
+        this.recordVisit();
+        this.updateSettingsUI();
+        this.renderCategories();
+        // Use navigateTo instead of renderCurrentView to ensure 'hidden' class is removed on load
+        this.navigateTo('main', null, false); 
+        this.updateVisitCounterDisplay();
+
+        // Scroll listener for Back to Top button
+        window.addEventListener('scroll', () => {
+          const btn = document.getElementById('btnBackToTop');
+          if (btn) {
+            if (window.scrollY > 280) {
+              btn.classList.remove('hidden');
+            } else {
+              btn.classList.add('hidden');
+            }
+          }
+        }, { passive: true });
+      }
+      
+      initKeyboardShortcuts() {
+        window.addEventListener('keydown', (e) => {
+          // Ignore keypresses inside input fields or textareas
+          const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+          if (activeTag === 'input' || activeTag === 'textarea') return;
+
+          if (this.activeView === 'detail') {
+            if (e.key === 'Escape') {
+              if (this.isTheatreMode) {
+                this.toggleTheatreMode(false);
+              } else {
+                this.goBack();
+              }
+            } else if (e.key === 't' || e.key === 'T') {
+              this.toggleTheatreMode();
+            } else if (e.key === 'ArrowLeft') {
+              this.navigateDetailTrack(-1);
+            } else if (e.key === 'ArrowRight') {
+              this.navigateDetailTrack(1);
+            } else if (e.key === ' ' || e.code === 'Space') {
+              e.preventDefault(); // Prevent page scrolling down
+              this.triggerDetailPlayPause();
+            }
+          } else if (e.key === 'Escape') {
+            ['disclaimerModal', 'shareModal', 'diceModal', 'settingsModal', 'queueDrawerModal'].forEach(m => this.closeModal(m));
+          }
+        });
+      }
+
+      triggerDetailPlayPause() {
+        const detailContainer = document.getElementById('detailContent');
+        if (!detailContainer) return;
+
+        // 1. If play overlay exists (video hasn't started yet), start it
+        const playBtn = detailContainer.querySelector('button[onclick*="handlePlayClick"]');
+        if (playBtn) {
+          playBtn.click();
+          return;
+        }
+
+        // 2. Otherwise toggle playback using the universal mini-player controller
+        this.toggleMiniPlayerPlayPause();
+      }
+
+      toggleTheatreMode(forceState = null) {
+        this.isTheatreMode = forceState !== null ? forceState : !this.isTheatreMode;
+        const backdrop = document.getElementById('theatreBackdrop');
+        const detailView = document.getElementById('view-detail');
+        const detailArticle = document.getElementById('detailContent');
+        const btnToggle = document.getElementById('btnTheatreToggle');
+
+        if (this.isTheatreMode) {
+          document.body.classList.add('theatre-active');
+          backdrop?.classList.remove('hidden');
+          detailView?.classList.add('theatre-active');
+          detailArticle?.classList.add('bg-stone-900', 'text-stone-100', 'border-stone-800', 'shadow-2xl');
+          detailArticle?.classList.remove('bg-[#faf8f5]', 'text-stone-800');
+          if (btnToggle) btnToggle.innerHTML = `<i class="fa-solid fa-person-through-window text-green-500"></i> Exit Theatre Mode`;
+        } else {
+          document.body.classList.remove('theatre-active');
+          backdrop?.classList.add('hidden');
+          detailView?.classList.remove('theatre-active');
+          detailArticle?.classList.remove('bg-stone-900', 'text-stone-100', 'border-stone-800', 'shadow-2xl');
+          detailArticle?.classList.add('bg-[#faf8f5]', 'text-stone-800');
+          if (btnToggle) btnToggle.innerHTML = `<i class="fa-solid fa-film text-blue-800"></i> Theatre Mode`;
+        }
+      }
+
+      navigateDetailTrack(direction) {
+        const filtered = this.getFilteredPosts();
+        if (filtered.length === 0) return;
+
+        const currentIndex = filtered.findIndex(p => p.id === this.selectedPostId);
+        if (currentIndex === -1) return;
+
+        let newIndex = currentIndex + direction;
+        if (newIndex < 0) newIndex = filtered.length - 1; // loop to end
+        if (newIndex >= filtered.length) newIndex = 0; // loop to start
+
+        this.selectedPostId = filtered[newIndex].id;
+        this.renderDetailView();
+        // Removed window.scrollTo so scroll position remains locked steadily
+      }
+
+      recordVisit() {
+        const today = new Date().toISOString().split('T')[0];
+        if (this.analytics.lastVisitDate !== today) {
+          this.analytics.dailyVisits = 0;
+          this.analytics.lastVisitDate = today;
+        }
+
+        this.analytics.totalVisits += 1;
+        this.analytics.dailyVisits += 1;
+        this.analytics.weeklyVisits += 1;
+        this.analytics.monthlyVisits += 1;
+
+        localStorage.setItem(`${DB_PREFIX}_analytics`, JSON.stringify(this.analytics));
+      }
+
+      recordPostView(postId) {
+        if (!this.analytics.postViews[postId]) {
+          this.analytics.postViews[postId] = { total: 0, daily: 0 };
+        }
+        this.analytics.postViews[postId].total += 1;
+        this.analytics.postViews[postId].daily += 1;
+        localStorage.setItem(`${DB_PREFIX}_analytics`, JSON.stringify(this.analytics));
+      }
+
+      updateVisitCounterDisplay() {
+        const counterEl = document.getElementById('footerVisitCounter');
+        if (counterEl) counterEl.textContent = this.analytics.totalVisits.toLocaleString();
+
+        const d = document.getElementById('statDailyVisits');
+        if (d) d.textContent = this.analytics.dailyVisits;
+        const w = document.getElementById('statWeeklyVisits');
+        if (w) w.textContent = this.analytics.weeklyVisits;
+        const m = document.getElementById('statMonthlyVisits');
+        if (m) m.textContent = this.analytics.monthlyVisits;
+        const t = document.getElementById('statTotalVisits');
+        if (t) t.textContent = this.analytics.totalVisits;
+      }
+
+      // Clean, unobtrusive sharing method (Web Share API + fallback)
+      sharePost(postId, event) {
+        if (event) event.stopPropagation();
+
+        // STEP 5: Local file execution check - display friendly construction message
+        if (window.location.protocol === 'file:') {
+          this.app.showToast('🚧 いま工事中 🚧');
+          return;
+        }
+
+        const post = this.posts.find(p => p.id === postId);
+        if (!post) return;
+
+        this.currentSharePost = post;
+        const shareUrl = `${window.location.origin}${window.location.pathname}#post-${post.id}`;
+
+        if (navigator.share) {
+          navigator.share({
+            title: post.title,
+            text: `Check out "${post.title}" on Adography!`,
+            url: shareUrl
+          }).catch(() => {});
+        } else {
+          // Open standard popup share tool
+          const titleEl = document.getElementById('shareModalTitle');
+          const urlInput = document.getElementById('shareCopyUrl');
+          if (titleEl) titleEl.textContent = post.title;
+          if (urlInput) urlInput.value = shareUrl;
+          this.openModal('shareModal');
+        }
+      }
+
+      shareToPlatform(platform) {
+        if (!this.currentSharePost) return;
+        const shareUrl = encodeURIComponent(`${window.location.origin}${window.location.pathname}#post-${this.currentSharePost.id}`);
+        const shareText = encodeURIComponent(`Check out "${this.currentSharePost.title}" on Adography!`);
+
+        let targetUrl = '';
+        if (platform === 'x') {
+          targetUrl = `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}`;
+        } else if (platform === 'facebook') {
+          targetUrl = `https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`;
+        } else if (platform === 'whatsapp') {
+          targetUrl = `https://api.whatsapp.com/send?text=${shareText}%20${shareUrl}`;
+        }
+
+        if (targetUrl) {
+          window.open(targetUrl, '_blank', 'width=600,height=400,scrollbars=yes');
+        }
+      }
+
+      copyShareLink() {
+        const urlInput = document.getElementById('shareCopyUrl');
+        if (urlInput) {
+          urlInput.select();
+          document.execCommand('copy');
+          this.app.showToast('Link copied to clipboard!');
+        }
+      }
+
+      cleanUrl(url) {
+        if (!url) return '';
+        let raw = url.trim();
+
+        // 1. Sanitize Niconico Links
+        if (raw.includes('nicovideo.jp') || raw.includes('nico.ms') || /^sm\d+$/i.test(raw)) {
+          const match = raw.match(/(sm\d+)/i);
+          if (match) return `https://www.nicovideo.jp/watch/${match[1].toLowerCase()}`;
+          return raw;
+        }
+
+        // 2. Sanitize YouTube Links (Strips &list=, ?si=, &t=, &pp=)
+        const vidId = this.getVideoId(raw);
+        if (vidId && vidId.length === 11) {
+          return `https://www.youtube.com/watch?v=${vidId}`;
+        }
+
+        return raw;
+      }
+      async fetchVideoMetadata(rawUrl, mode = 'add') {
+        const clean = this.cleanUrl(rawUrl);
+        if (!clean) return;
+
+        const platform = this.getPlatform(clean);
+        const vidId = this.getVideoId(clean);
+        if (!vidId) return;
+
+        const titleInput = mode === 'add' ? document.getElementById('addTitle') : document.getElementById('editTitle');
+
+        try {
+          if (platform === 'youtube') {
+            // Fetch Official Title via free oEmbed API
+            const res = await fetch(`https://noembed.com/embed?url=${encodeURIComponent(clean)}`);
+            const data = await res.json();
+
+            if (data && data.title && titleInput) {
+              titleInput.value = data.title;
+            }
+          }
+        } catch(e) {
+          // Silent fallback
+        }
+      }
+
+      getPlatform(url) {
+        if (!url) return 'youtube';
+        const cleanUrl = url.trim().toLowerCase();
+        if (cleanUrl.includes('nicovideo.jp') || cleanUrl.includes('nico.ms') || /^sm\d+$/.test(cleanUrl)) {
+          return 'niconico';
+        }
+        return 'youtube';
+      }
+
+      getVideoId(url) {
+        if (!url) return '';
+        const cleanUrl = url.trim();
+        if (this.getPlatform(cleanUrl) === 'niconico') {
+          const match = cleanUrl.match(/(sm\d+)/i);
+          return match ? match[1] : cleanUrl;
+        }
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = cleanUrl.match(regExp);
+        return (match && match[2].length === 11) ? match[2] : cleanUrl;
+      }
+
+      getThumbnailUrl(post) {
+        // 1. If explicit custom thumbnail is provided, use it
+        if (post.thumbnailUrl && post.thumbnailUrl.trim()) {
+          return post.thumbnailUrl.trim();
+        }
+        
+        // 2. Auto-generate thumbnail based on platform
+        const url = post.youtubeUrl || '';
+        const platform = this.getPlatform(url);
+        const videoId = this.getVideoId(url);
+
+        if (platform === 'niconico') {
+          // Auto-resolve Niconico CDN thumbnail using numeric video ID
+          const nicoNum = videoId.replace(/sm/i, '');
+          return `https://nicovideo.cdn.nimg.jp/thumbnails/${nicoNum}/${nicoNum}`;
+        }
+
+        // Default YouTube auto-thumbnail
+        return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+      }
+
+      renderCategories() {
+        const container = document.getElementById('categoryContainer');
+        if (!container) return;
+
+        // 1. Aggregation: Collect categories actually present in current posts
+        const activeCatsInData = new Set();
+        this.posts.forEach(p => {
+          const cats = Array.isArray(p.category) ? p.category : [p.category || 'General'];
+          cats.forEach(c => { if (c) activeCatsInData.add(c.trim()); });
+        });
+
+        // 2. Sorting based on CATEGORY_PRIORITY
+        const mainCats = CATEGORY_PRIORITY.filter(c => activeCatsInData.has(c));
+        
+        // 3. Collect any non-priority categories directly by name
+        const otherCats = Array.from(activeCatsInData).filter(c => !CATEGORY_PRIORITY.includes(c)).sort();
+
+        // 4. Build Final Clean List (Removes generic non-functional 'Other' pill)
+        const sortedCats = ['All', ...mainCats, ...otherCats];
+
+        container.innerHTML = sortedCats.map(cat => {
+          const isActive = this.activeCategory === cat;
+          const activeClass = isActive 
+            ? 'bg-blue-900 text-white font-bold border-blue-900 shadow-sm' 
+            : 'bg-[#faf8f5] text-stone-700 hover:bg-stone-200 border-stone-300';
+
+          const escapedCat = cat.replace(/'/g, "\\'");
+          return `
+            <button 
+              onclick="app.selectCategory('${escapedCat}')" 
+              class="px-3 py-1 rounded-md text-xs font-medium border transition whitespace-nowrap ${activeClass}">
+              ${cat}
+            </button>
+          `;
+        }).join('');
+
+        this.renderMoodFilters();
+      }
+
+      renderMoodFilters() {
+        const container = document.getElementById('moodFilterContainer');
+        if (!container) return;
+
+        // Add 'All' button at the start
+        let html = `
+          <button 
+            onclick="app.selectMood(null)" 
+            class="px-2.5 py-1 rounded-md text-[11px] font-medium border transition whitespace-nowrap ${!this.activeMood ? 'bg-stone-900 text-stone-100 border-stone-900' : 'bg-[#faf8f5] text-stone-700 border-stone-300 hover:bg-stone-200'}">
+            All Moods
+          </button>
+        `;
+
+        html += MOOD_CONFIG.map(mObj => {
+          const isActive = this.activeMood === mObj.name;
+          const activeClass = isActive 
+            ? `${mObj.activeBg} shadow-xs` 
+            : `bg-[#faf8f5] text-stone-700 border-stone-300 ${mObj.hoverBg}`;
+
+          const escapedMood = mObj.name.replace(/'/g, "\\'");
+          return `
+            <button 
+              onclick="app.selectMood('${escapedMood}')" 
+              class="px-2.5 py-1 rounded-md text-[11px] font-medium border transition whitespace-nowrap ${activeClass}">
+              ${mObj.name}
+            </button>
+          `;
+        }).join('');
+
+        container.innerHTML = html;
+      }
+
+      selectMood(m) {
+        if (this.activeMood === m) {
+          this.activeMood = null; // Toggle off
+        } else {
+          this.activeMood = m;
+        }
+        this.currentPage = 1;
+        this.renderMoodFilters();
+        this.renderCurrentView();
+      }
+
+      selectCategory(cat) {
+        this.activeCategory = cat;
+        this.currentPage = 1;
+        this.renderCategories();
+        this.renderCurrentView();
+      }
+
+      filterByTag(tag) {
+        this.activeTag = tag;
+        this.currentPage = 1;
+       // If current view is Playlists/Tags/Detail, default to 'main' as they don't display filtered content directly.
+        const viewToReturn = ['playlists', 'tags', 'detail'].includes(this.activeView) ? 'main' : this.activeView;
+        this.navigateTo(viewToReturn);
+      }
+
+      clearTagFilter() {
+        this.activeTag = null;
+        this.renderCurrentView();
+      }
+
+      // Helper: Checks if a post contains at least one primary category from CATEGORY_PRIORITY
+      isPrimaryPost(post) {
+        const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
+        return cats.some(c => CATEGORY_PRIORITY.includes(c));
+      }
+
+      getSortedPosts(postsArray) {
+        return [...postsArray].sort((a, b) => {
+          // If searching, rank primary performance songs above auxiliary instrumentals/interviews/others
+          if (this.searchQuery) {
+            const isPrimA = this.isPrimaryPost(a) ? 1 : 0;
+            const isPrimB = this.isPrimaryPost(b) ? 1 : 0;
+            if (isPrimA !== isPrimB) return isPrimB - isPrimA;
+          }
+
+          const timeA = a.customDate ? Date.parse(a.customDate) : 0;
+          const timeB = b.customDate ? Date.parse(b.customDate) : 0;
+          
+          // NaN-safe date comparisons
+          const validA = isNaN(timeA) ? 0 : timeA;
+          const validB = isNaN(timeB) ? 0 : timeB;
+          
+          return validB - validA; // Newest first
+        });
+      }
+
+      getFilteredPosts() {
+        // Is user explicitly requesting a filter, tag, playlist, or search?
+        const isExplicitQuery = Boolean(this.activeTag || this.activeMood || this.searchQuery || this.activeCategory !== 'All');
+
+        // Determine base dataset: use Fuse.js relevance ranking if searching, otherwise all posts
+        let basePosts = this.posts;
+        const isFuzzyActive = Boolean(this.searchQuery && this.fuse);
+
+        if (isFuzzyActive) {
+          const fuseResults = this.fuse.search(this.searchQuery);
+          basePosts = fuseResults.map(r => r.item);
+        }
+
+        const filtered = basePosts.filter(post => {
+          const postCats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
+          
+          // 1. Default Catalog Rule: Hide auxiliary posts unless explicitly searching or viewing a tag/playlist
+          if (!isExplicitQuery && !this.isPrimaryPost(post)) {
+            return false;
+          }
+
+          // 2. Category matching
+          let matchesCategory = false;
+          if (this.activeCategory === 'All') {
+            matchesCategory = true;
+          } else {
+            matchesCategory = postCats.some(c => c.toLowerCase() === this.activeCategory.toLowerCase());
+          }
+          
+          // 3. Mood matching
+          const postMoodStr = Array.isArray(post.mood) ? post.mood.join(' ') : (post.mood || '');
+          const matchesMood = !this.activeMood || postMoodStr.toLowerCase() === this.activeMood.toLowerCase() || (post.tags && post.tags.some(t => t.toLowerCase() === this.activeMood.toLowerCase()));
+          
+          // 4. Tag matching (case-insensitive across both tags and categories)
+          const matchesTag = !this.activeTag || 
+            (post.tags && post.tags.some(t => t.toLowerCase() === this.activeTag.toLowerCase())) || 
+            postCats.some(c => c.toLowerCase() === this.activeTag.toLowerCase());
+          
+          // 5. Fallback Search matching (if Fuse.js is unavailable)
+          let matchesSearch = true;
+          if (this.searchQuery && !isFuzzyActive) {
+            const query = this.searchQuery.toLowerCase();
+            matchesSearch = (post.title && post.title.toLowerCase().includes(query)) || 
+              (post.notes && post.notes.toLowerCase().includes(query)) ||
+              postCats.some(c => c.toLowerCase().includes(query)) ||
+              (post.tags && post.tags.some(t => t.toLowerCase().includes(query)));
+          }
+
+          return matchesCategory && matchesMood && matchesTag && matchesSearch;
+        });
+
+        // When fuzzy search is active, preserve Fuse's score relevance. Otherwise sort chronologically.
+        return isFuzzyActive ? filtered : this.getSortedPosts(filtered);
+      }
+
+      getPaginatedPosts(filtered) {
+        const startIndex = (this.currentPage - 1) * this.postsPerPage;
+        return filtered.slice(startIndex, startIndex + this.postsPerPage);
+      }
+
+      toggleMainGrid() {
+        if (this.activeView === 'grid') {
+          this.navigateTo('main');
+        } else {
+          this.navigateTo('grid');
+        }
+      }
+      setGridGrouping(groupMode) {
+        this.gridGrouping = groupMode;
+        this.renderCurrentView();
+      }
+
+      slugify(title) {
+        return title
+          .toLowerCase()
+          .normalize('NFKD')
+          .replace(/[^\x00-\x7f]/g, '')
+          .replace(/[^\w\s-]/g, '')
+          .trim()
+          .replace(/\s+/g, '-')
+          .slice(0, 40) || 'post';
+      }
+
+      formatNotes(text) {
+        if (!text) return '';
+        // Warm brown in Light Mode (#78350f / amber-900), soft grey in Dark Mode (#d4d4d8 / stone-300), no purple visited color
+        const linkClass = "underline underline-offset-2 font-semibold text-amber-900 dark:text-stone-300 hover:text-amber-700 dark:hover:text-white transition";
+
+        // 1. Convert Markdown links: [Link Text](https://url)
+        let formatted = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, `<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$1</a>`);
+        // 2. Convert remaining raw URLs that are not already part of an anchor tag
+        formatted = formatted.replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, `$1<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$2</a>`);
+        return formatted;
+      }
+
+      navigateTo(view, postId = null, pushHistory = true) {
+        if (pushHistory && this.activeView !== view) {
+          this.historyStack.push(this.activeView);
+          const slugPart = postId ? '/' + (this.posts.find(p => p.id === postId)?.slug || postId) : '';
+          history.pushState({ view, postId }, '', `#${view}${slugPart}`);
+          // Update Navbar Active States
+        const btnCompact = document.getElementById('nav-btn-compact');
+        const btnGrid = document.getElementById('nav-btn-grid');
+        if (btnCompact && btnGrid) {
+                    const btnHome = document.getElementById('nav-btn-home');
+          if (btnHome) btnHome.className = `text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${view === 'main' ? 'bg-blue-900 text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`;
+          btnCompact.className = `text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${view === 'compact' ? 'bg-blue-900 text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`;
+          btnGrid.className = `text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${view === 'grid' ? 'bg-blue-900 text-white shadow-sm' : 'text-stone-600 hover:text-stone-900'}`;
+        }
+        }
+        
+        this.activeView = view;
+        if (postId) {
+          this.selectedPostId = postId;
+          this.recordPostView(postId);
+        }
+
+        const filterStrip = document.getElementById('filterStripSection');
+        if (filterStrip) {
+          filterStrip.style.display = (view === 'tags' || view === 'playlists') ? 'none' : 'flex';
+        }
+
+        if (view !== 'detail' && this.isTheatreMode) {
+          this.toggleTheatreMode(false);
+        }
+
+        ['main', 'compact', 'grid', 'playlists', 'tags', 'detail'].forEach(v => {
+          document.getElementById(`view-${v}`)?.classList.add('hidden');
+        });
+
+        const targetView = document.getElementById(`view-${view}`);
+        if (targetView) targetView.classList.remove('hidden');
+
+        // Label stays constant (Grid button standard behavior)
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.renderCurrentView();
+      }
+
+      goBack() {
+        if (this.isTheatreMode) {
+          this.toggleTheatreMode(false);
+        }
+        history.back();
+      }
+      
+
+      renderCurrentView() {
+        const filtered = this.getFilteredPosts();
+        
+        const topHeaderRight = document.getElementById('topHeaderRight');
+        if (topHeaderRight) {
+          const isMainPage1 = (this.activeView === 'main' && this.currentPage === 1 && this.activeCategory === 'All' && !this.activeMood && !this.activeTag && !this.searchQuery);
+          
+          // Show Grouping Toggle Buttons on Compact and Grid views
+          if (this.activeView === 'compact' || this.activeView === 'grid') {
+            topHeaderRight.innerHTML = `
+              <div class="flex items-center gap-3">
+                <!-- Viewer Toggle Group -->
+                <div class="flex items-center gap-1 bg-[#eae5db] dark:bg-stone-800 p-1 rounded-lg border border-stone-300 dark:border-stone-700 text-[11px]">
+                  <button onclick="app.setGridGrouping('date')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'date' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Date</button>
+                  <button onclick="app.setGridGrouping('mood')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'mood' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Mood</button>
+                  <button onclick="app.setGridGrouping('category')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'category' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Category</button>
+                </div>
+
+                <button onclick="app.clearSearch(); app.navigateTo('main');" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-stone-300 dark:border-stone-700 bg-[#faf8f5] dark:bg-stone-800 hover:bg-stone-800 hover:text-white transition text-stone-800 dark:text-stone-200 flex items-center gap-1">
+                  Home
+                </button>
+              </div>
+            `;
+          } else if (isMainPage1) {
+            topHeaderRight.innerHTML = `
+              <button onclick="app.openModal('aboutAdoModal')" class="text-xs font-semibold px-2.5 py-1 rounded-md border border-blue-900 bg-[#faf8f5] hover:bg-blue-800 hover:text-white transition text-blue-800 flex items-center gap-1">
+                About Ado
+              </button>
+            `;
+          } else {
+            topHeaderRight.innerHTML = `
+              <button onclick="app.clearSearch(); app.navigateTo('main');" class="text-xs font-semibold px-2.5 py-1 rounded-md border border-stone-300 bg-[#faf8f5] hover:bg-stone-800 hover:text-white transition text-stone-800 flex items-center gap-1">
+                Home
+              </button>
+            `;
+          }
+        }
+
+        const tagBanner = document.getElementById('activeTagBanner');
+        const tagTitle = document.getElementById('activeTagName');
+        if (tagBanner && tagTitle) {
+          if (this.activeTag) {
+            tagBanner.classList.remove('hidden');
+            tagTitle.textContent = `${this.activeTag}`;
+          } else {
+            tagBanner.classList.add('hidden');
+          }
+        }
+
+        const countEl = document.getElementById('resultsCount');
+        if (countEl) {
+          if (this.activeView === 'main' || this.activeView === 'compact' || this.activeView === 'grid') {
+            countEl.style.display = 'block';
+            let label = `Showing ${filtered.length} ${filtered.length === 1 ? 'post' : 'posts'}`;
+            if (this.activeCategory !== 'All') label += ` in '${this.activeCategory}'`;
+            if (this.activeMood) label += ` · Mood: ${this.activeMood}`;
+            if (this.activeTag) label += ` tagged ${this.activeTag}`;
+            countEl.textContent = label;
+          } else {
+            countEl.style.display = 'none';
+          }
+        }
+
+        if (this.activeView === 'main') {
+          this.renderMainView(filtered);
+        } else if (this.activeView === 'compact') {
+          this.renderCompactView(filtered);
+        } else if (this.activeView === 'grid') {
+          this.renderGridView(filtered);
+        } else if (this.activeView === 'playlists') {
+          this.renderPlaylistsView();
+        } else if (this.activeView === 'tags') {
+          this.renderTagsView();
+        } else if (this.activeView === 'detail') {
+          this.renderDetailView();
+        }
+      }
+
+      renderMainView(filteredPosts) {
+        const container = document.getElementById('mainContainer');
+        if (!container) return;
+
+        const paginated = this.getPaginatedPosts(filteredPosts);
+
+        if (paginated.length === 0) {
+          container.innerHTML = `
+            <div class="col-span-full text-center py-16 bg-[#faf8f5] rounded-xl border border-stone-300">
+              <i class="fa-solid fa-tooth text-3xl text-blue-100 mb-2 animate-spin"></i>
+              <p class="text-stone-500 font-medium text-xs">No posts found matching your query.</p>
+              <button onclick="app.clearSearch()" class="mt-2 text-xs text-stone-800 underline font-medium">Reset Filters</button>
+            </div>
+          `;
+          document.getElementById('mainPagination').innerHTML = '';
+          return;
+        }
+
+        container.innerHTML = paginated.map(post => {
+          const rawUrl = post.youtubeUrl || post.videoUrl || '';
+          const thumbUrl = this.getThumbnailUrl(post);
+          const tagChips = (post.tags || []).slice(0, DISPLAY_TAG_LIMIT).map(t => 
+            `<span onclick="app.filterByTag('${t}')" class="cursor-pointer hover:underline text-[10px] text-stone-600 bg-stone-200/80 px-1.5 py-0.5 rounded font-medium">${t}</span>`
+          ).join(' ');
+
+          return `
+            <article class="bg-[#faf8f5] border border-stone-300/90 rounded-xl overflow-hidden shadow-xs hover:border-stone-400 transition flex flex-col justify-between">
+              <div>
+                <div class="relative aspect-video bg-stone-900 overflow-hidden group">
+                  <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover transition duration-300 group-hover:scale-102">
+                  <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition flex items-center justify-center">
+                    <button onclick="app.handlePlayClick('${post.id}', '${rawUrl}', this)" class="w-12 h-12 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-lg hover:scale-105 transition">
+                      <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="p-4 space-y-2.5">
+                  <div class="card-meta-row flex items-center justify-between text-[11px] text-stone-500">
+                    <div class="flex flex-wrap gap-1">
+                      ${(Array.isArray(post.category) ? post.category : [post.category || 'General']).map(c => `
+                        <span class="font-medium text-stone-700 dark:text-stone-300 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded text-[10px]">${c}</span>
+                      `).join('')}
+                    </div>
+                    <span class="card-date font-mono text-[10px] text-stone-500 dark:text-stone-400">${post.customDate || ''}</span>
+                  </div>
+
+                  <h3 class="font-serif font-bold text-base text-stone-900 dark:text-stone-100 hover:text-amber-800 dark:hover:text-amber-400 cursor-pointer transition leading-snug line-clamp-2" onclick="app.navigateTo('detail', '${post.id}')">
+                    ${post.title}
+                  </h3>
+                  
+                  ${post.notes ? `<p class="text-stone-700 dark:text-stone-300 text-xs leading-relaxed line-clamp-2">${post.notes}</p>` : ''}
+                  
+                  ${tagChips ? `<div class="flex flex-wrap gap-1 pt-1">${tagChips}</div>` : ''}
+                </div>
+              </div>
+
+              <div class="card-action-row p-4 pt-2 border-t border-stone-200/60 dark:border-stone-700/60 mt-3 flex items-center justify-between text-xs text-stone-500">
+                <button onclick="app.addToQueue('${post.id}', event)" title="Add to Playback Queue" class="text-stone-600 dark:text-stone-400 hover:text-blue-800 dark:hover:text-blue-400 font-medium transition flex items-center gap-1 text-[11px]">
+                  <i class="fa-solid fa-list-plus"></i> + Queue
+                </button>
+                <button onclick="app.navigateTo('detail', '${post.id}')" class="text-stone-800 dark:text-stone-200 font-semibold hover:text-blue-900 dark:hover:text-blue-400 transition text-xs">
+                  View Post <i class="fa-solid fa-arrow-right text-[10px] ml-0.5"></i>
+                </button>
+              </div>
+            </article>
+          `;
+        }).join('');
+
+        this.renderPagination('mainPagination', filteredPosts.length);
+      }
+
+      getGroupedPosts(filteredPosts) {
+        const groups = {};
+
+        // Helper: Sort array of posts newest date first (NaN-safe)
+        const sortByDateDesc = (arr) => {
+          return arr.sort((a, b) => {
+            const timeA = a.customDate ? Date.parse(a.customDate) : 0;
+            const timeB = b.customDate ? Date.parse(b.customDate) : 0;
+            const validA = isNaN(timeA) ? 0 : timeA;
+            const validB = isNaN(timeB) ? 0 : timeB;
+            return validB - validA;
+          });
+        };
+
+        if (this.gridGrouping === 'mood') {
+          const MOOD_ORDER = ["Hype / アゲ曲", "Anthem / エール", "Dark / ダーク", "Melancholy / 切ない", "Chill / バラード", "Playful / 遊び心", "Other Mood"];
+          MOOD_ORDER.forEach(m => { groups[m] = []; });
+
+          filteredPosts.forEach(post => {
+            const mKey = post.mood || "Other Mood";
+            if (!groups[mKey]) groups[mKey] = [];
+            groups[mKey].push(post);
+          });
+
+          // Sort posts newest date first inside each mood
+          Object.keys(groups).forEach(key => {
+            sortByDateDesc(groups[key]);
+            if (groups[key].length === 0) delete groups[key]; // Remove empty groups
+          });
+        } else if (this.gridGrouping === 'category') {
+          filteredPosts.forEach(post => {
+            const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
+            cats.forEach(c => {
+              const catKey = c.trim() || 'General';
+              if (!groups[catKey]) groups[catKey] = [];
+              groups[catKey].push(post);
+            });
+          });
+
+          // Sort posts newest date first inside each category
+          Object.keys(groups).forEach(key => {
+            sortByDateDesc(groups[key]);
+          });
+        } else {
+          // Default Chronological Date Grouping (Month & Year)
+          filteredPosts.forEach(post => {
+            let dateObj = new Date(post.customDate);
+            if (isNaN(dateObj.getTime())) dateObj = new Date();
+            
+            const monthYear = dateObj.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+            if (!groups[monthYear]) groups[monthYear] = [];
+            groups[monthYear].push(post);
+          });
+
+          // Ensure newest date first inside each month group
+          Object.keys(groups).forEach(key => {
+            sortByDateDesc(groups[key]);
+          });
+        }
+
+        return groups;
+      }
+
+      renderCompactView(filteredPosts) {
+        const container = document.getElementById('compactGridContainer');
+        if (!container) return;
+
+        if (filteredPosts.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-16 bg-[#faf8f5] rounded-xl border border-stone-300">
+              <i class="fa-solid fa-tooth text-3xl text-white-100 mb-2 animate-spin"></i>
+              <p class="text-stone-500 font-medium text-xs">No posts found matching your query.</p>
+              <button onclick="app.clearSearch()" class="mt-2 text-xs text-stone-800 underline font-medium">Reset Filters</button>
+            </div>
+          `;
+          document.getElementById('compactPagination').innerHTML = '';
+          return;
+        }
+
+        const groups = this.getGroupedPosts(filteredPosts);
+
+        container.innerHTML = Object.keys(groups).map(groupTitle => {
+          const groupPosts = groups[groupTitle];
+
+          const gridItemsHtml = groupPosts.map(post => {
+            const thumbUrl = this.getThumbnailUrl(post);
+
+            return `
+              <div onclick="app.openQuickView('${post.id}')" class="group relative aspect-square bg-stone-900 overflow-hidden cursor-pointer">
+                <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover scale-[1.35] group-hover:scale-[1.42] transition duration-200">
+                <div class="absolute inset-0 bg-stone-900/85 opacity-0 group-hover:opacity-100 transition duration-150 flex items-center justify-center p-2 text-center">
+                  <span class="text-[11px] font-medium text-stone-100 tracking-tight leading-tight line-clamp-3">
+                    ${post.title}
+                  </span>
+                </div>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <section class="space-y-2 w-full">
+              <div class="flex items-center justify-between border-b border-stone-300 dark:border-stone-900/80 pb-1">
+                <h2 class="text-xs font-serif font-bold text-stone-800 dark:text-stone-200 tracking-wider">
+                  ${groupTitle}
+                </h2>
+                <span class="text-[10px] text-stone-500 dark:text-stone-400 font-sans">${groupPosts.length} ${groupPosts.length === 1 ? 'post' : 'posts'}</span>
+              </div>
+              <div class="grid gap-0 border border-stone-300/60 dark:border-stone-900 overflow-hidden rounded-md shadow-xs w-full box-border" style="grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));">
+                ${gridItemsHtml}
+              </div>
+            </section>
+          `;
+        }).join('');
+
+        this.renderPagination('compactPagination', filteredPosts.length);
+      }
+
+      handlePlayClick(postId, rawUrl, buttonEl) {
+        // On Mobile/Narrow screens (< 768px), open QuickView modal EXCEPT when already inside Detail View
+        if (window.innerWidth < 768 && this.activeView !== 'detail') {
+          this.openQuickView(postId);
+          return;
+        }
+
+        this.recordPostView(postId);
+        const post = this.posts.find(p => p.id === postId);
+        const parent = buttonEl.closest('.relative');
+        if (!parent) return;
+
+        const platform = this.getPlatform(rawUrl);
+        const videoId = this.getVideoId(rawUrl);
+
+        let embedSrc = '';
+        if (platform === 'niconico') {
+          embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
+        } else {
+          // Enable JS API controls for independent postMessage commands 
+          embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
+        }
+
+        // Mount unique iframe instance for concurrent playback 
+        const iframeId = `iframe-${postId}`;
+        parent.innerHTML = `
+          <iframe 
+            id="${iframeId}"
+            class="w-full h-full rounded-t-xl" 
+            src="${embedSrc}" 
+            title="${post ? post.title : 'Video player'}" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>
+        `;
+
+        // Register concurrent player instance
+        this.activeMountedPlayers.set(postId, {
+          iframeId: iframeId,
+          post: post,
+          rawUrl: rawUrl
+        });
+
+        this.isIframePlaying = true;
+        if (post) this.activateMiniPlayer(post);
+      }
+
+      activateMiniPlayer(post) {
+        this.activePlayingPost = post;
+        const bar = document.getElementById('miniPlayerBar');
+        const thumb = document.getElementById('miniPlayerThumb');
+        const title = document.getElementById('miniPlayerTitle');
+        const status = document.getElementById('miniPlayerStatus');
+        const btnPlay = document.getElementById('btnMiniPlayPause');
+
+        if (bar && post) {
+          if (thumb) thumb.src = this.getThumbnailUrl(post);
+          if (title) title.textContent = post.title;
+          if (status) status.innerHTML = `<i class="fa-solid fa-pizza-slice animate-spin text-blue-400 text-[10px]"></i> Playing`;
+          if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+          bar.classList.remove('hidden');
+        }
+      }
+      
+      initContinuousPlaybackListener() {
+        window.addEventListener('message', (event) => {
+          try {
+            const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
+            // YouTube Iframe API state change event (0 === ENDED)
+            if (data && (data.event === 'onStateChange' || data.info === 0) && data.info === 0) {
+              if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
+                this.playNextTrack();
+              }
+            }
+          } catch(e) {}
+        });
+      }
+
+      pauseAllCardVideos() {
+        // Pauses all on-screen card/detail iframes to give dedicated audio focus
+        this.activeMountedPlayers.forEach((playerObj) => {
+          const el = document.getElementById(playerObj.iframeId);
+          if (el && el.contentWindow) {
+            try {
+              el.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+            } catch(e) {}
+          }
+        });
+      }
+
+      startPlaylistContinuous(playlistIndex) {
+        const pl = PLAYLIST_CONFIG[playlistIndex];
+        if (!pl) return;
+
+        // Confirmation Guard: prevent accidental queue wipe
+        if (this.playbackQueue.length > 0) {
+          const proceed = confirm(`Starting "${pl.name}" will replace your current queue (${this.playbackQueue.length} tracks).\n\nContinue?`);
+          if (!proceed) return;
+        }
+
+        const searchVal = pl.tag.toLowerCase();
+        const matchingPosts = this.posts.filter(post => {
+          if (pl.type === 'mood') {
+            const postMoods = post.mood ? (Array.isArray(post.mood) ? post.mood : [post.mood]) : [];
+            return postMoods.some(m => String(m).toLowerCase() === searchVal);
+          } else {
+            const postTags = Array.isArray(post.tags) ? post.tags : [];
+            const postCats = Array.isArray(post.category) ? post.category : [];
+            return postTags.some(t => String(t).toLowerCase() === searchVal) ||
+                   postCats.some(c => String(c).toLowerCase() === searchVal);
+          }
+        });
+
+        if (matchingPosts.length === 0) {
+          this.showToast('No tracks found in this playlist.');
+          return;
+        }
+
+        // Pause other active videos on the page for clean audio
+        this.pauseAllCardVideos();
+
+        this.activePlaylistName = pl.name;
+        this.playbackQueue = [...matchingPosts];
+        this.currentQueueIndex = 0;
+        this.mountPersistentTrack(this.playbackQueue[0]);
+        this.updateQueueBadge();
+        this.showToast(`▶ Loaded Playlist: ${pl.name}`);
+      }
+
+      mountPersistentTrack(post) {
+        if (!post) return;
+        this.activePlayingPost = post;
+        this.recordPostView(post.id);
+
+        const host = document.getElementById('persistentPlayerHost');
+        const rawUrl = post.youtubeUrl || post.videoUrl || '';
+        const platform = this.getPlatform(rawUrl);
+        const videoId = this.getVideoId(rawUrl);
+
+        let embedSrc = '';
+        if (platform === 'niconico') {
+          embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
+        } else {
+          embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
+        }
+
+        if (host) {
+          host.innerHTML = `
+            <iframe 
+              id="persistentAudioIframe"
+              class="w-1 h-1 opacity-0 pointer-events-none" 
+              src="${embedSrc}" 
+              title="${post.title}" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          `;
+        }
+
+        this.isIframePlaying = true;
+        this.updateMiniPlayerUI(post);
+      }
+
+      updateMiniPlayerUI(post) {
+        const bar = document.getElementById('miniPlayerBar');
+        const thumb = document.getElementById('miniPlayerThumb');
+        const title = document.getElementById('miniPlayerTitle');
+        const status = document.getElementById('miniPlayerStatus');
+        const btnPlay = document.getElementById('btnMiniPlayPause');
+        const counter = document.getElementById('miniPlayerQueueCounter');
+
+        if (bar && post) {
+          if (thumb) thumb.src = this.getThumbnailUrl(post);
+          if (title) title.textContent = post.title;
+          if (status) status.innerHTML = `<i class="fa-solid fa-compact-disc animate-spin text-blue-400"></i> Playing`;
+          if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+          if (counter && this.playbackQueue.length > 0) {
+            counter.textContent = `${this.currentQueueIndex + 1}/${this.playbackQueue.length}`;
+            counter.title = this.activePlaylistName ? `Playlist: ${this.activePlaylistName}` : 'Custom Queue';
+            counter.classList.remove('hidden');
+          } else if (counter) {
+            counter.classList.add('hidden');
+          }
+          bar.classList.remove('hidden');
+        }
+      }
+
+      playNextTrack() {
+        if (this.playbackQueue.length === 0) return;
+        if (this.currentQueueIndex + 1 < this.playbackQueue.length) {
+          this.currentQueueIndex++;
+          this.mountPersistentTrack(this.playbackQueue[this.currentQueueIndex]);
+        } else if (this.isAutoplayEnabled) {
+          // Loop back to track 1
+          this.currentQueueIndex = 0;
+          this.mountPersistentTrack(this.playbackQueue[0]);
+        }
+      }
+
+      playPrevTrack() {
+        if (this.playbackQueue.length === 0) return;
+        if (this.currentQueueIndex > 0) {
+          this.currentQueueIndex--;
+          this.mountPersistentTrack(this.playbackQueue[this.currentQueueIndex]);
+        } else {
+          this.currentQueueIndex = this.playbackQueue.length - 1;
+          this.mountPersistentTrack(this.playbackQueue[this.currentQueueIndex]);
+        }
+      }
+
+      toggleAutoplay() {
+        this.isAutoplayEnabled = !this.isAutoplayEnabled;
+        const btn = document.getElementById('btnMiniAutoplay');
+        if (btn) {
+          btn.className = `w-7 h-7 rounded-full flex items-center justify-center text-xs transition ml-0.5 ${this.isAutoplayEnabled ? 'bg-stone-800 text-amber-400 hover:text-amber-300' : 'bg-stone-800 text-stone-600 hover:text-stone-400'}`;
+          btn.title = `Autoplay Loop: ${this.isAutoplayEnabled ? 'ON' : 'OFF'}`;
+        }
+        this.showToast(`Continuous Autoplay: ${this.isAutoplayEnabled ? 'ON' : 'OFF'}`);
+      }
+      addToQueue(postId, event) {
+        if (event) event.stopPropagation();
+        const post = this.posts.find(p => p.id === postId);
+        if (!post) return;
+
+        this.playbackQueue.push(post);
+        this.updateQueueBadge();
+
+        // If nothing is playing, start this track immediately
+        if (!this.activePlayingPost) {
+          this.currentQueueIndex = this.playbackQueue.length - 1;
+          this.mountPersistentTrack(post);
+        } else {
+          this.updateMiniPlayerUI(this.activePlayingPost);
+        }
+
+        this.showToast(`Added "${post.title}" to Queue (${this.playbackQueue.length} tracks)`);
+      }
+
+      toggleQueueDrawer() {
+        const modal = document.getElementById('queueDrawerModal');
+        if (!modal) return;
+        const isHidden = modal.classList.contains('hidden');
+        if (isHidden) {
+          this.renderQueueDrawer();
+          this.openModal('queueDrawerModal');
+        } else {
+          this.closeModal('queueDrawerModal');
+        }
+      }
+
+      renderQueueDrawer() {
+        const container = document.getElementById('queueDrawerListContainer');
+        const badge = document.getElementById('queueDrawerTotalBadge');
+        if (!container) return;
+
+        if (badge) {
+          const plSuffix = this.activePlaylistName ? ` · ${this.activePlaylistName}` : '';
+          badge.textContent = `${this.playbackQueue.length} tracks${plSuffix}`;
+        }
+
+        if (this.playbackQueue.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-8 text-stone-400 dark:text-stone-500">
+              <i class="fa-solid fa-list-ul text-2xl mb-1.5 opacity-50"></i>
+              <p>The queue is empty.</p>
+              <p class="text-[10px] text-stone-500 mt-1">Click "+ Queue" on any track to add songs.</p>
+            </div>
+          `;
+          return;
+        }
+
+        container.innerHTML = this.playbackQueue.map((post, idx) => {
+          const isCurrent = idx === this.currentQueueIndex;
+          const thumbUrl = this.getThumbnailUrl(post);
+
+          return `
+            <div class="flex items-center justify-between gap-2.5 p-2 rounded-lg transition ${isCurrent ? 'bg-blue-900/15 dark:bg-blue-950/40 border border-blue-800/30' : 'hover:bg-stone-200/50 dark:hover:bg-stone-800/50 border border-transparent'}">
+              
+              <!-- Track Info & Click to Play -->
+              <div class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.jumpToQueueTrack(${idx})">
+                <div class="relative w-9 h-9 flex-shrink-0 rounded overflow-hidden bg-stone-800">
+                  <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover">
+                  ${isCurrent ? `<div class="absolute inset-0 bg-blue-950/60 flex items-center justify-center text-amber-400 text-xs"><i class="fa-solid fa-compact-disc animate-spin"></i></div>` : ''}
+                </div>
+                <div class="min-w-0 flex-1">
+                  <h4 class="font-serif font-bold truncate text-xs ${isCurrent ? 'text-blue-900 dark:text-blue-400' : 'text-stone-800 dark:text-stone-100'}">${post.title}</h4>
+                  <span class="text-[10px] text-stone-400">${idx + 1}. ${Array.isArray(post.category) ? post.category[0] : (post.category || 'Track')}</span>
+                </div>
+              </div>
+
+              <!-- Reorder & Delete Controls -->
+              <div class="flex items-center gap-1 flex-shrink-0">
+                <button onclick="app.moveQueueItem(${idx}, -1)" ${idx === 0 ? 'disabled class="opacity-20 cursor-not-allowed p-1 text-stone-400"' : 'class="p-1 text-stone-500 hover:text-stone-800 dark:hover:text-stone-100 transition"'} title="Move Up (▲)">
+                  <i class="fa-solid fa-chevron-up text-[10px]"></i>
+                </button>
+                <button onclick="app.moveQueueItem(${idx}, 1)" ${idx === this.playbackQueue.length - 1 ? 'disabled class="opacity-20 cursor-not-allowed p-1 text-stone-400"' : 'class="p-1 text-stone-500 hover:text-stone-800 dark:hover:text-stone-100 transition"'} title="Move Down (▼)">
+                  <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                </button>
+                <button onclick="app.removeFromQueue(${idx})" class="p-1 text-stone-400 hover:text-rose-600 dark:hover:text-rose-400 transition ml-0.5" title="Remove from Queue">
+                  <i class="fa-solid fa-xmark text-xs"></i>
+                </button>
+              </div>
+
+            </div>
+          `;
+        }).join('');
+      }
+
+      moveQueueItem(index, direction) {
+        const targetIndex = index + direction;
+        if (targetIndex < 0 || targetIndex >= this.playbackQueue.length) return;
+
+        // Swap items
+        const item = this.playbackQueue.splice(index, 1)[0];
+        this.playbackQueue.splice(targetIndex, 0, item);
+
+        // Adjust current active pointer if moved
+        if (this.currentQueueIndex === index) {
+          this.currentQueueIndex = targetIndex;
+        } else if (this.currentQueueIndex === targetIndex) {
+          this.currentQueueIndex = index;
+        }
+
+        this.updateQueueBadge();
+        this.renderQueueDrawer();
+        if (this.activePlayingPost) this.updateMiniPlayerUI(this.activePlayingPost);
+      }
+
+      removeFromQueue(index) {
+        if (index < 0 || index >= this.playbackQueue.length) return;
+
+        this.playbackQueue.splice(index, 1);
+
+        if (this.playbackQueue.length === 0) {
+          this.stopMiniPlayer();
+        } else if (index < this.currentQueueIndex) {
+          this.currentQueueIndex--;
+        } else if (index === this.currentQueueIndex) {
+          if (this.currentQueueIndex >= this.playbackQueue.length) {
+            this.currentQueueIndex = 0;
+          }
+          this.mountPersistentTrack(this.playbackQueue[this.currentQueueIndex]);
+        }
+
+        this.updateQueueBadge();
+        this.renderQueueDrawer();
+        if (this.activePlayingPost) this.updateMiniPlayerUI(this.activePlayingPost);
+      }
+
+      clearQueue() {
+        if (this.playbackQueue.length === 0) return;
+        const confirmClear = confirm('This will clear the playback queue. Continue?');
+        if (!confirmClear) return;
+
+        this.playbackQueue = [];
+        this.currentQueueIndex = 0;
+        this.activePlaylistName = null;
+        this.stopMiniPlayer();
+        this.closeModal('queueDrawerModal');
+        this.showToast('Playback queue cleared.');
+      }
+
+      jumpToQueueTrack(index) {
+        if (index < 0 || index >= this.playbackQueue.length) return;
+        this.pauseAllCardVideos();
+        this.currentQueueIndex = index;
+        this.mountPersistentTrack(this.playbackQueue[index]);
+        this.renderQueueDrawer();
+      }
+
+      updateQueueBadge() {
+        const badge = document.getElementById('miniQueueBadge');
+        if (badge) badge.textContent = `Queue (${this.playbackQueue.length})`;
+      }
+
+      toggleMiniPlayerPlayPause() {
+        const status = document.getElementById('miniPlayerStatus');
+        const btnPlay = document.getElementById('btnMiniPlayPause');
+
+        if (this.isIframePlaying) {
+          // Pause ALL active iframes across the page
+          document.querySelectorAll('iframe').forEach(iframe => {
+            if (iframe.contentWindow) {
+              try {
+                iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+              } catch(e) {}
+            }
+          });
+          this.isIframePlaying = false;
+          if (status) status.innerHTML = `<i class="fa-solid fa-pause text-amber-400"></i> Paused`;
+          if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-play"></i>`;
+        } else {
+          // SMART FOCUS: Resume ONLY the active focused track
+          let activeIframe = null;
+
+          if (this.activePlayingPost) {
+            activeIframe = document.getElementById(`iframe-${this.activePlayingPost.id}`) ||
+                           document.getElementById('quickViewIframe') ||
+                           document.getElementById('persistentAudioIframe');
+          }
+
+          if (!activeIframe) {
+            activeIframe = document.getElementById('persistentAudioIframe') || document.querySelector('iframe');
+          }
+
+          if (activeIframe && activeIframe.contentWindow) {
+            try {
+              activeIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+            } catch(e) {}
+          } else if (this.activePlayingPost) {
+            // Re-mount cleanly if iframe was unmounted
+            this.mountPersistentTrack(this.activePlayingPost);
+          }
+
+          this.isIframePlaying = true;
+          if (status) status.innerHTML = `<i class="fa-solid fa-compact-disc animate-spin text-blue-400"></i> Playing`;
+          if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+        }
+      }
+
+      stopMiniPlayer() {
+        // Stop persistent audio iframe
+        const host = document.getElementById('persistentPlayerHost');
+        if (host) host.innerHTML = '';
+
+        // Stop and pause all other card / modal iframes
+        this.stopAllActiveVideos();
+
+        this.playbackQueue = [];
+        this.currentQueueIndex = 0;
+        this.activePlaylistName = null;
+        this.isIframePlaying = false;
+        this.activePlayingPost = null;
+        
+        const bar = document.getElementById('miniPlayerBar');
+        if (bar) bar.classList.add('hidden');
+        this.updateQueueBadge();
+      }
+
+      openDetailFromMiniPlayer() {
+        if (this.activePlayingPost) {
+          this.navigateTo('detail', this.activePlayingPost.id);
+        }
+      }
+
+      renderGridView(filteredPosts) {
+        const container = document.getElementById('gridMonthGroups');
+        if (!container) return;
+
+        if (filteredPosts.length === 0) {
+          container.innerHTML = `<div class="text-center py-12 text-stone-500 text-xs">No items found in grid.</div>`;
+          document.getElementById('gridPagination').innerHTML = '';
+          return;
+        }
+
+        const groups = this.getGroupedPosts(filteredPosts);
+
+        container.innerHTML = Object.keys(groups).map(groupTitle => {
+          const monthPosts = groups[groupTitle];
+          const gridItems = monthPosts.map(post => {
+            const rawUrl = post.youtubeUrl || post.videoUrl || '';
+            const thumbUrl = this.getThumbnailUrl(post);
+
+            return `
+              <div onclick="app.openQuickView('${post.id}')" class="group relative aspect-square bg-stone-900 rounded-lg overflow-hidden cursor-pointer border border-stone-300 dark:border-stone-700 hover:border-stone-800 dark:hover:border-stone-400 shadow-2xs transition">
+                <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover scale-[1.35] group-hover:scale-[1.42] transition duration-200">
+                <div class="absolute inset-0 bg-stone-900/80 opacity-0 group-hover:opacity-100 transition duration-150 p-2.5 flex flex-col justify-between text-white">
+                  <div class="flex items-center justify-between">
+                    <span class="text-[9px] font-bold uppercase tracking-wider bg-stone-100 text-stone-900 px-1.5 py-0.5 rounded">
+                      ${Array.isArray(post.category) ? post.category.join(', ') : (post.category || 'General')}
+                    </span>
+                    <button onclick="app.sharePost('${post.id}', event)" class="text-stone-300 hover:text-amber-400 p-1" title="Share">
+                      <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                    </button>
+                  </div>
+                  <div>
+                    <h4 class="text-xs font-serif font-bold leading-tight line-clamp-2 text-stone-100">${post.title}</h4>
+                    <p class="text-[10px] text-stone-400 mt-1">${post.customDate || ''}</p>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('');
+
+          return `
+            <div class="space-y-3 w-full max-w-full">
+              <div class="flex items-center gap-3">
+                <h3 class="font-serif font-bold text-lg text-stone-900">${groupTitle}</h3>
+                <div class="flex-1 h-px bg-stone-300"></div>
+                <span class="text-xs text-stone-500 font-sans">${monthPosts.length} posts</span>
+              </div>
+              <div class="grid gap-2.5 w-full" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+                ${gridItems}
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        this.renderPagination('gridPagination', filteredPosts.length);
+      }
+
+      renderPlaylistsView() {
+        const container = document.getElementById('playlistTocList');
+        const badge = document.getElementById('playlistCountBadge');
+        if (!container) return;
+
+        if (badge) badge.textContent = `${PLAYLIST_CONFIG.length} Curated Playlists`;
+
+        container.innerHTML = PLAYLIST_CONFIG.map((pl, index) => {
+          const searchVal = pl.tag.toLowerCase();
+
+          // Accurate Universal Track Counter
+          const matchingCount = this.posts.filter(post => {
+            if (pl.type === 'mood') {
+              const postMoods = post.mood ? (Array.isArray(post.mood) ? post.mood : [post.mood]) : [];
+              return postMoods.some(m => String(m).toLowerCase() === searchVal);
+            } else {
+              const postTags = Array.isArray(post.tags) ? post.tags : [];
+              const postCats = Array.isArray(post.category) ? post.category : [];
+              return postTags.some(t => String(t).toLowerCase() === searchVal) ||
+                     postCats.some(c => String(c).toLowerCase() === searchVal);
+            }
+          }).length;
+
+          return `
+            <div class="group pt-4 first:pt-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2.5 hover:bg-[#eae5db]/30 rounded-lg p-3 transition cursor-pointer" onclick="app.openPlaylist(${index})">
+              <div class="flex items-baseline gap-3 flex-1 min-w-0">
+                <span class="font-serif text-stone-400 font-bold text-sm w-5 text-right flex-shrink-0">${index + 1}.</span>
+                <div class="space-y-1 min-w-0">
+                  <h3 class="font-serif font-bold text-stone-900 group-hover:text-amber-800 transition text-base leading-snug">
+                    ${pl.name}
+                  </h3>
+                  ${pl.desc ? `<p class="text-xs text-stone-600 font-sans leading-relaxed">${pl.desc}</p>` : ''}
+                </div>
+              </div>
+
+              <div class="flex items-center gap-4 pl-8 sm:pl-0 flex-shrink-0 self-end sm:self-center text-xs">
+                <span class="text-stone-500 font-sans font-normal">
+                  ${matchingCount} ${matchingCount === 1 ? 'track' : 'tracks'}
+                </span>
+                <button onclick="event.stopPropagation(); app.startPlaylistContinuous(${index})" class="px-2.5 py-1 bg-stone-900 hover:bg-blue-900 dark:bg-stone-800 dark:hover:bg-blue-800 text-white rounded font-semibold text-xs transition flex items-center gap-1 shadow-2xs">
+                  <i class="fa-solid fa-play text-[9px]"></i> Play All
+                </button>
+                <button onclick="event.stopPropagation(); app.openPlaylist(${index})" class="text-stone-700 dark:text-stone-300 font-semibold hover:text-amber-800 dark:hover:text-amber-400 transition flex items-center gap-1 text-xs">
+                  View <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      renderTagsView() {
+        const container = document.getElementById('tagDirectoryContent');
+        if (!container) return;
+
+        const tagMap = {};
+        const categoryMap = {};
+
+        // Live Dynamic Aggregation: Only counts tags currently present in dataset
+        this.posts.forEach(post => {
+          // Dynamic Categories (Standard & Custom)
+          const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
+          cats.forEach(cat => {
+            const c = cat.trim();
+            if (!c) return;
+            categoryMap[c] = (categoryMap[c] || 0) + 1;
+          });
+
+          // Dynamic Tags
+          (post.tags || []).forEach(tag => {
+            const t = tag.trim();
+            if (!t) return;
+            tagMap[t] = (tagMap[t] || 0) + 1;
+          });
+        });
+
+        // 1. Dynamic Sorting for Categories (Priority list first, followed alphabetically by custom categories)
+        const sortedCats = Object.keys(categoryMap).sort((a, b) => {
+          const pA = CATEGORY_PRIORITY.indexOf(a);
+          const pB = CATEGORY_PRIORITY.indexOf(b);
+          if (pA !== -1 && pB !== -1) return pA - pB;
+          if (pA !== -1) return -1;
+          if (pB !== -1) return 1;
+          return a.localeCompare(b);
+        });
+
+        const sortedTags = Object.keys(tagMap).sort((a, b) => tagMap[b] - tagMap[a]);
+
+        // 2. Structured Tag Groups Architecture
+        const groups = {
+          "Featured Creators & Artists": [],
+          "Concert & Live Stages": [],
+          "Curated Playlists": [],
+          "Release Year": [],
+          "Other Tags": []
+        };
+
+        // Matchers for Creators, Producers, Illustrators & Collaborators
+        const CREATOR_KEYWORDS = [
+          'syudou', 'jon-yakitory', 'wooma', 'orihara', 'giga', 'teddyloid', 
+          '椎名林檎', 'sheena', 'ringo', 'natori', 'n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
+           'deco*27', 'deco', 'すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
+          'くじら', 'vocaloid', 'utaite', 'jon-yakitory', 'producer', 'illust', 'collab'
+        ];
+
+        // Matchers for Concerts, Tours & Landmark Venues
+        const CONCERT_KEYWORDS = [
+          'kigeki', '喜劇', 'campanella', 'カムパネルラ', 'mars', 'マーズ', 
+          'wish', 'shinzou', '心臓', 'mona lisa', 'mona-lisa', 'モナ・リザ', 'hibana', 
+          'yodaka', 'よだか', 'live','stage', 'arena', 'stadium', 'dome', 'live stage',
+          'budokan', 'zepp', 'saitama', 'tokyo dome', 'k-arena', 'peacock', 'zipangu','yokohama','los angeles','kia'
+        ];
+
+        sortedTags.forEach(tag => {
+          const lower = tag.toLowerCase();
+
+          if (/^\d{4}$/.test(tag)) {
+            groups["Release Year"].push(tag);
+          } else if (lower.includes("playlist")) {
+            groups["Curated Playlists"].push(tag);
+          } else if (CREATOR_KEYWORDS.some(k => lower.includes(k))) {
+            groups["Featured Creators & Artists"].push(tag);
+          } else if (CONCERT_KEYWORDS.some(k => lower.includes(k))) {
+            groups["Concert & Live Stages"].push(tag);
+          } else {
+            groups["Other Tags"].push(tag);
+          }
+        });
+
+        // 3. Render Dynamic Categories Block
+        let html = `
+          <div class="space-y-3 pb-6">
+            <h3 class="font-serif font-bold text-lg text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-700/80 pb-1">Category</h3>
+            <div class="flex flex-wrap gap-2">
+              ${sortedCats.map(cat => `
+                <button onclick="app.selectCategory('${cat.replace(/'/g, "\\'")}'); app.navigateTo('main');" class="px-3 py-1.5 bg-[#eae5db] dark:bg-stone-800 dark:text-stone-300 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs transition flex items-center gap-1.5 shadow-2xs">
+                  <span>${cat}</span>
+                  <span class="px-1.5 py-0.2 bg-stone-300/80 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-[10px] font-mono">${categoryMap[cat]}</span>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+
+        // 4. Render All Dynamically Populated Tag Groups (Skips empty groups)
+        Object.keys(groups).forEach(groupName => {
+          if (groups[groupName].length === 0) return;
+
+          html += `
+            <div class="space-y-3 pt-6 border-t border-stone-100 dark:border-stone-750">
+              <div class="flex items-center justify-between">
+                <h3 class="font-serif font-bold text-base text-stone-900 dark:text-stone-100">${groupName}</h3>
+                <span class="text-[10px] font-mono text-stone-400">${groups[groupName].length} tags</span>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                ${groups[groupName].map(tag => `
+                  <button onclick="app.filterByTag('${tag.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-white dark:bg-stone-800/80 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-md text-xs text-stone-700 dark:text-stone-300 transition flex items-center gap-1.5 shadow-2xs">
+                    <span>${tag}</span>
+                    <span class="text-[10px] text-stone-400 dark:text-stone-500 font-mono">${tagMap[tag]}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+      stopAllActiveVideos() {
+        // Send pause command to all registered concurrent iframes before unmounting
+        this.activeMountedPlayers.forEach((playerObj, pId) => {
+          const el = document.getElementById(playerObj.iframeId);
+          if (el && el.contentWindow) {
+            try {
+              el.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+            } catch(e) {}
+          }
+        });
+
+        // Unmount iframes from DOM to release browser RAM completely
+        document.querySelectorAll('iframe').forEach(iframe => {
+          iframe.src = 'about:blank';
+          iframe.remove();
+        });
+
+        this.activeMountedPlayers.clear();
+        this.isIframePlaying = false;
+        const bar = document.getElementById('miniPlayerBar');
+        if (bar) bar.classList.add('hidden');
+      }
+
+      renderDetailView() {
+        this.isIframePlaying = false;
+        const container = document.getElementById('detailContent');
+        if (!container) return;
+
+        const post = this.posts.find(p => p.id === this.selectedPostId) || this.posts[0];
+        if (!post) {
+          container.innerHTML = `<p class="text-stone-500 text-xs">Post not found.</p>`;
+          return;
+        }
+
+        //const ytId = this.getYoutubeId(post.youtubeUrl);
+        //const thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        const rawUrl = post.youtubeUrl || post.videoUrl || '';
+        const platform = this.getPlatform(rawUrl);
+        const thumbUrl = this.getThumbnailUrl(post);
+        const tagChips = (post.tags || []).slice(0, DISPLAY_TAG_LIMIT).map(t => 
+          `<span onclick="app.filterByTag('${t}')" class="cursor-pointer hover:underline text-xs text-stone-600 bg-stone-200/80 px-2 py-0.5 rounded font-medium">${t}</span>`
+        ).join(' ');
+
+        const views = this.analytics.postViews[post.id]?.total || 1;
+        const watchLabel = platform === 'niconico' 
+          ? `<i class="fa-solid fa-tv text-blue-600 text-sm"></i> Watch on Niconico`
+          : `<i class="fa-brands fa-youtube text-rose-600 text-sm"></i> Watch on YouTube`;
+
+        container.innerHTML = `
+          <div class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 shadow-md group">
+            <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition flex items-center justify-center">
+              <button onclick="app.handlePlayClick('${post.id}', '${rawUrl}', this)" class="w-16 h-16 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-xl hover:scale-105 transition">
+                <i class="fa-solid fa-play text-xl ml-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 dark:border-stone-700/80 pb-3">
+              <div class="flex flex-wrap items-center gap-1.5">
+                ${(Array.isArray(post.category) ? post.category : [post.category || 'General']).map(c => `
+                  <span class="px-2.5 py-1 bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-250 rounded text-xs font-semibold">${c}</span>
+                `).join('')}
+              </div>
+
+              <div class="text-xs text-stone-500 flex items-center gap-3">
+                <span><i class="fa-regular fa-calendar mr-1"></i>${post.customDate || 'N/A'}</span>
+                <span><i class="fa-regular fa-eye mr-1"></i>${views} views</span>
+              </div>
+            </div>
+
+            <div class="flex items-start justify-between gap-3">
+              <h1 class="text-xl font-serif font-bold text-stone-900 dark:text-stone-100 leading-snug">${post.title}</h1>
+              <!-- Tiny Share Button -->
+              <button onclick="app.sharePost('${post.id}')" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1.5 flex-shrink-0 text-stone-850 dark:text-stone-250" title="Share Post">
+                <i class="fa-solid fa-share-nodes text-xs"></i>
+                <span class="text-[11px] font-medium">Share</span>
+              </button>
+            </div>
+
+            ${post.notes ? `
+              <div class="bg-[#f4f1ea] dark:bg-stone-900/60 p-4 rounded-lg border border-stone-300 dark:border-stone-700/60">
+                <p class="text-stone-800 dark:text-stone-250 text-xs leading-relaxed whitespace-pre-line">${this.formatNotes(post.notes)}</p>
+              </div>
+            ` : ''}
+
+            ${tagChips ? `<div class="flex flex-wrap gap-1.5 pt-1">${tagChips}</div>` : ''}
+
+            <!-- Related Videos Camera Roll Filmstrip (Collapsible)-->
+            ${(() => {
+              const relatedList = this.getRelatedPosts(post, 6);
+              if (relatedList.length === 0) return '';
+              
+              const filmstripItems = relatedList.map(relPost => {
+                const rThumb = this.getThumbnailUrl(relPost);
+                return `
+                  <div onclick="app.navigateTo('detail', '${relPost.id}')" class="group relative flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28 aspect-square bg-stone-900 rounded-lg overflow-hidden cursor-pointer shadow-xs border border-stone-300 dark:border-stone-700/70 hover:border-stone-800 dark:hover:border-stone-400 transition">
+                    <img src="${rThumb}" alt="${relPost.title}" class="w-full h-full object-cover scale-[1.35] group-hover:scale-[1.42] transition duration-200">
+                    <div class="absolute inset-0 bg-stone-950/85 opacity-0 group-hover:opacity-100 transition duration-150 p-1.5 flex flex-col justify-between text-white text-[10px]">
+                      <span class="font-bold text-[8px] uppercase tracking-wider bg-stone-100 text-stone-900 px-1 rounded self-start truncate max-w-full">
+                        ${Array.isArray(relPost.category) ? relPost.category[0] : (relPost.category || 'Track')}
+                      </span>
+                      <span class="font-serif font-bold leading-tight line-clamp-2 text-stone-100 text-[10px]">
+                        ${relPost.title}
+                      </span>
+                    </div>
+                  </div>
+                `;
+              }).join('');
+
+              return `
+                <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70 space-y-2">
+                  <button type="button" onclick="app.toggleRelatedTracks('detailRelatedStrip', this)" class="cursor-pointer text-xs font-serif font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white flex items-center gap-1.5 py-1 transition">
+                    
+                    <span class="related-toggle-label">▾ Related Tracks</span>
+                  </button>
+                  <div id="detailRelatedStrip" class="hidden pt-1">
+                    <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1 pt-0.5">
+                      ${filmstripItems}
+                    </div>
+                  </div>
+                </div>
+              `;
+            })()}
+
+            <div class="pt-3 border-t border-stone-200 dark:border-stone-700/80 flex justify-between items-center text-xs">
+              <a href="${rawUrl}" target="_blank" class="text-stone-700 dark:text-stone-300 hover:text-blue-900 transition flex items-center gap-1 font-medium">
+                ${watchLabel} <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ml-0.5"></i>
+              </a>
+
+              <div class="flex items-center gap-2">
+                ${(() => {
+                  const postMood = Array.isArray(post.mood) ? post.mood[0] : post.mood;
+                  if (!postMood) return '';
+                  const mObj = MOOD_CONFIG.find(m => m.name === postMood);
+                  const hoverClass = mObj ? mObj.hoverBg : 'hover:bg-stone-700 hover:text-white';
+                  return `
+                     <button onclick="app.viewMoodPlaylist('${postMood.replace(/'/g, "\\'")}')" class="cursor-pointer text-xs bg-[#eae5db] dark:bg-stone-800 text-stone-850 dark:text-stone-250 px-2 py-1 rounded font-medium transition ${hoverClass}">
+                      ${postMood}
+                    </button>
+                  `;
+                })()}
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+        renderPagination(containerId, totalItems) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        // Compact and grid render all posts — no pagination needed
+        if (containerId === 'compactPagination' || containerId === 'gridPagination') {
+          container.innerHTML = '';
+          return;
+        }
+
+        const totalPages = Math.ceil(totalItems / this.postsPerPage) || 1;
+
+        if (totalPages <= 1) {
+          container.innerHTML = `<span class="text-xs text-stone-500">Page 1 of 1</span>`;
+          return;
+        }
+
+        container.innerHTML = `
+          <button 
+            onclick="app.changePage(${this.currentPage - 1})" 
+            ${this.currentPage === 1 ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-1.5 bg-[#faf8f5] border border-stone-300 text-xs rounded text-stone-500"' : 'class="px-3 py-1.5 bg-[#faf8f5] border border-stone-300 hover:bg-stone-800 hover:text-white text-xs rounded text-stone-800 transition"'}>
+            <i class="fa-solid fa-chevron-left mr-1"></i> Prev
+          </button>
+
+          <span class="text-xs font-medium text-stone-600">
+            Page <strong class="text-stone-900">${this.currentPage}</strong> of ${totalPages}
+          </span>
+
+          <button 
+            onclick="app.changePage(${this.currentPage + 1})" 
+            ${this.currentPage >= totalPages ? 'disabled class="opacity-40 cursor-not-allowed px-3 py-1.5 bg-[#faf8f5] border border-stone-300 text-xs rounded text-stone-500"' : 'class="px-3 py-1.5 bg-[#faf8f5] border border-stone-300 hover:bg-stone-800 hover:text-white text-xs rounded text-stone-800 transition"'}>
+            Next <i class="fa-solid fa-chevron-right ml-1"></i>
+          </button>
+        `;
+      }
+
+      changePage(page) {
+        this.currentPage = page;
+        this.renderCurrentView();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      handleSearch(val) {
+        this.searchQuery = val.trim();
+        this.currentPage = 1;
+        document.getElementById('clearSearchBtn')?.classList.toggle('hidden', !this.searchQuery);
+        this.renderCurrentView();
+      }
+
+      clearSearch() {
+        const input = document.getElementById('searchInput');
+        if (input) input.value = '';
+        this.searchQuery = '';
+        this.activeCategory = 'All';
+        this.activeMood = null;
+        this.activeTag = null;
+        this.renderCategories();
+        this.handleSearch('');
+      }
+      openPlaylist(index) {
+        const pl = PLAYLIST_CONFIG[index];
+        if (!pl) return;
+
+        // 1. Wipe all conflicting filters clean
+        this.searchQuery = '';
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        const clearBtn = document.getElementById('clearSearchBtn');
+        if (clearBtn) clearBtn.classList.add('hidden');
+
+        this.activeCategory = 'All';
+        this.activeMood = null;
+        this.activeTag = null;
+        this.currentPage = 1;
+
+        // 2. Set ONLY the target filter for this playlist
+        if (pl.type === 'mood') {
+          this.activeMood = pl.tag;
+        } else {
+          this.activeTag = pl.tag;
+        }
+
+        // 3. Update filter pill states & navigate cleanly to Main View
+        this.renderCategories();
+        this.renderMoodFilters();
+        this.navigateTo('main');
+      }
+
+        viewMoodPlaylist(mood) {
+        if (!mood) return;
+        this.activeMood = mood;
+        this.currentPage = 1;
+        this.navigateTo('main');
+        this.renderMoodFilters();
+      }
+        openQuickView(postId) {
+        const post = this.posts.find(p => p.id === postId);
+        if (!post) return;
+
+        const rawUrl = post.youtubeUrl || post.videoUrl || '';
+        const vidId = this.getVideoId(rawUrl);
+        const cats = Array.isArray(post.category)
+          ? post.category.join(', ')
+          : (post.category || 'General');
+
+        // Tag Pills: Capped at 5, interactive, horizontal touch scroll
+        const tagPillsHtml = (post.tags || [])
+          .slice(0, DISPLAY_TAG_LIMIT)
+          .map(t => `
+            <span 
+              onclick="app.filterByTag('${t.replace(/'/g, "\\'")}'); app.closeModal('quickViewModal');" 
+              class="cursor-pointer text-[10px] bg-stone-800 text-stone-300 hover:bg-blue-900 hover:text-white px-2 py-0.5 rounded transition whitespace-nowrap font-medium">
+              #${t}
+            </span>
+          `).join('');
+
+        const relatedList = this.getRelatedPosts(post, 6);
+        const filmstripHtml = relatedList.map(relPost => {
+          const rThumb = this.getThumbnailUrl(relPost);
+          return `
+            <div onclick="app.openQuickView('${relPost.id}')" class="group relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 aspect-square bg-stone-950 rounded-lg overflow-hidden cursor-pointer border border-stone-700 hover:border-stone-400 transition shadow-xs" title="${relPost.title}">
+              <img src="${rThumb}" alt="${relPost.title}" class="w-full h-full object-cover scale-[1.35] group-hover:scale-[1.42] transition duration-200">
+              <div class="absolute inset-0 bg-stone-950/85 opacity-0 group-hover:opacity-100 transition duration-150 p-1 flex flex-col justify-end text-white text-[9px]">
+                <span class="font-serif font-bold leading-tight line-clamp-2 text-stone-200 text-[9px]">${relPost.title}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        const container = document.getElementById('quickViewContainer');
+        if (container) {
+          container.innerHTML = `
+            <div class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 shadow-md">
+              ${vidId
+                ? `<iframe src="https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+                : `<div class="flex items-center justify-center h-full text-stone-400 text-xs">No video available</div>`
+              }
+            </div>
+            <div class="space-y-1.5 pt-1">
+              <span class="px-2 py-0.5 bg-stone-700 text-stone-200 rounded text-[11px] font-semibold">${cats}</span>
+              <h3 class="text-base font-serif font-bold text-stone-200 mt-1 leading-snug">${post.title}</h3>
+              ${tagPillsHtml ? `<div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none pt-1">${tagPillsHtml}</div>` : ''}
+            </div>
+            ${relatedList.length > 0 ? `
+              <div class="pt-1.5 border-t border-stone-800 space-y-1.5">
+                <button type="button" onclick="app.toggleRelatedTracks('quickRelatedStrip', this)" class="cursor-pointer text-[11px] font-semibold text-stone-400 hover:text-stone-200 flex items-center gap-1.5 py-0.5 transition">
+                  
+                  <span class="related-toggle-label">▾ Related Tracks</span>
+                </button>
+                <div id="quickRelatedStrip" class="hidden pt-1">
+                  <div class="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1">
+                    ${filmstripHtml}
+                  </div>
+                </div>
+              </div>
+            ` : ''}
+          `;
+        }
+
+        // Wire "View Post" button to this post's detail page
+        const detailBtn = document.getElementById('quickViewDetailBtn');
+        if (detailBtn) {
+          detailBtn.onclick = () => {
+            app.closeModal('quickViewModal');
+            app.navigateTo('detail', postId);
+          };
+        }
+
+        // Wire "+ Queue" button inside QuickView 
+        const queueBtn = document.getElementById('quickViewQueueBtn');
+        if (queueBtn) {
+          queueBtn.onclick = (e) => {
+            app.addToQueue(postId, e);
+          };
+        }
+
+        // Activate miniplayer so user has controls after closing quickView
+        if (post) this.activateMiniPlayer(post);
+        this.openModal('quickViewModal');
+      }
+
+      triggerDiceShuffle() {
+        // Only roll from Primary performance tracks (excludes auxiliary off-vocal/interviews)
+        const eligiblePool = this.posts.filter(p => this.isPrimaryPost(p));
+        if (eligiblePool.length === 0) return;
+
+        const randomIndex = Math.floor(Math.random() * eligiblePool.length);
+        const randomPost = eligiblePool[randomIndex];
+        const rawUrl = randomPost.youtubeUrl || randomPost.videoUrl || '';
+        const thumbUrl = this.getThumbnailUrl(randomPost);
+
+        const diceContainer = document.getElementById('diceResultContainer');
+        if (diceContainer) {
+          diceContainer.innerHTML = `
+            <div class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 group">
+              <img src="${thumbUrl}" alt="${randomPost.title}" class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition flex items-center justify-center">
+                <button onclick="app.handlePlayClick('${randomPost.id}', '${rawUrl}', this)" class="w-14 h-14 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-xl hover:scale-105 transition">
+                  <i class="fa-solid fa-play text-lg ml-0.5"></i>
+                </button>
+              </div>
+            </div>
+            <div>
+              <div>
+              <span class="px-2 py-0.5 bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 rounded text-xs font-semibold">
+                ${randomPost.category || 'General'}
+              </span>
+              <h3 class="text-base font-serif font-bold text-stone-900 dark:text-stone-100 mt-2">${randomPost.title}</h3>
+              <p class="text-xs text-stone-600 dark:text-stone-300 mt-1">${this.formatNotes(randomPost.notes || '')}</p>
+            </div>
+          `;
+        }
+
+        this.openModal('diceModal');
+      }
+
+      initFuse() {
+        if (typeof Fuse === 'undefined') return;
+        const options = {
+          keys: [
+            { name: 'title', weight: 0.40 },
+            { name: 'tags', weight: 0.30 },
+            { name: 'slug', weight: 0.10 },
+            { name: 'category', weight: 0.10 },
+            { name: 'mood', weight: 0.05 },
+            { name: 'notes', weight: 0.05 }
+          ],
+          threshold: 0.34,
+          distance: 100,
+          ignoreLocation: false,
+          findAllMatches: true,
+          minMatchCharLength: 2
+        };
+        this.fuse = new Fuse(this.posts, options);
+      }
+      getRelatedPosts(targetPost, limit = 6) {
+        if (!targetPost || !this.posts || this.posts.length <= 1) return [];
+
+        const candidates = this.posts.filter(p => p.id !== targetPost.id);
+        const targetMood = Array.isArray(targetPost.mood) ? targetPost.mood[0] : (targetPost.mood || '');
+        const targetCats = Array.isArray(targetPost.category) ? targetPost.category : [targetPost.category || 'General'];
+        const targetTags = (targetPost.tags || []).map(t => String(t).toLowerCase());
+
+        // Parse manual pins from targetPost (IDs, Slugs, or Exact Full Titles)
+        const manualPins = (targetPost.related || []).map(r => String(r).trim().toLowerCase()).filter(Boolean);
+
+        // 1. Extract manual pins in specified sequence
+        const pinnedPosts = [];
+        manualPins.forEach(pin => {
+          const matched = candidates.find(p => 
+            p.id.toLowerCase() === pin || 
+            (p.slug && p.slug.toLowerCase() === pin) || 
+            p.title.toLowerCase() === pin
+          );
+          if (matched && !pinnedPosts.some(p => p.id === matched.id)) {
+            pinnedPosts.push(matched);
+          }
+        });
+
+        // 2. Score unpinned candidates
+        const unpinned = candidates.filter(c => !pinnedPosts.some(p => p.id === c.id));
+        
+        const scoredCandidates = unpinned.map(post => {
+          let score = 0;
+          const postMood = Array.isArray(post.mood) ? post.mood[0] : (post.mood || '');
+          const postCats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
+          const postTags = (post.tags || []).map(t => String(t).toLowerCase());
+
+          // Same Mood (+8 pts)
+          const isSameMood = targetMood && postMood && targetMood.toLowerCase() === postMood.toLowerCase();
+          if (isSameMood) score += 8;
+
+          // Category Overlap (+3 pts per category)
+          postCats.forEach(c => {
+            if (targetCats.some(tc => tc.toLowerCase() === c.toLowerCase())) score += 3;
+          });
+
+          // Tag Overlap (+1 pt per shared tag)
+          postTags.forEach(t => {
+            if (targetTags.includes(t)) score += 1;
+          });
+
+          // Primary performance track preference (+1 pt)
+          if (this.isPrimaryPost(post)) score += 1;
+
+          return { post, score, isSameMood };
+        });
+
+        // 3. Separate pools for Option A (Slots 1-4: Same Mood, Slots 5-6: Cross-Mood Discovery)
+        const sameMoodPool = scoredCandidates.filter(c => c.isSameMood).sort((a, b) => b.score - a.score).map(c => c.post);
+        const diffMoodPool = scoredCandidates.filter(c => !c.isSameMood).sort((a, b) => b.score - a.score).map(c => c.post);
+
+        const result = [...pinnedPosts];
+
+        // Fill up to 4 slots with same-mood top matches
+        while (result.length < 4 && sameMoodPool.length > 0) {
+          result.push(sameMoodPool.shift());
+        }
+
+        // Fill slots 5 and 6 with cross-mood serendipity discovery
+        while (result.length < limit && diffMoodPool.length > 0) {
+          result.push(diffMoodPool.shift());
+        }
+
+        // Fallback: fill remaining if either pool had fewer items
+        while (result.length < limit && sameMoodPool.length > 0) {
+          result.push(sameMoodPool.shift());
+        }
+        while (result.length < limit && diffMoodPool.length > 0) {
+          result.push(diffMoodPool.shift());
+        }
+
+        return result.slice(0, limit);
+      }
+      toggleRelatedTracks(containerId, btnEl) {
+        const strip = document.getElementById(containerId);
+        if (!strip) return;
+        
+        const isHidden = strip.classList.contains('hidden');
+        if (isHidden) {
+          strip.classList.remove('hidden');
+          if (btnEl) {
+            const label = btnEl.querySelector('.related-toggle-label');
+            if (label) label.textContent = '▴ Related Tracks';
+          }
+        } else {
+          strip.classList.add('hidden');
+          if (btnEl) {
+            const label = btnEl.querySelector('.related-toggle-label');
+            if (label) label.textContent = '▾ Related Tracks';
+          }
+        }
+      }
+
+      savePosts() {
+        localStorage.setItem(`${DB_PREFIX}_posts`, JSON.stringify(this.posts));
+        this.initFuse();
+      }
+
+
+      updatePostsPerPage(val) {
+        this.postsPerPage = parseInt(val);
+        localStorage.setItem(`${DB_PREFIX}_posts_per_page`, this.postsPerPage);
+        document.getElementById('postsPerPageValue').textContent = this.postsPerPage;
+        this.currentPage = 1;
+        this.renderCurrentView();
+      }
+
+      initTheme() {
+        // Load saved theme or default to light
+        const savedTheme = localStorage.getItem(`${DB_PREFIX}_theme`) || 'light';
+        this.setTheme(savedTheme, false);
+      }
+
+      setTheme(themeName, saveToStorage = true) {
+        this.currentTheme = themeName;
+        const isDark = themeName === 'dark';
+
+        // Toggle 'dark' class on root element
+        document.documentElement.classList.toggle('dark', isDark);
+
+        if (saveToStorage) {
+          localStorage.setItem(`${DB_PREFIX}_theme`, themeName);
+        }
+
+        // Update Theme Switcher Buttons in Settings Modal
+        const btnLight = document.getElementById('theme-btn-light');
+        const btnDark = document.getElementById('theme-btn-dark');
+        if (btnLight && btnDark) {
+          btnLight.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${!isDark ? 'bg-white dark:bg-stone-700 text-stone-950 dark:text-stone-100 shadow-xs' : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'}`;
+          btnDark.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${isDark ? 'bg-stone-900 dark:bg-stone-700 text-stone-100 shadow-xs' : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'}`;
+        }
+      }
+
+      updateSettingsUI() {
+        const pVal = document.getElementById('postsPerPageValue');
+        if (pVal) pVal.textContent = this.postsPerPage;
+        const pRange = document.getElementById('postsPerPageRange');
+        if (pRange) pRange.value = this.postsPerPage;
+        this.setTheme(this.currentTheme || localStorage.getItem(`${DB_PREFIX}_theme`) || 'light', false);
+      }
+
+      startAboutAdoAnimation() {
+        const container = document.getElementById('aboutAdoTypingBody');
+        if (!container) return;
+
+        if (this.isTyping) return;
+        this.isTyping = true;
+
+        if (!this.aboutAdoOriginalParagraphs) {
+          const pElements = container.querySelectorAll('p');
+          this.aboutAdoOriginalParagraphs = Array.from(pElements).map(p => ({
+            className: p.className,
+            words: p.innerText.trim().split(/\s+/)
+          }));
+          this.aboutAdoFullHTML = container.innerHTML;
+        }
+
+        container.innerHTML = '';
+        const paragraphs = this.aboutAdoOriginalParagraphs;
+        let pIdx = 0;
+        let wIdx = 0;
+        let currentP = document.createElement('p');
+        if (paragraphs[0].className) currentP.className = paragraphs[0].className;
+        container.appendChild(currentP);
+
+        this.typingInterval = setInterval(() => {
+          if (pIdx < paragraphs.length) {
+            const currentParaData = paragraphs[pIdx];
+            if (wIdx < currentParaData.words.length) {
+              currentP.textContent += (wIdx === 0 ? '' : ' ') + currentParaData.words[wIdx];
+              wIdx++;
+            } else {
+              pIdx++;
+              wIdx = 0;
+              if (pIdx < paragraphs.length) {
+                currentP = document.createElement('p');
+                if (paragraphs[pIdx].className) currentP.className = paragraphs[pIdx].className;
+                container.appendChild(currentP);
+              }
+            }
+          } else {
+            this.skipTypingAnimation();
+          }
+        }, 32);
+      }
+
+      skipTypingAnimation() {
+        clearInterval(this.typingInterval);
+        const container = document.getElementById('aboutAdoTypingBody');
+        if (container && this.aboutAdoFullHTML) {
+          container.innerHTML = this.aboutAdoFullHTML;
+        }
+        this.isTyping = false;
+      }
+
+      openModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+          modal.classList.remove('hidden');
+          if (id === 'aboutAdoModal') {
+            this.startAboutAdoAnimation();
+          }
+        }
+      }
+
+      closeModal(id) {
+        const modal = document.getElementById(id);
+        if (modal) {
+          modal.classList.add('hidden');
+          if (id === 'aboutAdoModal') {
+            this.skipTypingAnimation();
+          }
+        }
+      }
+
+      showToast(msg) {
+        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
+        if (toast && toastMsg) {
+          toastMsg.textContent = msg;
+          toast.classList.remove('hidden');
+          setTimeout(() => {
+            toast.classList.add('hidden');
+          }, 3000);
+        }
+      }
+    }
+
+    let app;
+    window.onload = () => {
+      app = new VibeBlogApp();
+    };
+  </script>
+</body>
+</html>
