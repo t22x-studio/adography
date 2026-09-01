@@ -2782,40 +2782,55 @@
         const container = document.getElementById('tagDirectoryContent');
         if (!container) return;
 
+        // Case-Insensitive Normalization Maps (normalizedKey -> { displayName, count })
         const tagMap = {};
         const categoryMap = {};
 
-        // Live Dynamic Aggregation: Only counts tags currently present in dataset
         this.posts.forEach(post => {
-          // Dynamic Categories (Standard & Custom)
+          // Normalize Categories (e.g. 'cover' and 'Cover' merge together)
           const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
           cats.forEach(cat => {
             const c = cat.trim();
             if (!c) return;
-            categoryMap[c] = (categoryMap[c] || 0) + 1;
+            const norm = c.toLowerCase();
+            if (!categoryMap[norm]) {
+              categoryMap[norm] = { name: c, count: 0 };
+            }
+            categoryMap[norm].count += 1;
           });
 
-          // Dynamic Tags
+          // Normalize Tags (e.g. 'collaboration' and 'Collaboration' merge together cleanly)
           (post.tags || []).forEach(tag => {
             const t = tag.trim();
             if (!t) return;
-            tagMap[t] = (tagMap[t] || 0) + 1;
+            const norm = t.toLowerCase();
+            if (!tagMap[norm]) {
+              // Standardize display name: Capitalize first letter if all lowercase
+              const prettyName = t.length > 1 && t === t.toLowerCase() && !/[^\x00-\x7F]/.test(t)
+                ? t.charAt(0).toUpperCase() + t.slice(1) 
+                : t;
+              tagMap[norm] = { name: prettyName, count: 0 };
+            }
+            tagMap[norm].count += 1;
           });
         });
 
-        // 1. Dynamic Sorting for Categories (Priority list first, followed alphabetically by custom categories)
-        const sortedCats = Object.keys(categoryMap).sort((a, b) => {
-          const pA = CATEGORY_PRIORITY.indexOf(a);
-          const pB = CATEGORY_PRIORITY.indexOf(b);
+        // 1. Sort Categories (Priority categories first, followed alphabetically)
+        const sortedCatKeys = Object.keys(categoryMap).sort((a, b) => {
+          const nameA = categoryMap[a].name;
+          const nameB = categoryMap[b].name;
+          const pA = CATEGORY_PRIORITY.indexOf(nameA);
+          const pB = CATEGORY_PRIORITY.indexOf(nameB);
           if (pA !== -1 && pB !== -1) return pA - pB;
           if (pA !== -1) return -1;
           if (pB !== -1) return 1;
-          return a.localeCompare(b);
+          return nameA.localeCompare(nameB);
         });
 
-        const sortedTags = Object.keys(tagMap).sort((a, b) => tagMap[b] - tagMap[a]);
+        // 2. Sort Tags by highest post count
+        const sortedTagKeys = Object.keys(tagMap).sort((a, b) => tagMap[b].count - tagMap[a].count);
 
-        // 2. Structured Tag Groups Architecture
+        // 3. Structured Tag Groups Architecture
         const groups = {
           "Featured Creators & Artists": [],
           "Concert & Live Stages": [],
@@ -2824,54 +2839,65 @@
           "Other Tags": []
         };
 
-        // Matchers for Creators, Producers, Illustrators & Collaborators
+        // Comprehensive Creator & Collaborator Detection Roster
         const CREATOR_KEYWORDS = [
-          'syudou', 'jon-yakitory', 'wooma', 'orihara', 'giga', 'teddyloid', 
+          'syudou', 'jon-yakitory', 'wooma', 'orihara', 'giga', 'teddyloid', '日向電工',
           '椎名林檎', 'sheena', 'ringo', 'natori', 'n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
-           'deco*27', 'deco', 'すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
-          'くじら', 'vocaloid', 'utaite', 'jon-yakitory', 'producer', 'illust', 'collab'
+           'deco*27', 'deco', 'mrs. green apple', '大森元貴','すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
+          'くじら', 'vocaloid', 'utaite', 'jon-yakitory', 'producer', 'illust', 'collab', 'つんく',
+           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 
+           'Hatsune Miku', 'GUMI','きくお','after the rain','atr','そらる','まふまふ','TK',
+           'indigo la end','Neru', '吉乃','弱酸性', 'てにをは','ピノキオピー','MI8k','Yuta Orisaka','Koshi Inaba','UTA',
+           'Jax Jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'Neru', 'みゆはん', 
+           'Canon', 'Hiroyuki Sawano', '秦基博','yuta orisaka', 'Eiichiro Oda','FAKE TYPE.', '椎乃味醂',
+            'Yasutaka Nakata','hachi','wowaka','biz'
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
         const CONCERT_KEYWORDS = [
           'kigeki', '喜劇', 'campanella', 'カムパネルラ', 'mars', 'マーズ', 
-          'wish', 'shinzou', '心臓', 'mona lisa', 'mona-lisa', 'モナ・リザ', 'hibana', 
+          'wish', 'shinzou', '心臓', 'monalisa', 'mona lisa', 'モナ・リザ', 'hibana', 
           'yodaka', 'よだか', 'live','stage', 'arena', 'stadium', 'dome', 'live stage',
-          'budokan', 'zepp', 'saitama', 'tokyo dome', 'k-arena', 'peacock', 'zipangu','yokohama','los angeles','kia'
+          'budokan', 'zepp', 'saitama', 'tokyo dome', 'k-arena', 'peacock', 'zipangu',
+          'yokohama','los angeles','kia', 'nissan','expo'
         ];
 
-        sortedTags.forEach(tag => {
-          const lower = tag.toLowerCase();
+        sortedTagKeys.forEach(key => {
+          const item = tagMap[key];
 
-          if (/^\d{4}$/.test(tag)) {
-            groups["Release Year"].push(tag);
-          } else if (lower.includes("playlist")) {
-            groups["Curated Playlists"].push(tag);
-          } else if (CREATOR_KEYWORDS.some(k => lower.includes(k))) {
-            groups["Featured Creators & Artists"].push(tag);
-          } else if (CONCERT_KEYWORDS.some(k => lower.includes(k))) {
-            groups["Concert & Live Stages"].push(tag);
+          if (/^\d{4}$/.test(key)) {
+            groups["Release Year"].push(item);
+          } else if (key.includes("playlist")) {
+            groups["Curated Playlists"].push(item);
+          } else if (CREATOR_KEYWORDS.some(k => key.includes(k))) {
+            groups["Featured Creators & Artists"].push(item);
+          } else if (CONCERT_KEYWORDS.some(k => key.includes(k))) {
+            groups["Concert & Live Stages"].push(item);
           } else {
-            groups["Other Tags"].push(tag);
+            groups["Other Tags"].push(item);
           }
         });
 
-        // 3. Render Dynamic Categories Block
+        // 4. Render Dynamic Categories Block
         let html = `
           <div class="space-y-3 pb-6">
             <h3 class="font-serif font-bold text-lg text-stone-900 dark:text-stone-100 border-b border-stone-200 dark:border-stone-700/80 pb-1">Category</h3>
             <div class="flex flex-wrap gap-2">
-              ${sortedCats.map(cat => `
-                <button onclick="app.selectCategory('${cat.replace(/'/g, "\\'")}'); app.navigateTo('main');" class="px-3 py-1.5 bg-[#eae5db] dark:bg-stone-800 dark:text-stone-300 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs transition flex items-center gap-1.5 shadow-2xs">
-                  <span>${cat}</span>
-                  <span class="px-1.5 py-0.2 bg-stone-300/80 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-[10px] font-mono">${categoryMap[cat]}</span>
-                </button>
-              `).join('')}
+              ${sortedCatKeys.map(key => {
+                const cat = categoryMap[key].name;
+                const count = categoryMap[key].count;
+                return `
+                  <button onclick="app.selectCategory('${cat.replace(/'/g, "\\'")}'); app.navigateTo('main');" class="px-3 py-1.5 bg-[#eae5db] dark:bg-stone-800 dark:text-stone-300 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs transition flex items-center gap-1.5 shadow-2xs">
+                    <span>${cat}</span>
+                    <span class="px-1.5 py-0.2 bg-stone-300/80 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-[10px] font-mono">${count}</span>
+                  </button>
+                `;
+              }).join('')}
             </div>
           </div>
         `;
 
-        // 4. Render All Dynamically Populated Tag Groups (Skips empty groups)
+        // 5. Render All Dynamically Populated Tag Groups (Skips empty groups)
         Object.keys(groups).forEach(groupName => {
           if (groups[groupName].length === 0) return;
 
@@ -2882,10 +2908,10 @@
                 <span class="text-[10px] font-mono text-stone-400">${groups[groupName].length} tags</span>
               </div>
               <div class="flex flex-wrap gap-2">
-                ${groups[groupName].map(tag => `
-                  <button onclick="app.filterByTag('${tag.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-white dark:bg-stone-800/80 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-md text-xs text-stone-700 dark:text-stone-300 transition flex items-center gap-1.5 shadow-2xs">
-                    <span>${tag}</span>
-                    <span class="text-[10px] text-stone-400 dark:text-stone-500 font-mono">${tagMap[tag]}</span>
+                ${groups[groupName].map(item => `
+                  <button onclick="app.filterByTag('${item.name.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-white dark:bg-stone-800/80 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-md text-xs text-stone-700 dark:text-stone-300 transition flex items-center gap-1.5 shadow-2xs">
+                    <span>${item.name}</span>
+                    <span class="text-[10px] text-stone-400 dark:text-stone-500 font-mono">${item.count}</span>
                   </button>
                 `).join('')}
               </div>
