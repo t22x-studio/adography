@@ -1,7 +1,7 @@
 [
   {
-    "id": "early-ado-27",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37552768?ref=pc_userpage_video",
+    "id": "post-ado-nico-27",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37552768",
     "title": "【Ado】Sunny Wave 歌いました",
     "category": [
       "Cover"
@@ -13,11 +13,13 @@
       "2020"
     ],
     "customDate": "2020-09-20",
-    "notes": ""
+    "notes": "",
+    "slug": "sunny-wave-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/37552768/37552768.36702708.L"
   },
   {
-    "id": "early-ado-26",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37544884?ref=pc_userpage_video",
+    "id": "post-ado-nico-26",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37544884",
     "title": "Limbo feat Ado",
     "category": [
       "Cover"
@@ -29,11 +31,13 @@
       "2020"
     ],
     "customDate": "2020-09-19",
-    "notes": ""
+    "notes": "",
+    "slug": "limbo-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/37544884/37544884.98330000.L"
   },
   {
-    "id": "early-ado-25",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37524925?ref=pc_userpage_video",
+    "id": "post-ado-nico-25",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37524925",
     "title": "半色の感傷 feat Ado",
     "category": [
       "Cover"
@@ -45,11 +49,13 @@
       "2020"
     ],
     "customDate": "2020-09-15",
-    "notes": ""
+    "notes": "",
+    "slug": "hashitairo-no-kanshou-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/37524925/37524925.42118744.L"
   },
   {
-    "id": "early-ado-24",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37244891?ref=pc_userpage_video",
+    "id": "post-ado-nico-24",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37244891",
     "title": "【Ado】ヒステリックナイトガール 歌いました",
     "category": [
       "Cover"
@@ -61,11 +67,13 @@
       "2020"
     ],
     "customDate": "2020-07-25",
-    "notes": ""
+    "notes": "",
+    "slug": "hysteric-night-girl-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/37244891/37244891.8559661.L"
   },
   {
-    "id": "early-ado-23",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37074770?ref=pc_userpage_video",
+    "id": "post-ado-nico-23",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm37074770",
     "title": "【オリジナルMV】馬鹿 歌いました【Ado】",
     "category": [
       "Cover"
@@ -77,11 +85,16 @@
       "2020"
     ],
     "customDate": "2020-06-22",
-    "notes": ""
+    "notes": "",
+    "slug": "baka-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/37074770/37074770.99354050.L",
+    "related": [
+      "jama-niconico"
+    ]
   },
   {
-    "id": "early-ado-22",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm36966835?ref=pc_userpage_video",
+    "id": "post-ado-nico-22",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm36966835",
     "title": "【Ado】ボッカデラベリタ 歌いました",
     "category": [
       "Cover"
@@ -93,11 +106,13 @@
       "2020"
     ],
     "customDate": "2020-06-02",
-    "notes": ""
+    "notes": "",
+    "slug": "hysteric-night-girl-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/36966835/36966835.96271232.L"
   },
   {
-    "id": "early-ado-21",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm36511466?ref=pc_userpage_video",
+    "id": "post-ado-nico-21",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm36511466",
     "title": "【オリジナルMV】ラストリゾート 歌いました【Ado】",
     "category": [
       "Cover"
@@ -109,11 +124,13 @@
       "2020"
     ],
     "customDate": "2020-03-14",
-    "notes": ""
+    "notes": "",
+    "slug": "last-resort-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/36511466/36511466.22488553.L"
   },
   {
-    "id": "early-ado-20",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35926740?ref=pc_userpage_video",
+    "id": "post-ado-nico-20",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35926740",
     "title": "【Ado】バスケットワーム 歌いました",
     "category": [
       "Cover"
@@ -125,11 +142,13 @@
       "2019"
     ],
     "customDate": "2019-11-08",
-    "notes": ""
+    "notes": "",
+    "slug": "basket-worm-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/35926740/35926740.8695927.L"
   },
   {
-    "id": "early-ado-19",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35680631?ref=pc_userpage_video",
+    "id": "post-ado-nico-19",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35680631",
     "title": "【オリジナルMV】bin 歌いました 【Ado】",
     "category": [
       "Cover"
@@ -141,11 +160,13 @@
       "2019"
     ],
     "customDate": "2019-09-14",
-    "notes": ""
+    "notes": "",
+    "slug": "bin-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/35680631/35680631.29684007.L"
   },
   {
-    "id": "early-ado-18",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35487853?ref=pc_userpage_video",
+    "id": "post-ado-nico-18",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35487853",
     "title": "【Ado】ハングリーニコル歌いました",
     "category": [
       "Cover"
@@ -157,11 +178,13 @@
       "2019"
     ],
     "customDate": "2019-08-03",
-    "notes": ""
+    "notes": "",
+    "slug": "hungry-nicole-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/35487853/35487853.95256904.L"
   },
   {
-    "id": "early-ado-17",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35298513?ref=pc_userpage_video",
+    "id": "post-ado-nico-17",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm35298513",
     "title": "【オリジナルMV】邪魔 歌いました 【Ado】",
     "category": [
       "Cover"
@@ -173,12 +196,18 @@
       "2019"
     ],
     "customDate": "2019-06-22",
-    "notes": "Jama."
+    "notes": "Jama.",
+    "slug": "jama-niconico",
+    "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/35298513/35298513.29254940.L",
+    "related": [
+      "baka-niconico"
+    ]
   },
   {
-    "id": "early-ado-16",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34963457?ref=pc_userpage_video",
+    "id": "post-ado-nico-16",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34963457",
     "title": "【Ado】脳内革命ガール歌いました",
+    "slug": "nounai-kakumei-girl-2019",
     "category": [
       "Cover"
     ],
@@ -192,9 +221,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-15",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34609548?ref=pc_userpage_video",
+    "id": "post-ado-nico-15",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34609548",
     "title": "【Ado】乙女解剖歌いました",
+    "slug": "otome-kaibou-niconico",
     "category": [
       "Cover"
     ],
@@ -208,9 +238,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-14",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34065291?ref=pc_userpage_video",
+    "id": "post-ado-nico-14",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm34065291",
     "title": "【誕生日に】エゴロック歌いました【Ado】",
+    "slug": "ego-rock-niconico",
     "category": [
       "Cover"
     ],
@@ -224,9 +255,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-13",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33955760?ref=pc_userpage_video",
+    "id": "post-ado-nico-13",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33955760",
     "title": "【Ado】アディショナルメモリー歌いました",
+    "slug": "additional-memory-niconico",
     "category": [
       "Cover"
     ],
@@ -240,9 +272,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-12",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33817960?ref=pc_userpage_video",
+    "id": "post-ado-nico-12",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33817960",
     "title": "【Adorty】メルティランドナイトメア　歌いました",
+    "slug": "melty-land-nightmare-niconico",
     "category": [
       "Cover"
     ],
@@ -256,9 +289,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-11",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33709059?ref=pc_userpage_video",
+    "id": "post-ado-nico-11",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33709059",
     "title": "【Adoviser】アクシデントコーディネイター　歌いました",
+    "slug": "accident-coordinator-niconico",
     "category": [
       "Cover"
     ],
@@ -272,9 +306,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-10",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33404706?ref=pc_userpage_video",
+    "id": "post-ado-nico-10",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33404706",
     "title": "【ネタ尽きたから誰か名前考えて】恋愛裁判 歌いました",
+    "slug": "renaisaihan-love-trial-2018",
     "category": [
       "Cover"
     ],
@@ -288,9 +323,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-9",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33192595?ref=pc_userpage_video",
+    "id": "post-ado-nico-9",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm33192595",
     "title": "【Adokin】うみなおし歌ってみた",
+    "slug": "uminaoshi-niconico",
     "category": [
       "Cover"
     ],
@@ -304,9 +340,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-8",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32932556?ref=pc_userpage_video",
+    "id": "post-ado-nico-8",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32932556",
     "title": "バッド・ダンス・ホール歌ってみた【Adovisory】",
+    "slug": "bad-dance-hall-niconico",
     "category": [
       "Cover"
     ],
@@ -320,9 +357,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-7",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32821295?ref=pc_userpage_video",
+    "id": "post-ado-nico-7",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32821295",
     "title": "キライ・キライ・ジガヒダイ！歌ってみた【Adoption】",
+    "slug": "kiraikiraijigahidai-niconico",
     "category": [
       "Cover"
     ],
@@ -336,9 +374,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-6",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32677441?ref=pc_userpage_video",
+    "id": "post-ado-nico-6",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32677441",
     "title": "わたしのアール 歌ってみた【Adovice】",
+    "slug": "watashinoR-niconico",
     "category": [
       "Cover"
     ],
@@ -352,9 +391,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-5",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32488469?ref=pc_userpage_video",
+    "id": "post-ado-nico-5",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm32488469",
     "title": "深昏睡　歌いました /Adoventure",
+    "slug": "shinkonsui-niconico",
     "category": [
       "Cover"
     ],
@@ -368,9 +408,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-4",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31757098?ref=pc_userpage_video",
+    "id": "post-ado-nico-4",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31757098",
     "title": "キライ・キライ・ジガヒダイ！歌ってみた【Adoballoon】",
+    "slug": "kiraikiraijigahidai-niconico-1",
     "category": [
       "Cover"
     ],
@@ -384,9 +425,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-3",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31324700?ref=pc_userpage_video",
+    "id": "post-ado-nico-3",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31324700",
     "title": "Strangers歌いました【Adorment】",
+    "slug": "strangers-niconico",
     "category": [
       "Cover"
     ],
@@ -400,9 +442,10 @@
     "notes": ""
   },
   {
-    "id": "early-ado-2",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31014792?ref=pc_userpage_video",
+    "id": "post-ado-nico-2",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31014792",
     "title": "【春だけど】スターナイトスノウ歌ってみた【Adovantage】",
+    "slug": "star-night-snow-niconico",
     "category": [
       "Cover"
     ],
@@ -418,8 +461,8 @@
     "notes": ""
   },
   {
-    "id": "early-ado-1",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm30407954?ref=pc_userpage_video",
+    "id": "post-ado-nico-1",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm30407954",
     "title": "【初投稿】君の体温　歌ってみた【Adovance】",
     "category": [
       "Cover"
@@ -431,7 +474,8 @@
       "2017"
     ],
     "customDate": "2017-01-10",
-    "notes": "Niconico first upload."
+    "notes": "Niconico first upload.",
+    "slug": "kimi-no-taion-niconico-2017"
   },
   {
     "id": "post-ado-1",
@@ -450,7 +494,7 @@
       "約束ね"
     ],
     "customDate": "2026-08-25",
-    "notes": "Ado covers \"Fairytale,\" reuniting with her 13-year-old self.\n[本家様]{ https://www.nicovideo.jp/watch/sm18562271?ref=nicoiphone_other}\n\n\n[reunion ver]\n{https://youtu.be/IW6sjlMp2o0?si=a24-e7-NMOjk4g2z}",
+    "notes": "Ado covers \"Fairytale,\" reuniting with her 13-year-old self.\n[本家様](https://www.nicovideo.jp/watch/sm18562271?ref=nicoiphone_other)\n\n\n[reunion ver](https://youtu.be/IW6sjlMp2o0?si=a24-e7-NMOjk4g2z)",
     "mood": "Chill / バラード"
   },
   {
@@ -645,6 +689,7 @@
       "theme song",
       "今日好きになりました",
       "主題歌",
+      "今日好き",
       "2026"
     ],
     "customDate": "2026-05-25",
@@ -1159,8 +1204,8 @@
       "Cover"
     ],
     "tags": [
-      "cover",
-      "歌いました",
+      "collaboration",
+      "others",
       "suipotet",
       "すいぽてっ",
       "2025"
@@ -2973,7 +3018,7 @@
       "2022"
     ],
     "customDate": "2022-08-24",
-    "notes": "\"Where The Wind Blows\" - Written and Produced by Yuta Orisaka | Uta's Songs: One Piece Film Red (Track 7)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"Where The Wind Blows\" - Written and Produced by Yuta Orisaka | Uta's Songs: One Piece Film Red (Track 7)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Melancholy / 切ない"
   },
   {
@@ -3016,7 +3061,7 @@
       "2022"
     ],
     "customDate": "2022-08-17",
-    "notes": "\"Tot Musica\" - Written and Produced by Canon and Hiroyuki Sawano | Uta's Songs: One Piece Film Red (Track 5)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"Tot Musica\" - Written and Produced by Canon and Hiroyuki Sawano | Uta's Songs: One Piece Film Red (Track 5)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Dark / ダーク"
   },
   {
@@ -3037,7 +3082,7 @@
       "2022"
     ],
     "customDate": "2022-08-10",
-    "notes": "\"The World's Continuation\" - Written and Produced by Yuta Orisaka | Uta's Songs: One Piece Film Red (Track 6)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"The World's Continuation\" - Written and Produced by Yuta Orisaka | Uta's Songs: One Piece Film Red (Track 6)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Melancholy / 切ない"
   },
   {
@@ -3058,7 +3103,7 @@
       "2022"
     ],
     "customDate": "2022-08-06",
-    "notes": "\"Fleeting Lullaby\" - Written and Produced by FAKE TYPE. | Uta's Songs: One Piece Film Red (Track 4)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"Fleeting Lullaby\" - Written and Produced by FAKE TYPE. | Uta's Songs: One Piece Film Red (Track 4)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Playful / 遊び心"
   },
   {
@@ -3078,7 +3123,7 @@
       "2022"
     ],
     "customDate": "2022-08-09",
-    "notes": "\"Bink's Sake\" - Written by Eiichiro Oda | Uta's Songs: One Piece Film Red (Track 8)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"Bink's Sake\" - Written by Eiichiro Oda | Uta's Songs: One Piece Film Red (Track 8)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Playful / 遊び心"
   },
   {
@@ -3137,7 +3182,7 @@
       "2022"
     ],
     "customDate": "2022-07-06",
-    "notes": "\"Backlight\" - Written and Produced by Vaundy | Uta's Songs: One Piece Film Red (Track 3)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"Backlight\" - Written and Produced by Vaundy | Uta's Songs: One Piece Film Red (Track 3)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Hype / アゲ曲"
   },
   {
@@ -3159,7 +3204,7 @@
       "2022"
     ],
     "customDate": "2022-06-22",
-    "notes": "\"I'm Invincible\" - Written and Produced by Motoki Ohmori of Mrs. GREEN APPLE | Uta's Songs: One Piece Film Red (Track 2)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"I'm Invincible\" - Written and Produced by Motoki Ohmori of Mrs. GREEN APPLE | Uta's Songs: One Piece Film Red (Track 2)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Anthem / エール"
   },
   {
@@ -3182,7 +3227,7 @@
       "2022"
     ],
     "customDate": "2022-06-15",
-    "notes": "\"New Genesis\" - Written and Produced by Yasutaka Nakata | Uta's Songs: One Piece Film Red (Track 1)\n\nListen: [~ウタ from ONE PIECE FILM RED~] {https://ado.lnk.to/utanoutaID}",
+    "notes": "\"New Genesis\" - Written and Produced by Yasutaka Nakata | Uta's Songs: One Piece Film Red (Track 1)\n\nListen: [~ウタ from ONE PIECE FILM RED~](https://ado.lnk.to/utanoutaID)",
     "mood": "Hype / アゲ曲"
   },
   {
@@ -4377,25 +4422,6 @@
     ],
     "customDate": "2024-11-16",
     "notes": ""
-  },
-  {
-    "id": "post-ado-collab-3",
-    "youtubeUrl": "https://www.youtube.com/watch?v=cUX6PXB_L6A",
-    "title": "【LE SSERAFIM x Ado】 ‘UNFORGIVEN (feat. Nile Rodgers, Ado) -Japanese ver.-’ (Sped up ver.) Visualizer",
-    "slug": "unforgiven-japanese-sped-up-ver",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "collaboration",
-      "出張",
-      "LE SSERAFIM",
-      "versions",
-      "2023"
-    ],
-    "customDate": "2023-09-04",
-    "notes": "",
-    "mood": "Anthem / エール"
   },
   {
     "id": "post-ado-collab-4",

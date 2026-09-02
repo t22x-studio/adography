@@ -450,7 +450,7 @@
       <div class="max-w-6xl w-full mx-auto flex items-center gap-2 sm:gap-3 flex-nowrap overflow-x-auto scrollbar-none">
       
       <!-- Brand Logo (Fixed, never shrinks) -->
-      <div class="flex items-center gap-2.5 cursor-pointer group flex-shrink-0" onclick="app.clearSearch(); app.navigateTo('main');">
+      <div class="flex items-center gap-2.5 cursor-pointer group flex-shrink-0" onclick="app.resetToHome()">
         <div class="w-8 h-8 rounded-md bg-stone-900 text-stone-100 flex items-center justify-center font-bold text-xl font-display shadow-xs group-hover:bg-blue-900 transition duration-200">
           A:
         </div>
@@ -471,7 +471,7 @@
             oninput="app.handleSearch(this.value)"
             class="w-full pl-8 pr-7 py-1.5 bg-[#eae5db] border border-stone-300 rounded-lg text-xs text-stone-800 placeholder-stone-500 focus:outline-none focus:border-stone-600 focus:bg-white transition"
           >
-          <button id="clearSearchBtn" onclick="app.clearSearch()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-xs">
+          <button id="clearSearchBtn" onclick="app.clearSearchInput()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-xs">
             <i class="fa-solid fa-circle-xmark"></i>
           </button>
         </div>
@@ -545,10 +545,10 @@
       </div>
     </section>
 
-    <!-- Active Tag Banner Indicator -->
-    <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] border border-stone-300 rounded-lg flex items-center justify-between text-xs text-stone-800">
-      <span>Filtering posts tagged with <strong id="activeTagName" class="font-serif text-stone-900">tag</strong></span>
-      <button onclick="app.clearTagFilter()" class="text-stone-600 hover:text-stone-900 font-semibold text-[11px] underline">
+   <!-- Active Tag Banner Indicator -->
+    <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-lg flex items-center justify-between text-xs text-stone-800 dark:text-stone-200">
+      <span>Filtering posts tagged with <strong id="activeTagName" class="font-serif font-bold text-stone-900 dark:text-blue-400">tag</strong></span>
+      <button onclick="app.clearTagFilter()" class="text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white font-semibold text-[11px] underline">
         Clear Tag Filter
       </button>
     </div>
@@ -652,18 +652,23 @@
     <i class="fa-solid fa-chevron-up text-[10px]"></i>
   </button>
 
-  <!-- STICKY MINI-PLAYER FLOATING BAR (Persistent SPA Audio/Video Host) -->
-  <div id="miniPlayerBar" class="hidden fixed bottom-14 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/55 backdrop-blur-sm text-stone-100 border border-stone-700/60 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2.5">
+  <!-- STICKY MINI-PLAYER FLOATING BAR (With Mini Collapsible Notch & Safe Spacing) -->
+  <div id="miniPlayerBar" class="hidden fixed bottom-3 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/90 backdrop-blur-md text-stone-100 border border-stone-700/80 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2">
     <!-- Persistent Iframe Mount (Hidden from view, never resets on navigation) -->
     <div id="persistentPlayerHost" class="hidden"></div>
 
-    <div class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
+    <!-- Mini Collapse Toggle Notch -->
+    <button type="button" onclick="app.toggleMiniPlayerCollapse()" id="btnMiniCollapse" title="Minimize / Expand Player" class="w-5 h-8 -ml-1 text-stone-400 hover:text-stone-100 flex items-center justify-center text-[10px] transition">
+      <i class="fa-solid fa-chevron-down"></i>
+    </button>
+
+    <div id="miniPlayerMainContent" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer overflow-hidden transition-all duration-200" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
       <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-10 h-10 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
       <div class="min-w-0 flex-1">
         <h4 id="miniPlayerTitle" class="text-xs font-serif font-bold text-stone-100 truncate">Playing Track...</h4>
         <div class="flex items-center gap-2 text-[10px] text-stone-400 font-sans">
           <span id="miniPlayerStatus" class="flex items-center gap-1 text-blue-400"><i class="fa-solid fa-compact-disc animate-spin"></i> Playing</span>
-          <span id="miniPlayerQueueCounter" class="text-stone-500 font-mono hidden">1/15</span>
+          <span id="miniPlayerQueueCounter" class="text-stone-400 font-mono hidden">1/15</span>
           <button type="button" onclick="event.stopPropagation(); app.toggleQueueDrawer()" id="btnMiniQueue" class="px-1.5 py-0.5 rounded bg-stone-800/90 hover:bg-stone-700 text-[10px] text-amber-400 font-semibold transition flex items-center gap-1">
             <i class="fa-solid fa-list-ul text-[9px]"></i> <span id="miniQueueBadge">Queue (0)</span>
           </button>
@@ -1008,11 +1013,19 @@
         </button>
       </div>
 
-      <div class="space-y-4 text-xs">
-        <!-- Theme Mode Switcher (Streamlined Row with FontAwesome Icons) -->
-        <div class="flex items-center justify-between gap-4 py-1">
+      <!-- Theme Mode Switcher (3-Way: Auto/System, Light, Dark) -->
+        <div class="flex items-center justify-between gap-3 py-1">
           <label class="font-semibold text-stone-700 dark:text-stone-300">Appearance Theme</label>
-          <div class="flex items-center bg-[#eae5db] dark:bg-stone-800 p-0.5 rounded-lg border border-stone-300 dark:border-stone-700 w-24">
+          <div class="flex items-center bg-[#eae5db] dark:bg-stone-800 p-0.5 rounded-lg border border-stone-300 dark:border-stone-700 w-36">
+            <button 
+              type="button" 
+              onclick="app.setTheme('system')" 
+              id="theme-btn-system" 
+              title="System Auto Mode"
+              class="flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center gap-1 transition text-stone-600 dark:text-stone-300">
+              <i class="fa-solid fa-mobile-screen text-[10px]"></i>
+              <span class="text-[10px] font-medium">Auto</span>
+            </button>
             <button 
               type="button" 
               onclick="app.setTheme('light')" 
@@ -1032,13 +1045,13 @@
           </div>
         </div>
 
-        <!-- Posts Per Page Range Slider -->
-        <div class="pt-2 border-t border-stone-200">
+        <!-- Posts Per Page Range Slider (Up to 96) -->
+        <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70">
           <div class="flex justify-between items-center mb-1">
-            <label class="font-semibold text-stone-700">Posts Per Page</label>
-            <span id="postsPerPageValue" class="text-stone-900 font-bold">12</span>
+            <label class="font-semibold text-stone-700 dark:text-stone-300">Posts Per Page</label>
+            <span id="postsPerPageValue" class="text-stone-900 dark:text-stone-100 font-bold font-mono">12</span>
           </div>
-          <input type="range" id="postsPerPageRange" min="3" max="36" step="3" value="12" oninput="app.updatePostsPerPage(this.value)" class="w-full accent-stone-800 bg-stone-300">
+          <input type="range" id="postsPerPageRange" min="6" max="96" step="6" value="12" oninput="app.updatePostsPerPage(this.value)" class="w-full accent-stone-800 dark:accent-blue-500 bg-stone-300 dark:bg-stone-700 rounded-lg h-1.5 cursor-pointer">
         </div>
       </div>
 
@@ -1314,10 +1327,12 @@
         this.isAutoplayEnabled = true;
         this.activePlayingPost = null;
         this.activePlaylistName = null; // Tracks current active playlist name
+        this.playbackWatchdogTimer = null; // 5-second auto-skip timer for restricted/broken videos
 
-        // Bind keyboard shortcuts & YouTube API auto-advance listeners
+        // Bind keyboard shortcuts, touch gestures & YouTube/Niconico playback listeners
         this.initKeyboardShortcuts();
         this.initContinuousPlaybackListener();
+        this.initTouchSwipeNavigation();
 
         // Background Analytics State
         this.analytics = JSON.parse(localStorage.getItem(`${DB_PREFIX}_analytics`)) || {
@@ -1772,7 +1787,13 @@
       filterByTag(tag) {
         this.activeTag = tag;
         this.currentPage = 1;
-       // If current view is Playlists/Tags/Detail, default to 'main' as they don't display filtered content directly.
+        // Decouple search: clear search input when selecting a tag to avoid empty compound queries
+        this.searchQuery = '';
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = '';
+        document.getElementById('clearSearchBtn')?.classList.add('hidden');
+
+        // If current view is Playlists/Tags/Detail, default to 'main'
         const viewToReturn = ['playlists', 'tags', 'detail'].includes(this.activeView) ? 'main' : this.activeView;
         this.navigateTo(viewToReturn);
       }
@@ -2282,24 +2303,138 @@
         if (bar && post) {
           if (thumb) thumb.src = this.getThumbnailUrl(post);
           if (title) title.textContent = post.title;
-          if (status) status.innerHTML = `<i class="fa-solid fa-pizza-slice animate-spin text-blue-400 text-[10px]"></i> Playing`;
+          if (status) status.innerHTML = `<i class="fa-solid fa-compact-disc animate-spin text-blue-400 text-[10px]"></i> Playing`;
           if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
           bar.classList.remove('hidden');
+          // Add safe bottom padding so floating mini-player never blocks pagination or buttons
+          document.querySelector('main')?.classList.add('pb-24');
         }
       }
       
+      initTouchSwipeNavigation() {
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        window.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+          touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].screenX;
+          const touchEndY = e.changedTouches[0].screenY;
+          const deltaX = touchEndX - touchStartX;
+          const deltaY = Math.abs(touchEndY - touchStartY);
+
+          // Horizontal swipe threshold: > 60px horizontal, < 40px vertical
+          if (Math.abs(deltaX) > 60 && deltaY < 40) {
+            // Ignore swipe gestures inside textareas or inputs
+            const activeEl = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+            if (activeEl === 'input' || activeEl === 'textarea') return;
+
+            if (this.activeView === 'detail') {
+              if (deltaX < 0) {
+                this.navigateDetailTrack(1); // Swipe Left -> Next Track
+              } else {
+                this.navigateDetailTrack(-1); // Swipe Right -> Prev Track
+              }
+            } else if (!document.getElementById('quickViewModal')?.classList.contains('hidden')) {
+              if (deltaX < 0) {
+                this.navigateQuickViewTrack(1);
+              } else {
+                this.navigateQuickViewTrack(-1);
+              }
+            }
+          }
+        }, { passive: true });
+      }
+
+      navigateQuickViewTrack(direction) {
+        const filtered = this.getFilteredPosts();
+        if (filtered.length === 0 || !this.selectedPostId) return;
+
+        const currentIndex = filtered.findIndex(p => p.id === this.selectedPostId);
+        if (currentIndex === -1) return;
+
+        let newIndex = currentIndex + direction;
+        if (newIndex < 0) newIndex = filtered.length - 1;
+        if (newIndex >= filtered.length) newIndex = 0;
+
+        this.openQuickView(filtered[newIndex].id);
+      }
+
+      toggleMiniPlayerCollapse() {
+        const content = document.getElementById('miniPlayerMainContent');
+        const btn = document.getElementById('btnMiniCollapse');
+        if (!content || !btn) return;
+
+        const isCollapsed = content.classList.contains('w-0');
+        if (isCollapsed) {
+          content.classList.remove('w-0', 'opacity-0', 'pointer-events-none');
+          btn.innerHTML = `<i class="fa-solid fa-chevron-down"></i>`;
+        } else {
+          content.classList.add('w-0', 'opacity-0', 'pointer-events-none');
+          btn.innerHTML = `<i class="fa-solid fa-chevron-up"></i>`;
+        }
+      }
+
       initContinuousPlaybackListener() {
         window.addEventListener('message', (event) => {
           try {
             const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
-            // YouTube Iframe API state change event (0 === ENDED)
-            if (data && (data.event === 'onStateChange' || data.info === 0) && data.info === 0) {
+            if (!data) return;
+
+            // 1. Video Started / Heartbeat Signal (Clear Watchdog)
+            const isPlaying = (data.event === 'onStateChange' && data.info === 1) || 
+                              (data.eventName === 'player:play') ||
+                              (data.type === 'player:play');
+            if (isPlaying) {
+              this.clearWatchdogTimer();
+            }
+
+            // 2. Track Ended Signals (YouTube info === 0 | Niconico player:ended)
+            const isEnded = (data.event === 'onStateChange' && data.info === 0) ||
+                            (data.info === 0) ||
+                            (data.eventName === 'player:ended') ||
+                            (data.type === 'player:ended');
+
+            if (isEnded) {
+              this.clearWatchdogTimer();
               if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
                 this.playNextTrack();
               }
             }
+
+            // 3. YouTube Error Signal (info === -1, 100, 101, 150 = unavailable/restricted)
+            const isError = (data.event === 'onError') || (data.info === 100 || data.info === 101 || data.info === 150);
+            if (isError && this.playbackQueue.length > 0) {
+              this.handlePlaybackTimeout();
+            }
           } catch(e) {}
         });
+      }
+
+      startWatchdogTimer(postTitle) {
+        this.clearWatchdogTimer();
+        // 6-second timeout watchdog: if video is blocked/dead, auto-skip so playlist does not freeze
+        this.playbackWatchdogTimer = setTimeout(() => {
+          if (this.isAutoplayEnabled && this.playbackQueue.length > 1) {
+            this.handlePlaybackTimeout(postTitle);
+          }
+        }, 6000);
+      }
+
+      clearWatchdogTimer() {
+        if (this.playbackWatchdogTimer) {
+          clearTimeout(this.playbackWatchdogTimer);
+          this.playbackWatchdogTimer = null;
+        }
+      }
+
+      handlePlaybackTimeout(postTitle = '') {
+        this.clearWatchdogTimer();
+        this.showToast(`⚠️ Skipped unavailable track${postTitle ? ': ' + postTitle : ''}`);
+        this.playNextTrack();
       }
 
       pauseAllCardVideos() {
@@ -2378,7 +2513,7 @@
               src="${embedSrc}" 
               title="${post.title}" 
               frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               referrerpolicy="strict-origin-when-cross-origin"
               allowfullscreen>
             </iframe>
@@ -2387,6 +2522,9 @@
 
         this.isIframePlaying = true;
         this.updateMiniPlayerUI(post);
+
+        // Start 6-second heartbeat watchdog in case track is blocked or unreachable
+        this.startWatchdogTimer(post.title);
       }
 
       updateMiniPlayerUI(post) {
@@ -2647,22 +2785,36 @@
       }
 
       stopMiniPlayer() {
-        // Stop persistent audio iframe
+        // 1. Instantly kill persistent audio stream & clear watchdog
+        this.clearWatchdogTimer();
         const host = document.getElementById('persistentPlayerHost');
         if (host) host.innerHTML = '';
 
-        // Stop and pause all other card / modal iframes
-        this.stopAllActiveVideos();
+        // 2. Clear QuickView modal iframe if active
+        const qvContainer = document.getElementById('quickViewContainer');
+        if (qvContainer && !document.getElementById('quickViewModal')?.classList.contains('hidden')) {
+          this.closeModal('quickViewModal');
+        }
 
+        // 3. Clear active player registry & reset state
+        this.activeMountedPlayers.clear();
         this.playbackQueue = [];
         this.currentQueueIndex = 0;
         this.activePlaylistName = null;
         this.isIframePlaying = false;
         this.activePlayingPost = null;
         
+        // 4. Hide Mini-player bar
         const bar = document.getElementById('miniPlayerBar');
         if (bar) bar.classList.add('hidden');
         this.updateQueueBadge();
+
+        // 5. Instantly restore card thumbnails and Play buttons (no black screen)
+        if (this.activeView !== 'detail') {
+          this.renderCurrentView();
+        } else {
+          this.renderDetailView();
+        }
       }
 
       openDetailFromMiniPlayer() {
@@ -2878,6 +3030,9 @@
           }
         });
 
+        // Specific Enhancement: Sort "Release Year" strictly from Newest to Oldest (2026 -> 2017)
+        groups["Release Year"].sort((a, b) => parseInt(b.name, 10) - parseInt(a.name, 10));
+
         // 4. Render Dynamic Categories Block
         let html = `
           <div class="space-y-3 pb-6">
@@ -2993,13 +3148,20 @@
               </div>
             </div>
 
-            <div class="flex items-start justify-between gap-3">
-              <h1 class="text-xl font-serif font-bold text-stone-900 dark:text-stone-100 leading-snug">${post.title}</h1>
-              <!-- Tiny Share Button -->
-              <button onclick="app.sharePost('${post.id}')" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1.5 flex-shrink-0 text-stone-850 dark:text-stone-250" title="Share Post">
-                <i class="fa-solid fa-share-nodes text-xs"></i>
-                <span class="text-[11px] font-medium">Share</span>
-              </button>
+            <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+              <h1 class="text-xl font-serif font-bold text-stone-900 dark:text-stone-100 leading-snug flex-1">${post.title}</h1>
+              
+              <!-- Quick Action Row: + Queue & Share -->
+              <div class="flex items-center gap-1.5 flex-shrink-0 self-end sm:self-start">
+                <button onclick="app.addToQueue('${post.id}', event)" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1 text-stone-800 dark:text-stone-200" title="Add to Playback Queue">
+                  <i class="fa-solid fa-list-plus text-amber-500"></i>
+                  <span class="text-[11px] font-medium">+ Queue</span>
+                </button>
+                <button onclick="app.sharePost('${post.id}', event)" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1 text-stone-800 dark:text-stone-200" title="Share Post">
+                  <i class="fa-solid fa-share-nodes text-xs"></i>
+                  <span class="text-[11px] font-medium">Share</span>
+                </button>
+              </div>
             </div>
 
             ${post.notes ? `
@@ -3094,8 +3256,8 @@
             <i class="fa-solid fa-chevron-left mr-1"></i> Prev
           </button>
 
-          <span class="text-xs font-medium text-stone-600">
-            Page <strong class="text-stone-900">${this.currentPage}</strong> of ${totalPages}
+          <span class="text-xs font-medium text-stone-600 dark:text-stone-300">
+            Page <strong class="text-stone-900 dark:text-stone-100 font-bold">${this.currentPage}</strong> of <span class="text-stone-700 dark:text-stone-300">${totalPages}</span>
           </span>
 
           <button 
@@ -3119,15 +3281,33 @@
         this.renderCurrentView();
       }
 
-      clearSearch() {
+      // Clears ONLY the search input bar without resetting tags or categories
+      clearSearchInput() {
+        const input = document.getElementById('searchInput');
+        if (input) input.value = '';
+        this.searchQuery = '';
+        document.getElementById('clearSearchBtn')?.classList.add('hidden');
+        this.currentPage = 1;
+        this.renderCurrentView();
+      }
+
+      // Brand Logo & Home Button Master Reset: Clears all filters and returns cleanly to Main Page 1
+      resetToHome() {
         const input = document.getElementById('searchInput');
         if (input) input.value = '';
         this.searchQuery = '';
         this.activeCategory = 'All';
         this.activeMood = null;
         this.activeTag = null;
+        this.currentPage = 1;
+        document.getElementById('clearSearchBtn')?.classList.add('hidden');
         this.renderCategories();
-        this.handleSearch('');
+        this.renderMoodFilters();
+        this.navigateTo('main');
+      }
+
+      clearSearch() {
+        this.resetToHome();
       }
       openPlaylist(index) {
         const pl = PLAYLIST_CONFIG[index];
@@ -3199,12 +3379,20 @@
           `;
         }).join('');
 
+        const platform = this.getPlatform(rawUrl);
+        let qvEmbedSrc = '';
+        if (platform === 'niconico') {
+          qvEmbedSrc = `https://embed.nicovideo.jp/watch/${vidId}?jsapi=1&autoplay=1`;
+        } else if (vidId) {
+          qvEmbedSrc = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
+        }
+
         const container = document.getElementById('quickViewContainer');
         if (container) {
           container.innerHTML = `
             <div class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 shadow-md">
-              ${vidId
-                ? `<iframe src="https://www.youtube-nocookie.com/embed/${vidId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
+              ${qvEmbedSrc
+                ? `<iframe id="quickViewIframe" src="${qvEmbedSrc}" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`
                 : `<div class="flex items-center justify-center h-full text-stone-400 text-xs">No video available</div>`
               }
             </div>
@@ -3419,29 +3607,48 @@
       }
 
       initTheme() {
-        // Load saved theme or default to light
-        const savedTheme = localStorage.getItem(`${DB_PREFIX}_theme`) || 'light';
+        // Load saved preference or default to system auto
+        const savedTheme = localStorage.getItem(`${DB_PREFIX}_theme`) || 'system';
+        
+        // Listen to OS system theme changes in real time
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', (e) => {
+          if (this.currentTheme === 'system') {
+            document.documentElement.classList.toggle('dark', e.matches);
+          }
+        });
+
         this.setTheme(savedTheme, false);
       }
 
       setTheme(themeName, saveToStorage = true) {
         this.currentTheme = themeName;
-        const isDark = themeName === 'dark';
+        let isDark = false;
 
-        // Toggle 'dark' class on root element
+        if (themeName === 'system') {
+          isDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        } else {
+          isDark = themeName === 'dark';
+        }
+
+        // Toggle 'dark' class on <html> root element
         document.documentElement.classList.toggle('dark', isDark);
 
         if (saveToStorage) {
           localStorage.setItem(`${DB_PREFIX}_theme`, themeName);
         }
 
-        // Update Theme Switcher Buttons in Settings Modal
+        // Update 3-Way Button States in Settings Modal
+        const btnSystem = document.getElementById('theme-btn-system');
         const btnLight = document.getElementById('theme-btn-light');
         const btnDark = document.getElementById('theme-btn-dark');
-        if (btnLight && btnDark) {
-          btnLight.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${!isDark ? 'bg-white dark:bg-stone-700 text-stone-950 dark:text-stone-100 shadow-xs' : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'}`;
-          btnDark.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${isDark ? 'bg-stone-900 dark:bg-stone-700 text-stone-100 shadow-xs' : 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200'}`;
-        }
+
+        const activeClass = 'bg-white dark:bg-stone-700 text-stone-950 dark:text-stone-100 shadow-xs font-bold';
+        const inactiveClass = 'text-stone-500 dark:text-stone-400 hover:text-stone-800 dark:hover:text-stone-200';
+
+        if (btnSystem) btnSystem.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center gap-1 transition ${themeName === 'system' ? activeClass : inactiveClass}`;
+        if (btnLight) btnLight.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${themeName === 'light' ? activeClass : inactiveClass}`;
+        if (btnDark) btnDark.className = `flex-1 py-1 px-1.5 rounded-md text-xs flex items-center justify-center transition ${themeName === 'dark' ? activeClass : inactiveClass}`;
       }
 
       updateSettingsUI() {
