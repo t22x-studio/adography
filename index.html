@@ -282,6 +282,13 @@
         flex-shrink: 0 !important;
         border-radius: 0 !important;
       }
+      /* Hide big play button overlay on mobile strip while keeping the thumbnail 100% clickable */
+      #mainContainer .aspect-video .absolute {
+        display: none !important;
+      }
+      #mainContainer .aspect-video {
+        cursor: pointer !important;
+      }
       #mainContainer article > div:first-child > div:last-child {
         flex: 1 1 auto !important;
         min-width: 0 !important;
@@ -321,7 +328,7 @@
         margin-left: auto !important;
         text-align: right !important;
         flex-shrink: 0 !important;
-        font-family: monospace, -apple-system, sans-serif !important;
+        font-family: Inter, -apple-system, sans-serif !important;
         font-size: 10px !important;
         color: #78716c !important;
       }
@@ -516,11 +523,7 @@
           </button>
         </div>
 
-        <!-- Google Translate Widget -->
-        <div class="hidden lg:flex items-center gap-1 bg-[#faf8f5] px-1.5 py-1 rounded-md border border-stone-300 text-[11px] text-stone-600 flex-shrink-0" title="Translate Page">
-          <div id="google_translate_element"></div>
-        </div>
-      </nav>
+        <!-- Google Translate Widget moved to Settings Modal for universal mobile access -->
 
     </div>
   </header>
@@ -546,11 +549,16 @@
     </section>
 
    <!-- Active Tag Banner Indicator -->
-    <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-lg flex items-center justify-between text-xs text-stone-800 dark:text-stone-200">
+    <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-lg flex flex-wrap items-center justify-between gap-2 text-xs text-stone-800 dark:text-stone-200">
       <span>Filtering posts tagged with <strong id="activeTagName" class="font-serif font-bold text-stone-900 dark:text-blue-400">tag</strong></span>
-      <button onclick="app.clearTagFilter()" class="text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white font-semibold text-[11px] underline">
-        Clear Tag Filter
-      </button>
+      <div class="flex items-center gap-3">
+        <button onclick="app.addAllFilteredToQueue()" class="px-2.5 py-1 bg-stone-900 hover:bg-blue-900 dark:bg-stone-700 dark:hover:bg-blue-800 text-white rounded text-[11px] font-semibold transition flex items-center gap-1 shadow-2xs">
+          <i class="fa-solid fa-list-plus text-amber-400"></i> Add all to queue
+        </button>
+        <button onclick="app.clearTagFilter()" class="text-stone-600 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white font-semibold text-[11px] underline">
+          Clear Tag Filter
+        </button>
+      </div>
     </div>
 
     <!-- 1. MAIN VIEW PAGE -->
@@ -624,10 +632,6 @@
             <i class="fa-solid fa-chevron-left text-[10px]"></i> Prev
           </button>
 
-          <button onclick="app.addToQueue(app.selectedPostId, event)" title="Add this track to Queue" class="px-2.5 py-1.5 bg-[#faf8f5] dark:bg-stone-800 hover:bg-blue-900 hover:text-white text-stone-700 dark:text-stone-200 rounded-md border border-stone-300 dark:border-stone-700 text-xs font-medium transition flex items-center gap-1">
-            <i class="fa-solid fa-list-plus"></i> + Queue
-          </button>
-
           <button onclick="app.toggleTheatreMode()" id="btnTheatreToggle" title="Toggle Theatre Dark Mode (Shortcut: T)" class="px-3 py-1.5 bg-[#faf8f5] hover:bg-amber-700 hover:text-white text-stone-800 rounded-md border border-stone-300 text-xs font-semibold transition flex items-center gap-1.5">
             <i class="fa-solid fa-film text-blue-800"></i> Theatre Mode
           </button>
@@ -652,23 +656,18 @@
     <i class="fa-solid fa-chevron-up text-[10px]"></i>
   </button>
 
-  <!-- STICKY MINI-PLAYER FLOATING BAR (With Mini Collapsible Notch & Safe Spacing) -->
-  <div id="miniPlayerBar" class="hidden fixed bottom-3 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/90 backdrop-blur-md text-stone-100 border border-stone-700/80 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2">
-    <!-- Persistent Iframe Mount (Hidden from view, never resets on navigation) -->
+  <!-- STICKY MINI-PLAYER FLOATING BAR (Clean Unified Controller) -->
+  <div id="miniPlayerBar" class="hidden fixed bottom-3 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/95 backdrop-blur-md text-stone-100 border border-stone-700/80 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2.5">
+    <!-- Persistent Iframe Mount for Continuous Audio -->
     <div id="persistentPlayerHost" class="hidden"></div>
 
-    <!-- Mini Collapse Toggle Notch -->
-    <button type="button" onclick="app.toggleMiniPlayerCollapse()" id="btnMiniCollapse" title="Minimize / Expand Player" class="w-5 h-8 -ml-1 text-stone-400 hover:text-stone-100 flex items-center justify-center text-[10px] transition">
-      <i class="fa-solid fa-chevron-down"></i>
-    </button>
-
-    <div id="miniPlayerMainContent" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer overflow-hidden transition-all duration-200" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
-      <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-10 h-10 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
+    <div id="miniPlayerMainContent" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
+      <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-9 h-9 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
       <div class="min-w-0 flex-1">
         <h4 id="miniPlayerTitle" class="text-xs font-serif font-bold text-stone-100 truncate">Playing Track...</h4>
         <div class="flex items-center gap-2 text-[10px] text-stone-400 font-sans">
           <span id="miniPlayerStatus" class="flex items-center gap-1 text-blue-400"><i class="fa-solid fa-compact-disc animate-spin"></i> Playing</span>
-          <span id="miniPlayerQueueCounter" class="text-stone-400 font-mono hidden">1/15</span>
+          <span id="miniPlayerQueueCounter" class="text-stone-400 font-sans hidden">1/15</span>
           <button type="button" onclick="event.stopPropagation(); app.toggleQueueDrawer()" id="btnMiniQueue" class="px-1.5 py-0.5 rounded bg-stone-800/90 hover:bg-stone-700 text-[10px] text-amber-400 font-semibold transition flex items-center gap-1">
             <i class="fa-solid fa-list-ul text-[9px]"></i> <span id="miniQueueBadge">Queue (0)</span>
           </button>
@@ -705,7 +704,7 @@
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-list-ul text-blue-800 dark:text-blue-400"></i>
           <h3 class="font-serif font-bold text-base">Playback Queue</h3>
-          <span id="queueDrawerTotalBadge" class="text-[11px] font-mono text-stone-500 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded">0 tracks</span>
+          <span id="queueDrawerTotalBadge" class="text-[11px] font-sans font-medium text-stone-500 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded">0 tracks</span>
         </div>
         <div class="flex items-center gap-2">
           <button onclick="app.clearQueue()" class="text-[11px] text-rose-600 dark:text-rose-400 hover:underline font-medium">
@@ -727,9 +726,9 @@
 
   <!-- Sticky Bottom Footer with Visit Counter -->
   <footer class="w-full border-t border-stone-300/70 bg-[#eae5db]/60 py-3 px-4 lg:px-8 text-xs text-stone-600 flex flex-wrap justify-between items-center gap-2 mt-auto">
-    <div class="flex items-center gap-2 font-mono text-[11px] bg-[#faf8f5] px-2.5 py-1 rounded-md border border-stone-300 text-stone-700 shadow-2xs">
+    <div class="flex items-center gap-2 font-sans text-[11px] bg-[#faf8f5] px-2.5 py-1 rounded-md border border-stone-300 text-stone-700 shadow-2xs">
       <i class="fa-solid fa-eye text-stone-500"></i>
-      <span>Visits: <strong id="footerVisitCounter" class="text-stone-900 font-bold">0</strong></span>
+      <span>Visits: <strong id="footerVisitCounter" class="text-stone-900 font-bold font-sans">0</strong></span>
     </div>
     
     <div class="text-[11px] text-stone-500 font-serif flex items-center gap-2">
@@ -1006,7 +1005,7 @@
     <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-sm w-full p-5 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-stone-200 pb-3">
         <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-          <i class="fa-solid fa-sliders text-stone-600"></i> Settings
+          <i class="fa-solid fa-sliders text-stone-600"></i> Settings / 設定
         </h3>
         <button onclick="app.closeModal('settingsModal')" class="text-stone-400 hover:text-stone-800">
           <i class="fa-solid fa-xmark text-lg"></i>
@@ -1052,6 +1051,29 @@
             <span id="postsPerPageValue" class="text-stone-900 dark:text-stone-100 font-bold font-mono">12</span>
           </div>
           <input type="range" id="postsPerPageRange" min="6" max="96" step="6" value="12" oninput="app.updatePostsPerPage(this.value)" class="w-full accent-stone-800 dark:accent-blue-500 bg-stone-300 dark:bg-stone-700 rounded-lg h-1.5 cursor-pointer">
+        </div>
+
+        <!-- Concurrent Video Stream Limit (Data Saver vs Unlimited) -->
+        <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70 flex items-center justify-between gap-2">
+          <div>
+            <div class="font-semibold text-stone-700 dark:text-stone-300">Active Video Limit</div>
+            <div class="text-[10px] text-stone-500">Cap simultaneous video streams to save data/RAM</div>
+          </div>
+          <select id="streamLimitSelect" onchange="app.updateStreamLimit(this.value)" class="px-2 py-1 bg-white dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded text-xs text-stone-800 dark:text-stone-200 focus:outline-none cursor-pointer">
+            <option value="2">Max 2 (Data Saver)</option>
+            <option value="999">Unlimited (WiFi Mode)</option>
+          </select>
+        </div>
+
+        <!-- Google Translate Section (Universal for Mobile & Desktop) -->
+        <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70">
+          <label class="font-semibold text-stone-700 dark:text-stone-300 block mb-1">Translate / 翻訳</label>
+          <div class="bg-[#eae5db] dark:bg-stone-800 p-2 rounded-lg border border-stone-300 dark:border-stone-700 flex items-center justify-between">
+            <span class="text-xs text-stone-600 dark:text-stone-300 flex items-center gap-1.5">
+              <i class="fa-solid fa-language text-blue-500"></i> Translate Page:
+            </span>
+            <div id="google_translate_element"></div>
+          </div>
         </div>
       </div>
 
@@ -1316,6 +1338,7 @@
         this.isTheatreMode = false;
         this.isIframePlaying = false;
         this.gridGrouping = 'date'; // Options: 'date', 'mood', 'category'
+        this.streamLimit = parseInt(localStorage.getItem(`${DB_PREFIX}_stream_limit`)) || 2;
 
         // Search Engine Index & Multi-Player Registry
         this.fuse = null;
@@ -1327,9 +1350,11 @@
         this.isAutoplayEnabled = true;
         this.activePlayingPost = null;
         this.activePlaylistName = null; // Tracks current active playlist name
-        this.playbackWatchdogTimer = null; // 5-second auto-skip timer for restricted/broken videos
+        this.ytPlayer = null; // Official Google YouTube API Player Instance
+        this.isYtApiReady = false;
 
-        // Bind keyboard shortcuts, touch gestures & YouTube/Niconico playback listeners
+        // Bind YouTube API Ready, keyboard shortcuts, touch gestures & Niconico listeners
+        this.initYouTubeAPI();
         this.initKeyboardShortcuts();
         this.initContinuousPlaybackListener();
         this.initTouchSwipeNavigation();
@@ -1803,6 +1828,29 @@
         this.renderCurrentView();
       }
 
+      // Adds all currently filtered tracks into playback queue with safety confirmation
+      addAllFilteredToQueue() {
+        const filtered = this.getFilteredPosts();
+        if (filtered.length === 0) {
+          this.showToast('No tracks found to add.');
+          return;
+        }
+
+        // Safety Guard: Warn before replacing active queue
+        if (this.playbackQueue.length > 0) {
+          const proceed = confirm(`Adding ${filtered.length} filtered tracks will replace your current queue (${this.playbackQueue.length} tracks).\n\nContinue?`);
+          if (!proceed) return;
+        }
+
+        this.pauseAllCardVideos();
+        this.activePlaylistName = this.activeTag ? `Tag: ${this.activeTag}` : 'Filtered Queue';
+        this.playbackQueue = [...filtered];
+        this.currentQueueIndex = 0;
+        this.mountPersistentTrack(this.playbackQueue[0]);
+        this.updateQueueBadge();
+        this.showToast(`▶ Added ${filtered.length} tracks to queue!`);
+      }
+
       // Helper: Checks if a post contains at least one primary category from CATEGORY_PRIORITY
       isPrimaryPost(post) {
         const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
@@ -2082,10 +2130,10 @@
           return `
             <article class="bg-[#faf8f5] border border-stone-300/90 rounded-xl overflow-hidden shadow-xs hover:border-stone-400 transition flex flex-col justify-between">
               <div>
-                <div class="relative aspect-video bg-stone-900 overflow-hidden group">
+                <div class="relative aspect-video bg-stone-900 overflow-hidden group cursor-pointer" onclick="app.handlePlayClick('${post.id}', '${rawUrl}', this)">
                   <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover transition duration-300 group-hover:scale-102">
                   <div class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition flex items-center justify-center">
-                    <button onclick="app.handlePlayClick('${post.id}', '${rawUrl}', this)" class="w-12 h-12 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-lg hover:scale-105 transition">
+                    <button type="button" class="w-12 h-12 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-lg hover:scale-105 transition pointer-events-none">
                       <i class="fa-solid fa-play text-sm ml-0.5"></i>
                     </button>
                   </div>
@@ -2098,7 +2146,12 @@
                         <span class="font-medium text-stone-700 dark:text-stone-300 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded text-[10px]">${c}</span>
                       `).join('')}
                     </div>
-                    <span class="card-date font-mono text-[10px] text-stone-500 dark:text-stone-400">${post.customDate || ''}</span>
+                    <div class="flex items-center gap-1.5">
+                      <button onclick="app.addToQueue('${post.id}', event)" class="w-5 h-5 rounded hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-500 hover:text-amber-500 dark:text-stone-400 dark:hover:text-amber-400 flex items-center justify-center transition" title="Add to Queue">
+                        <i class="fa-solid fa-plus text-[10px]"></i>
+                      </button>
+                      <span class="card-date font-sans text-[10px] text-stone-500 dark:text-stone-400">${post.customDate || ''}</span>
+                    </div>
                   </div>
 
                   <h3 class="font-serif font-bold text-base text-stone-900 dark:text-stone-100 hover:text-amber-800 dark:hover:text-amber-400 cursor-pointer transition leading-snug line-clamp-2" onclick="app.navigateTo('detail', '${post.id}')">
@@ -2255,6 +2308,9 @@
         const parent = buttonEl.closest('.relative');
         if (!parent) return;
 
+        // 1. Pause other active card videos for clean audio focus
+        this.pauseAllCardVideos();
+
         const platform = this.getPlatform(rawUrl);
         const videoId = this.getVideoId(rawUrl);
 
@@ -2262,11 +2318,10 @@
         if (platform === 'niconico') {
           embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
         } else {
-          // Enable JS API controls for independent postMessage commands 
           embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
         }
 
-        // Mount unique iframe instance for concurrent playback 
+        // 2. Mount new iframe on the clicked card
         const iframeId = `iframe-${postId}`;
         parent.innerHTML = `
           <iframe 
@@ -2281,15 +2336,79 @@
           </iframe>
         `;
 
-        // Register concurrent player instance
         this.activeMountedPlayers.set(postId, {
           iframeId: iframeId,
           post: post,
           rawUrl: rawUrl
         });
 
+        // 3. Asynchronous Non-Blocking FIFO Stream Limiter (Zero DOM Collision)
+        if (this.streamLimit !== 999 && this.activeMountedPlayers.size > this.streamLimit) {
+          setTimeout(() => {
+            if (this.activeMountedPlayers.size > this.streamLimit) {
+              const oldestKey = this.activeMountedPlayers.keys().next().value;
+              if (oldestKey && oldestKey !== postId) {
+                const oldestPlayer = this.activeMountedPlayers.get(oldestKey);
+                if (oldestPlayer) {
+                  const oldEl = document.getElementById(oldestPlayer.iframeId);
+                  if (oldEl && oldEl.parentElement) {
+                    const oldPost = oldestPlayer.post;
+                    const rThumb = this.getThumbnailUrl(oldPost);
+                    const rUrl = oldPost.youtubeUrl || oldPost.videoUrl || '';
+                    oldEl.parentElement.innerHTML = `
+                      <img src="${rThumb}" alt="${oldPost.title}" class="w-full h-full object-cover">
+                      <div class="absolute inset-0 bg-black/20 hover:bg-black/40 transition flex items-center justify-center">
+                        <button onclick="app.handlePlayClick('${oldPost.id}', '${rUrl}', this)" class="w-12 h-12 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-lg hover:scale-105 transition">
+                          <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                        </button>
+                      </div>
+                    `;
+                  }
+                  this.activeMountedPlayers.delete(oldestKey);
+                }
+              }
+            }
+          }, 50);
+        }
+
         this.isIframePlaying = true;
         if (post) this.activateMiniPlayer(post);
+      }
+
+      stopMiniPlayer() {
+        // 1. Instantly unmount background continuous audio host
+        const host = document.getElementById('persistentPlayerHost');
+        if (host) host.innerHTML = '';
+
+        // 2. Kill QuickView modal video immediately
+        const qvModal = document.getElementById('quickViewModal');
+        if (qvModal && !qvModal.classList.contains('hidden')) {
+          this.closeModal('quickViewModal');
+        }
+        const qvContainer = document.getElementById('quickViewContainer');
+        if (qvContainer) qvContainer.innerHTML = '';
+
+        // 3. Clear player registry & stop all active card/detail videos
+        this.stopAllActiveVideos();
+        this.activeMountedPlayers.clear();
+        this.playbackQueue = [];
+        this.currentQueueIndex = 0;
+        this.activePlaylistName = null;
+        this.isIframePlaying = false;
+        this.activePlayingPost = null;
+
+        // 4. Hide Mini-player bar & remove bottom spacing
+        const bar = document.getElementById('miniPlayerBar');
+        if (bar) bar.classList.add('hidden');
+        document.querySelector('main')?.classList.remove('pb-24');
+        this.updateQueueBadge();
+
+        // 5. Restore cards and detail view cleanly to thumbnails with Play buttons
+        if (this.activeView !== 'detail') {
+          this.renderCurrentView();
+        } else {
+          this.renderDetailView();
+        }
       }
 
       activateMiniPlayer(post) {
@@ -2316,33 +2435,43 @@
         let touchStartY = 0;
 
         window.addEventListener('touchstart', (e) => {
-          touchStartX = e.changedTouches[0].screenX;
-          touchStartY = e.changedTouches[0].screenY;
+          touchStartX = e.changedTouches[0].clientX;
+          touchStartY = e.changedTouches[0].clientY;
         }, { passive: true });
 
         window.addEventListener('touchend', (e) => {
-          const touchEndX = e.changedTouches[0].screenX;
-          const touchEndY = e.changedTouches[0].screenY;
+          const touchEndX = e.changedTouches[0].clientX;
+          const touchEndY = e.changedTouches[0].clientY;
           const deltaX = touchEndX - touchStartX;
-          const deltaY = Math.abs(touchEndY - touchStartY);
+          const deltaY = touchEndY - touchStartY;
+          const absX = Math.abs(deltaX);
+          const absY = Math.abs(deltaY);
 
-          // Horizontal swipe threshold: > 60px horizontal, < 40px vertical
-          if (Math.abs(deltaX) > 60 && deltaY < 40) {
-            // Ignore swipe gestures inside textareas or inputs
-            const activeEl = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
-            if (activeEl === 'input' || activeEl === 'textarea') return;
+          // Ignore swipe gestures inside inputs or textareas
+          const activeEl = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+          if (activeEl === 'input' || activeEl === 'textarea') return;
 
+          const isQuickViewOpen = !document.getElementById('quickViewModal')?.classList.contains('hidden');
+
+          // 1. Vertical Swipe Down on QuickView (Pull-to-Dismiss and handover to Mini-Player)
+          if (isQuickViewOpen && deltaY > 75 && absX < 45) {
+            this.closeModal('quickViewModal');
+            return;
+          }
+
+          // 2. Horizontal Swipe (Swipe Left -> Next Track | Swipe Right -> Prev Track)
+          if (absX > 50 && absY < 45) {
             if (this.activeView === 'detail') {
               if (deltaX < 0) {
-                this.navigateDetailTrack(1); // Swipe Left -> Next Track
+                this.navigateDetailTrack(1); // Swipe Left -> Next
               } else {
-                this.navigateDetailTrack(-1); // Swipe Right -> Prev Track
+                this.navigateDetailTrack(-1); // Swipe Right -> Prev
               }
-            } else if (!document.getElementById('quickViewModal')?.classList.contains('hidden')) {
+            } else if (isQuickViewOpen) {
               if (deltaX < 0) {
-                this.navigateQuickViewTrack(1);
+                this.navigateQuickViewTrack(1); // Swipe Left -> Next in QuickView
               } else {
-                this.navigateQuickViewTrack(-1);
+                this.navigateQuickViewTrack(-1); // Swipe Right -> Prev in QuickView
               }
             }
           }
@@ -2378,63 +2507,112 @@
         }
       }
 
+      initYouTubeAPI() {
+        window.onYouTubeIframeAPIReady = () => {
+          this.isYtApiReady = true;
+          try {
+            this.ytPlayer = new YT.Player('persistentPlayerHost', {
+              height: '100%',
+              width: '100%',
+              playerVars: {
+                autoplay: 1,
+                playsinline: 1,
+                enablejsapi: 1,
+                rel: 0,
+                modestbranding: 1
+              },
+              events: {
+                onReady: () => {
+                  this.isYtApiReady = true;
+                },
+                onStateChange: (event) => {
+                  if (event.data === YT.PlayerState.ENDED) {
+                    if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
+                      this.playNextTrack();
+                    }
+                  } else if (event.data === YT.PlayerState.PLAYING) {
+                    this.isIframePlaying = true;
+                    const status = document.getElementById('miniPlayerStatus');
+                    const btnPlay = document.getElementById('btnMiniPlayPause');
+                    if (status) status.innerHTML = `<i class="fa-solid fa-compact-disc animate-spin text-blue-400"></i> Playing`;
+                    if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                  } else if (event.data === YT.PlayerState.PAUSED) {
+                    this.isIframePlaying = false;
+                    const status = document.getElementById('miniPlayerStatus');
+                    const btnPlay = document.getElementById('btnMiniPlayPause');
+                    if (status) status.innerHTML = `<i class="fa-solid fa-pause text-amber-400"></i> Paused`;
+                    if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-play"></i>`;
+                  }
+                },
+                onError: (event) => {
+                  const currentTitle = this.activePlayingPost ? this.activePlayingPost.title : 'Selected Track';
+                  this.handleStreamError(currentTitle, event.data);
+                }
+              }
+            });
+          } catch(e) {}
+        };
+      }
+
       initContinuousPlaybackListener() {
         window.addEventListener('message', (event) => {
           try {
             const data = typeof event.data === 'string' ? JSON.parse(event.data) : event.data;
             if (!data) return;
 
-            // 1. Video Started / Heartbeat Signal (Clear Watchdog)
-            const isPlaying = (data.event === 'onStateChange' && data.info === 1) || 
-                              (data.eventName === 'player:play') ||
-                              (data.type === 'player:play');
-            if (isPlaying) {
-              this.clearWatchdogTimer();
-            }
+            // Extract YouTube & Niconico playback states safely
+            const playerState = (data.info && typeof data.info.playerState !== 'undefined') 
+              ? data.info.playerState 
+              : data.info;
 
-            // 2. Track Ended Signals (YouTube info === 0 | Niconico player:ended)
-            const isEnded = (data.event === 'onStateChange' && data.info === 0) ||
-                            (data.info === 0) ||
+            // 1. Natural Track Ended Signal (YouTube playerState === 0 | Niconico player:ended)
+            const isEnded = (data.event === 'onStateChange' && playerState === 0) ||
+                            (playerState === 0) ||
                             (data.eventName === 'player:ended') ||
                             (data.type === 'player:ended');
 
             if (isEnded) {
-              this.clearWatchdogTimer();
               if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
                 this.playNextTrack();
               }
+              return;
             }
 
-            // 3. YouTube Error Signal (info === -1, 100, 101, 150 = unavailable/restricted)
-            const isError = (data.event === 'onError') || (data.info === 100 || data.info === 101 || data.info === 150);
-            if (isError && this.playbackQueue.length > 0) {
-              this.handlePlaybackTimeout();
+            // 2. Comprehensive Error Code Detection (2: Bad ID, 5: HTML5 error, 100: Deleted/Private, 101/150: Embed Forbidden)
+            const errorCode = (data.event === 'onError') ? (data.data || data.info) : playerState;
+            const isExplicitError = (data.event === 'onError') || 
+                                    (data.eventName === 'player:error') ||
+                                    (data.type === 'player:error') ||
+                                    (typeof errorCode === 'number' && [2, 5, 100, 101, 150].includes(errorCode));
+
+            if (isExplicitError) {
+              const currentTitle = this.activePlayingPost ? this.activePlayingPost.title : 'Selected Track';
+              this.handleStreamError(currentTitle, errorCode);
             }
           } catch(e) {}
         });
       }
 
-      startWatchdogTimer(postTitle) {
-        this.clearWatchdogTimer();
-        // 6-second timeout watchdog: if video is blocked/dead, auto-skip so playlist does not freeze
-        this.playbackWatchdogTimer = setTimeout(() => {
-          if (this.isAutoplayEnabled && this.playbackQueue.length > 1) {
-            this.handlePlaybackTimeout(postTitle);
-          }
-        }, 6000);
-      }
-
-      clearWatchdogTimer() {
-        if (this.playbackWatchdogTimer) {
-          clearTimeout(this.playbackWatchdogTimer);
-          this.playbackWatchdogTimer = null;
+      // Triggered immediately when YouTube/Niconico reports an unplayable or restricted video
+      handleStreamError(postTitle = '', errorCode = null) {
+        // Update Mini-Player status text to show alert
+        const status = document.getElementById('miniPlayerStatus');
+        if (status) {
+          status.innerHTML = `<span class="text-rose-400 font-semibold"><i class="fa-solid fa-triangle-exclamation text-amber-400"></i> Embed Restricted</span>`;
         }
-      }
 
-      handlePlaybackTimeout(postTitle = '') {
-        this.clearWatchdogTimer();
-        this.showToast(`⚠️ Skipped unavailable track${postTitle ? ': ' + postTitle : ''}`);
-        this.playNextTrack();
+        let reason = 'This video is restricted from playing in third-party embeds by YouTube.';
+        if (errorCode === 100) reason = 'This video was deleted or made private.';
+        if (errorCode === 101 || errorCode === 150) reason = 'The video owner does not allow embedded playback.';
+
+        this.showToast(`⚠️ "${postTitle}": ${reason}`);
+
+        // If in playlist continuous mode with more tracks, auto-advance after 2 seconds
+        if (this.playbackQueue.length > 1 && this.isAutoplayEnabled) {
+          setTimeout(() => {
+            this.playNextTrack();
+          }, 2000);
+        }
       }
 
       pauseAllCardVideos() {
@@ -2460,7 +2638,11 @@
         }
 
         const searchVal = pl.tag.toLowerCase();
+        // Filter strictly for YouTube-supported continuous tracks (Niconico remains on standalone cards)
         const matchingPosts = this.posts.filter(post => {
+          const rawUrl = post.youtubeUrl || post.videoUrl || '';
+          if (this.getPlatform(rawUrl) !== 'youtube') return false;
+
           if (pl.type === 'mood') {
             const postMoods = post.mood ? (Array.isArray(post.mood) ? post.mood : [post.mood]) : [];
             return postMoods.some(m => String(m).toLowerCase() === searchVal);
@@ -2473,19 +2655,17 @@
         });
 
         if (matchingPosts.length === 0) {
-          this.showToast('No tracks found in this playlist.');
+          this.showToast('No continuous YouTube tracks found in this playlist.');
           return;
         }
 
-        // Pause other active videos on the page for clean audio
         this.pauseAllCardVideos();
-
         this.activePlaylistName = pl.name;
         this.playbackQueue = [...matchingPosts];
         this.currentQueueIndex = 0;
         this.mountPersistentTrack(this.playbackQueue[0]);
         this.updateQueueBadge();
-        this.showToast(`▶ Loaded Playlist: ${pl.name}`);
+        this.showToast(`▶ Loaded Playlist: ${pl.name} (${matchingPosts.length} tracks)`);
       }
 
       mountPersistentTrack(post) {
@@ -2493,38 +2673,43 @@
         this.activePlayingPost = post;
         this.recordPostView(post.id);
 
-        const host = document.getElementById('persistentPlayerHost');
         const rawUrl = post.youtubeUrl || post.videoUrl || '';
         const platform = this.getPlatform(rawUrl);
         const videoId = this.getVideoId(rawUrl);
 
-        let embedSrc = '';
-        if (platform === 'niconico') {
-          embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
+        if (platform === 'youtube' && this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
+          // Official YouTube API Stream Swap (Preserves media session across page navigation)
+          try {
+            this.ytPlayer.loadVideoById({
+              videoId: videoId,
+              startSeconds: 0
+            });
+          } catch(e) {}
         } else {
-          embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
-        }
+          // Niconico & Fallback Iframe Mount
+          const host = document.getElementById('persistentPlayerHost');
+          let embedSrc = platform === 'niconico'
+            ? `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`
+            : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
 
-        if (host) {
-          host.innerHTML = `
-            <iframe 
-              id="persistentAudioIframe"
-              class="w-1 h-1 opacity-0 pointer-events-none" 
-              src="${embedSrc}" 
-              title="${post.title}" 
-              frameborder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerpolicy="strict-origin-when-cross-origin"
-              allowfullscreen>
-            </iframe>
-          `;
+          if (host) {
+            host.innerHTML = `
+              <iframe 
+                id="persistentAudioIframe"
+                class="w-full h-full" 
+                src="${embedSrc}" 
+                title="${post.title}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen>
+              </iframe>
+            `;
+          }
         }
 
         this.isIframePlaying = true;
         this.updateMiniPlayerUI(post);
-
-        // Start 6-second heartbeat watchdog in case track is blocked or unreachable
-        this.startWatchdogTimer(post.title);
       }
 
       updateMiniPlayerUI(post) {
@@ -2737,6 +2922,19 @@
       updateQueueBadge() {
         const badge = document.getElementById('miniQueueBadge');
         if (badge) badge.textContent = `Queue (${this.playbackQueue.length})`;
+
+        // Synchronize and reset the #miniPlayerQueueCounter (e.g. 1/39)
+        const counter = document.getElementById('miniPlayerQueueCounter');
+        if (counter) {
+          if (this.playbackQueue.length > 0) {
+            counter.textContent = `${this.currentQueueIndex + 1}/${this.playbackQueue.length}`;
+            counter.title = this.activePlaylistName ? `Playlist: ${this.activePlaylistName}` : 'Custom Queue';
+            counter.classList.remove('hidden');
+          } else {
+            counter.textContent = '0/0';
+            counter.classList.add('hidden'); // Immediately hide when queue is wiped
+          }
+        }
       }
 
       toggleMiniPlayerPlayPause() {
@@ -2744,37 +2942,34 @@
         const btnPlay = document.getElementById('btnMiniPlayPause');
 
         if (this.isIframePlaying) {
-          // Pause ALL active iframes across the page
+          // PAUSE: Broadcast pause command to all mounted iframes across the page
           document.querySelectorAll('iframe').forEach(iframe => {
             if (iframe.contentWindow) {
               try {
                 iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
+                iframe.contentWindow.postMessage({ eventName: 'player:pause' }, '*');
               } catch(e) {}
             }
           });
+
           this.isIframePlaying = false;
           if (status) status.innerHTML = `<i class="fa-solid fa-pause text-amber-400"></i> Paused`;
           if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-play"></i>`;
         } else {
-          // SMART FOCUS: Resume ONLY the active focused track
-          let activeIframe = null;
+          // RESUME: Send play command directly to existing iframe (resumes from exact pause millisecond without restarting)
+          let hasActiveFrame = false;
+          document.querySelectorAll('iframe').forEach(iframe => {
+            if (iframe.contentWindow) {
+              try {
+                iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+                iframe.contentWindow.postMessage({ eventName: 'player:play' }, '*');
+                hasActiveFrame = true;
+              } catch(e) {}
+            }
+          });
 
-          if (this.activePlayingPost) {
-            activeIframe = document.getElementById(`iframe-${this.activePlayingPost.id}`) ||
-                           document.getElementById('quickViewIframe') ||
-                           document.getElementById('persistentAudioIframe');
-          }
-
-          if (!activeIframe) {
-            activeIframe = document.getElementById('persistentAudioIframe') || document.querySelector('iframe');
-          }
-
-          if (activeIframe && activeIframe.contentWindow) {
-            try {
-              activeIframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
-            } catch(e) {}
-          } else if (this.activePlayingPost) {
-            // Re-mount cleanly if iframe was unmounted
+          // Only mount if no active iframe exists in the DOM
+          if (!hasActiveFrame && this.activePlayingPost) {
             this.mountPersistentTrack(this.activePlayingPost);
           }
 
@@ -2785,15 +2980,19 @@
       }
 
       stopMiniPlayer() {
-        // 1. Instantly kill persistent audio stream & clear watchdog
-        this.clearWatchdogTimer();
-        const host = document.getElementById('persistentPlayerHost');
-        if (host) host.innerHTML = '';
+        // 1. Universal Killswitch: Stop YouTube API player immediately
+        if (this.ytPlayer && typeof this.ytPlayer.stopVideo === 'function') {
+          try { this.ytPlayer.stopVideo(); } catch(e) {}
+        }
+        
+        // 2. Kill all on-screen card, detail, and modal iframes
+        this.stopAllActiveVideos();
 
-        // 2. Clear QuickView modal iframe if active
-        const qvContainer = document.getElementById('quickViewContainer');
-        if (qvContainer && !document.getElementById('quickViewModal')?.classList.contains('hidden')) {
+        const qvModal = document.getElementById('quickViewModal');
+        if (qvModal && !qvModal.classList.contains('hidden')) {
           this.closeModal('quickViewModal');
+          const qvContainer = document.getElementById('quickViewContainer');
+          if (qvContainer) qvContainer.innerHTML = '';
         }
 
         // 3. Clear active player registry & reset state
@@ -2804,12 +3003,13 @@
         this.isIframePlaying = false;
         this.activePlayingPost = null;
         
-        // 4. Hide Mini-player bar
+        // 4. Hide Mini-player bar & remove bottom spacing
         const bar = document.getElementById('miniPlayerBar');
         if (bar) bar.classList.add('hidden');
+        document.querySelector('main')?.classList.remove('pb-24');
         this.updateQueueBadge();
 
-        // 5. Instantly restore card thumbnails and Play buttons (no black screen)
+        // 5. Restore all cards cleanly to thumbnails with Play buttons
         if (this.activeView !== 'detail') {
           this.renderCurrentView();
         } else {
@@ -3044,7 +3244,7 @@
                 return `
                   <button onclick="app.selectCategory('${cat.replace(/'/g, "\\'")}'); app.navigateTo('main');" class="px-3 py-1.5 bg-[#eae5db] dark:bg-stone-800 dark:text-stone-300 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-lg text-xs transition flex items-center gap-1.5 shadow-2xs">
                     <span>${cat}</span>
-                    <span class="px-1.5 py-0.2 bg-stone-300/80 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-[10px] font-mono">${count}</span>
+                    <span class="px-1.5 py-0.2 bg-stone-300/80 dark:bg-stone-700 text-stone-800 dark:text-stone-200 rounded-full text-[10px] font-sans">${count}</span>
                   </button>
                 `;
               }).join('')}
@@ -3066,7 +3266,7 @@
                 ${groups[groupName].map(item => `
                   <button onclick="app.filterByTag('${item.name.replace(/'/g, "\\'")}')" class="px-3 py-1 bg-white dark:bg-stone-800/80 hover:bg-blue-900 dark:hover:bg-blue-900 border border-stone-300 dark:border-stone-700 rounded-md text-xs text-stone-700 dark:text-stone-300 transition flex items-center gap-1.5 shadow-2xs">
                     <span>${item.name}</span>
-                    <span class="text-[10px] text-stone-400 dark:text-stone-500 font-mono">${item.count}</span>
+                    <span class="text-[10px] text-stone-400 dark:text-stone-500 font-sans">${item.count}</span>
                   </button>
                 `).join('')}
               </div>
@@ -3346,6 +3546,7 @@
         this.renderMoodFilters();
       }
         openQuickView(postId) {
+        this.selectedPostId = postId;
         const post = this.posts.find(p => p.id === postId);
         if (!post) return;
 
@@ -3656,7 +3857,17 @@
         if (pVal) pVal.textContent = this.postsPerPage;
         const pRange = document.getElementById('postsPerPageRange');
         if (pRange) pRange.value = this.postsPerPage;
-        this.setTheme(this.currentTheme || localStorage.getItem(`${DB_PREFIX}_theme`) || 'light', false);
+        
+        const streamSelect = document.getElementById('streamLimitSelect');
+        if (streamSelect) streamSelect.value = String(this.streamLimit);
+
+        this.setTheme(this.currentTheme || localStorage.getItem(`${DB_PREFIX}_theme`) || 'system', false);
+      }
+
+      updateStreamLimit(val) {
+        this.streamLimit = parseInt(val, 10);
+        localStorage.setItem(`${DB_PREFIX}_stream_limit`, this.streamLimit);
+        this.showToast(`Stream Limit set to: ${this.streamLimit === 2 ? 'Max 2 (Data Saver)' : 'Unlimited'}`);
       }
 
       startAboutAdoAnimation() {
@@ -3729,6 +3940,16 @@
           modal.classList.add('hidden');
           if (id === 'aboutAdoModal') {
             this.skipTypingAnimation();
+          } else if (id === 'quickViewModal') {
+            // 1. Destroy the QuickView modal iframe to eliminate modal ghost audio
+            const qvContainer = document.getElementById('quickViewContainer');
+            const hadPlayingTrack = Boolean(qvContainer && qvContainer.querySelector('iframe') && this.activePlayingPost);
+            if (qvContainer) qvContainer.innerHTML = '';
+
+            // 2. Seamless Handover: Transfer playback to Mini-Player so user can browse while listening
+            if (hadPlayingTrack && this.activePlayingPost) {
+              this.mountPersistentTrack(this.activePlayingPost);
+            }
           }
         }
       }
