@@ -6,14 +6,14 @@
   <!-- Short, clean browser tab title (No UI clutter) -->
   <title class="notranslate">Adography - Curated Ado Video Archive</title>
 
-  <!-- 100% INVISIBLE to users, visible ONLY to Google Search & Discord/X Link Previews -->
-  <meta name="description" content="Curated Ado video directory & music archive. Stream official music videos, live stadium concerts, Vocaloid covers, and playlists." />
-  <meta name="keywords" content="Ado, アド, Adography, Ado live, Ado ライブ映像, Ado 歌ってみた, Ado MV, Ado songs list, Ado concert, Ado 心臓, Ado 国立競技場, Ado モナ・リザの横顔, Ado カムパネルラ, Ado 喜劇, Ado Hibana, Uta One Piece, Ado playlist, Vocaloid, Utaite" />
+  <!-- Global Multi-Language Search Meta (English, Japanese, Spanish, Korean) -->
+  <meta name="description" content="Curated Ado (アド) video archive & continuous music player. Stream official MVs, stadium concerts (心臓, モナ・リザ, カムパネルラ), Vocaloid covers, Kyogen & Zanmu albums. Ado canciones, Ado 노래 모음, 歌ってみた, ライブ映像." />
+  <meta name="keywords" content="Ado, アド, Adography, Ado live, Ado ライブ映像, Ado 歌ってみた, Ado MV, Ado songs, Ado concert, Ado 心臓, Shinzou, Ado 国立競技場, Ado モナ・リザの横顔, Ado カムパネルラ, Ado 喜劇, Ado Hibana, Ado よだか, Ado Ao, YODAKA, Ado 狂言, Ado 残夢, Kyogen, Zanmu, Uta One Piece, New Genesis, Usseewa, Show, Gira Gira, Odo, KIRA, Vocaloid, Utaite, Ado canciones, Ado musica, Ado en vivo, Ado concierto, Ado 노래 모음, 아도, 아도 노래, Ado 라이브, Ado playlist" />
   <meta name="robots" content="index, follow" />
 
-  <!-- Invisible Rich Social Preview Card (Discord, X/Twitter, LINE) -->
+  <!-- Invisible Rich Social Preview Card (Discord, X/Twitter, LINE, iMessage) -->
   <meta property="og:title" content="Adography - Curated Ado Video Archive" />
-  <meta property="og:description" content="Curated Ado video directory & continuous music player. Stream official MVs, live stages, and covers." />
+  <meta property="og:description" content="Curated Ado video directory & continuous player. Stream official MVs, stadium lives, and Vocaloid covers. Ado canciones, Ado 노래 모음." />
   <meta property="og:image" content="https://img.youtube.com/vi/NVutx0Olj8E/hqdefault.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
 
@@ -49,7 +49,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Fuse.js Fuzzy Search Engine CDN -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js"></script>
-  
+  <!-- Vercel Web Analytics (Privacy-Friendly, Zero Cookie Banner) -->
+  <script defer src="/_vercel/insights/script.js"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -117,11 +118,19 @@
       scrollbar-width: none;
     }
 
-    /* Google Translate Widget Styling - Clean Compact Fit */
+    /* Google Translate Widget Styling - Clean Compact Fit & High Z-Index for Mobile */
+    .goog-te-menu-frame,
+    .goog-te-menu2,
+    iframe.goog-te-menu-frame {
+      z-index: 99999999 !important;
+      position: fixed !important;
+    }
     #google_translate_element {
       display: inline-flex !important;
       align-items: center !important;
       height: 26px !important;
+      position: relative !important;
+      z-index: 60 !important;
     }
     #google_translate_element .goog-te-gadget-simple {
       background-color: #faf8f5 !important;
@@ -136,6 +145,8 @@
       height: 26px !important;
       box-sizing: border-box !important;
       white-space: nowrap !important;
+      cursor: pointer !important;
+      pointer-events: auto !important;
     }
     #google_translate_element .goog-te-gadget-icon {
       display: none !important;
@@ -540,8 +551,17 @@
         <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none"  id="moodFilterContainer">
           <!-- Mood pills injected dynamically -->
         </div>
-        <div class="text-[11px] text-stone-500 font-medium px-1" id="resultsCount">
-          <span>Showing all posts</span>
+        <div class="flex items-center gap-1.5 text-[11px] text-stone-500 font-medium px-1">
+          <span id="resultsCount">Showing all posts</span>
+          <div id="mainSortWrapper" class="hidden items-center gap-1.5 bg-[#eae5db] dark:bg-stone-800 px-2 py-0.5 rounded-lg border border-stone-300 dark:border-stone-700 text-xs shadow-2xs">
+            <span class="text-[11px] text-stone-500 dark:text-stone-400 font-medium hidden sm:inline">Sort:</span>
+            <select id="mainSortSelect" onchange="app.setMainSort(this.value)" class="bg-transparent text-stone-800 dark:text-stone-200 text-xs font-semibold focus:outline-none cursor-pointer">
+              <option value="newest" class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">Newest</option>
+              <option value="oldest" class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">Oldest</option>
+              <option value="az" class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">Title (A → Z)</option>
+              <option value="za" class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">Title (Z → A)</option>
+            </select>
+          </div>
         </div>
       <div id="topHeaderRight">
         <!-- Injected dynamically via JS: 'About Ado' on Main Page 1, 'Back' otherwise -->
@@ -657,9 +677,11 @@
   </button>
 
   <!-- STICKY MINI-PLAYER FLOATING BAR (Clean Unified Controller) -->
-  <div id="miniPlayerBar" class="hidden fixed bottom-3 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/95 backdrop-blur-md text-stone-100 border border-stone-700/80 rounded-xl p-2.5 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2.5">
-    <!-- Persistent Iframe Mount for Continuous Audio -->
-    <div id="persistentPlayerHost" class="hidden"></div>
+  <div id="miniPlayerBar" class="hidden fixed bottom-3 right-3 sm:right-8 z-50 max-w-md w-[calc(100vw-1.5rem)] sm:w-full bg-stone-900/95 backdrop-blur-md text-stone-100 border border-stone-700/80 rounded-xl p-2 shadow-2xl transition-all duration-300 flex items-center justify-between gap-2.5">
+    <!-- Visible Mini Video Screen (Satisfies browser playback policies) -->
+    <div class="relative w-12 h-9 rounded bg-stone-950 overflow-hidden flex-shrink-0 border border-stone-700/60">
+      <div id="persistentPlayerHost" class="w-full h-full"></div>
+    </div>
 
     <div id="miniPlayerMainContent" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
       <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-9 h-9 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
@@ -1327,17 +1349,16 @@
         this.searchQuery = '';
         this.currentPage = 1;
         this.postsPerPage = parseInt(localStorage.getItem(`${DB_PREFIX}_posts_per_page`)) || 12;
-        this.historyStack = ['main'];
-        history.replaceState({ view: 'main', postId: null }, '', '#main');
-        window.addEventListener('popstate', (e) => {
-          const state = e.state || { view: 'main', postId: null };
-          this.navigateTo(state.view, state.postId, false);
+       this.historyStack = ['main'];
+        window.addEventListener('popstate', () => {
+          this.handleHashRouting(false);
         });
         this.selectedPostId = null;
         this.currentSharePost = null;
         this.isTheatreMode = false;
         this.isIframePlaying = false;
-        this.gridGrouping = 'date'; // Options: 'date', 'mood', 'category'
+        this.gridGrouping = 'date'; // Options: 'date', 'year', 'az', 'mood', 'category'
+        this.mainSort = 'newest'; // Options: 'newest', 'oldest', 'az', 'za'
         this.streamLimit = parseInt(localStorage.getItem(`${DB_PREFIX}_stream_limit`)) || 2;
 
         // Search Engine Index & Multi-Player Registry
@@ -1350,11 +1371,8 @@
         this.isAutoplayEnabled = true;
         this.activePlayingPost = null;
         this.activePlaylistName = null; // Tracks current active playlist name
-        this.ytPlayer = null; // Official Google YouTube API Player Instance
-        this.isYtApiReady = false;
 
-        // Bind YouTube API Ready, keyboard shortcuts, touch gestures & Niconico listeners
-        this.initYouTubeAPI();
+        // Bind keyboard shortcuts, touch gestures & continuous playback listeners
         this.initKeyboardShortcuts();
         this.initContinuousPlaybackListener();
         this.initTouchSwipeNavigation();
@@ -1435,8 +1453,14 @@
         this.recordVisit();
         this.updateSettingsUI();
         this.renderCategories();
-        // Use navigateTo instead of renderCurrentView to ensure 'hidden' class is removed on load
-        this.navigateTo('main', null, false); 
+        
+        // Handle direct incoming links (e.g. #detail/himawari or #playlists)
+        if (window.location.hash && window.location.hash !== '#main') {
+          this.handleHashRouting(false);
+        } else {
+          this.navigateTo('main', null, false);
+        }
+
         this.updateVisitCounterDisplay();
 
         // Scroll listener for Back to Top button
@@ -1450,6 +1474,36 @@
             }
           }
         }, { passive: true });
+      }
+
+      handleHashRouting(pushHistory = false) {
+        const rawHash = window.location.hash.replace(/^#/, '');
+        if (!rawHash) {
+          this.navigateTo('main', null, pushHistory);
+          return;
+        }
+
+        const parts = rawHash.split('/');
+        const view = parts[0] || 'main';
+        const targetIdentifier = parts[1] || null;
+
+        if (view === 'detail' && targetIdentifier) {
+          // Resolve post by matching either slug or id
+          const matched = this.posts.find(p => 
+            (p.slug && p.slug.toLowerCase() === targetIdentifier.toLowerCase()) || 
+            (p.id && p.id.toLowerCase() === targetIdentifier.toLowerCase())
+          );
+          if (matched) {
+            this.navigateTo('detail', matched.id, pushHistory);
+            return;
+          }
+        }
+
+        if (['main', 'compact', 'grid', 'playlists', 'tags'].includes(view)) {
+          this.navigateTo(view, null, pushHistory);
+        } else {
+          this.navigateTo('main', null, pushHistory);
+        }
       }
       
       initKeyboardShortcuts() {
@@ -1588,7 +1642,8 @@
         if (!post) return;
 
         this.currentSharePost = post;
-        const shareUrl = `${window.location.origin}${window.location.pathname}#post-${post.id}`;
+        const targetSlug = post.slug || post.id;
+        const shareUrl = `${window.location.origin}${window.location.pathname}#detail/${targetSlug}`;
 
         if (navigator.share) {
           navigator.share({
@@ -1608,7 +1663,8 @@
 
       shareToPlatform(platform) {
         if (!this.currentSharePost) return;
-        const shareUrl = encodeURIComponent(`${window.location.origin}${window.location.pathname}#post-${this.currentSharePost.id}`);
+        const targetSlug = this.currentSharePost.slug || this.currentSharePost.id;
+        const shareUrl = encodeURIComponent(`${window.location.origin}${window.location.pathname}#detail/${targetSlug}`);
         const shareText = encodeURIComponent(`Check out "${this.currentSharePost.title}" on Adography!`);
 
         let targetUrl = '';
@@ -1857,9 +1913,38 @@
         return cats.some(c => CATEGORY_PRIORITY.includes(c));
       }
 
+      setMainSort(sortVal) {
+        this.mainSort = sortVal;
+        this.currentPage = 1;
+        this.renderCurrentView();
+      }
+
       getSortedPosts(postsArray) {
         return [...postsArray].sort((a, b) => {
-          // If searching, rank primary performance songs above auxiliary instrumentals/interviews/others
+          // 1. Oldest First (Chronological Ascending)
+          if (this.mainSort === 'oldest') {
+            const timeA = a.customDate ? Date.parse(a.customDate) : 0;
+            const timeB = b.customDate ? Date.parse(b.customDate) : 0;
+            const validA = isNaN(timeA) ? 0 : timeA;
+            const validB = isNaN(timeB) ? 0 : timeB;
+            return validA - validB;
+          }
+
+          // 2. Title (A → Z) (Alphabetical by Romaji Slug or Title)
+          if (this.mainSort === 'az') {
+            const strA = (a.slug || a.title || '').toLowerCase();
+            const strB = (b.slug || b.title || '').toLowerCase();
+            return strA.localeCompare(strB);
+          }
+
+          // 3. Title (Z → A) (Reverse Alphabetical)
+          if (this.mainSort === 'za') {
+            const strA = (a.slug || a.title || '').toLowerCase();
+            const strB = (b.slug || b.title || '').toLowerCase();
+            return strB.localeCompare(strA);
+          }
+
+          // 4. Default: Newest First (Chronological Descending)
           if (this.searchQuery) {
             const isPrimA = this.isPrimaryPost(a) ? 1 : 0;
             const isPrimB = this.isPrimaryPost(b) ? 1 : 0;
@@ -1868,12 +1953,9 @@
 
           const timeA = a.customDate ? Date.parse(a.customDate) : 0;
           const timeB = b.customDate ? Date.parse(b.customDate) : 0;
-          
-          // NaN-safe date comparisons
           const validA = isNaN(timeA) ? 0 : timeA;
           const validB = isNaN(timeB) ? 0 : timeB;
-          
-          return validB - validA; // Newest first
+          return validB - validA;
         });
       }
 
@@ -2031,18 +2113,23 @@
         if (topHeaderRight) {
           const isMainPage1 = (this.activeView === 'main' && this.currentPage === 1 && this.activeCategory === 'All' && !this.activeMood && !this.activeTag && !this.searchQuery);
           
-          // Show Grouping Toggle Buttons on Compact and Grid views
+          // Show Clean Grouping Dropdown on Compact and Grid views
           if (this.activeView === 'compact' || this.activeView === 'grid') {
             topHeaderRight.innerHTML = `
-              <div class="flex items-center gap-3">
-                <!-- Viewer Toggle Group -->
-                <div class="flex items-center gap-1 bg-[#eae5db] dark:bg-stone-800 p-1 rounded-lg border border-stone-300 dark:border-stone-700 text-[11px]">
-                  <button onclick="app.setGridGrouping('date')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'date' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Date</button>
-                  <button onclick="app.setGridGrouping('mood')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'mood' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Mood</button>
-                  <button onclick="app.setGridGrouping('category')" class="px-2 py-0.5 rounded font-medium transition ${this.gridGrouping === 'category' ? 'bg-stone-900 dark:bg-stone-700 text-white shadow-2xs font-bold' : 'text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white'}">By Category</button>
+              <div class="flex items-center gap-2">
+                <div class="flex items-center gap-1.5 bg-[#eae5db] dark:bg-stone-800 px-2 py-1 rounded-lg border border-stone-300 dark:border-stone-700 text-xs shadow-2xs">
+                  <span class="text-[11px] text-stone-500 dark:text-stone-400 font-medium hidden sm:inline">Group:</span>
+                  <select onchange="app.setGridGrouping(this.value)" class="bg-transparent text-stone-800 dark:text-stone-200 text-xs font-semibold focus:outline-none cursor-pointer">
+                    <option value="date" ${this.gridGrouping === 'date' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Month</option>
+                    <option value="year" ${this.gridGrouping === 'year' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Year</option>
+                    <option value="az" ${this.gridGrouping === 'az' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Title (A → Z)</option>
+                    <option value="za" ${this.gridGrouping === 'za' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Title (Z → A)</option>
+                    <option value="category" ${this.gridGrouping === 'category' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Category</option>
+                    <option value="mood" ${this.gridGrouping === 'mood' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Mood</option>
+                  </select>
                 </div>
 
-                <button onclick="app.clearSearch(); app.navigateTo('main');" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-stone-300 dark:border-stone-700 bg-[#faf8f5] dark:bg-stone-800 hover:bg-stone-800 hover:text-white transition text-stone-800 dark:text-stone-200 flex items-center gap-1">
+                <button onclick="app.resetToHome()" class="text-xs font-semibold px-2.5 py-1.5 rounded-md border border-stone-300 dark:border-stone-700 bg-[#faf8f5] dark:bg-stone-800 hover:bg-stone-800 hover:text-white transition text-stone-800 dark:text-stone-200 flex items-center gap-1">
                   Home
                 </button>
               </div>
@@ -2074,6 +2161,9 @@
         }
 
         const countEl = document.getElementById('resultsCount');
+        const sortWrapper = document.getElementById('mainSortWrapper');
+        const sortSelect = document.getElementById('mainSortSelect');
+
         if (countEl) {
           if (this.activeView === 'main' || this.activeView === 'compact' || this.activeView === 'grid') {
             countEl.style.display = 'block';
@@ -2082,8 +2172,15 @@
             if (this.activeMood) label += ` · Mood: ${this.activeMood}`;
             if (this.activeTag) label += ` tagged ${this.activeTag}`;
             countEl.textContent = label;
+
+            // Display sort selector strictly on Main View feed
+            if (sortWrapper) {
+              sortWrapper.style.display = (this.activeView === 'main') ? 'inline-flex' : 'none';
+              if (sortSelect) sortSelect.value = this.mainSort;
+            }
           } else {
             countEl.style.display = 'none';
+            if (sortWrapper) sortWrapper.style.display = 'none';
           }
         }
 
@@ -2193,7 +2290,102 @@
           });
         };
 
-        if (this.gridGrouping === 'mood') {
+        if (this.gridGrouping === 'year') {
+          // 1. Group strictly by Year (2026 -> 2017 Descending)
+          filteredPosts.forEach(post => {
+            let year = 'Unknown Year';
+            if (post.customDate) {
+              const match = String(post.customDate).match(/\b(20\d\d)\b/);
+              if (match) year = match[1];
+            }
+            if (!groups[year]) groups[year] = [];
+            groups[year].push(post);
+          });
+
+          const sortedYears = Object.keys(groups).sort((a, b) => parseInt(b, 10) - parseInt(a, 10));
+          const sortedYearGroups = {};
+          sortedYears.forEach(y => {
+            sortByDateDesc(groups[y]);
+            sortedYearGroups[y + ' '] = groups[y];
+          });
+          return sortedYearGroups;
+
+        } else if (this.gridGrouping === 'az') {
+          // 2. Alphabetical A-Z (6 Buckets Ascending)
+          const BUCKETS = ["A — F", "G — K", "L — O", "P — T", "U — Z", "0 — 9 / Others"];
+          BUCKETS.forEach(b => { groups[b] = []; });
+
+          filteredPosts.forEach(post => {
+            const str = (post.slug || post.title || '').trim().toUpperCase();
+            const firstChar = str.charAt(0);
+
+            if (/[A-F]/.test(firstChar)) {
+              groups["A — F"].push(post);
+            } else if (/[G-K]/.test(firstChar)) {
+              groups["G — K"].push(post);
+            } else if (/[L-O]/.test(firstChar)) {
+              groups["L — O"].push(post);
+            } else if (/[P-T]/.test(firstChar)) {
+              groups["P — T"].push(post);
+            } else if (/[U-Z]/.test(firstChar)) {
+              groups["U — Z"].push(post);
+            } else {
+              groups["0 — 9 / Others"].push(post);
+            }
+          });
+
+          const sortedAzGroups = {};
+          BUCKETS.forEach(bucket => {
+            groups[bucket].sort((a, b) => {
+              const keyA = (a.slug || a.title || '').toLowerCase();
+              const keyB = (b.slug || b.title || '').toLowerCase();
+              return keyA.localeCompare(keyB);
+            });
+            if (groups[bucket].length > 0) {
+              sortedAzGroups[bucket] = groups[bucket];
+            }
+          });
+          return sortedAzGroups;
+
+        } else if (this.gridGrouping === 'za') {
+          // 3. Reverse Alphabetical Z-A (6 Buckets Descending)
+          const BUCKETS_REVERSE = ["U — Z", "P — T", "L — O", "G — K", "A — F", "0 — 9 / Others"];
+          BUCKETS_REVERSE.forEach(b => { groups[b] = []; });
+
+          filteredPosts.forEach(post => {
+            const str = (post.slug || post.title || '').trim().toUpperCase();
+            const firstChar = str.charAt(0);
+
+            if (/[U-Z]/.test(firstChar)) {
+              groups["U — Z"].push(post);
+            } else if (/[P-T]/.test(firstChar)) {
+              groups["P — T"].push(post);
+            } else if (/[L-O]/.test(firstChar)) {
+              groups["L — O"].push(post);
+            } else if (/[G-K]/.test(firstChar)) {
+              groups["G — K"].push(post);
+            } else if (/[A-F]/.test(firstChar)) {
+              groups["A — F"].push(post);
+            } else {
+              groups["0 — 9 / Others"].push(post);
+            }
+          });
+
+          const sortedZaGroups = {};
+          BUCKETS_REVERSE.forEach(bucket => {
+            groups[bucket].sort((a, b) => {
+              const keyA = (a.slug || a.title || '').toLowerCase();
+              const keyB = (b.slug || b.title || '').toLowerCase();
+              return keyB.localeCompare(keyA);
+            });
+            if (groups[bucket].length > 0) {
+              sortedZaGroups[bucket] = groups[bucket];
+            }
+          });
+          return sortedZaGroups;
+
+        } else if (this.gridGrouping === 'mood') {
+          // 4. Mood Grouping
           const MOOD_ORDER = ["Hype / アゲ曲", "Anthem / エール", "Dark / ダーク", "Melancholy / 切ない", "Chill / バラード", "Playful / 遊び心", "Other Mood"];
           MOOD_ORDER.forEach(m => { groups[m] = []; });
 
@@ -2203,12 +2395,14 @@
             groups[mKey].push(post);
           });
 
-          // Sort posts newest date first inside each mood
           Object.keys(groups).forEach(key => {
             sortByDateDesc(groups[key]);
-            if (groups[key].length === 0) delete groups[key]; // Remove empty groups
+            if (groups[key].length === 0) delete groups[key];
           });
+          return groups;
+
         } else if (this.gridGrouping === 'category') {
+          // 5. Category Grouping
           filteredPosts.forEach(post => {
             const cats = Array.isArray(post.category) ? post.category : [post.category || 'General'];
             cats.forEach(c => {
@@ -2218,12 +2412,13 @@
             });
           });
 
-          // Sort posts newest date first inside each category
           Object.keys(groups).forEach(key => {
             sortByDateDesc(groups[key]);
           });
+          return groups;
+
         } else {
-          // Default Chronological Date Grouping (Month & Year)
+          // 6. Default: Chronological Month & Year Grouping
           filteredPosts.forEach(post => {
             let dateObj = new Date(post.customDate);
             if (isNaN(dateObj.getTime())) dateObj = new Date();
@@ -2233,13 +2428,11 @@
             groups[monthYear].push(post);
           });
 
-          // Ensure newest date first inside each month group
           Object.keys(groups).forEach(key => {
             sortByDateDesc(groups[key]);
           });
+          return groups;
         }
-
-        return groups;
       }
 
       renderCompactView(filteredPosts) {
@@ -2507,52 +2700,7 @@
         }
       }
 
-      initYouTubeAPI() {
-        window.onYouTubeIframeAPIReady = () => {
-          this.isYtApiReady = true;
-          try {
-            this.ytPlayer = new YT.Player('persistentPlayerHost', {
-              height: '100%',
-              width: '100%',
-              playerVars: {
-                autoplay: 1,
-                playsinline: 1,
-                enablejsapi: 1,
-                rel: 0,
-                modestbranding: 1
-              },
-              events: {
-                onReady: () => {
-                  this.isYtApiReady = true;
-                },
-                onStateChange: (event) => {
-                  if (event.data === YT.PlayerState.ENDED) {
-                    if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
-                      this.playNextTrack();
-                    }
-                  } else if (event.data === YT.PlayerState.PLAYING) {
-                    this.isIframePlaying = true;
-                    const status = document.getElementById('miniPlayerStatus');
-                    const btnPlay = document.getElementById('btnMiniPlayPause');
-                    if (status) status.innerHTML = `<i class="fa-solid fa-compact-disc animate-spin text-blue-400"></i> Playing`;
-                    if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-pause"></i>`;
-                  } else if (event.data === YT.PlayerState.PAUSED) {
-                    this.isIframePlaying = false;
-                    const status = document.getElementById('miniPlayerStatus');
-                    const btnPlay = document.getElementById('btnMiniPlayPause');
-                    if (status) status.innerHTML = `<i class="fa-solid fa-pause text-amber-400"></i> Paused`;
-                    if (btnPlay) btnPlay.innerHTML = `<i class="fa-solid fa-play"></i>`;
-                  }
-                },
-                onError: (event) => {
-                  const currentTitle = this.activePlayingPost ? this.activePlayingPost.title : 'Selected Track';
-                  this.handleStreamError(currentTitle, event.data);
-                }
-              }
-            });
-          } catch(e) {}
-        };
-      }
+      // Direct postMessage event engine active (no external API dependencies)
 
       initContinuousPlaybackListener() {
         window.addEventListener('message', (event) => {
@@ -2638,11 +2786,7 @@
         }
 
         const searchVal = pl.tag.toLowerCase();
-        // Filter strictly for YouTube-supported continuous tracks (Niconico remains on standalone cards)
         const matchingPosts = this.posts.filter(post => {
-          const rawUrl = post.youtubeUrl || post.videoUrl || '';
-          if (this.getPlatform(rawUrl) !== 'youtube') return false;
-
           if (pl.type === 'mood') {
             const postMoods = post.mood ? (Array.isArray(post.mood) ? post.mood : [post.mood]) : [];
             return postMoods.some(m => String(m).toLowerCase() === searchVal);
@@ -2655,7 +2799,7 @@
         });
 
         if (matchingPosts.length === 0) {
-          this.showToast('No continuous YouTube tracks found in this playlist.');
+          this.showToast('No tracks found in this playlist.');
           return;
         }
 
@@ -2673,39 +2817,31 @@
         this.activePlayingPost = post;
         this.recordPostView(post.id);
 
+        const host = document.getElementById('persistentPlayerHost');
         const rawUrl = post.youtubeUrl || post.videoUrl || '';
         const platform = this.getPlatform(rawUrl);
         const videoId = this.getVideoId(rawUrl);
 
-        if (platform === 'youtube' && this.ytPlayer && typeof this.ytPlayer.loadVideoById === 'function') {
-          // Official YouTube API Stream Swap (Preserves media session across page navigation)
-          try {
-            this.ytPlayer.loadVideoById({
-              videoId: videoId,
-              startSeconds: 0
-            });
-          } catch(e) {}
+        let embedSrc = '';
+        if (platform === 'niconico') {
+          embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
         } else {
-          // Niconico & Fallback Iframe Mount
-          const host = document.getElementById('persistentPlayerHost');
-          let embedSrc = platform === 'niconico'
-            ? `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`
-            : `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
+          embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&playsinline=1&modestbranding=1&rel=0`;
+        }
 
-          if (host) {
-            host.innerHTML = `
-              <iframe 
-                id="persistentAudioIframe"
-                class="w-full h-full" 
-                src="${embedSrc}" 
-                title="${post.title}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen>
-              </iframe>
-            `;
-          }
+        if (host) {
+          host.innerHTML = `
+            <iframe 
+              id="persistentAudioIframe"
+              class="w-full h-full" 
+              src="${embedSrc}" 
+              title="${post.title}" 
+              frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          `;
         }
 
         this.isIframePlaying = true;
