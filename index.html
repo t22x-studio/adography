@@ -2817,6 +2817,11 @@
         this.activePlayingPost = post;
         this.recordPostView(post.id);
 
+        // 1. Reveal Mini-Player Bar FIRST so iframe is never mounted in display:none
+        const bar = document.getElementById('miniPlayerBar');
+        if (bar) bar.classList.remove('hidden');
+        document.querySelector('main')?.classList.add('pb-24');
+
         const host = document.getElementById('persistentPlayerHost');
         const rawUrl = post.youtubeUrl || post.videoUrl || '';
         const platform = this.getPlatform(rawUrl);
