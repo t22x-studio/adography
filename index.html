@@ -479,21 +479,23 @@
       </div>
 
       <!-- Search Bar (Squeezes smoothly down to 100px, never jumps to a 2nd line) -->
-      <div class="flex-1 min-w-[100px] max-w-xs sm:max-w-sm mx-1 flex-shrink">
-        <div class="relative">
-          <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-stone-400 text-xs"></i>
-          <input 
-            type="text" 
-            id="searchInput"
-            placeholder="Search tracks, tags..." 
-            oninput="app.handleSearch(this.value)"
-            class="w-full pl-8 pr-7 py-1.5 bg-[#eae5db] border border-stone-300 rounded-lg text-xs text-stone-800 placeholder-stone-500 focus:outline-none focus:border-stone-600 focus:bg-white transition"
-          >
-          <button id="clearSearchBtn" onclick="app.clearSearchInput()" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-700 text-xs">
-            <i class="fa-solid fa-circle-xmark"></i>
-          </button>
+      <div class="flex-shrink-0 ml-1">
+      <div class="relative flex items-center">
+        <button id="searchToggleBtn" onclick="app.toggleSpotlightSearch()"
+        class="w-8 h-8 flex items-center justify-center rounded-full text-stone-500 hover:bg-stone-200 transition flex-shrink-0">
+        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+        </button>
+       <div id="searchExpandWrap" class="w-0 overflow-hidden transition-all duration-200 ease-out">
+        <input type="text" id="searchInput" placeholder="Search tracks, tags..."
+        oninput="app.handleSearch(this.value)"
+        onblur="app.collapseSpotlightSearch()"
+        class="w-40 sm:w-56 ml-1 pl-2 pr-6 py-1.5 bg-[#eae5db] border border-stone-300 rounded-lg text-xs text-stone-800 focus:outline-none focus:border-stone-600">
         </div>
+        <button id="clearSearchBtn" onclick="app.clearSearchInput()" class="hidden absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 text-xs">
+        <i class="fa-solid fa-circle-xmark"></i>
+        </button>
       </div>
+    </div>
 
       <!-- Navigation Links (Segmented Toggles + Ghost Links) -->
       <nav class="flex items-center gap-3 sm:gap-4 flex-shrink-0 flex-nowrap">
@@ -1023,9 +1025,7 @@
     </div>
   </div>
 
-  <div id="settingsModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-sm w-full p-5 shadow-xl space-y-4">
-      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+      <div id="settingsModal" class="invisible opacity-0 pointer-events-none fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4 transition-opacity duration-150">      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
         <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
           <i class="fa-solid fa-sliders text-stone-600"></i> Settings / 設定
         </h3>
@@ -1137,6 +1137,7 @@
       { id: "pl-top10",      type: "tag",  tag: "Top 10 Playlist",  name: "Top 10 Must-Watch Playlist",                  desc: "Essential Top 10 of Ado's defining performances and music videos." },
       { id: "pl-vocaloid",   type: "tag",  tag: "Vocaloid",         name: "#1 Vocaloid & Utaite Roots Playlist 💙",      desc: "Ado's love letter to Vocaloid culture-from early Niconico cover uploads, Vocaloid producer collaborations, to the iconic Hatsune Miku duet." },
       { id: "pl-cover",      type: "tag",  tag: "Cover",            name: "Ado Covers Collection (歌ってみた)",           desc: "Memorable studio and acoustic covers of legendary Vocaloid and J-pop songs." },
+      { id: "pl-live-all",   type: "tag",  tag: "LIVE映像",             name: "Ado Live Stages & Arena Performances (ライブ映像集)",      desc: "List of Ado's stadium, arena, and concert live stages performances." },
       { id: "pl-hype",       type: "mood", tag: "Hype / アゲ曲",     name: "Ado's Hype Playlist (アゲ曲)",                 desc: "Energetic and feel-good tracks with upbeat rhythms, catchy hooks, and powerful delivery." },
       { id: "pl-anthem",     type: "mood", tag: "Anthem / エール",    name: "Ado's Anthem Playlist (エール)",               desc: "Uplifting and empowering tracks with inspiring messages of strength, growth, and hope." },
       { id: "pl-dark",       type: "mood", tag: "Dark / ダーク",     name: "Ado's Dark Playlist (ダーク)",                 desc: "Intense, psychologically heavy tracks with dark atmospheres and powerful vocal delivery." },
@@ -1149,7 +1150,7 @@
       
 
       // Chronological Concert & Live Stage Archives (Verified)
-      { id: "pl-live-all",   type: "tag",  tag: "LIVE映像",             name: "Ado Live Stages & Arena Performances",       desc: "List of Ado's stadium, arena, and concert live stages performances." },
+      
       { id: "pl-kigeki",     type: "tag",  tag: "Kigeki",           name: "2022 · 1st Live「喜劇」Kigeki",              desc: "2022.04.04 at Zepp DiverCity (TOKYO) — Ado's historic debut solo live concert." },
       { id: "pl-campanella", type: "tag",  tag: "Campanella",       name: "2022 · 2nd Live「カムパネルラ」Campanella",      desc: "2022.08.11 at Saitama Super Arena — Ado's landmark 1st standalone arena performance." },
       { id: "pl-mars",       type: "tag",  tag: "Mars",             name: "2023 · 全国ツアー「マーズ」Mars Tour",           desc: "2023 at Nippon Budokan — Highlights from Ado's nationwide arena tour." },
@@ -1573,6 +1574,11 @@
           if (btnToggle) btnToggle.innerHTML = `<i class="fa-solid fa-film text-blue-800"></i> Theatre Mode`;
         }
       }
+      updateDetailUrl(postId) {
+        const post = this.posts.find(p => p.id === postId);
+        const slugPart = post?.slug || postId;
+        history.replaceState({ view: 'detail', postId }, '', `#detail/${slugPart}`);
+      }
 
       navigateDetailTrack(direction) {
         const filtered = this.getFilteredPosts();
@@ -1586,6 +1592,7 @@
         if (newIndex >= filtered.length) newIndex = 0; // loop to start
 
         this.selectedPostId = filtered[newIndex].id;
+        this.updateDetailUrl(this.selectedPostId);
         this.renderDetailView();
         // Removed window.scrollTo so scroll position remains locked steadily
       }
@@ -1885,8 +1892,8 @@
       }
 
       // Adds all currently filtered tracks into playback queue with safety confirmation
-      addAllFilteredToQueue() {
-        const filtered = this.getFilteredPosts();
+        addAllFilteredToQueue() {
+        const filtered = this.getFilteredPosts().filter(p => this.getPlatform(p.youtubeUrl || p.videoUrl || '') !== 'niconico'); // CHANGED
         if (filtered.length === 0) {
           this.showToast('No tracks found to add.');
           return;
@@ -2049,7 +2056,12 @@
 
         // 1. Convert Markdown links: [Link Text](https://url)
         let formatted = text.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, `<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$1</a>`);
-        // 2. Convert remaining raw URLs that are not already part of an anchor tag
+        // NEW: [1:32] or [01:32:05] → clickable seek button (must run BEFORE raw-URL replace)
+        formatted = formatted.replace(/\[(\d{1,2}(?::\d{2}){1,2})\]/g, (m, ts) => {
+          const parts = ts.split(':').map(Number).reverse();
+          const secs = (parts[0]||0) + (parts[1]||0)*60 + (parts[2]||0)*3600;
+          return `<button onclick="app.seekToTimestamp(${secs})" class="${linkClass}">▶ ${ts}</button>`;
+        });
         formatted = formatted.replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, `$1<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$2</a>`);
         return formatted;
       }
@@ -2255,8 +2267,7 @@
                     ${post.title}
                   </h3>
                   
-                  ${post.notes ? `<p class="text-stone-700 dark:text-stone-300 text-xs leading-relaxed line-clamp-2">${post.notes}</p>` : ''}
-                  
+                  ${post.notes ? `<p class="text-stone-700 dark:text-stone-300 text-xs leading-relaxed line-clamp-2">${this.formatNotes(post.notes)}</p>` : ''}                  
                   ${tagChips ? `<div class="flex flex-wrap gap-1 pt-1">${tagChips}</div>` : ''}
                 </div>
               </div>
@@ -2507,15 +2518,16 @@
         const platform = this.getPlatform(rawUrl);
         const videoId = this.getVideoId(rawUrl);
 
-        let embedSrc = '';
+                let embedSrc = '';
         if (platform === 'niconico') {
           embedSrc = `https://embed.nicovideo.jp/watch/${videoId}?jsapi=1&autoplay=1`;
         } else {
           embedSrc = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&enablejsapi=1&modestbranding=1&rel=0`;
         }
 
-        // 2. Mount new iframe on the clicked card
-        const iframeId = `iframe-${postId}`;
+        // NEW: fixed id only for the large detail-view player (not grid cards)
+        const isDetailLarge = this.activeView === 'detail';
+        const iframeId = isDetailLarge ? 'detailLargeIframe' : `iframe-${postId}`;
         parent.innerHTML = `
           <iframe 
             id="${iframeId}"
@@ -2528,6 +2540,13 @@
             allowfullscreen>
           </iframe>
         `;
+        // NEW: handshake so this iframe posts state updates back
+        if (isDetailLarge && platform !== 'niconico') {
+          setTimeout(() => {
+            document.getElementById('detailLargeIframe')?.contentWindow?.postMessage(
+              JSON.stringify({ event: 'listening', id: 'detailLargeIframe' }), '*');
+          }, 1000);
+        }
 
         this.activeMountedPlayers.set(postId, {
           iframeId: iframeId,
@@ -2719,8 +2738,21 @@
                             (data.eventName === 'player:ended') ||
                             (data.type === 'player:ended');
 
-            if (isEnded) {
-              if (this.isAutoplayEnabled && this.playbackQueue.length > 0) {
+              if (isEnded) {
+              if (!this.isAutoplayEnabled) return;
+              const largeFrame = document.getElementById('detailLargeIframe');
+              const miniFrame = document.getElementById('persistentAudioIframe');
+              // NEW: ignore ended-signals from a frame that isn't the one currently playing
+              const sourceIsLarge = largeFrame && event.source === largeFrame.contentWindow;
+              const sourceIsMini = miniFrame && event.source === miniFrame.contentWindow;
+              if (!sourceIsLarge && !sourceIsMini) return;
+              if (sourceIsLarge) {
+                this.playNextInLargeFrame();
+              } 
+              if (sourceIsMini && this.playbackQueue.length > 0) { // CHANGED: queue-check moved here, only guards mini-player path
+                if (largeFrame && largeFrame.contentWindow) {
+                  largeFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'stopVideo' }), '*');
+                }
                 this.playNextTrack();
               }
               return;
@@ -2816,6 +2848,7 @@
         if (!post) return;
         this.activePlayingPost = post;
         this.recordPostView(post.id);
+        this.trackEvent('play_track', { title: post.title, mood: post.mood });  // NEW
 
         // 1. Reveal Mini-Player Bar FIRST so iframe is never mounted in display:none
         const bar = document.getElementById('miniPlayerBar');
@@ -2853,6 +2886,17 @@
         this.updateMiniPlayerUI(post);
       }
 
+      seekToTimestamp(seconds) {
+        const iframe = document.getElementById('persistentAudioIframe');
+        if (iframe && iframe.contentWindow) {
+          iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [seconds, true] }), '*');
+          iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+        }
+      }
+      trackEvent(name, data = {}) {
+        if (window.va) window.va('event', { name, ...data });
+      }
+
       updateMiniPlayerUI(post) {
         const bar = document.getElementById('miniPlayerBar');
         const thumb = document.getElementById('miniPlayerThumb');
@@ -2887,6 +2931,31 @@
           this.currentQueueIndex = 0;
           this.mountPersistentTrack(this.playbackQueue[0]);
         }
+      }
+        playNextInLargeFrame() {
+        const filtered = this.getFilteredPosts().filter(p => this.getPlatform(p.youtubeUrl || p.videoUrl || '') !== 'niconico');
+        if (filtered.length === 0) return;
+        const currentIndex = filtered.findIndex(p => p.id === this.selectedPostId);
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= filtered.length) nextIndex = 0; // loop to start
+        const nextPost = filtered[nextIndex];
+        if (!nextPost) return;
+
+        // NEW: fully stop mini-player so it can't fire stale "ended" messages
+        const mini = document.getElementById('persistentAudioIframe');
+        if (mini && mini.src && this.isIframePlaying) {
+          setTimeout(() => {
+            mini.contentWindow?.postMessage(JSON.stringify({ event: 'command', func: 'stopVideo' }), '*');
+          }, 500); // CHANGED: delay avoids racing the iframe's internal init
+        }
+
+        this.selectedPostId = nextPost.id;
+        this.updateDetailUrl(nextPost.id);
+        this.renderDetailView();
+        setTimeout(() => {
+          const playBtn = document.querySelector('#detailContent .aspect-video button');
+          if (playBtn) playBtn.click();
+        }, 150);
       }
 
       playPrevTrack() {
@@ -3342,8 +3411,8 @@
            'Hatsune Miku', 'GUMI','きくお','after the rain','atr','そらる','まふまふ','TK',
            'indigo la end','Neru', '吉乃','弱酸性', 'てにをは','ピノキオピー','MI8k','Yuta Orisaka','Koshi Inaba','UTA',
            'Jax Jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'Neru', 'みゆはん', 
-           'Canon', 'Hiroyuki Sawano', '秦基博','yuta orisaka', 'Eiichiro Oda','FAKE TYPE.', '椎乃味醂',
-            'Yasutaka Nakata','hachi','wowaka','biz'
+           'Canon', 'Hiroyuki Sawano', '秦基博','秦基博','yuta orisaka', 'Eiichiro Oda','FAKE TYPE.', '椎乃味醂',
+            'Yasutaka Nakata','hachi','wowaka','biz', "吉乃","弱酸性","papiyon","indigo la end"
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
@@ -3630,6 +3699,21 @@
         document.getElementById('clearSearchBtn')?.classList.add('hidden');
         this.currentPage = 1;
         this.renderCurrentView();
+      }
+      toggleSpotlightSearch() {
+        const wrap = document.getElementById('searchExpandWrap');
+        const isOpen = wrap.classList.contains('w-40') || wrap.classList.contains('sm:w-64');
+        if (isOpen) { this.collapseSpotlightSearch(); return; }
+        wrap.classList.remove('w-0');
+        wrap.classList.add('w-40', 'sm:w-64');
+        setTimeout(() => document.getElementById('searchInput')?.focus(), 50);
+      }
+      collapseSpotlightSearch() {
+        const input = document.getElementById('searchInput');
+        const wrap = document.getElementById('searchExpandWrap');
+        if (input && input.value) return; // keep open if user typed something
+        wrap.classList.remove('w-40', 'sm:w-64');
+        wrap.classList.add('w-0');
       }
 
       // Brand Logo & Home Button Master Reset: Clears all filters and returns cleanly to Main Page 1
@@ -4065,20 +4149,24 @@
         this.isTyping = false;
       }
 
-      openModal(id) {
+        openModal(id) {
         const modal = document.getElementById(id);
         if (modal) {
-          modal.classList.remove('hidden');
+          modal.classList.remove('hidden', 'invisible', 'opacity-0', 'pointer-events-none'); // CHANGED: strip both class sets
           if (id === 'aboutAdoModal') {
             this.startAboutAdoAnimation();
           }
         }
       }
 
-      closeModal(id) {
+              closeModal(id) {
         const modal = document.getElementById(id);
         if (modal) {
-          modal.classList.add('hidden');
+          if (id === 'settingsModal') {
+            modal.classList.add('invisible', 'opacity-0', 'pointer-events-none'); // keeps translate widget alive
+          } else {
+            modal.classList.add('hidden'); // CHANGED: all other modals back to normal
+          }
           if (id === 'aboutAdoModal') {
             this.skipTypingAnimation();
           } else if (id === 'quickViewModal') {

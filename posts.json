@@ -1,5 +1,33 @@
 [
   {
+    "id": "post-1788588314728",
+    "youtubeUrl": "https://www.youtube.com/watch?v=uVDCsvYaeGw",
+    "category": [
+      "Collab",
+      "Original"
+    ],
+    "customDate": "2026-09-03",
+    "title": "春に舞う -『今日、好きになりました。』夏休み編2026 ver.",
+    "slug": "haru-ni-mau-summer-holiday-ver",
+    "tags": [
+      "soundtrack",
+      "collaboration",
+      "theme song",
+      "今日好きになりました",
+      "主題歌",
+      "今日好き",
+      "season-summer",
+      "versions",
+      "2026"
+    ],
+    "notes": "",
+    "mood": "Chill / バラード",
+    "related": [
+      "haru-ni-mau-tv-ver",
+      "haru-ni-mau"
+    ]
+  },
+  {
     "id": "post-ado-nico-8",
     "youtubeUrl": "https://www.nicovideo.jp/watch/sm32932556",
     "title": "バッド・ダンス・ホール歌ってみた【Adovisory】",
@@ -140,7 +168,7 @@
   {
     "id": "post-ado-1",
     "youtubeUrl": "https://www.youtube.com/watch?v=MhViuFoLkbs",
-    "title": "Fairytale 歌いました",
+    "title": "Fairytale, 歌いました",
     "slug": "fairytale",
     "category": [
       "Cover"
@@ -246,7 +274,8 @@
       "ブルーロック",
       "ryo",
       "主題歌",
-      "2026"
+      "2026",
+      "single"
     ],
     "customDate": "2026-08-06",
     "notes": "Theme song of \"Blue Lock\".\n映画『ブルーロック』主題歌",
@@ -269,7 +298,8 @@
       "Top 10 Playlist",
       "つんく",
       "original",
-      "2026"
+      "2026",
+      "single"
     ],
     "customDate": "2026-07-02",
     "notes": "Nintendo Switchソフト「リズム天国 ミラクルスターズ」のゲーム内楽曲",
@@ -658,7 +688,8 @@
       "オススメ",
       "Top 10 Playlist",
       "2026",
-      "shrimp"
+      "shrimp",
+      "single"
     ],
     "customDate": "2026-02-28",
     "notes": "Vocal, Lyrics & Music : Ado",
@@ -696,6 +727,7 @@
       "theme song",
       "ヤンドク",
       "主題歌",
+      "single",
       "2026"
     ],
     "customDate": "2026-02-09",
@@ -887,7 +919,8 @@
     "tags": [
       "MV",
       "椎乃味醂",
-      "2025"
+      "2025",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2025-10-24",
     "notes": "",
@@ -946,7 +979,8 @@
       "theme song",
       "沈黙の艦隊 北極海大海戦",
       "主題歌",
-      "2025"
+      "2025",
+      "single"
     ],
     "customDate": "2025-09-26",
     "notes": "Theme song of \"The Silent Service: The Great Sea Battle of the Arctic Ocean\". \n映画『沈黙の艦隊 北極海大海戦』主題歌",
@@ -1187,7 +1221,8 @@
       "jon-YAKITORY",
       "collaboration",
       "丸紅",
-      "2025"
+      "2025",
+      "single"
     ],
     "customDate": "2025-04-09",
     "notes": "",
@@ -1284,7 +1319,8 @@
       "theme song",
       "クジャクのダンス誰が見た？",
       "主題歌",
-      "2025"
+      "2025",
+      "single"
     ],
     "customDate": "2025-01-24",
     "notes": "Theme song of drama \"Who saw the peacock dance in the jungle?\".\nTBS系 金曜ドラマ『クジャクのダンス、誰が見た？』主題歌",
@@ -1301,7 +1337,8 @@
     ],
     "tags": [
       "MV",
-      "2024"
+      "2024",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2024-12-30",
     "notes": "",
@@ -1384,7 +1421,8 @@
       "collaboration",
       "duet",
       "2024",
-      "season-spring"
+      "season-spring",
+      "single"
     ],
     "customDate": "2024-10-23",
     "notes": "",
@@ -1403,7 +1441,8 @@
       "MV",
       "original",
       "2024",
-      "season-summer"
+      "season-summer",
+      "single"
     ],
     "customDate": "2024-10-14",
     "notes": "Vocal, Lyrics & Music : Ado",
@@ -1566,7 +1605,9 @@
       "theme song",
       "ビリオン×スクール",
       "主題歌",
-      "2024"
+      "2024",
+      "single",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2024-07-05",
     "notes": "",
@@ -1699,7 +1740,8 @@
     "tags": [
       "MV",
       "natori",
-      "2024"
+      "2024",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2024-05-31",
     "notes": "",
@@ -1796,7 +1838,8 @@
     ],
     "tags": [
       "MV",
-      "2024"
+      "2024",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2024-02-23",
     "notes": "",
@@ -1816,7 +1859,8 @@
       "collaboration",
       "theme song",
       "lotte",
-      "2024"
+      "2024",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2024-01-31",
     "notes": "",
@@ -1917,7 +1961,8 @@
       "Vocaloid",
       "日向電工",
       "Hatsune Miku",
-      "2023"
+      "2023",
+      "Adoの歌ってみたアルバム"
     ],
     "customDate": "2023-11-29",
     "notes": "",
@@ -1958,7 +2003,8 @@
       "cover",
       "歌いました",
       "TK",
-      "2023"
+      "2023",
+      "Adoの歌ってみたアルバム"
     ],
     "customDate": "2023-11-15",
     "notes": "",
@@ -1979,7 +2025,8 @@
       "theme song",
       "主題歌",
       "あの夜であえたら",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-11-11",
     "notes": "",
@@ -2112,7 +2159,8 @@
       "theme song",
       "spy x family",
       "主題歌",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-10-07",
     "notes": "Theme song of \"SPY×FAMILY\" Season 2.",
@@ -2134,7 +2182,8 @@
       "Koshi Inaba",
       "沈黙の艦隊",
       "主題歌",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-09-28",
     "notes": "Theme song of \"沈黙の艦隊(The Silent Service)\", written by Koshi Inaba of B'z.",
@@ -2192,7 +2241,8 @@
       "theme song",
       "USJ",
       "versions",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-09-06",
     "notes": "",
@@ -2292,7 +2342,8 @@
       "18／40～ふたりなら夢も恋も～",
       "みゆはん",
       "主題歌",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-07-11",
     "notes": "",
@@ -2314,7 +2365,8 @@
       "Mezamashi TV",
       "めざましテレビ",
       "soundtrack",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-05-09",
     "notes": "Theme song of \"Mezamashi TV\" 2023-2024.\n『めざましテレビ』の2023年度テーマソング",
@@ -2443,7 +2495,8 @@
       "MV",
       "pinocchiop",
       "ピノキオピー",
-      "2023"
+      "2023",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2023-02-20",
     "notes": "",
@@ -2472,14 +2525,14 @@
     "title": "【LIVE映像】踊 さいたまスーパーアリーナ 2022.8.11【Ado】",
     "slug": "odo-saitama",
     "category": [
-      "Live",
-      "Original"
+      "Original",
+      "Live"
     ],
     "tags": [
       "Live",
       "LIVE映像",
       "saitama",
-      "campenella",
+      "campanella",
       "2022"
     ],
     "customDate": "2022-12-31",
@@ -2592,7 +2645,8 @@
     "tags": [
       "MV",
       "jon-YAKITORY",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-10-24",
     "notes": "",
@@ -2653,7 +2707,8 @@
       "soundtrack",
       "挿入歌",
       "カラダ探し",
-      "2022"
+      "2022",
+      "残夢, zanmu, 殘夢"
     ],
     "customDate": "2022-09-19",
     "notes": "",
@@ -2800,7 +2855,8 @@
       "歌いました",
       "椎名林檎",
       "Sheena Ringo",
-      "2022"
+      "2022",
+      "Adoの歌ってみたアルバム"
     ],
     "customDate": "2022-07-24",
     "notes": "",
@@ -2819,7 +2875,8 @@
       "歌いました",
       "pinocchiop",
       "ピノキオピー",
-      "2022"
+      "2022",
+      "Adoの歌ってみたアルバム"
     ],
     "customDate": "2022-07-24",
     "notes": "",
@@ -2903,7 +2960,8 @@
     "tags": [
       "MV",
       "柊キライ",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-05-08",
     "notes": "",
@@ -2924,7 +2982,8 @@
       "soundtrack",
       "theme song",
       "TBS系スポーツ2022",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-05-08",
     "notes": "Theme song of \"TBS Sports 2022\".\n『TBS系スポーツ2022』テーマソング",
@@ -2960,7 +3019,8 @@
     "tags": [
       "MV",
       "てにをは",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-03-14",
     "notes": "",
@@ -2978,7 +3038,8 @@
     "tags": [
       "MV",
       "伊根",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-03-06",
     "notes": "",
@@ -2996,7 +3057,8 @@
     "tags": [
       "MV",
       "くじら",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-01-26",
     "notes": "",
@@ -3035,7 +3097,8 @@
       "theme song",
       "主題歌",
       "ドクターホワイト",
-      "2022"
+      "2022",
+      "狂言, kyogen"
     ],
     "customDate": "2022-01-17",
     "notes": "",
@@ -3167,7 +3230,8 @@
       "主題歌",
       "ドクターX～外科医・大門未知子～(第7シリーズ)",
       "Neru",
-      "2021"
+      "2021",
+      "狂言, kyogen"
     ],
     "customDate": "2021-10-28",
     "notes": "",
@@ -3312,7 +3376,8 @@
     "tags": [
       "MV",
       "みゆはん",
-      "2021"
+      "2021",
+      "狂言, kyogen"
     ],
     "customDate": "2021-08-12",
     "notes": "",
@@ -3370,7 +3435,8 @@
       "初情事まであと1時間",
       "biz",
       "主題歌",
-      "2021"
+      "2021",
+      "狂言, kyogen"
     ],
     "customDate": "2021-06-14",
     "notes": "",
@@ -3430,7 +3496,8 @@
       "Giga",
       "TeddyLoid",
       "オススメ",
-      "2021"
+      "2021",
+      "狂言, kyogen"
     ],
     "customDate": "2021-04-27",
     "notes": "",
@@ -3465,7 +3532,8 @@
     "tags": [
       "MV",
       "てにをは",
-      "2021"
+      "2021",
+      "狂言, kyogen"
     ],
     "customDate": "2021-02-14",
     "notes": "",
@@ -3518,7 +3586,8 @@
     "tags": [
       "MV",
       "すりぃ",
-      "2020"
+      "2020",
+      "狂言, kyogen"
     ],
     "customDate": "2020-12-24",
     "notes": "",
@@ -3597,7 +3666,8 @@
       "debut",
       "syudou",
       "Top 10 Playlist",
-      "2020"
+      "2020",
+      "狂言, kyogen"
     ],
     "customDate": "2020-10-23",
     "notes": "",
