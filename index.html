@@ -49,6 +49,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <!-- Fuse.js Fuzzy Search Engine CDN -->
   <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.basic.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <!-- Vercel Web Analytics (Privacy-Friendly, Zero Cookie Banner) -->
   <script defer src="/_vercel/insights/script.js"></script>
   <script>
@@ -292,13 +293,12 @@
         aspect-ratio: unset !important;
         flex-shrink: 0 !important;
         border-radius: 0 !important;
+        position: relative !important;
+        cursor: pointer !important;
       }
-      /* Hide big play button overlay on mobile strip while keeping the thumbnail 100% clickable */
+      /* Hide the big play button circle overlay on mobile so thumbnail is clean */
       #mainContainer .aspect-video .absolute {
         display: none !important;
-      }
-      #mainContainer .aspect-video {
-        cursor: pointer !important;
       }
       #mainContainer article > div:first-child > div:last-child {
         flex: 1 1 auto !important;
@@ -1372,6 +1372,7 @@
         this.isAutoplayEnabled = true;
         this.activePlayingPost = null;
         this.activePlaylistName = null; // Tracks current active playlist name
+        this.detailQueueModeActive = false;
 
         // Bind keyboard shortcuts, touch gestures & continuous playback listeners
         this.initKeyboardShortcuts();
@@ -1391,7 +1392,20 @@
         this.loadInitialPosts().then(() => this.init());
       }
 
-      async loadInitialPosts() {
+        async loadInitialPosts() {
+        // NEW: load from Supabase first (public read-only via anon key)
+        try {
+          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
+          const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxaGpydnpka3hoYWZjbG12ZmtpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODYwMDQ3MCwiZXhwIjoyMTA0MTc2NDcwfQ.HbaHPaB0-MxfO8UykLRm3-MqriJLSBHgGh7eMCV44f8'; // anon key only — never service_role here
+          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          const { data, error } = await sb.from('posts').select('*');
+          if (!error && Array.isArray(data) && data.length > 0) {
+            this.posts = data;
+            this.sanitizePosts();
+            return;
+          }
+        } catch (err) { console.warn('Supabase load failed, falling back to posts.json:', err); }
+
         // 1. Priority network fetch when deployed on live HTTP/HTTPS server (GitHub Pages / Vercel)
         if (window.location.protocol.startsWith('http')) {
           try {
@@ -2067,6 +2081,10 @@
       }
 
       navigateTo(view, postId = null, pushHistory = true) {
+        // If we are leaving detail view, move the player back to mini-bar
+        if (this.activeView === 'detail' && this.detailQueueModeActive) {
+          this.detachPlayerFromDetailSlot();
+        }
         if (pushHistory && this.activeView !== view) {
           this.historyStack.push(this.activeView);
           const slugPart = postId ? '/' + (this.posts.find(p => p.id === postId)?.slug || postId) : '';
@@ -2548,39 +2566,27 @@
           }, 1000);
         }
 
+        // Register new player instance
         this.activeMountedPlayers.set(postId, {
           iframeId: iframeId,
           post: post,
           rawUrl: rawUrl
         });
 
-        // 3. Asynchronous Non-Blocking FIFO Stream Limiter (Zero DOM Collision)
+        // FIFO Stream Manager: Pause oldest if exceeding limit (DO NOT DELETE DOM)
         if (this.streamLimit !== 999 && this.activeMountedPlayers.size > this.streamLimit) {
-          setTimeout(() => {
-            if (this.activeMountedPlayers.size > this.streamLimit) {
-              const oldestKey = this.activeMountedPlayers.keys().next().value;
-              if (oldestKey && oldestKey !== postId) {
-                const oldestPlayer = this.activeMountedPlayers.get(oldestKey);
-                if (oldestPlayer) {
-                  const oldEl = document.getElementById(oldestPlayer.iframeId);
-                  if (oldEl && oldEl.parentElement) {
-                    const oldPost = oldestPlayer.post;
-                    const rThumb = this.getThumbnailUrl(oldPost);
-                    const rUrl = oldPost.youtubeUrl || oldPost.videoUrl || '';
-                    oldEl.parentElement.innerHTML = `
-                      <img src="${rThumb}" alt="${oldPost.title}" class="w-full h-full object-cover">
-                      <div class="absolute inset-0 bg-black/20 hover:bg-black/40 transition flex items-center justify-center">
-                        <button onclick="app.handlePlayClick('${oldPost.id}', '${rUrl}', this)" class="w-12 h-12 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-lg hover:scale-105 transition">
-                          <i class="fa-solid fa-play text-sm ml-0.5"></i>
-                        </button>
-                      </div>
-                    `;
-                  }
-                  this.activeMountedPlayers.delete(oldestKey);
-                }
+          const oldestKey = this.activeMountedPlayers.keys().next().value;
+          if (oldestKey && oldestKey !== postId) {
+            const oldestPlayer = this.activeMountedPlayers.get(oldestKey);
+            if (oldestPlayer) {
+              const oldEl = document.getElementById(oldestPlayer.iframeId);
+              if (oldEl && oldEl.contentWindow) {
+                // Just pause the old one, keep the DOM intact to avoid crashes
+                oldEl.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'pauseVideo' }), '*');
               }
+              this.activeMountedPlayers.delete(oldestKey);
             }
-          }, 50);
+          }
         }
 
         this.isIframePlaying = true;
@@ -2640,6 +2646,22 @@
           // Add safe bottom padding so floating mini-player never blocks pagination or buttons
           document.querySelector('main')?.classList.add('pb-24');
         }
+      }
+      // Ensures the Detail View video can communicate with the app
+      attachPlayerToDetailSlot() {
+        const slot = document.getElementById('detailVideoSlot');
+        const wrapper = document.getElementById('persistentPlayerWrapper');
+        if (!slot || !wrapper) return;
+        wrapper.classList.remove('hidden');
+        slot.appendChild(wrapper);
+      }
+
+      detachPlayerFromDetailSlot() {
+        const wrapper = document.getElementById('persistentPlayerWrapper');
+        const home = document.getElementById('miniPlayerBar');
+        if (!wrapper || !home) return;
+        wrapper.classList.add('hidden');
+        home.appendChild(wrapper);
       }
       
       initTouchSwipeNavigation() {
@@ -2919,6 +2941,24 @@
           }
           bar.classList.remove('hidden');
         }
+      }playNextInLargeFrame() {
+        const filtered = this.getFilteredPosts().filter(p => this.getPlatform(p.youtubeUrl || p.videoUrl || '') !== 'niconico');
+        if (filtered.length === 0) return;
+        const currentIndex = filtered.findIndex(p => p.id === this.selectedPostId);
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= filtered.length) nextIndex = 0; // Loop to start
+        const nextPost = filtered[nextIndex];
+        if (!nextPost) return;
+
+        this.selectedPostId = nextPost.id;
+        this.updateDetailUrl(nextPost.id);
+        this.renderDetailView();
+        
+        // Auto-play next song in Detail View
+        setTimeout(() => {
+          const playBtn = document.querySelector('#detailContent .aspect-video button');
+          if (playBtn) playBtn.click();
+        }, 150);
       }
 
       playNextTrack() {
@@ -3508,9 +3548,28 @@
         const bar = document.getElementById('miniPlayerBar');
         if (bar) bar.classList.add('hidden');
       }
+      // Attach persistent player to Detail View slot
+      attachPlayerToDetailSlot() {
+        const slot = document.getElementById('detailVideoSlot');
+        const wrapper = document.getElementById('persistentPlayerWrapper'); // Ensure this ID exists
+        if (!slot || !wrapper) return;
+        wrapper.classList.remove('hidden');
+        slot.appendChild(wrapper);
+      }
+
+      // Move player back to Mini-Player Bar
+      detachPlayerFromDetailSlot() {
+        const wrapper = document.getElementById('persistentPlayerWrapper');
+        const home = document.getElementById('miniPlayerBar');
+        if (!wrapper || !home) return;
+        wrapper.classList.add('hidden');
+        home.appendChild(wrapper);
+      }
 
       renderDetailView() {
-        this.isIframePlaying = false;
+        // Stop background persistent player audio during detail view playback to avoid double-playing
+        if (this.isIframePlaying) this.pauseAllCardVideos(); 
+        
         const container = document.getElementById('detailContent');
         if (!container) return;
 
@@ -3520,11 +3579,11 @@
           return;
         }
 
-        //const ytId = this.getYoutubeId(post.youtubeUrl);
-        //const thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
         const rawUrl = post.youtubeUrl || post.videoUrl || '';
         const platform = this.getPlatform(rawUrl);
         const thumbUrl = this.getThumbnailUrl(post);
+        
+        // Define all missing variables to prevent ReferenceErrors
         const tagChips = (post.tags || []).slice(0, DISPLAY_TAG_LIMIT).map(t => 
           `<span onclick="app.filterByTag('${t}')" class="cursor-pointer hover:underline text-xs text-stone-600 bg-stone-200/80 px-2 py-0.5 rounded font-medium">${t}</span>`
         ).join(' ');
@@ -3535,7 +3594,7 @@
           : `<i class="fa-brands fa-youtube text-rose-600 text-sm"></i> Watch on YouTube`;
 
         container.innerHTML = `
-          <div class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 shadow-md group">
+          <div id="detailVideoSlot" class="relative aspect-video w-full rounded-lg overflow-hidden bg-stone-900 shadow-md group">
             <img src="${thumbUrl}" alt="${post.title}" class="w-full h-full object-cover">
             <div class="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition flex items-center justify-center">
               <button onclick="app.handlePlayClick('${post.id}', '${rawUrl}', this)" class="w-16 h-16 rounded-full bg-stone-900/90 text-stone-100 flex items-center justify-center shadow-xl hover:scale-105 transition">
@@ -3582,7 +3641,7 @@
 
             ${tagChips ? `<div class="flex flex-wrap gap-1.5 pt-1">${tagChips}</div>` : ''}
 
-            <!-- Related Videos Camera Roll Filmstrip (Collapsible)-->
+            <!-- Related Videos Camera Roll Filmstrip (Collapsible) -->
             ${(() => {
               const relatedList = this.getRelatedPosts(post, 6);
               if (relatedList.length === 0) return '';
@@ -3607,7 +3666,6 @@
               return `
                 <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70 space-y-2">
                   <button type="button" onclick="app.toggleRelatedTracks('detailRelatedStrip', this)" class="cursor-pointer text-xs font-serif font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white flex items-center gap-1.5 py-1 transition">
-                    
                     <span class="related-toggle-label">▾ Related Tracks</span>
                   </button>
                   <div id="detailRelatedStrip" class="hidden pt-1">
