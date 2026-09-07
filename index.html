@@ -3463,32 +3463,36 @@
         // Comprehensive Creator & Collaborator Detection Roster
         const CREATOR_KEYWORDS = [
           'syudou', 'jon-yakitory', 'wooma', 'orihara', 'giga', 'teddyloid', '日向電工',
-          '椎名林檎', 'sheena', 'ringo', 'natori', 'n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
+          '椎名林檎', 'sheena', 'ringo', 'natori', 'なとり','n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
            'deco*27', 'deco', 'mrs. green apple', '大森元貴','すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
-          'くじら', 'vocaloid', 'utaite', 'jon-yakitory', 'producer', 'illust', 'collab', 'つんく',
-           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 
-           'Hatsune Miku', 'GUMI','きくお','after the rain','atr','そらる','まふまふ','TK',
-           'indigo la end','Neru', '吉乃','弱酸性', 'てにをは','ピノキオピー','MI8k','Yuta Orisaka','Koshi Inaba','UTA',
-           'Jax Jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'Neru', 'みゆはん', 
-           'Canon', 'Hiroyuki Sawano', '秦基博','秦基博','yuta orisaka', 'Eiichiro Oda','FAKE TYPE.', '椎乃味醂',
-            'Yasutaka Nakata','hachi','wowaka','biz', "吉乃","弱酸性","papiyon","indigo la end"
+          'くじら', 'vocaloid', 'utaite', 'jon-yakitory','honeyworks', 'producer', 'illust', 'collab', 'つんく',
+           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'GUMI',
+           'Hatsune Miku', '稲葉浩志','松本孝弘', 'きくお','after the rain','atr','そらる','まふまふ','tk','mitchie m','neru',
+           'indigo la end','Neru', '吉乃', '弱酸性','優里', 'てにをは','ピノキオピー','MI8k','yuta orisaka','koshi inaba','UTA',
+           'yasutaka nakata','中田ヤスタカ','バルーン','40mp','jax jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'Neru', 'みゆはん', 
+           'Canon', 'hiroyuki sawano', '園田海未','秦基博','みきとP','yuta orisaka', 'eiichiro oda','hiroyuki sawano','fake type.', '椎乃味醂','沼田ゾンビ',
+            'Yasutaka Nakata','hachi','wowaka','biz', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
+            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん'
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
         const CONCERT_KEYWORDS = [
           'kigeki', '喜劇', 'campanella', 'カムパネルラ', 'mars', 'マーズ', 
           'wish', 'shinzou', '心臓', 'monalisa', 'mona lisa', 'モナ・リザ', 'hibana', 
-          'yodaka', 'よだか', 'live','stage', 'arena', 'stadium', 'dome', 'live stage',
+          'yodaka', 'よだか', 'live','stage', 'arena', 'stadium', 'dome', 'スタジアム','live stage',
           'budokan', 'zepp', 'saitama', 'tokyo dome', 'k-arena', 'peacock', 'zipangu',
           'yokohama','los angeles','kia', 'nissan','expo'
         ];
+
+        // NEW: build a quick lookup set of every tag actually used by a real playlist
+        const playlistTagSet = new Set(PLAYLIST_CONFIG.map(pl => pl.tag.toLowerCase()));
 
         sortedTagKeys.forEach(key => {
           const item = tagMap[key];
 
           if (/^\d{4}$/.test(key)) {
             groups["Release Year"].push(item);
-          } else if (key.includes("playlist")) {
+          } else if (playlistTagSet.has(key.toLowerCase())) { // CHANGED: match real playlist tags, not just the word "playlist"
             groups["Curated Playlists"].push(item);
           } else if (CREATOR_KEYWORDS.some(k => key.includes(k))) {
             groups["Featured Creators & Artists"].push(item);
