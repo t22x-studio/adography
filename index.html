@@ -1,10 +1,22 @@
 <!DOCTYPE html>
-<html lang="en" class="min-h-full bg-[#f4f1ea] dark:bg-[#0f0f10] text-stone-800">
-<head>
+<html lang="en" class="min-h-full bg-[#0f0f10] dark:bg-[#0f0f10] text-stone-100 dark:text-stone-100">
+  <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Flash-Prevention Script: Applies Dark Mode instantly before rendering -->
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('ado_theme') || 'dark'; // Default as dark
+      if (savedTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
   <!-- Short, clean browser tab title (No UI clutter) -->
   <title class="notranslate">Adography - Curated Ado Video Archive</title>
+  <meta name="google-site-verification" content="tfR1PUh1m3otdfJKnMidYFLVrrUaOA1bNI04gIOeKWs" />
 
   <!-- Global Multi-Language Search Meta (English, Japanese, Spanish, Korean) -->
   <meta name="description" content="Curated Ado (アド) video archive & continuous music player. Stream official MVs, stadium concerts (心臓, モナ・リザ, カムパネルラ), Vocaloid covers, Kyogen & Zanmu albums. Ado canciones, Ado 노래 모음, 歌ってみた, ライブ映像." />
@@ -81,7 +93,8 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        includedLanguages: 'en,ja,zh-TW,ko,es,pt,fr,de,it',
+        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
         autoDisplay: false
       }, 'google_translate_element');
     }
@@ -757,6 +770,10 @@
     
     <div class="text-[11px] text-stone-500 font-serif flex items-center gap-2">
       <span>Adography &copy; 2026 · Unofficial Adomin Archive</span>
+      <button onclick="app.openModal('aboutFooterModal')" class="underline hover:text-stone-900 transition">
+        About
+      </button>
+      <span>·</span>
       <button onclick="app.openModal('disclaimerModal')" class="underline hover:text-stone-900 transition">
         Disclaimer
       </button>
@@ -791,6 +808,34 @@
       <!-- Modal Footer (Locked firmly to bottom right) -->
       <div class="pt-3 border-t border-stone-200 flex justify-end flex-shrink-0">
         <button onclick="app.closeModal('aboutAdoModal')" class="px-4 py-1.5 bg-stone-800 hover:bg-blue-900 text-white rounded text-xs font-medium transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL: FOOTER ABOUT MODAL -->
+  <div id="aboutFooterModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-[#faf8f5] dark:bg-stone-900 border border-stone-300 dark:border-stone-700 rounded-xl max-w-md w-full p-5 shadow-xl space-y-4 text-stone-800 dark:text-stone-100">
+      <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-700 pb-3">
+        <h3 class="font-serif font-bold text-base flex items-center gap-2">
+          About Adography
+        </h3>
+        <button onclick="app.closeModal('aboutFooterModal')" class="text-stone-400 hover:text-stone-800 dark:hover:text-stone-200">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="text-xs leading-relaxed space-y-3 font-sans">
+        <p>
+          This is a fan-supported curated Ado video archive. Cataloging official music videos, live stadium concerts, Vocaloid covers, and curated playlists.
+        </p>
+        <p class="text-stone-500 dark:text-stone-400 font-serif italic">
+          Ado 楽曲・ライブ映像アーカイブ
+        </p>
+      </div>
+
+      <div class="pt-2 border-t border-stone-200 dark:border-stone-700 flex justify-end">
+        <button onclick="app.closeModal('aboutFooterModal')" class="px-3.5 py-1.5 bg-blue-900 hover:bg-blue-800 text-white rounded text-xs font-medium transition">
           Close
         </button>
       </div>
@@ -1167,6 +1212,7 @@
       { id: "pl-yodaka",     type: "tag",  tag: "Yodaka",           name: "2025 · 東京ドーム「よだか」Yodaka Tour",    desc: "2025.11.11–11.12 at Tokyo Dome — Milestone 2-day dome concert performances." },
       { id: "pl-inst",       type: "tag",  tag: "Instrumental-off-vocal", name: "Ado Official Instrumentals & Off-Vocal", desc: "Official karaoke tracks, off-vocals, and instrumental arrangements." },
       { id: "pl-fav",       type: "tag",  tag: "adofav",             name: "Ado's Oshi Playlist (推しプレイリスト)",                   desc: "Featuring Ado's personal favorites, dream-come-true collaborations. 「だって未来は誰にもわからない。」" },
+      { id: "pl-stream",     type: "tag",  tag: "live stream",      name: "Ado Live Stream Collection (VTuber x Gamer Ado の配信)", desc: "Featuring Ado's legendary gaming, streaming, and chaotic screaming sessions, including the Silent Hill stream, Rhythm Heaven stream, and her 2-hour birthday karaoke marathon celebration." },
       { id: "pl-hidden",     type: "tag",  tag: "Hidden Gem",      name: "Ado's Hidden Gems Playlist",                  desc: "Underrated gems and hidden favorites across Ado's catalog that may become your new favorite." }
     ];
     /* --------------------------------------------- */
@@ -3471,13 +3517,13 @@
           '椎名林檎', 'sheena', 'ringo', 'natori', 'なとり','n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
            'deco*27', 'deco', 'mrs. green apple', '大森元貴','すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
           'くじら', 'vocaloid', 'utaite', 'jon-yakitory','honeyworks', 'producer', 'illust', 'collab', 'つんく',
-           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'GUMI',
+           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'eight','canon','linmu',
            'Hatsune Miku', '稲葉浩志','松本孝弘', 'きくお','after the rain','atr','そらる','まふまふ','tk','mitchie m','neru',
-           'indigo la end','Neru', '吉乃', '弱酸性','優里', 'てにをは','ピノキオピー','MI8k','yuta orisaka','koshi inaba','UTA',
-           'yasutaka nakata','中田ヤスタカ','バルーン','40mp','jax jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'Neru', 'みゆはん', 
-           'Canon', 'hiroyuki sawano', '園田海未','秦基博','みきとP','yuta orisaka', 'eiichiro oda','hiroyuki sawano','fake type.', '椎乃味醂','沼田ゾンビ',
-            'Yasutaka Nakata','hachi','wowaka','biz', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
-            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん'
+           'indigo la end','chinozo', '吉乃', '弱酸性','優里', 'てにをは','ピノキオピー','mi8k','yuta orisaka','koshi inaba','UTA',
+           'yasutaka nakata','中田ヤスタカ','バルーン','the binary','40mp','jax jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'neru', 'みゆはん', 
+           'Canon', 'hiroyuki sawano', '園田海未','秦基博','みきとP','倉橋ヨエコ','yuta orisaka', 'eiichiro oda','hiroyuki sawano','fake type.', '椎乃味醂','沼田ゾンビ',
+            'Yasutaka Nakata','hachi','wowaka','寺田てら','mono-devoid', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
+            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん','ファントムシータ','whaledontsleep','みきとp','gumi'
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
