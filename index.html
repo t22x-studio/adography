@@ -81,7 +81,7 @@
     function googleTranslateElementInit() {
       new google.translate.TranslateElement({
         pageLanguage: 'en',
-        layout: google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
         autoDisplay: false
       }, 'google_translate_element');
     }
@@ -1025,9 +1025,7 @@
     </div>
   </div>
 
-      <div id="settingsModal" class="invisible opacity-0 pointer-events-none fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4 transition-opacity duration-150">
-      <div class="bg-[#faf8f5] dark:bg-stone-900 rounded-xl shadow-xl w-full max-w-md p-5 space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
+      <div id="settingsModal" class="invisible opacity-0 pointer-events-none fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4 transition-opacity duration-150">      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
         <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
           <i class="fa-solid fa-sliders text-stone-600"></i> Settings / 設定
         </h3>
@@ -1147,7 +1145,11 @@
       { id: "pl-playful",    type: "mood", tag: "Playful / 遊び心",   name: "Ado's Playful Playlist (遊び心)",              desc: "Playful tracks featuring dynamic vocals, quirky rhythms, and expressive character energy." },
       { id: "pl-chill",      type: "mood", tag: "Chill / バラード",   name: "Ado's Chill Playlist (バラード)",              desc: "Soothing ballads with gentle melodies and Ado's softer vocals, calm, quiet, and intimate." },
       { id: "pl-osusume",       type: "tag",  tag: "オススメ",             name: "Ado's Super Cool Playlist",                   desc: "Gyaru." },
-      { id: "pl-uta",        type: "tag",  tag: "Uta",              name: "Uta's Songs from ONE PIECE FILM RED",          desc: "I hope UTA will be a source of comfort for whatever you may be feeling in any situation. And for all of you bursting with excitement in anticipation of the film, I guarantee UTA will deliver above and beyond all expectations. (Ado)" },
+      { id: "pl-kyogen",    type: "tag", tag: "Kyogen",                        name: "Album Playlist · 「狂言」Kyogen",                          desc: "Ado's debut studio album, released on 2022-01-26." },
+      { id: "pl-zanmu",     type: "tag", tag: "Zanmu",                         name: "Album Playlist · 「残夢」Zanmu",                           desc: "Ado's second studio album, released on 2024-07-10." },
+      { id: "pl-utattemita",type: "tag", tag: "Ado's Utattemita Album",        name: "Album Playlist · 「Adoの歌ってみたアルバム」Ado's Utattemita Album", desc: "Compilation album featuring 10 Vocaloid and J-pop songs voted by fans for Ado to cover. Released on 2023-12-13." },
+      { id: "pl-bestadobum",type: "tag", tag: "Ado's Best Adobum",             name: "Album Playlist · 「Adoのベストアドバム」Ado's Best Adobum",       desc: "Ado's greatest hits album, released on 2025-04-08." },
+      { id: "pl-uta",        type: "tag",  tag: "Uta's Songs One Piece Film Red",              name: "Album Playlist · 「ウタの歌 ONE PIECE FILM RED」Uta's Songs: One Piece Film Red",          desc: "I hope UTA will be a source of comfort for whatever you may be feeling in any situation. And for all of you bursting with excitement in anticipation of the film, I guarantee UTA will deliver above and beyond all expectations. (Ado)" },
       
       
 
@@ -1155,13 +1157,13 @@
       
       { id: "pl-kigeki",     type: "tag",  tag: "Kigeki",           name: "2022 · 1st Live「喜劇」Kigeki",              desc: "2022.04.04 at Zepp DiverCity (TOKYO) — Ado's historic debut solo live concert." },
       { id: "pl-campanella", type: "tag",  tag: "Campanella",       name: "2022 · 2nd Live「カムパネルラ」Campanella",      desc: "2022.08.11 at Saitama Super Arena — Ado's landmark 1st standalone arena performance." },
-      { id: "pl-mars",       type: "tag",  tag: "Mars",             name: "2023 · 全国ツアー「マーズ」Mars Tour",           desc: "2023 at Nippon Budokan — Highlights from Ado's nationwide arena tour." },
+      { id: "pl-mars",       type: "tag",  tag: "Mars",             name: "2023 · 全国ツアー「マーズ」Mars Tour",           desc: "2023 at Nippon Budokan — Highlights from Ado's nationwide arena tour including the masterclass 'Unravel' performance.." },
       { id: "pl-wish",       type: "tag",  tag: "Wish",             name: "2024 · THE FIRST WORLD TOUR “Wish”",         desc: "2024 at Peacock Theater (Los Angeles) & world tour stops." },
-      { id: "pl-shinzou",    type: "tag",  tag: "Shinzou",          name: "2024 · 国立競技場「心臓」Shinzou Special Live",  desc: "2024.04.28 at Japan National Stadium — Historic 2-day stadium concert featuring the masterclass 'Unravel' performance." },
+      { id: "pl-shinzou",    type: "tag",  tag: "Shinzou",          name: "2024 · 国立競技場「心臓」Shinzou Special Live",  desc: "2024 at Japan National Stadium — Historic 2-day stadium concert" },
       { id: "pl-monalisa",   type: "tag",  tag: "Monalisa",        name: "2024 · アリーナツアー「モナ・リザの横顔」Profile of Mona Lisa", desc: "2024 at K-Arena Yokohama." },
       { id: "pl-hibana",     type: "tag",  tag: "Hibana",           name: "2025 · WORLD TOUR 2025 “Hibana”",            desc: "2025 at Saitama Super Arena & Kia Center, Orlando global arena tour." },
       { id: "pl-yodaka",     type: "tag",  tag: "Yodaka",           name: "2025 · 東京ドーム「よだか」Yodaka Tour",    desc: "2025.11.11–11.12 at Tokyo Dome — Milestone 2-day dome concert performances." },
-      { id: "pl-inst",       type: "tag",  tag: "Instrumental-off-vocal", name: "Ado Official Instrumentals & Off-Vocal", desc: "Official backing tracks, off-vocals, and instrumental arrangements." },
+      { id: "pl-inst",       type: "tag",  tag: "Instrumental-off-vocal", name: "Ado Official Instrumentals & Off-Vocal", desc: "Official karaoke tracks, off-vocals, and instrumental arrangements." },
       { id: "pl-hidden",     type: "tag",  tag: "Hidden Gem",      name: "Ado's Hidden Gems Playlist",                  desc: "Underrated gems and hidden favorites across Ado's catalog that may become your new favorite." }
     ];
     /* --------------------------------------------- */
@@ -2669,16 +2671,13 @@
       initTouchSwipeNavigation() {
         let touchStartX = 0;
         let touchStartY = 0;
-        let touchStartedInScrollArea = false;
 
         window.addEventListener('touchstart', (e) => {
           touchStartX = e.changedTouches[0].clientX;
           touchStartY = e.changedTouches[0].clientY;
-          touchStartedInScrollArea = !!e.target.closest('.overflow-x-auto');
         }, { passive: true });
 
         window.addEventListener('touchend', (e) => {
-          if (touchStartedInScrollArea) return;
           const touchEndX = e.changedTouches[0].clientX;
           const touchEndY = e.changedTouches[0].clientY;
           const deltaX = touchEndX - touchStartX;
@@ -2914,6 +2913,12 @@
       }
 
       seekToTimestamp(seconds) {
+        if (this.ytPlayer && typeof this.ytPlayer.seekTo === 'function') {
+          this.ytPlayer.seekTo(seconds, true);
+          this.ytPlayer.playVideo();
+          return;
+        }
+        // Fallback: raw iframe path (niconico / edge cases only)
         const iframe = document.getElementById('persistentAudioIframe');
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [seconds, true] }), '*');
