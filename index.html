@@ -1403,8 +1403,8 @@
         // NEW: load from Supabase first (public read-only via anon key)
         try {
           const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
-          const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNxaGpydnpka3hoYWZjbG12ZmtpIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4ODYwMDQ3MCwiZXhwIjoyMTA0MTc2NDcwfQ.HbaHPaB0-MxfO8UykLRm3-MqriJLSBHgGh7eMCV44f8'; // anon key only — never service_role here
-          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb'; // Replace with your new sb_publishable_... key
+          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
           const { data, error } = await sb.from('posts').select('*');
           if (!error && Array.isArray(data) && data.length > 0) {
             this.posts = data;
