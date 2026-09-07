@@ -1164,6 +1164,7 @@
       { id: "pl-hibana",     type: "tag",  tag: "Hibana",           name: "2025 · WORLD TOUR 2025 “Hibana”",            desc: "2025 at Saitama Super Arena & Kia Center, Orlando global arena tour." },
       { id: "pl-yodaka",     type: "tag",  tag: "Yodaka",           name: "2025 · 東京ドーム「よだか」Yodaka Tour",    desc: "2025.11.11–11.12 at Tokyo Dome — Milestone 2-day dome concert performances." },
       { id: "pl-inst",       type: "tag",  tag: "Instrumental-off-vocal", name: "Ado Official Instrumentals & Off-Vocal", desc: "Official karaoke tracks, off-vocals, and instrumental arrangements." },
+      { id: "pl-fav",       type: "tag",  tag: "adofav",             name: "Ado's Oshi Playlist (推しプレイリスト)",                   desc: "Featuring Ado's personal favorites, dream-come-true collaborations. 「だって未来は誰にもわからない。」" },
       { id: "pl-hidden",     type: "tag",  tag: "Hidden Gem",      name: "Ado's Hidden Gems Playlist",                  desc: "Underrated gems and hidden favorites across Ado's catalog that may become your new favorite." }
     ];
     /* --------------------------------------------- */
@@ -2289,7 +2290,7 @@
                     ${post.title}
                   </h3>
                   
-                  ${post.notes ? `<p class="text-stone-700 dark:text-stone-300 text-xs leading-relaxed line-clamp-2">${this.formatNotes(post.notes)}</p>` : ''}                  
+                  ${post.notes ? `<p class="text-stone-700 dark:text-stone-300 text-xs leading-relaxed line-clamp-2 whitespace-pre-line">${this.formatNotes(post.notes)}</p>` : ''}             
                   ${tagChips ? `<div class="flex flex-wrap gap-1 pt-1">${tagChips}</div>` : ''}
                 </div>
               </div>
@@ -2912,13 +2913,21 @@
         this.updateMiniPlayerUI(post);
       }
 
-      seekToTimestamp(seconds) {
+            seekToTimestamp(seconds) {
+        // NEW: check the single-click detail video iframe first (most common watch path)
+        const detailFrame = document.getElementById('detailLargeIframe');
+        if (detailFrame && detailFrame.contentWindow) {
+          detailFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [seconds, true] }), '*');
+          detailFrame.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'playVideo' }), '*');
+          return;
+        }
+        // Queue-mode path (continuous playlist playback)
         if (this.ytPlayer && typeof this.ytPlayer.seekTo === 'function') {
           this.ytPlayer.seekTo(seconds, true);
           this.ytPlayer.playVideo();
           return;
         }
-        // Fallback: raw iframe path (niconico / edge cases only)
+        // Fallback: niconico / edge cases
         const iframe = document.getElementById('persistentAudioIframe');
         if (iframe && iframe.contentWindow) {
           iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'seekTo', args: [seconds, true] }), '*');
@@ -3960,7 +3969,7 @@
                 ${randomPost.category || 'General'}
               </span>
               <h3 class="text-base font-serif font-bold text-stone-900 dark:text-stone-100 mt-2">${randomPost.title}</h3>
-              <p class="text-xs text-stone-600 dark:text-stone-300 mt-1">${this.formatNotes(randomPost.notes || '')}</p>
+              <p class="text-xs text-stone-600 dark:text-stone-300 mt-1 whitespace-pre-line">${this.formatNotes(randomPost.notes || '')}</p>
             </div>
           `;
         }
