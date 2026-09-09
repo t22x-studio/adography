@@ -1534,6 +1534,56 @@
           this.navigateTo('detail', this.selectedSpotlightPostId);
         }
       }
+      isPostLiked(postId) {
+        const likedMap = JSON.parse(localStorage.getItem(`${DB_PREFIX}_liked_posts`) || '{}');
+        return Boolean(likedMap[postId]);
+      }
+
+      async toggleLikePost(postId, event) {
+        if (event) event.stopPropagation();
+        
+        const likedMap = JSON.parse(localStorage.getItem(`${DB_PREFIX}_liked_posts`) || '{}');
+        const isCurrentlyLiked = Boolean(likedMap[postId]);
+        const newLikeState = !isCurrentlyLiked;
+
+        // 1. Update local storage instantly
+        likedMap[postId] = newLikeState;
+        localStorage.setItem(`${DB_PREFIX}_liked_posts`, JSON.stringify(likedMap));
+
+        // 2. Update ALL matching heart buttons across the page (Main cards, Grid cards, Detail view)
+        document.querySelectorAll(`button[onclick*="toggleLikePost('${postId}'"]`).forEach(btn => {
+          const icon = btn.querySelector('i');
+          if (newLikeState) {
+            btn.classList.add('text-blue-600', 'dark:text-blue-400', 'font-bold');
+            btn.classList.remove('text-stone-400', 'text-stone-500', 'text-stone-800');
+            if (icon) {
+              icon.className = 'fa-solid fa-heart text-blue-600 dark:text-blue-400';
+            }
+          } else {
+            btn.classList.remove('text-blue-600', 'dark:text-blue-400', 'font-bold');
+            if (icon) {
+              icon.className = 'fa-regular fa-heart text-stone-400 dark:text-stone-500';
+            }
+          }
+        });
+
+        this.showToast(newLikeState ? '❤ Added to your Liked tracks!' : 'Removed from Liked tracks.');
+
+        // 3. Sync to Supabase backend silently in the background
+        try {
+          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
+          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
+          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+          const { data: currentPost } = await sb.from('posts').select('likes').eq('id', postId).single();
+          const currentLikes = (currentPost && typeof currentPost.likes === 'number') ? currentPost.likes : 0;
+          const updatedLikes = newLikeState ? currentLikes + 1 : Math.max(0, currentLikes - 1);
+
+          await sb.from('posts').update({ likes: updatedLikes }).eq('id', postId);
+        } catch(e) {
+          // Silent fallback if offline
+        }
+      }
 
       sanitizePosts() {
         this.posts.forEach(p => {
@@ -2458,7 +2508,10 @@
                         <span class="font-medium text-stone-700 dark:text-stone-300 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded text-[10px]">${c}</span>
                       `).join('')}
                     </div>
-                    <div class="flex items-center gap-1.5">
+                    <div class="flex items-center gap-2">
+                      <button onclick="app.toggleLikePost('${post.id}', event)" id="heart-btn-${post.id}" class="w-5 h-5 rounded hover:bg-stone-200 dark:hover:bg-stone-700 ${app.isPostLiked(post.id) ? 'text-blue-600 dark:text-blue-400 font-bold' : 'text-stone-400 dark:text-stone-500 hover:text-stone-700 dark:hover:text-stone-300'} flex items-center justify-center transition" title="Like / Bookmark">
+                        <i class="${app.isPostLiked(post.id) ? 'fa-solid' : 'fa-regular'} fa-heart text-[10px]"></i>
+                      </button>
                       <button onclick="app.addToQueue('${post.id}', event)" class="w-5 h-5 rounded hover:bg-stone-200 dark:hover:bg-stone-700 text-stone-500 hover:text-amber-500 dark:text-stone-400 dark:hover:text-amber-400 flex items-center justify-center transition" title="Add to Queue">
                         <i class="fa-solid fa-plus text-[10px]"></i>
                       </button>
@@ -2476,9 +2529,12 @@
               </div>
 
               <div class="card-action-row p-4 pt-2 border-t border-stone-200/60 dark:border-stone-700/60 mt-3 flex items-center justify-between text-xs text-stone-500">
-                <button onclick="app.addToQueue('${post.id}', event)" title="Add to Playback Queue" class="text-stone-600 dark:text-stone-400 hover:text-blue-800 dark:hover:text-blue-400 font-medium transition flex items-center gap-1 text-[11px]">
-                  <i class="fa-solid fa-list-plus"></i> + Queue
-                </button>
+                <div class="flex items-center gap-3">
+                  
+                  <button onclick="app.addToQueue('${post.id}', event)" title="Add to Playback Queue" class="text-stone-600 dark:text-stone-400 hover:text-blue-800 dark:hover:text-blue-400 font-medium transition flex items-center gap-1 text-[11px]">
+                    <i class="fa-solid fa-list-plus"></i> + Queue
+                  </button>
+                </div>
                 <button onclick="app.navigateTo('detail', '${post.id}')" class="text-stone-800 dark:text-stone-200 font-semibold hover:text-blue-900 dark:hover:text-blue-400 transition text-xs">
                   View Post <i class="fa-solid fa-arrow-right text-[10px] ml-0.5"></i>
                 </button>
@@ -3826,8 +3882,12 @@
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
               <h1 class="text-xl font-sans font-bold text-stone-900 dark:text-stone-100 leading-snug flex-1">${post.title}</h1>
               
-              <!-- Quick Action Row: + Queue & Share -->
+              <!-- Quick Action Row: Like, + Queue & Share -->
               <div class="flex items-center gap-1.5 flex-shrink-0 self-end sm:self-start">
+               <button onclick="app.toggleLikePost('${post.id}', event)" id="heart-btn-detail-${post.id}" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1 ${app.isPostLiked(post.id) ? 'text-blue-600 dark:text-blue-400 font-bold border-blue-500/50' : 'text-stone-800 dark:text-stone-200'}" title="Like / Bookmark">
+                  <i class="${app.isPostLiked(post.id) ? 'fa-solid text-blue-600 dark:text-blue-400' : 'fa-regular text-stone-400 dark:text-stone-500'} fa-heart"></i>
+                  <span class="text-[11px] font-medium">Like</span>
+                </button>
                 <button onclick="app.addToQueue('${post.id}', event)" class="px-2.5 py-1.5 bg-[#eae5db] dark:bg-stone-800 hover:bg-blue-900 hover:text-white border border-stone-300 dark:border-stone-700 rounded-md text-xs transition flex items-center gap-1 text-stone-800 dark:text-stone-200" title="Add to Playback Queue">
                   <i class="fa-solid fa-list-plus text-amber-500"></i>
                   <span class="text-[11px] font-medium">+ Queue</span>
