@@ -1457,7 +1457,9 @@
           const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
           const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
           const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-          const { data, error } = await sb.from('site_settings').select('*').limit(1).single();
+          
+          const { data, error } = await sb.from('site_settings').select('*').eq('id', 1).single();
+          
           if (!error && data) {
             let needsRerender = false;
             if (data.spotlight_post_id && data.spotlight_post_id !== activeKey) {
