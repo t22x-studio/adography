@@ -812,7 +812,7 @@
       <div id="aboutAdoTypingBody" class="text-xs text-stone-700 dark:text-stone-300 leading-relaxed space-y-3 font-sans overflow-y-auto my-3 pr-1 cursor-pointer" onclick="app.skipTypingAnimation()" title="Click to display full text immediately">
         <p>Drawn by a lifelong desire to empower others through song, Ado chose her stage name from the supporting role in traditional Japanese Kyogen theater—a subtle nod to supporting her listeners from behind the scenes. Growing up on Vocaloid culture and inspired by Hatsune Miku, she began her journey in 2017 as a net-native utaite, recording vocals inside a DIY soundproofed closet booth.</p>
         <p>In late 2020, her major debut single "Usseewa" ignited a cultural phenomenon, shattering domestic charts and turning her overnight into the voice of a modern generation.</p>
-        <p>Known for her astonishing vocal gymnastics—effortlessly switching between delicate whispers, intricate range leaps, and signature growls (ganari)—she made global history in 2022 as the singing voice of Uta in ONE PIECE FILM RED. Her hit "New Genesis" (Shin Jidai) became the first Japanese song in history to reach No. 1 on the Apple Music Global Top 100 Chart, while tracks from the same soundtrack album swept the top positions of the Billboard Japan Hot 100.</p>
+        <p>Known for her astonishing vocal gymnastics—effortlessly switching between delicate whispers, intricate range leaps, and signature growls (ganari)—she made global history in 2022 as the singing voice of Uta in ONE PIECE FILM RED. Her hit "New Genesis" (Shin Jidai) became the first Japanese song in history to reach No. 1 on the Global Top 100 Chart, while tracks from the same soundtrack album swept the top positions of the Billboard Japan Hot 100.</p>
         <p>From her anthem "KIRA", which backed the Japan National Football Team for the 2026 World Cup campaign, to her sold-out global arena tours, Ado continues to reign at the forefront of modern J-pop without revealing her face, proving that pure vocal mastery needs no identity.</p>
         <p class="text-[11px] text-stone-500 dark:text-stone-400 italic pt-1 border-t border-stone-200 dark:border-stone-700">
           "Adography" is a curated digital archive dedicated to cataloging her music videos, live stage performances, and Vocaloid covers.
@@ -1441,47 +1441,60 @@
         this.posts = [...INITIAL_POSTS];
         this.sanitizePosts();
       }
-      // Landing Spotlight Popup (Reads from Supabase site_settings or local fallback)
-     // Lazy-Loaded Spotlight Popup (Renders instantly, fetches Supabase settings asynchronously)
-      async openSpotlightModal() {
-        // 1. Open modal IMMEDIATELY with local fallback config so there is zero delay
-        let activeKey = SPOTLIGHT_CONFIG.postId;
-        let activeAppleEmbed = SPOTLIGHT_CONFIG.spotifyMusicEmbed;
-        let activeBadge = SPOTLIGHT_CONFIG.badgeText;
+      // Spotlight Popup: Automatically picks whichever post is tagged with 'spotlight' in your database
+      openSpotlightModal() {
+        // Find the first post that has 'spotlight' in its tags array
+        let post = this.posts.find(p => 
+          p.tags && p.tags.some(t => String(t).trim().toLowerCase() === 'spotlight')
+        );
 
-        this.renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed);
-        this.openModal('spotlightModal');
-
-        // 2. Fetch remote overrides from Supabase asynchronously in the background
-        try {
-          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
-          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
-          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-          
-          const { data, error } = await sb.from('site_settings').select('*').eq('id', 1).single();
-          
-          if (!error && data) {
-            let needsRerender = false;
-            if (data.spotlight_post_id && data.spotlight_post_id !== activeKey) {
-              activeKey = data.spotlight_post_id;
-              needsRerender = true;
-            }
-            if (data.apple_music_embed && data.apple_music_embed !== activeAppleEmbed) {
-              activeAppleEmbed = data.apple_music_embed;
-              needsRerender = true;
-            }
-            if (data.spotlight_badge && data.spotlight_badge !== activeBadge) {
-              activeBadge = data.spotlight_badge;
-              needsRerender = true;
-            }
-            // Rerender modal smoothly if Supabase returned updated settings
-            if (needsRerender) {
-              this.renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed);
-            }
-          }
-        } catch(e) {
-          // Silent fallback
+        // Fallback to the first post if no post is tagged with 'spotlight' yet
+        if (!post) {
+          post = this.posts[0];
         }
+        if (!post) return;
+
+        this.selectedSpotlightPostId = post.id;
+        const activeBadge = "Featured Video";
+        const activeSpotifyEmbed = typeof SPOTLIGHT_CONFIG !== 'undefined' ? SPOTLIGHT_CONFIG.spotifyMusicEmbed : '';
+
+        const rawUrl = post.youtubeUrl || post.videoUrl || '';
+        const vidId = this.getVideoId(rawUrl);
+        const platform = this.getPlatform(rawUrl);
+
+        let embedSrc = '';
+        if (platform === 'niconico') {
+          embedSrc = `https://embed.nicovideo.jp/watch/${vidId}?jsapi=1&autoplay=0`;
+        } else if (vidId) {
+          embedSrc = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=0&enablejsapi=1&modestbranding=1&rel=0`;
+        }
+
+        const container = document.getElementById('spotlightModalContent');
+        if (container) {
+          container.innerHTML = `
+            <div class="space-y-2">
+              <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                ${activeBadge}
+              </span>
+              <h3 class="font-sans font-bold text-lg text-stone-900 dark:text-stone-100 leading-snug">
+                ${post.title}
+              </h3>
+            </div>
+
+            <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-stone-900 shadow-md">
+              <iframe src="${embedSrc}" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            ${post.notes ? `<p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-3 leading-relaxed">${this.formatNotes(post.notes)}</p>` : ''}
+
+            <div class="pt-2 border-t border-stone-200 dark:border-stone-800">
+              <label class="text-[10px] font-semibold text-stone-400 uppercase block mb-1.5">Spotify Music Preview</label>
+              ${activeSpotifyEmbed}
+            </div>
+          `;
+        }
+
+        this.openModal('spotlightModal');
       }
 
       renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed) {
