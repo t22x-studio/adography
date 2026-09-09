@@ -1681,7 +1681,7 @@
           }
         }
 
-        // 2. Handle Playlist routing (#playlist/zanmu -> maps to tag or playlist)
+        // 2. Handle Playlist routing (#playlists/zanmu -> maps to tag or playlist)
         if (view === 'playlist' && targetIdentifier) {
           const foundPl = PLAYLIST_CONFIG.find(pl => pl.id === `pl-${targetIdentifier}` || pl.tag.toLowerCase() === targetIdentifier.toLowerCase());
           if (foundPl) {
@@ -4089,7 +4089,7 @@
           history.pushState({ view: 'main', mood: pl.tag }, '', `#mood/${routeKey}`);
         } else {
           this.activeTag = pl.tag;
-          history.pushState({ view: 'main', tag: pl.tag }, '', `#playlist/${routeKey}`);
+          history.pushState({ view: 'main', tag: pl.tag }, '', `#playlists/${routeKey}`);
         }
 
         // 3. Update filter pill states & navigate cleanly to Main View
