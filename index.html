@@ -124,6 +124,13 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .line-clamp-8 {
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      line-clamp: 8;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
     .scrollbar-none::-webkit-scrollbar {
       display: none;
     }
@@ -476,9 +483,8 @@
 <body class="min-h-screen flex flex-col font-sans antialiased bg-[#f4f1ea] dark:bg-[#0f0f10] text-stone-800 dark:text-stone-100 selection:bg-stone-800 selection:text-white overflow-x-hidden">
 
   <!-- Top Navigation Header (Strict 1-Row Responsive Squeezing) -->
-  <header class="sticky top-0 z-50 w-full border-b border-stone-300/80 bg-[#f4f1ea]/90 backdrop-blur-md px-3 lg:px-8 pt-6 pb-2">
-    <!--  non-scrollable format <div class="max-w-6xl w-full mx-auto flex items-center justify-between gap-2 sm:gap-3 flex-nowrap"> -->
-      <div class="max-w-6xl w-full mx-auto flex items-center gap-2 sm:gap-3 flex-nowrap overflow-x-auto scrollbar-none">
+  <header class="sticky top-0 z-50 w-full border-b border-stone-300/80 dark:border-stone-800 bg-[#f4f1ea]/90 dark:bg-[#0f0f10]/90 backdrop-blur-md px-3 lg:px-8 pt-4 pb-2">
+      <div class="max-w-6xl w-full mx-auto flex items-center justify-between gap-2 sm:gap-4 flex-nowrap overflow-x-auto scrollbar-none">
       
       <!-- Brand Logo (Fixed, never shrinks) -->
       <div class="flex items-center gap-2.5 cursor-pointer group flex-shrink-0" onclick="app.resetToHome()">
@@ -490,6 +496,10 @@
           <p class="hidden md:inline text-[10px] text-stone-500 font-sans tracking-wider uppercase mt-0.5">Curated Ado Video Archive</p>
         </div>
       </div>
+      <!-- Navigation Links (Compact 1-Row Responsive Squeezing) -->
+      <nav class="flex items-center gap-1.5 sm:gap-3 flex-shrink-0 flex-nowrap">
+        
+       
 
       <!-- Search Bar (Squeezes smoothly down to 100px, never jumps to a 2nd line) -->
       <div class="flex-shrink-0 ml-1">
@@ -510,44 +520,41 @@
       </div>
     </div>
 
-      <!-- Navigation Links (Segmented Toggles + Ghost Links) -->
-      <nav class="flex items-center gap-3 sm:gap-4 flex-shrink-0 flex-nowrap">
-        
-        <!-- View Toggles (Segmented Pill) -->
-                <div class="flex items-center bg-[#eae5db] p-1 rounded-lg border border-stone-300 shadow-inner">
-          
-          <button onclick="app.navigateTo('compact')" id="nav-btn-compact"
-          class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${this.activeView === 'compact' ? 'bg-blue-900 text-stone-600 shadow-sm' : 'text-stone-600 hover:text-stone-900'}">
-            <i class="fa-solid fa-table-cells text-[10px]"></i> <span class="hidden md:inline">Compact</span>
+       <!-- View Toggles (Segmented Pill) -->
+        <div class="flex items-center bg-[#eae5db] dark:bg-stone-800 p-0.5 rounded-lg border border-stone-300 dark:border-stone-700 shadow-inner">
+          <button onclick="app.navigateTo('compact')" id="nav-btn-compact" class="text-[10px] font-bold px-2 py-1 rounded-md transition text-stone-600 dark:text-stone-300 hover:text-stone-900">
+            <i class="fa-solid fa-table-cells"></i>
           </button>
-          <button onclick="app.navigateTo('grid')" id="nav-btn-grid" class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 ${this.activeView === 'grid' ? 'bg-blue-900 text-stone-600 shadow-sm' : 'text-stone-600 hover:text-stone-900'}">
-            <i class="fa-solid fa-border-all text-[10px]"></i> <span class="hidden md:inline">Grid</span>
+          <button onclick="app.navigateTo('grid')" id="nav-btn-grid" class="text-[10px] font-bold px-2 py-1 rounded-md transition text-stone-600 dark:text-stone-300 hover:text-stone-900">
+            <i class="fa-solid fa-border-all"></i>
           </button>
-          <button onclick="app.navigateTo('main')" id="nav-btn-home" class="text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-stone-600 hover:text-stone-900">
-            <i class="fa-regular fa-square-full text-[10px]"></i> <span class="hidden md:inline">Main</span>
+          <button onclick="app.navigateTo('main')" id="nav-btn-home" class="text-[10px] font-bold px-2 py-1 rounded-md transition text-stone-600 dark:text-stone-300 hover:text-stone-900">
+            <i class="fa-solid fa-bars"></i>
           </button>
         </div>
 
-        <!-- Directory Links (Ghost Buttons) -->
-        <button onclick="app.triggerDiceShuffle()" title="Random Video Suggestion" class="p-1.5 text-stone-500 hover:text-blue-600 transition">
-            <i class="fa-solid fa-tooth animate-pulse"></i>
-          </button>
-        <div class="flex items-center gap-1 sm:gap-2">
-          <button onclick="app.navigateTo('playlists')" class="text-xs font-bold px-2 py-1.5 text-stone-600 hover:text-blue-900 hover:bg-stone-200/60 rounded-md transition flex items-center gap-1.5">
-            <i class="fa-solid fa-list-ul text-[10px]"></i> <span class="hidden sm:inline">Playlists</span>
+        <!-- Directory Links & Action Buttons -->
+        <div class="flex items-center gap-1 sm:gap-1.5">
+          <button onclick="app.navigateTo('playlists')" class="text-xs font-bold px-2 py-1.5 text-stone-700 dark:text-stone-300 hover:text-blue-900 dark:hover:text-blue-400 hover:bg-stone-200/60 dark:hover:bg-stone-800 rounded-md transition flex items-center gap-1">
+            <i class="fa-solid fa-list-ul text-[10px]"></i> <span class="hidden xs:inline">Playlists</span>
           </button>
 
-          <button onclick="app.navigateTo('tags')" class="text-xs font-bold px-2 py-1.5 text-stone-600 hover:text-blue-900 hover:bg-stone-200/60 rounded-md transition flex items-center gap-1.5">
-            <i class="fa-solid fa-tag text-[10px]"></i> <span class="hidden sm:inline">Tags</span>
+          <button onclick="app.navigateTo('tags')" class="text-xs font-bold px-2 py-1.5 text-stone-700 dark:text-stone-300 hover:text-blue-900 dark:hover:text-blue-400 hover:bg-stone-200/60 dark:hover:bg-stone-800 rounded-md transition flex items-center gap-1">
+            <i class="fa-solid fa-tag text-[10px]"></i> <span class="hidden xs:inline">Tags</span>
           </button>
         </div>
 
-        <!-- Utility Icons (Settings) -->
-        <div class="flex items-center gap-1 border-l border-stone-300 dark:border-stone-700 pl-2 sm:pl-3">
+        <!-- Utility Icons (Settings & Random Tooth at the Far Right) -->
+        <div class="flex items-center gap-1 border-l border-stone-300 dark:border-stone-700 pl-1.5 sm:pl-2.5">
           <button onclick="app.openModal('settingsModal')" class="p-1.5 text-stone-500 dark:text-stone-400 hover:text-stone-900 dark:hover:text-stone-100 transition" title="Settings">
             <i class="fa-solid fa-gear text-xs"></i>
           </button>
+          <button onclick="app.triggerDiceShuffle()" title="Random Video Suggestion" class="p-1.5 text-stone-500 hover:text-blue-600 dark:text-stone-400 dark:hover:text-blue-400 transition">
+            <i class="fa-solid fa-tooth animate-pulse text-xs"></i>
+          </button>
         </div>
+
+      </nav>
 
         <!-- Google Translate Widget moved to Settings Modal for universal mobile access -->
 
@@ -556,6 +563,21 @@
 
   <main class="flex-1 max-w-6xl w-full mx-auto px-4 lg:px-8 py-6">
     
+    <!-- Welcome Announcement Banner) -->
+    <div id="welcomeBannerBox" class="mb-5 p-3.5 bg-[#eae5db] dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-xl flex items-center justify-between gap-3 text-xs text-stone-800 dark:text-stone-200 shadow-2xs transition-all duration-300">
+      <div class="flex items-center gap-2.5 min-w-0 flex-1">
+        <button onclick="app.triggerDiceShuffle()" title="Random Suggestion" class="flex-shrink-0 w-8 h-8 rounded-lg bg-blue-900/10 dark:bg-blue-950/40 text-blue-600 dark:text-blue-400 flex items-center justify-center hover:bg-blue-900 hover:text-white transition">
+          <i class="fa-solid fa-tooth animate-pulse text-sm"></i>
+        </button>
+        <p class="font-sans leading-snug line-clamp-2">
+          Discover your new favorite Ado song today! Browse by mood, category, album, or <a href="#playlists" onclick="app.navigateTo('playlists')" class="font-semibold underline text-blue-900 dark:text-blue-400 hover:text-blue-700 transition">curated playlists</a> to explore different sides of Ado 💙
+        </p>
+      </div>
+      <button onclick="app.dismissWelcomeBanner()" class="flex-shrink-0 text-stone-400 hover:text-stone-700 dark:hover:text-stone-200 p-1" title="Close banner">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+    </div>
+
     <!-- Category & Tag Filter Bar -->
     <section class="mb-6 flex flex-wrap items-center justify-between gap-2 border-b border-stone-300 pb-3" id="filterStripSection">
       <div class="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full scrollbar-none" id="categoryContainer">
@@ -585,7 +607,7 @@
 
    <!-- Active Tag Banner Indicator -->
     <div id="activeTagBanner" class="hidden mb-5 p-2.5 bg-[#eae5db] dark:bg-stone-800 border border-stone-300 dark:border-stone-700 rounded-lg flex flex-wrap items-center justify-between gap-2 text-xs text-stone-800 dark:text-stone-200">
-      <span>Filtering posts tagged with <strong id="activeTagName" class="font-serif font-bold text-stone-900 dark:text-blue-400">tag</strong></span>
+      <span>Filtering posts tagged with <strong id="activeTagName" class="font-sans font-bold text-stone-900 dark:text-blue-400">tag</strong></span>
       <div class="flex items-center gap-3">
         <button onclick="app.addAllFilteredToQueue()" class="px-2.5 py-1 bg-stone-900 hover:bg-blue-900 dark:bg-stone-700 dark:hover:bg-blue-800 text-white rounded text-[11px] font-semibold transition flex items-center gap-1 shadow-2xs">
           <i class="fa-solid fa-list-plus text-amber-400"></i> Add all to queue
@@ -631,12 +653,12 @@
 
     <!-- 4. PLAYLISTS PAGE -->
     <div id="view-playlists" class="hidden max-w-4xl mx-auto space-y-6">
-      <div class="bg-[#faf8f5] border border-stone-300 rounded-xl p-6 md:p-10 space-y-8 shadow-xs">
-        <div class="flex justify-between items-baseline border-b border-stone-300/60 pb-3">
-          <h2 class="font-serif font-bold text-2xl text-stone-900 tracking-tight">Playlists</h2>
-          <span class="text-xs text-stone-500 font-sans" id="playlistCountBadge">4 Curated Playlists</span>
+      <div class="bg-[#faf8f5] dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-xl p-6 md:p-10 space-y-8 shadow-xs text-stone-800 dark:text-stone-100">
+        <div class="flex justify-between items-baseline border-b border-stone-300/60 dark:border-stone-800 pb-3">
+          <h2 class="font-serif font-bold text-2xl text-stone-900 dark:text-stone-100 tracking-tight">Playlists</h2>
+          <span class="text-xs text-stone-500 dark:text-stone-400 font-sans font-medium" id="playlistCountBadge">Curated Playlists</span>
         </div>
-        <div id="playlistTocList" class="space-y-4 divide-y divide-stone-200/60"></div>
+        <div id="playlistTocList" class="space-y-4 divide-y divide-stone-200/60 dark:divide-stone-800/80"></div>
       </div>
     </div>
 
@@ -701,7 +723,7 @@
     <div id="miniPlayerMainContent" class="flex items-center gap-2.5 min-w-0 flex-1 cursor-pointer" onclick="app.openDetailFromMiniPlayer()" title="Click to view full video">
       <img id="miniPlayerThumb" src="" alt="Thumbnail" class="w-9 h-9 rounded object-cover flex-shrink-0 bg-stone-800 border border-stone-700/60">
       <div class="min-w-0 flex-1">
-        <h4 id="miniPlayerTitle" class="text-xs font-serif font-bold text-stone-100 truncate">Playing Track...</h4>
+        <h4 id="miniPlayerTitle" class="text-xs font-sans font-bold text-stone-100 truncate">Playing Track...</h4>
         <div class="flex items-center gap-2 text-[10px] text-stone-400 font-sans">
           <span id="miniPlayerStatus" class="flex items-center gap-1 text-blue-400"><i class="fa-solid fa-compact-disc animate-spin"></i> Playing</span>
           <span id="miniPlayerQueueCounter" class="text-stone-400 font-sans hidden">1/15</span>
@@ -712,7 +734,7 @@
       </div>
     </div>
 
-    <!-- Playback Navigation & Autoplay Controls -->
+    <!-- Playback Navigation Controls (Autoplay is on by default) -->
     <div class="flex items-center gap-1 flex-shrink-0">
       <button onclick="app.playPrevTrack()" title="Previous Song (⏮)" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs transition">
         <i class="fa-solid fa-backward-step text-[10px]"></i>
@@ -722,9 +744,6 @@
       </button>
       <button onclick="app.playNextTrack()" title="Next Song (⏭)" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white flex items-center justify-center text-xs transition">
         <i class="fa-solid fa-forward-step text-[10px]"></i>
-      </button>
-      <button onclick="app.toggleAutoplay()" id="btnMiniAutoplay" title="Autoplay Loop: ON" class="w-7 h-7 rounded-full bg-stone-800 text-amber-400 hover:text-amber-300 flex items-center justify-center text-xs transition ml-0.5">
-        <i class="fa-solid fa-repeat text-[10px]"></i>
       </button>
       <button onclick="app.stopMiniPlayer()" title="Stop & Close" class="w-7 h-7 rounded-full bg-stone-800 hover:bg-rose-900 text-stone-400 hover:text-rose-200 flex items-center justify-center text-xs transition ml-1">
         <i class="fa-solid fa-xmark text-xs"></i>
@@ -740,7 +759,7 @@
       <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-700/70 pb-3 flex-shrink-0">
         <div class="flex items-center gap-2">
           <i class="fa-solid fa-list-ul text-blue-800 dark:text-blue-400"></i>
-          <h3 class="font-serif font-bold text-base">Playback Queue</h3>
+          <h3 class="font-sans font-bold text-base">Playback Queue</h3>
           <span id="queueDrawerTotalBadge" class="text-[11px] font-sans font-medium text-stone-500 bg-stone-200 dark:bg-stone-800 px-1.5 py-0.5 rounded">0 tracks</span>
         </div>
         <div class="flex items-center gap-2">
@@ -761,16 +780,11 @@
     </div>
   </div>
 
-  <!-- Sticky Bottom Footer with Visit Counter -->
-  <footer class="w-full border-t border-stone-300/70 bg-[#eae5db]/60 py-3 px-4 lg:px-8 text-xs text-stone-600 flex flex-wrap justify-between items-center gap-2 mt-auto">
-    <div class="flex items-center gap-2 font-sans text-[11px] bg-[#faf8f5] px-2.5 py-1 rounded-md border border-stone-300 text-stone-700 shadow-2xs">
-      <i class="fa-solid fa-eye text-stone-500"></i>
-      <span>Visits: <strong id="footerVisitCounter" class="text-stone-900 font-bold font-sans">0</strong></span>
-    </div>
-    
-    <div class="text-[11px] text-stone-500 font-serif flex items-center gap-2">
+  <!-- Sticky Bottom Footer (Vercel Analytics active in background) -->
+  <footer class="w-full border-t border-stone-300/70 dark:border-stone-800 bg-[#eae5db]/60 dark:bg-stone-900/80 py-3 px-4 lg:px-8 text-xs text-stone-600 dark:text-stone-400 flex flex-wrap justify-between items-center gap-2 mt-auto">
+    <div class="text-[11px] text-stone-500 dark:text-stone-400 font-serif flex items-center gap-2">
       <span>Adography &copy; 2026 · Unofficial Adomin Archive</span>
-      <button onclick="app.openModal('aboutFooterModal')" class="underline hover:text-stone-900 transition">
+      <button onclick="app.openModal('aboutFooterModal')" class="underline hover:text-stone-900 dark:hover:text-white transition">
         About
       </button>
       <span>·</span>
@@ -878,7 +892,7 @@
   <div id="shareModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
     <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-sm w-full p-5 shadow-xl space-y-4">
       <div class="flex items-center justify-between border-b border-stone-200 pb-2.5">
-        <h3 class="font-serif font-bold text-base text-stone-900 flex items-center gap-2">
+        <h3 class="font-sans font-bold text-base text-stone-900 flex items-center gap-2">
           <i class="fa-solid fa-share-nodes text-stone-600"></i> Share Post
         </h3>
         <button onclick="app.closeModal('shareModal')" class="text-stone-400 hover:text-stone-800">
@@ -921,106 +935,10 @@
     </div>
   </div>
 
-  <!-- MODAL: IN-PAGE POST EDIT MODAL -->
-  <div id="editPostModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-xl w-full p-6 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
-      <div class="flex items-center justify-between border-b border-stone-200 pb-3">
-        <h3 class="font-serif font-bold text-lg text-stone-900 flex items-center gap-2">
-          <i class="fa-solid fa-pen-to-square text-amber-800"></i> Edit Post Details
-        </h3>
-        <button onclick="app.closeModal('editPostModal')" class="text-stone-400 hover:text-stone-800">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <form onsubmit="app.handleSaveEdit(event)" class="space-y-3.5 text-xs">
-        <input type="hidden" id="editPostId">
-        
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Post / Track Title *</label>
-          <input type="text" id="editTitle" required class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-          <label class="font-semibold text-stone-700 block mb-1 mt-2">URL Slug (romaji/English, editable)</label>
-          <input type="text" id="editSlug" placeholder="e.g. himawari" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none font-mono text-xs">
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">YouTube URL or Video ID *</label>
-          <input type="text" id="editYtUrl" required onpaste="setTimeout(() => { this.value = app.cleanUrl(this.value); app.fetchVideoMetadata(this.value, 'edit'); }, 100)" onblur="this.value = app.cleanUrl(this.value); app.fetchVideoMetadata(this.value, 'edit');" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1.5">Categories (Check all that apply)</label>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-white p-2.5 border border-stone-300 rounded-md text-stone-800">
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Cover" class="accent-stone-800"> Cover</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="MV" class="accent-stone-800"> MV</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Collab" class="accent-stone-800"> Collab</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Vocaloid" class="accent-stone-800"> Vocaloid</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Original" class="accent-stone-800"> Original</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Soundtrack" class="accent-stone-800"> Soundtrack</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Live" class="accent-stone-800"> Live</label>
-            <label class="flex items-center gap-1.5 cursor-pointer"><input type="checkbox" name="editCat" value="Audio" class="accent-stone-800"> Audio</label>
-          </div>
-        </div>
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Custom Category (Optional, e.g. Instrumental & Off-Vocal, Others)</label>
-          <input type="text" id="editCustomCategory" placeholder="e.g. Instrumental & Off-Vocal, Others" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div>
-            <label class="font-semibold text-stone-700 block mb-1">Mood (Optional)</label>
-            <select id="editMood" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-              <option value="">None (Optional)</option>
-              <option value="Hype / アゲ曲">Hype / アゲ曲</option>
-              <option value="Anthem / エール">Anthem / エール</option>
-              <option value="Melancholy / 切ない">Melancholy / 切ない</option>
-              <option value="Dark / ダーク">Dark / ダーク</option>
-              <option value="Chill / バラード">Chill / バラード</option>
-              <option value="Playful / 遊び心">Playful / 遊び心</option>
-            </select>
-          </div>
-          <div>
-            <label class="font-semibold text-stone-700 block mb-1">Custom Date</label>
-            <input type="date" id="editCustomDate" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-          </div>
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Custom Thumbnail URL (Optional)</label>
-          <input type="text" id="editThumbnailUrl" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Tags (Comma separated)</label>
-          <input type="text" id="editTags" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none">
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Manual Related Tracks (Unique Post IDs, Slugs, or Full Titles — Comma-separated)</label>
-          <input type="text" id="editRelated" placeholder="e.g. himawari, post-ado-2, hibana-hibana-saitama" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none font-mono text-xs">
-          <p class="text-[10px] text-stone-500 mt-0.5">Pins these specific tracks in order to the front of the related filmstrip.</p>
-        </div>
-
-        <div>
-          <label class="font-semibold text-stone-700 block mb-1">Post Notes & Commentary</label>
-          <textarea id="editNotes" rows="4" class="w-full px-3 py-2 bg-white border border-stone-300 rounded-md text-stone-800 focus:border-stone-600 focus:outline-none"></textarea>
-        </div>
-
-        <div class="pt-3 border-t border-stone-200 flex justify-end gap-2">
-          <button type="button" onclick="app.closeModal('editPostModal')" class="px-4 py-2 border border-stone-300 bg-white hover:bg-stone-100 text-stone-700 font-medium rounded-md text-xs transition">
-            Cancel
-          </button>
-          <button type="submit" class="px-4 py-2 bg-stone-800 hover:bg-blue-900 text-white font-medium rounded-md text-xs transition flex items-center gap-1.5">
-            <i class="fa-solid fa-floppy-disk"></i> Save Changes
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- MODAL: DAILY DICE SHUFFLE MODAL -->
-  <div id="diceModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-[#faf8f5] border border-stone-300 rounded-xl max-w-lg w-full p-5 shadow-xl space-y-4">
+  <div id="diceModal" class="hidden fixed inset-0 z-50 bg-stone-900/60 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)app.closeModal('diceModal')">
+    <div class="bg-[#faf8f5] dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-xl max-w-lg w-full p-5 shadow-xl space-y-4 text-stone-800 dark:text-stone-100">
       <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-700/80 pb-3">
         <div class="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-serif font-bold text-lg">
           <i class="fa-solid fa-tooth text-blue-500 text-xl animate-pulse"></i> Random Suggestion
@@ -1064,6 +982,33 @@
           </button>
         </div>
         <button onclick="app.closeModal('quickViewModal')" class="px-3 py-1.5 text-stone-500 hover:text-stone-300 text-xs">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- MODAL: SPOTLIGHT LANDING POPUP (Pixiv Comic Style) -->
+  <div id="spotlightModal" class="hidden fixed inset-0 z-50 bg-stone-950/80 backdrop-blur-xs flex items-center justify-center p-4" onclick="if(event.target===this)app.closeModal('spotlightModal')">
+    <div class="bg-[#faf8f5] dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-stone-800 dark:text-stone-100 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-3">
+        <div class="flex items-center gap-2 text-stone-900 dark:text-stone-100 font-sans font-bold text-base">
+           <i class="fa-solid fa-heart text-sm text-blue-900 mb-2 animate-pulse"></i>
+           Welcome to Adography!
+        </div>
+        <button onclick="app.closeModal('spotlightModal')" class="text-stone-400 hover:text-stone-800 dark:hover:text-stone-200 p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div id="spotlightModalContent" class="space-y-4">
+        <!-- Injected dynamically via JS -->
+      </div>
+
+      <div class="flex justify-between items-center pt-3 border-t border-stone-200 dark:border-stone-800">
+        <button onclick="app.openDetailFromSpotlight()" class="px-3.5 py-1.5 bg-blue-900 text-white hover:bg-blue-800 rounded-md text-xs font-semibold transition flex items-center gap-1.5">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> View Full Post
+        </button>
+        <button onclick="app.closeModal('spotlightModal')" class="px-3.5 py-1.5 bg-stone-200 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-300 dark:hover:bg-stone-700 rounded-md text-xs font-medium transition">
           Close
         </button>
       </div>
@@ -1219,6 +1164,12 @@
 
     // Automatically derive the simple list for logic checks
     const MOOD_LIST = MOOD_CONFIG.map(m => m.name);
+    // --- SPOTLIGHT CONFIGURATION (Easily editable for new releases/features) ---
+      const SPOTLIGHT_CONFIG = {
+        postId: "post-ado-223",
+        badgeText: "Featured Video",
+        spotifyMusicEmbed: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1R5910Ugt25ZWIJxkDdfIa?utm_source=generator&si=f4915aa762e54da8" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+      };
 
     const INITIAL_POSTS = [
       {
@@ -1490,6 +1441,99 @@
         this.posts = [...INITIAL_POSTS];
         this.sanitizePosts();
       }
+      // Landing Spotlight Popup (Reads from Supabase site_settings or local fallback)
+     // Lazy-Loaded Spotlight Popup (Renders instantly, fetches Supabase settings asynchronously)
+      async openSpotlightModal() {
+        // 1. Open modal IMMEDIATELY with local fallback config so there is zero delay
+        let activeKey = SPOTLIGHT_CONFIG.postId;
+        let activeAppleEmbed = SPOTLIGHT_CONFIG.spotifyMusicEmbed;
+        let activeBadge = SPOTLIGHT_CONFIG.badgeText;
+
+        this.renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed);
+        this.openModal('spotlightModal');
+
+        // 2. Fetch remote overrides from Supabase asynchronously in the background
+        try {
+          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
+          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
+          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+          const { data, error } = await sb.from('site_settings').select('*').limit(1).single();
+          if (!error && data) {
+            let needsRerender = false;
+            if (data.spotlight_post_id && data.spotlight_post_id !== activeKey) {
+              activeKey = data.spotlight_post_id;
+              needsRerender = true;
+            }
+            if (data.apple_music_embed && data.apple_music_embed !== activeAppleEmbed) {
+              activeAppleEmbed = data.apple_music_embed;
+              needsRerender = true;
+            }
+            if (data.spotlight_badge && data.spotlight_badge !== activeBadge) {
+              activeBadge = data.spotlight_badge;
+              needsRerender = true;
+            }
+            // Rerender modal smoothly if Supabase returned updated settings
+            if (needsRerender) {
+              this.renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed);
+            }
+          }
+        } catch(e) {
+          // Silent fallback
+        }
+      }
+
+      renderSpotlightContent(activeKey, activeBadge, activeAppleEmbed) {
+        const post = this.posts.find(p => 
+          (p.id && p.id.toLowerCase() === String(activeKey).toLowerCase()) || 
+          (p.slug && p.slug.toLowerCase() === String(activeKey).toLowerCase())
+        ) || this.posts[0];
+
+        if (!post) return;
+        this.selectedSpotlightPostId = post.id;
+
+        const rawUrl = post.youtubeUrl || post.videoUrl || '';
+        const vidId = this.getVideoId(rawUrl);
+        const platform = this.getPlatform(rawUrl);
+
+        let embedSrc = '';
+        if (platform === 'niconico') {
+          embedSrc = `https://embed.nicovideo.jp/watch/${vidId}?jsapi=1&autoplay=0`;
+        } else if (vidId) {
+          embedSrc = `https://www.youtube-nocookie.com/embed/${vidId}?autoplay=0&enablejsapi=1&modestbranding=1&rel=0`;
+        }
+
+        const container = document.getElementById('spotlightModalContent');
+        if (container) {
+          container.innerHTML = `
+            <div class="space-y-2">
+              <span class="px-2.5 py-0.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                ${activeBadge}
+              </span>
+              <h3 class="font-sans font-bold text-lg text-stone-900 dark:text-stone-100 leading-snug">
+                ${post.title}
+              </h3>
+            </div>
+
+            <div class="relative aspect-video w-full rounded-xl overflow-hidden bg-stone-900 shadow-md">
+              <iframe src="${embedSrc}" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+
+            ${post.notes ? `<p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-3 leading-relaxed">${this.formatNotes(post.notes)}</p>` : ''}
+
+            <div class="pt-2 border-t border-stone-200 dark:border-stone-800">
+              <label class="text-[10px] font-semibold text-stone-400 uppercase block mb-1.5">Spotify Music Preview</label>
+              ${activeAppleEmbed}
+            </div>
+          `;
+        }
+      }
+
+      openDetailFromSpotlight() {
+        if (this.selectedSpotlightPostId) {
+          this.closeModal('spotlightModal');
+          this.navigateTo('detail', this.selectedSpotlightPostId);
+        }
+      }
 
       sanitizePosts() {
         this.posts.forEach(p => {
@@ -1521,6 +1565,11 @@
         this.recordVisit();
         this.updateSettingsUI();
         this.renderCategories();
+        // Trigger Pixiv-style Spotlight Modal on first visit of session
+        if (!sessionStorage.getItem(`${DB_PREFIX}_spotlight_shown`)) {
+          setTimeout(() => { this.openSpotlightModal(); }, 600);
+          sessionStorage.setItem(`${DB_PREFIX}_spotlight_shown`, 'true');
+        }
         
         // Handle direct incoming links (e.g. #detail/himawari or #playlists)
         if (window.location.hash && window.location.hash !== '#main') {
@@ -1531,7 +1580,13 @@
 
         this.updateVisitCounterDisplay();
 
-        // Scroll listener for Back to Top button
+        // Check if user already dismissed welcome banner this session
+        if (sessionStorage.getItem(`${DB_PREFIX}_banner_dismissed`)) {
+          const banner = document.getElementById('welcomeBannerBox');
+          if (banner) banner.classList.add('hidden');
+        }
+
+        // Scroll listener strictly for Back to Top button
         window.addEventListener('scroll', () => {
           const btn = document.getElementById('btnBackToTop');
           if (btn) {
@@ -1542,6 +1597,15 @@
             }
           }
         }, { passive: true });
+      }
+
+      dismissWelcomeBanner() {
+        sessionStorage.setItem(`${DB_PREFIX}_banner_dismissed`, 'true');
+        const banner = document.getElementById('welcomeBannerBox');
+        if (banner) {
+          banner.style.opacity = '0';
+          setTimeout(() => { banner.classList.add('hidden'); }, 200);
+        }
       }
 
       handleHashRouting(pushHistory = false) {
@@ -1555,8 +1619,8 @@
         const view = parts[0] || 'main';
         const targetIdentifier = parts[1] || null;
 
+        // 1. Handle Detail View routing (#detail/slug-or-id)
         if (view === 'detail' && targetIdentifier) {
-          // Resolve post by matching either slug or id
           const matched = this.posts.find(p => 
             (p.slug && p.slug.toLowerCase() === targetIdentifier.toLowerCase()) || 
             (p.id && p.id.toLowerCase() === targetIdentifier.toLowerCase())
@@ -1567,10 +1631,30 @@
           }
         }
 
+        // 2. Handle Playlist routing (#playlist/zanmu -> maps to tag or playlist)
+        if (view === 'playlist' && targetIdentifier) {
+          const foundPl = PLAYLIST_CONFIG.find(pl => pl.id === `pl-${targetIdentifier}` || pl.tag.toLowerCase() === targetIdentifier.toLowerCase());
+          if (foundPl) {
+            const plIndex = PLAYLIST_CONFIG.indexOf(foundPl);
+            this.openPlaylist(plIndex);
+            return;
+          }
+        }
+
+        // 3. Handle Mood routing (#mood/hype)
+        if (view === 'mood' && targetIdentifier) {
+          const foundMoodObj = MOOD_CONFIG.find(m => m.name.toLowerCase().includes(targetIdentifier.toLowerCase()));
+          if (foundMoodObj) {
+            this.selectMood(foundMoodObj.name);
+            return;
+          }
+        }
+
+        // 4. Standard Views
         if (['main', 'compact', 'grid', 'playlists', 'tags'].includes(view)) {
           this.navigateTo(view, null, pushHistory);
         } else {
-          this.navigateTo('main', null, pushHistory);
+          this.navigateTo('main', null, false);
         }
       }
       
@@ -2132,6 +2216,54 @@
         formatted = formatted.replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, `$1<a href="$2" target="_blank" rel="noopener noreferrer" class="${linkClass}">$2</a>`);
         return formatted;
       }
+      // Smart notes renderer: applies 8-line clamp + fade ONLY to long notes (> ~300 chars / ~6 lines)
+      formatCollapsibleNotes(text, uniqueId = 'note') {
+        if (!text) return '';
+        const formattedText = this.formatNotes(text);
+        
+        // If note is short (under ~500 chars / ~5 lines), just show it normally without any buttons
+        if (text.length < 400 && text.split('\n').length <= 5) {
+          return `<p class="text-xs text-stone-300 leading-relaxed whitespace-pre-line">${formattedText}</p>`;
+        }
+
+        // Store full text safely
+        if (!this._noteStorage) this._noteStorage = {};
+        this._noteStorage[uniqueId] = formattedText;
+
+        return `
+          <div class="space-y-1.5">
+            <div id="note-box-${uniqueId}" style="max-height: 100px;" class="text-xs text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white leading-relaxed whitespace-pre-line overflow-hidden transition-all duration-200">
+              ${formattedText}
+            </div>
+            <button type="button" onclick="event.stopPropagation(); app.toggleNoteDirect('${uniqueId}')" id="note-btn-${uniqueId}" class="text-[11px] font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white flex items-center gap-1 cursor-pointer">
+              ▾ More
+            </button>
+          </div>
+        `;
+      }
+
+      toggleNoteDirect(uniqueId) {
+        const box = document.getElementById(`note-box-${uniqueId}`);
+        const btn = document.getElementById(`note-btn-${uniqueId}`);
+        if (!box || !btn) return;
+
+        // Check if currently at initial collapsed height (~5 lines)
+        const isCollapsed = box.style.maxHeight === '100px' || box.classList.contains('max-h-36');
+
+        if (isCollapsed) {
+          // Expand to show up to 8 lines with internal scrolling enabled
+          box.classList.remove('max-h-36');
+          box.style.maxHeight = '160px'; // Exactly ~8 lines
+          box.style.overflowY = 'auto';  // Lets user scroll within the 8-line box if note is 60+ lines
+          btn.innerHTML = '▴ Less';
+        } else {
+          // Collapse back to 5 lines (~100px)
+          box.classList.add('max-h-36');
+          box.style.maxHeight = '100px';
+          box.style.overflowY = 'hidden';
+          btn.innerHTML = '▾ More';
+        }
+      }
 
       navigateTo(view, postId = null, pushHistory = true) {
         // If we are leaving detail view, move the player back to mini-bar
@@ -2334,7 +2466,7 @@
                     </div>
                   </div>
 
-                  <h3 class="font-serif font-bold text-base text-stone-900 dark:text-stone-100 hover:text-amber-800 dark:hover:text-amber-400 cursor-pointer transition leading-snug line-clamp-2" onclick="app.navigateTo('detail', '${post.id}')">
+                  <h3 class="font-sans font-bold text-base text-stone-900 dark:text-stone-100 hover:text-amber-800 dark:hover:text-amber-400 cursor-pointer transition leading-snug line-clamp-2" onclick="app.navigateTo('detail', '${post.id}')">
                     ${post.title}
                   </h3>
                   
@@ -2556,7 +2688,7 @@
           return `
             <section class="space-y-2 w-full">
               <div class="flex items-center justify-between border-b border-stone-300 dark:border-stone-900/80 pb-1">
-                <h2 class="text-xs font-serif font-bold text-stone-800 dark:text-stone-200 tracking-wider">
+                <h2 class="text-xs font-sans font-bold text-stone-800 dark:text-stone-200 tracking-wider">
                   ${groupTitle}
                 </h2>
                 <span class="text-[10px] text-stone-500 dark:text-stone-400 font-sans">${groupPosts.length} ${groupPosts.length === 1 ? 'post' : 'posts'}</span>
@@ -3154,7 +3286,7 @@
                   ${isCurrent ? `<div class="absolute inset-0 bg-blue-950/60 flex items-center justify-center text-amber-400 text-xs"><i class="fa-solid fa-compact-disc animate-spin"></i></div>` : ''}
                 </div>
                 <div class="min-w-0 flex-1">
-                  <h4 class="font-serif font-bold truncate text-xs ${isCurrent ? 'text-blue-900 dark:text-blue-400' : 'text-stone-800 dark:text-stone-100'}">${post.title}</h4>
+                  <h4 class="font-sans font-bold truncate text-xs ${isCurrent ? 'text-blue-900 dark:text-blue-400' : 'text-stone-800 dark:text-stone-100'}">${post.title}</h4>
                   <span class="text-[10px] text-stone-400">${idx + 1}. ${Array.isArray(post.category) ? post.category[0] : (post.category || 'Track')}</span>
                 </div>
               </div>
@@ -3374,7 +3506,7 @@
                     </button>
                   </div>
                   <div>
-                    <h4 class="text-xs font-serif font-bold leading-tight line-clamp-2 text-stone-100">${post.title}</h4>
+                    <h4 class="text-xs font-sans font-bold leading-tight line-clamp-2 text-stone-100">${post.title}</h4>
                     <p class="text-[10px] text-stone-400 mt-1">${post.customDate || ''}</p>
                   </div>
                 </div>
@@ -3385,7 +3517,7 @@
           return `
             <div class="space-y-3 w-full max-w-full">
               <div class="flex items-center gap-3">
-                <h3 class="font-serif font-bold text-lg text-stone-900">${groupTitle}</h3>
+                <h3 class="font-sans font-bold text-lg text-stone-900">${groupTitle}</h3>
                 <div class="flex-1 h-px bg-stone-300"></div>
                 <span class="text-xs text-stone-500 font-sans">${monthPosts.length} posts</span>
               </div>
@@ -3423,25 +3555,25 @@
           }).length;
 
           return `
-            <div class="group pt-4 first:pt-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2.5 hover:bg-[#eae5db]/30 rounded-lg p-3 transition cursor-pointer" onclick="app.openPlaylist(${index})">
+            <div class="group pt-4 first:pt-0 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2.5 hover:bg-[#eae5db]/30 dark:hover:bg-stone-800/40 rounded-lg p-3 transition cursor-pointer" onclick="app.openPlaylist(${index})">
               <div class="flex items-baseline gap-3 flex-1 min-w-0">
-                <span class="font-serif text-stone-400 font-bold text-sm w-5 text-right flex-shrink-0">${index + 1}.</span>
+                <span class="font-sans text-stone-400 dark:text-stone-500 font-bold text-sm w-5 text-right flex-shrink-0">${index + 1}.</span>
                 <div class="space-y-1 min-w-0">
-                  <h3 class="font-serif font-bold text-stone-900 group-hover:text-amber-800 transition text-base leading-snug">
+                  <h3 class="font-sans font-bold text-stone-900 dark:text-stone-100 group-hover:text-blue-900 dark:group-hover:text-blue-400 transition text-base leading-snug">
                     ${pl.name}
                   </h3>
-                  ${pl.desc ? `<p class="text-xs text-stone-600 font-sans leading-relaxed">${pl.desc}</p>` : ''}
+                  ${pl.desc ? `<p class="text-xs text-stone-500 dark:text-stone-400 font-sans leading-relaxed">${pl.desc}</p>` : ''}
                 </div>
               </div>
 
               <div class="flex items-center gap-4 pl-8 sm:pl-0 flex-shrink-0 self-end sm:self-center text-xs">
-                <span class="text-stone-500 font-sans font-normal">
+                <span class="text-stone-500 dark:text-stone-400 font-sans font-normal">
                   ${matchingCount} ${matchingCount === 1 ? 'track' : 'tracks'}
                 </span>
-                <button onclick="event.stopPropagation(); app.startPlaylistContinuous(${index})" class="px-2.5 py-1 bg-stone-900 hover:bg-blue-900 dark:bg-stone-800 dark:hover:bg-blue-800 text-white rounded font-semibold text-xs transition flex items-center gap-1 shadow-2xs">
+                <button onclick="event.stopPropagation(); app.startPlaylistContinuous(${index})" class="px-2.5 py-1 bg-stone-900 hover:bg-blue-900 dark:bg-stone-700 dark:hover:bg-blue-800 text-white rounded font-semibold text-xs transition flex items-center gap-1 shadow-2xs">
                   <i class="fa-solid fa-play text-[9px]"></i> Play All
                 </button>
-                <button onclick="event.stopPropagation(); app.openPlaylist(${index})" class="text-stone-700 dark:text-stone-300 font-semibold hover:text-amber-800 dark:hover:text-amber-400 transition flex items-center gap-1 text-xs">
+                <button onclick="event.stopPropagation(); app.openPlaylist(${index})" class="text-stone-700 dark:text-stone-300 font-semibold hover:text-blue-900 dark:hover:text-blue-400 transition flex items-center gap-1 text-xs">
                   View <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </button>
               </div>
@@ -3517,13 +3649,13 @@
           '椎名林檎', 'sheena', 'ringo', 'natori', 'なとり','n-buna','pinocchiop', '初音ミク', 'miku', 'ミク', 'kanaria', 'jax jones','mikokichi', 'ミコ吉',        
            'deco*27', 'deco', 'mrs. green apple', '大森元貴','すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
           'くじら', 'vocaloid', 'utaite', 'jon-yakitory','honeyworks', 'producer', 'illust', 'collab', 'つんく',
-           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'eight','canon','linmu',
+           'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'eight','canon','linmu','bz',
            'Hatsune Miku', '稲葉浩志','松本孝弘', 'きくお','after the rain','atr','そらる','まふまふ','tk','mitchie m','neru',
            'indigo la end','chinozo', '吉乃', '弱酸性','優里', 'てにをは','ピノキオピー','mi8k','yuta orisaka','koshi inaba','UTA',
            'yasutaka nakata','中田ヤスタカ','バルーン','the binary','40mp','jax jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'neru', 'みゆはん', 
            'Canon', 'hiroyuki sawano', '園田海未','秦基博','みきとP','倉橋ヨエコ','yuta orisaka', 'eiichiro oda','hiroyuki sawano','fake type.', '椎乃味醂','沼田ゾンビ',
-            'Yasutaka Nakata','hachi','wowaka','寺田てら','mono-devoid', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
-            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん','ファントムシータ','whaledontsleep','みきとp','gumi'
+            'Yasutaka Nakata','hachi','wowaka','寺田てら','mono-devoid', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'gyari','meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
+            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん','ファントムシータ','whaledontsleep','みきとp','gumi','ウタ','kenshi yonezu','ハチ','rib','りぶ','かめりあ'
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
@@ -3583,7 +3715,7 @@
           html += `
             <div class="space-y-3 pt-6 border-t border-stone-100 dark:border-stone-750">
               <div class="flex items-center justify-between">
-                <h3 class="font-serif font-bold text-base text-stone-900 dark:text-stone-100">${groupName}</h3>
+                <h3 class="font-sans font-bold text-base text-stone-900 dark:text-stone-100">${groupName}</h3>
                 <span class="text-[10px] font-mono text-stone-400">${groups[groupName].length} tags</span>
               </div>
               <div class="flex flex-wrap gap-2">
@@ -3692,7 +3824,7 @@
             </div>
 
             <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
-              <h1 class="text-xl font-serif font-bold text-stone-900 dark:text-stone-100 leading-snug flex-1">${post.title}</h1>
+              <h1 class="text-xl font-sans font-bold text-stone-900 dark:text-stone-100 leading-snug flex-1">${post.title}</h1>
               
               <!-- Quick Action Row: + Queue & Share -->
               <div class="flex items-center gap-1.5 flex-shrink-0 self-end sm:self-start">
@@ -3729,7 +3861,7 @@
                       <span class="font-bold text-[8px] uppercase tracking-wider bg-stone-100 text-stone-900 px-1 rounded self-start truncate max-w-full">
                         ${Array.isArray(relPost.category) ? relPost.category[0] : (relPost.category || 'Track')}
                       </span>
-                      <span class="font-serif font-bold leading-tight line-clamp-2 text-stone-100 text-[10px]">
+                      <span class="font-sans font-bold leading-tight line-clamp-2 text-stone-100 text-[10px]">
                         ${relPost.title}
                       </span>
                     </div>
@@ -3739,7 +3871,7 @@
 
               return `
                 <div class="pt-2 border-t border-stone-200 dark:border-stone-700/70 space-y-2">
-                  <button type="button" onclick="app.toggleRelatedTracks('detailRelatedStrip', this)" class="cursor-pointer text-xs font-serif font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white flex items-center gap-1.5 py-1 transition">
+                  <button type="button" onclick="app.toggleRelatedTracks('detailRelatedStrip', this)" class="cursor-pointer text-xs font-sans font-semibold text-stone-700 dark:text-stone-300 hover:text-stone-900 dark:hover:text-white flex items-center gap-1.5 py-1 transition">
                     <span class="related-toggle-label">▾ Related Tracks</span>
                   </button>
                   <div id="detailRelatedStrip" class="hidden pt-1">
@@ -3756,14 +3888,22 @@
                 ${watchLabel} <i class="fa-solid fa-arrow-up-right-from-square text-[9px] ml-0.5"></i>
               </a>
 
-              <div class="flex items-center gap-2">
+             <div class="flex items-center gap-2">
                 ${(() => {
                   const postMood = Array.isArray(post.mood) ? post.mood[0] : post.mood;
                   if (!postMood) return '';
-                  const mObj = MOOD_CONFIG.find(m => m.name === postMood);
-                  const hoverClass = mObj ? mObj.hoverBg : 'hover:bg-stone-700 hover:text-white';
+                  
+                  // Desaturated sophisticated theme map for moods
+                  let moodColorClass = "bg-stone-200/80 dark:bg-stone-800 text-stone-700 dark:text-stone-300 border-stone-300 dark:border-stone-700";
+                  if (postMood.includes("Hype")) moodColorClass = "bg-red-900 text-red-300 border-red-800/50";
+                  else if (postMood.includes("Anthem")) moodColorClass = "bg-orange-900 text-orange-300 border-orange-800/50";
+                  else if (postMood.includes("Dark")) moodColorClass = "bg-stone-900 text-stone-300 border-stone-700 hover:bg-stone-800";
+                  else if (postMood.includes("Melancholy")) moodColorClass = "bg-blue-900/80 text-white dark:text-blue-300 border-blue-800/50";
+                  else if (postMood.includes("Chill")) moodColorClass = "bg-blue-400 dark:bg-blue-400/60 text-white dark:text-blue-300 border-blue-400/60";
+                  else if (postMood.includes("Playful")) moodColorClass = "bg-yellow-500 text-yellow-900 dark:text-yellow-500 border-yellow-800/50 dark:bg-yellow-800";
+
                   return `
-                     <button onclick="app.viewMoodPlaylist('${postMood.replace(/'/g, "\\'")}')" class="cursor-pointer text-xs bg-[#eae5db] dark:bg-stone-800 text-stone-850 dark:text-stone-250 px-2 py-1 rounded font-medium transition ${hoverClass}">
+                     <button onclick="app.viewMoodPlaylist('${postMood.replace(/'/g, "\\'")}')" class="cursor-pointer text-[11px] border px-2.5 py-1 rounded-md font-medium transition ${moodColorClass}">
                       ${postMood}
                     </button>
                   `;
@@ -3883,16 +4023,27 @@
         this.currentPage = 1;
 
         // 2. Set ONLY the target filter for this playlist
+        let routeKey = pl.id.replace('pl-', '');
         if (pl.type === 'mood') {
           this.activeMood = pl.tag;
+          history.pushState({ view: 'main', mood: pl.tag }, '', `#mood/${routeKey}`);
         } else {
           this.activeTag = pl.tag;
+          history.pushState({ view: 'main', tag: pl.tag }, '', `#playlist/${routeKey}`);
         }
 
         // 3. Update filter pill states & navigate cleanly to Main View
         this.renderCategories();
         this.renderMoodFilters();
-        this.navigateTo('main');
+        
+        ['main', 'compact', 'grid', 'playlists', 'tags', 'detail'].forEach(v => {
+          document.getElementById(`view-${v}`)?.classList.add('hidden');
+        });
+        document.getElementById('view-main')?.classList.remove('hidden');
+        this.activeView = 'main';
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        this.renderCurrentView();
       }
 
         viewMoodPlaylist(mood) {
@@ -3931,7 +4082,7 @@
             <div onclick="app.openQuickView('${relPost.id}')" class="group relative flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 aspect-square bg-stone-950 rounded-lg overflow-hidden cursor-pointer border border-stone-700 hover:border-stone-400 transition shadow-xs" title="${relPost.title}">
               <img src="${rThumb}" alt="${relPost.title}" class="w-full h-full object-cover scale-[1.35] group-hover:scale-[1.42] transition duration-200">
               <div class="absolute inset-0 bg-stone-950/85 opacity-0 group-hover:opacity-100 transition duration-150 p-1 flex flex-col justify-end text-white text-[9px]">
-                <span class="font-serif font-bold leading-tight line-clamp-2 text-stone-200 text-[9px]">${relPost.title}</span>
+                <span class="font-sans font-bold leading-tight line-clamp-2 text-stone-200 text-[9px]">${relPost.title}</span>
               </div>
             </div>
           `;
@@ -3956,8 +4107,9 @@
             </div>
             <div class="space-y-1.5 pt-1">
               <span class="px-2 py-0.5 bg-stone-700 text-stone-200 rounded text-[11px] font-semibold">${cats}</span>
-              <h3 class="text-base font-serif font-bold text-stone-200 mt-1 leading-snug">${post.title}</h3>
+              <h3 class="text-base font-sans font-bold text-stone-200 mt-1 leading-snug">${post.title}</h3>
               ${tagPillsHtml ? `<div class="flex items-center gap-1.5 overflow-x-auto scrollbar-none pt-1">${tagPillsHtml}</div>` : ''}
+              ${post.notes ? `<div class="pt-2">${this.formatCollapsibleNotes(post.notes, 'qv-' + post.id)}</div>` : ''}
             </div>
             ${relatedList.length > 0 ? `
               <div class="pt-1.5 border-t border-stone-800 space-y-1.5">
@@ -4023,8 +4175,8 @@
               <span class="px-2 py-0.5 bg-stone-200 dark:bg-stone-800 text-stone-800 dark:text-stone-200 rounded text-xs font-semibold">
                 ${randomPost.category || 'General'}
               </span>
-              <h3 class="text-base font-serif font-bold text-stone-900 dark:text-stone-100 mt-2">${randomPost.title}</h3>
-              <p class="text-xs text-stone-600 dark:text-stone-300 mt-1 whitespace-pre-line">${this.formatNotes(randomPost.notes || '')}</p>
+              <h3 class="text-base font-sans font-bold text-stone-900 dark:text-stone-100 mt-2">${randomPost.title}</h3>
+              <p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-8 whitespace-pre-line">${this.formatNotes(randomPost.notes || '')}</p>
             </div>
           `;
         }
@@ -4291,7 +4443,7 @@
         }
       }
 
-              closeModal(id) {
+             closeModal(id) {
         const modal = document.getElementById(id);
         if (modal) {
           if (id === 'settingsModal') {
@@ -4301,6 +4453,10 @@
           }
           if (id === 'aboutAdoModal') {
             this.skipTypingAnimation();
+          } else if (id === 'spotlightModal') {
+            // KILLSWITCH: Destroy iframe instantly when spotlight modal closes so audio stops
+            const spotlightContent = document.getElementById('spotlightModalContent');
+            if (spotlightContent) spotlightContent.innerHTML = '';
           } else if (id === 'quickViewModal') {
             // 1. Destroy the QuickView modal iframe to eliminate modal ghost audio
             const qvContainer = document.getElementById('quickViewContainer');
