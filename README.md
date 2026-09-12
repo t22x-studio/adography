@@ -1,8 +1,9 @@
 # 🎵 Adography
 > Ado 楽曲・ライブ映像アーカイブ
 **Ado Video Archive**: 
- 👉 [https://adography1024.vercel.app](https://adography1024.vercel.app)
- 👉 [https://t22x-studio.github.io/adography](https://t22x-studio.github.io/adography)
+👉 [https://adography1024.vercel.app](https://adography1024.vercel.app)
+
+👉 [https://t22x-studio.github.io/adography](https://t22x-studio.github.io/adography)
 
 
 **Adography** is an unofficial, fan-supported curated Ado video archive built for a distraction-free experience and a way to discover your new favorite Ado song 💙
