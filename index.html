@@ -1383,7 +1383,7 @@
         this.currentSharePost = null;
         this.isTheatreMode = false;
         this.isIframePlaying = false;
-        this.gridGrouping = 'date'; // Options: 'date', 'year', 'az', 'mood', 'category'
+        this.gridGrouping = 'year'; // Options: 'date', 'year', 'az', 'mood', 'category'
         this.mainSort = 'newest'; // Options: 'newest', 'oldest', 'az', 'za'
         this.streamLimit = parseInt(localStorage.getItem(`${DB_PREFIX}_stream_limit`)) || 2;
 
@@ -2446,8 +2446,8 @@
                 <div class="flex items-center gap-1.5 bg-[#eae5db] dark:bg-stone-800 px-2 py-1 rounded-lg border border-stone-300 dark:border-stone-700 text-xs shadow-2xs">
                   <span class="text-[11px] text-stone-500 dark:text-stone-400 font-medium hidden sm:inline">Group:</span>
                   <select onchange="app.setGridGrouping(this.value)" class="bg-transparent text-stone-800 dark:text-stone-200 text-xs font-semibold focus:outline-none cursor-pointer">
-                    <option value="date" ${this.gridGrouping === 'date' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Month</option>
                     <option value="year" ${this.gridGrouping === 'year' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Year</option>
+                    <option value="date" ${this.gridGrouping === 'date' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Month</option>
                     <option value="az" ${this.gridGrouping === 'az' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Title (A → Z)</option>
                     <option value="za" ${this.gridGrouping === 'za' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Title (Z → A)</option>
                     <option value="category" ${this.gridGrouping === 'category' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Category</option>
@@ -3767,12 +3767,12 @@
            'deco*27', 'deco', 'mrs. green apple', '大森元貴','すりぃ', 'カンザキイオリ', '煮ル果実', 'biz', '春野', 'le sserafim','imaginie dragons','mafumafu',
           'くじら', 'vocaloid', 'utaite', 'jon-yakitory','honeyworks', 'producer', 'illust', 'collab', 'つんく',
            'ayase', 'ryo','buzzg', 'papiyon','みゆはん', '柊キライ','DECO*27', 'eight','canon','linmu','bz',
-           'Hatsune Miku', '稲葉浩志','松本孝弘', 'きくお','after the rain','atr','そらる','まふまふ','tk','mitchie m','neru',
+           'Hatsune Miku', '稲葉浩志','松本孝弘', '米津玄師','獅子志司','きくお','after the rain','atr','そらる','まふまふ','tk','mitchie m','neru',
            'indigo la end','chinozo', '吉乃', '弱酸性','優里', 'てにをは','ピノキオピー','mi8k','yuta orisaka','koshi inaba','UTA',
            'yasutaka nakata','中田ヤスタカ','バルーン','the binary','40mp','jax jones', 'LE SSERAFIM', 'imagine dragons', 'vaundy', 'neru', 'みゆはん', 
            'Canon', 'hiroyuki sawano', '園田海未','秦基博','みきとP','倉橋ヨエコ','yuta orisaka', 'eiichiro oda','hiroyuki sawano','fake type.', '椎乃味醂','沼田ゾンビ',
             'Yasutaka Nakata','hachi','wowaka','寺田てら','mono-devoid', '吉乃','弱酸性','papiyon','kujira','maretu','taky inoue' ,'gyari','meiyo','中森明菜','Eight','かゆか','藍瀬まなみ',
-            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん','ファントムシータ','whaledontsleep','みきとp','gumi','ウタ','kenshi yonezu','ハチ','rib','りぶ','かめりあ'
+            'suipotet','すいぽてっ','雄之助_牛肉','伊根','gyara','じん','ファントムシータ','whaledontsleep','みきとp','gumi','ウタ','kenshi yonezu','ハチ','rib','りぶ','かめりあ','ちゃんみな','紗倉ひびき','南雲ゆうき','くらげp','立椅子かんな','yoasobi','nile rodgers','茨薔薇咲アドヲ','stella jang','菅野よう子×seatbelts','神宮司','チェリ子','kagamine lin','kagamine ren'
         ];
 
         // Matchers for Concerts, Tours & Landmark Venues
