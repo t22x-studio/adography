@@ -1667,6 +1667,7 @@
           if (p.tags && typeof p.tags === 'string') {
             p.tags = p.tags.split(',').map(t => t.trim()).filter(Boolean);
           }
+          p.indexedTitle = p.title.replace(/[()\/〜\-]/g, ' ');
         });
       }
 
@@ -4309,15 +4310,16 @@
         if (typeof Fuse === 'undefined') return;
         const options = {
           keys: [
-            { name: 'title', weight: 0.40 },
-            { name: 'tags', weight: 0.30 },
+            { name: 'indexedTitle', weight: 0.35 }, // This is the new symbol-stripped field
+            { name: 'title', weight: 0.10 },        // Original title (still searched)
+            { name: 'tags', weight: 0.25 },
             { name: 'slug', weight: 0.10 },
-            { name: 'category', weight: 0.10 },
+            { name: 'category', weight: 0.05 },
             { name: 'mood', weight: 0.05 },
-            { name: 'notes', weight: 0.05 }
+            { name: 'notes', weight: 0.10 }
           ],
-          threshold: 0.34,
-          distance: 100,
+          threshold: 0.3,
+          distance: 300,
           ignoreLocation: false,
           findAllMatches: true,
           minMatchCharLength: 2
