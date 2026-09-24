@@ -124,6 +124,12 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
+    .line-clamp-3 a, 
+    .line-clamp-3 button {
+    position: relative;
+    pointer-events: auto;
+    }
+
     .line-clamp-8 {
       display: -webkit-box;
       -webkit-line-clamp: 8;
@@ -1189,7 +1195,7 @@
       const SPOTLIGHT_CONFIG = {
         postId: "post-ado-223",
         badgeText: "Featured Video",
-        spotifyMusicEmbed: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1R5910Ugt25ZWIJxkDdfIa?utm_source=generator&si=f4915aa762e54da8" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+        spotifyMusicEmbed: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6A4ooWBIeYjfb4Xd2ygUo1?utm_source=generator&si=b4e309d2658a4cb6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
       };
 
     const INITIAL_POSTS = [
@@ -1506,7 +1512,7 @@
               <iframe src="${embedSrc}" class="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
 
-            ${post.notes ? `<p class="text-xs text-stone-600 dark:text-stone-300 line-clamp-3 leading-relaxed">${this.formatNotes(post.notes)}</p>` : ''}
+            ${post.notes ? `<div class="text-xs text-stone-600 dark:text-stone-300 line-clamp-3 leading-relaxed">${this.formatNotes(post.notes)}</div>` : ''}
 
             <div class="pt-2 border-t border-stone-200 dark:border-stone-800">
               <label class="text-[10px] font-semibold text-stone-400 uppercase block mb-1.5">Latest Release Preview</label>
