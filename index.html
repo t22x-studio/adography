@@ -1195,7 +1195,7 @@
       const SPOTLIGHT_CONFIG = {
         postId: "post-ado-223",
         badgeText: "Featured Video",
-        spotifyMusicEmbed: `<iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/6A4ooWBIeYjfb4Xd2ygUo1?utm_source=generator&si=b4e309d2658a4cb6" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>`
+        spotifyHtml: `<div onclick="this.innerHTML='<iframe style=&quot;border-radius:12px&quot; src=&quot;https://open.spotify.com/embed/track/6A4ooWBIeYjfb4Xd2ygUo1&quot; width=&quot;100%&quot; height=&quot;152&quot; frameBorder=&quot;0&quot; allowfullscreen allow=&quot;autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture&quot;></iframe>'" class="cursor-pointer bg-stone-800 p-4 rounded-xl text-center text-xs text-stone-300 hover:bg-stone-700 transition">▶ Click to load Spotify Preview</div>`
       };
 
     const INITIAL_POSTS = [
@@ -1373,6 +1373,8 @@
     ];
     class VibeBlogApp {
       constructor() {
+        window.app = this;
+        this.app = this;
         this.posts = [];
         this.activeView = 'main';
         this.activeCategory = 'All';
@@ -1420,39 +1422,15 @@
           postViews: {}
         };
 
-        this.loadInitialPosts().then(() => this.init());
+        this.loadInitialPosts();
+        queueMicrotask(() => {
+          this.init();
+          this.syncRemotePosts();
+        });
       }
 
-        async loadInitialPosts() {
-        // NEW: load from Supabase first (public read-only via anon key)
-        try {
-          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
-          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb'; // Replace with your new sb_publishable_... key
-          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-          const { data, error } = await sb.from('posts').select('*');
-          if (!error && Array.isArray(data) && data.length > 0) {
-            this.posts = data;
-            this.sanitizePosts();
-            return;
-          }
-        } catch (err) { console.warn('Supabase load failed, falling back to posts.json:', err); }
-
-        // 1. Priority network fetch when deployed on live HTTP/HTTPS server (GitHub Pages / Vercel)
-        if (window.location.protocol.startsWith('http')) {
-          try {
-            const res = await fetch('./posts.json', { cache: 'no-store' });
-            if (res.ok) {
-              const jsonPosts = await res.json();
-              if (Array.isArray(jsonPosts) && jsonPosts.length > 0) {
-                this.posts = jsonPosts;
-                this.sanitizePosts();
-                return;
-              }
-            }
-          } catch (err) {}
-        }
-
-        // 2. Fallback to cached storage or default dataset for offline browsing
+        loadInitialPosts() {
+        // 1. Instant Synchronous Read: Cached local storage first (0ms)
         const stored = localStorage.getItem(`${DB_PREFIX}_posts`);
         if (stored) {
           try {
@@ -1465,10 +1443,50 @@
           } catch (e) {}
         }
 
+        // 2. Instant Synchronous Fallback: Default dataset (0ms)
         this.posts = [...INITIAL_POSTS];
         this.sanitizePosts();
       }
-      // Spotlight Popup: Automatically picks whichever post is tagged with 'spotlight' in your database
+
+      async syncRemotePosts() {
+        // Background Asynchronous Sync: Does not block initial paint or modals
+        let remoteData = null;
+
+        try {
+          const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
+          const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
+          if (typeof window.supabase !== 'undefined') {
+            const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+            const { data, error } = await sb.from('posts').select('*');
+            if (!error && Array.isArray(data) && data.length > 0) {
+              remoteData = data;
+            }
+          }
+        } catch (err) {
+          console.warn('Background Supabase sync skipped:', err);
+        }
+
+        if (!remoteData && window.location.protocol.startsWith('http')) {
+          try {
+            const res = await fetch('./posts.json');
+            if (res.ok) {
+              const jsonPosts = await res.json();
+              if (Array.isArray(jsonPosts) && jsonPosts.length > 0) {
+                remoteData = jsonPosts;
+              }
+            }
+          } catch (err) {}
+        }
+
+        if (remoteData && Array.isArray(remoteData) && remoteData.length > 0) {
+          this.posts = remoteData;
+          this.sanitizePosts();
+          localStorage.setItem(`${DB_PREFIX}_posts`, JSON.stringify(this.posts));
+          this.initFuse();
+          this.renderCategories();
+          this.renderCurrentView();
+        }
+      }
       openSpotlightModal() {
         // Find the first post that has 'spotlight' in its tags array
         let post = this.posts.find(p => 
@@ -1483,7 +1501,7 @@
 
         this.selectedSpotlightPostId = post.id;
         const activeBadge = "Featured Video";
-        const activeSpotifyEmbed = typeof SPOTLIGHT_CONFIG !== 'undefined' ? SPOTLIGHT_CONFIG.spotifyMusicEmbed : '';
+        const activeSpotifyEmbed = typeof SPOTLIGHT_CONFIG !== 'undefined' ? SPOTLIGHT_CONFIG.spotifyHtml : '';
 
         const rawUrl = post.youtubeUrl || post.videoUrl || '';
         const vidId = this.getVideoId(rawUrl);
@@ -2245,6 +2263,50 @@
 
         if (isFuzzyActive) {
           const fuseResults = this.fuse.search(this.searchQuery);
+
+          // Sort with Smart Tie-Breaker: Match Quality first, Date (Newest) on ties
+          fuseResults.sort((a, b) => {
+            const scoreA = (typeof a.score === 'number' && !isNaN(a.score)) ? a.score : 0;
+            const scoreB = (typeof b.score === 'number' && !isNaN(b.score)) ? b.score : 0;
+
+            // Clear relevance tier difference (> 0.08 score difference favors stronger match)
+            if (Math.abs(scoreA - scoreB) > 0.08) {
+              return scoreA - scoreB;
+            }
+
+            // Close score / tie: break according to user's sort preference
+            if (this.mainSort === 'oldest') {
+              const timeA = a.item.customDate ? Date.parse(a.item.customDate) : 0;
+              const timeB = b.item.customDate ? Date.parse(b.item.customDate) : 0;
+              const validA = isNaN(timeA) ? 0 : timeA;
+              const validB = isNaN(timeB) ? 0 : timeB;
+              return validA - validB;
+            }
+
+            if (this.mainSort === 'az') {
+              const strA = (a.item.slug || a.item.title || '').toLowerCase();
+              const strB = (b.item.slug || b.item.title || '').toLowerCase();
+              return strA.localeCompare(strB);
+            }
+
+            if (this.mainSort === 'za') {
+              const strA = (a.item.slug || a.item.title || '').toLowerCase();
+              const strB = (b.item.slug || b.item.title || '').toLowerCase();
+              return strB.localeCompare(strA);
+            }
+
+            // Default: Newest date first
+            const timeA = a.item.customDate ? Date.parse(a.item.customDate) : 0;
+            const timeB = b.item.customDate ? Date.parse(b.item.customDate) : 0;
+            const validA = isNaN(timeA) ? 0 : timeA;
+            const validB = isNaN(timeB) ? 0 : timeB;
+            if (validA !== validB) {
+              return validB - validA;
+            }
+
+            return scoreA - scoreB;
+          });
+
           basePosts = fuseResults.map(r => r.item);
         }
 
@@ -2902,41 +2964,6 @@
         if (post) this.activateMiniPlayer(post);
       }
 
-      stopMiniPlayer() {
-        // 1. Instantly unmount background continuous audio host
-        const host = document.getElementById('persistentPlayerHost');
-        if (host) host.innerHTML = '';
-
-        // 2. Kill QuickView modal video immediately
-        const qvModal = document.getElementById('quickViewModal');
-        if (qvModal && !qvModal.classList.contains('hidden')) {
-          this.closeModal('quickViewModal');
-        }
-        const qvContainer = document.getElementById('quickViewContainer');
-        if (qvContainer) qvContainer.innerHTML = '';
-
-        // 3. Clear player registry & stop all active card/detail videos
-        this.stopAllActiveVideos();
-        this.activeMountedPlayers.clear();
-        this.playbackQueue = [];
-        this.currentQueueIndex = 0;
-        this.activePlaylistName = null;
-        this.isIframePlaying = false;
-        this.activePlayingPost = null;
-
-        // 4. Hide Mini-player bar & remove bottom spacing
-        const bar = document.getElementById('miniPlayerBar');
-        if (bar) bar.classList.add('hidden');
-        document.querySelector('main')?.classList.remove('pb-24');
-        this.updateQueueBadge();
-
-        // 5. Restore cards and detail view cleanly to thumbnails with Play buttons
-        if (this.activeView !== 'detail') {
-          this.renderCurrentView();
-        } else {
-          this.renderDetailView();
-        }
-      }
 
       activateMiniPlayer(post) {
         this.activePlayingPost = post;
@@ -2955,22 +2982,6 @@
           // Add safe bottom padding so floating mini-player never blocks pagination or buttons
           document.querySelector('main')?.classList.add('pb-24');
         }
-      }
-      // Ensures the Detail View video can communicate with the app
-      attachPlayerToDetailSlot() {
-        const slot = document.getElementById('detailVideoSlot');
-        const wrapper = document.getElementById('persistentPlayerWrapper');
-        if (!slot || !wrapper) return;
-        wrapper.classList.remove('hidden');
-        slot.appendChild(wrapper);
-      }
-
-      detachPlayerFromDetailSlot() {
-        const wrapper = document.getElementById('persistentPlayerWrapper');
-        const home = document.getElementById('miniPlayerBar');
-        if (!wrapper || !home) return;
-        wrapper.classList.add('hidden');
-        home.appendChild(wrapper);
       }
       
       initTouchSwipeNavigation() {
@@ -3267,24 +3278,6 @@
           }
           bar.classList.remove('hidden');
         }
-      }playNextInLargeFrame() {
-        const filtered = this.getFilteredPosts().filter(p => this.getPlatform(p.youtubeUrl || p.videoUrl || '') !== 'niconico');
-        if (filtered.length === 0) return;
-        const currentIndex = filtered.findIndex(p => p.id === this.selectedPostId);
-        let nextIndex = currentIndex + 1;
-        if (nextIndex >= filtered.length) nextIndex = 0; // Loop to start
-        const nextPost = filtered[nextIndex];
-        if (!nextPost) return;
-
-        this.selectedPostId = nextPost.id;
-        this.updateDetailUrl(nextPost.id);
-        this.renderDetailView();
-        
-        // Auto-play next song in Detail View
-        setTimeout(() => {
-          const playBtn = document.querySelector('#detailContent .aspect-video button');
-          if (playBtn) playBtn.click();
-        }, 150);
       }
 
       playNextTrack() {
@@ -4315,6 +4308,7 @@
       initFuse() {
         if (typeof Fuse === 'undefined') return;
         const options = {
+          includeScore: true,
           keys: [
             { name: 'indexedTitle', weight: 0.35 }, // This is the new symbol-stripped field
             { name: 'title', weight: 0.10 },        // Original title (still searched)
