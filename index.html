@@ -1486,6 +1486,20 @@
           this.renderCategories();
           this.renderCurrentView();
         }
+
+        // Trigger spotlight once remote posts (including "spotlight" tag) are loaded
+        if (this.spotlightFallbackTimer) {
+          clearTimeout(this.spotlightFallbackTimer);
+          this.spotlightFallbackTimer = null;
+        }
+        this.checkAndTriggerSpotlight();
+      }
+
+      checkAndTriggerSpotlight() {
+        if (!sessionStorage.getItem(`${DB_PREFIX}_spotlight_shown`)) {
+          sessionStorage.setItem(`${DB_PREFIX}_spotlight_shown`, 'true');
+          this.openSpotlightModal();
+        }
       }
       openSpotlightModal() {
         // Find the first post that has 'spotlight' in its tags array
@@ -1703,8 +1717,9 @@
         this.renderCategories();
         // Trigger Pixiv-style Spotlight Modal on first visit of session
         if (!sessionStorage.getItem(`${DB_PREFIX}_spotlight_shown`)) {
-          setTimeout(() => { this.openSpotlightModal(); }, 600);
-          sessionStorage.setItem(`${DB_PREFIX}_spotlight_shown`, 'true');
+          this.spotlightFallbackTimer = setTimeout(() => {
+            this.checkAndTriggerSpotlight();
+          }, 1500);
         }
         
         // Handle direct incoming links (e.g. #detail/himawari or #playlists)
