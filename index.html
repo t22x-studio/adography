@@ -1394,7 +1394,9 @@
         this.gridGrouping = 'year'; // Options: 'date', 'year', 'az', 'mood', 'category'
         this.mainSort = 'newest'; // Options: 'newest', 'oldest', 'az', 'za'
         this.streamLimit = parseInt(localStorage.getItem(`${DB_PREFIX}_stream_limit`)) || 2;
-
+        this.lastSupabaseSyncTime = 0; // Epoch timestamp of last successful Supabase read
+        this.isSupabaseSyncing = false;
+        this.SYNC_COOLDOWN_MS = 30 * 60 * 1000; // 30-minute cooldown
         // Search Engine Index & Multi-Player Registry
         this.fuse = null;
         this.activeMountedPlayers = new Map(); // Tracks all concurrently mounted video iframes
@@ -1448,51 +1450,102 @@
         this.sanitizePosts();
       }
 
-      async syncRemotePosts() {
-        // Background Asynchronous Sync: Does not block initial paint or modals
-        let remoteData = null;
+      async fetchFromSupabase(force = false) {
+        // 20261010 NEW Cooldown Guard: Skip network call if already synced within the last 30 minutes
+        const now = Date.now();
+        if (!force && (now - this.lastSupabaseSyncTime < this.SYNC_COOLDOWN_MS)) return null;
+        if (this.isSupabaseSyncing) return null;
+        if (typeof window.supabase === 'undefined') return null;
 
+        this.isSupabaseSyncing = true;
         try {
           const SUPABASE_URL = 'https://cqhjrvzdkxhafclmvfki.supabase.co';
           const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_mmGJJf8N8NuSSSj4aRGD-A_0GtKx4Qb';
-          if (typeof window.supabase !== 'undefined') {
-            const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
-            const { data, error } = await sb.from('posts').select('*');
-            if (!error && Array.isArray(data) && data.length > 0) {
-              remoteData = data;
+          const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+          const { data, error } = await sb.from('posts').select('*');
+          if (!error && Array.isArray(data) && data.length > 0) {
+            this.lastSupabaseSyncTime = Date.now(); // Record successful timestamp
+            return data;
+          }
+        } catch (e) {
+        } finally {
+          this.isSupabaseSyncing = false;
+        }
+        return null;
+      }
+
+      async fetchFromPostsJson() {
+        if (!window.location.protocol.startsWith('http')) return null;
+        try {
+          const res = await fetch('./posts.json');
+          if (res.ok) {
+            const jsonPosts = await res.json();
+            if (Array.isArray(jsonPosts) && jsonPosts.length > 0) {
+              return jsonPosts;
             }
           }
+        } catch (e) {}
+        return null;
+      }
+
+      applyUpdatedPosts(newPosts) {
+        if (!Array.isArray(newPosts) || newPosts.length === 0) return;
+        this.posts = newPosts;
+        this.sanitizePosts();
+        localStorage.setItem(`${DB_PREFIX}_posts`, JSON.stringify(this.posts));
+        this.initFuse();
+        this.renderCategories();
+        this.renderCurrentView();
+      }
+
+      async syncRemotePosts() {
+        let remoteData = null;
+        let timedOut = false;
+
+        // 1. Race Supabase against a strict 2.5-second timeout
+        try {
+          const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve('TIMEOUT'), 2500));
+          const result = await Promise.race([this.fetchFromSupabase(), timeoutPromise]);
+
+          if (result === 'TIMEOUT') {
+            timedOut = true;
+          } else if (result) {
+            remoteData = result;
+          }
         } catch (err) {
-          console.warn('Background Supabase sync skipped:', err);
+          console.warn('Initial Supabase fetch error:', err);
         }
 
-        if (!remoteData && window.location.protocol.startsWith('http')) {
-          try {
-            const res = await fetch('./posts.json');
-            if (res.ok) {
-              const jsonPosts = await res.json();
-              if (Array.isArray(jsonPosts) && jsonPosts.length > 0) {
-                remoteData = jsonPosts;
-              }
-            }
-          } catch (err) {}
+        // 2. If Supabase timed out or failed, fall back to posts.json immediately
+        if (!remoteData) {
+          remoteData = await this.fetchFromPostsJson();
         }
 
-        if (remoteData && Array.isArray(remoteData) && remoteData.length > 0) {
-          this.posts = remoteData;
-          this.sanitizePosts();
-          localStorage.setItem(`${DB_PREFIX}_posts`, JSON.stringify(this.posts));
-          this.initFuse();
-          this.renderCategories();
-          this.renderCurrentView();
-        }
-
-        // Trigger spotlight once remote posts (including "spotlight" tag) are loaded
-        if (this.spotlightFallbackTimer) {
-          clearTimeout(this.spotlightFallbackTimer);
-          this.spotlightFallbackTimer = null;
+        // 3. Apply whichever data source arrived and trigger the spotlight popup
+        if (remoteData) {
+          this.applyUpdatedPosts(remoteData);
         }
         this.checkAndTriggerSpotlight();
+
+        // 4. If Supabase timed out on slow internet, continue retrying in background (up to 2 retries)
+        if (timedOut || !remoteData) {
+          this.retrySupabaseInBackground(2);
+        }
+      }
+
+      retrySupabaseInBackground(retriesLeft, delayMs = 3000) {
+        if (retriesLeft <= 0) return;
+        setTimeout(async () => {
+          try {
+            const data = await this.fetchFromSupabase();
+            if (data && Array.isArray(data) && data.length > 0) {
+              this.applyUpdatedPosts(data);
+              return;
+            }
+          } catch (e) {}
+          // Exponential backoff for the next retry (3s -> 6s)
+          this.retrySupabaseInBackground(retriesLeft - 1, delayMs * 2);
+        }, delayMs);
       }
 
       checkAndTriggerSpotlight() {
@@ -1502,12 +1555,11 @@
         }
       }
       openSpotlightModal() {
-        // Find the first post that has 'spotlight' in its tags array
-        let post = this.posts.find(p => 
-          p.tags && p.tags.some(t => String(t).trim().toLowerCase() === 'spotlight')
-        );
+        // Directly target designated spotlight post ID (post-ado-00)
+        const targetId = (typeof SPOTLIGHT_CONFIG !== 'undefined' && SPOTLIGHT_CONFIG.postId) ? SPOTLIGHT_CONFIG.postId : 'post-ado-00';
+        let post = this.posts.find(p => p.id === targetId);
 
-        // Fallback to the first post if no post is tagged with 'spotlight' yet
+        // Graceful fallback to first post if post-ado-00 is not yet available
         if (!post) {
           post = this.posts[0];
         }
@@ -1715,13 +1767,6 @@
         this.recordVisit();
         this.updateSettingsUI();
         this.renderCategories();
-        // Trigger Pixiv-style Spotlight Modal on first visit of session
-        if (!sessionStorage.getItem(`${DB_PREFIX}_spotlight_shown`)) {
-          this.spotlightFallbackTimer = setTimeout(() => {
-            this.checkAndTriggerSpotlight();
-          }, 1500);
-        }
-        
         // Handle direct incoming links (e.g. #detail/himawari or #playlists)
         if (window.location.hash && window.location.hash !== '#main') {
           this.handleHashRouting(false);
@@ -4137,6 +4182,14 @@
         this.renderCategories();
         this.renderMoodFilters();
         this.navigateTo('main');
+
+        // 20261010 NEW Quietly re-syncs if 30+ minutes passed since last sync or if initial sync had failed
+        const now = Date.now();
+        if (!this.isSupabaseSyncing && (now - this.lastSupabaseSyncTime >= this.SYNC_COOLDOWN_MS)) {
+          this.fetchFromSupabase(true).then(data => {
+            if (data) this.applyUpdatedPosts(data);
+          });
+        }
       }
 
       clearSearch() {
