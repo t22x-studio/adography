@@ -1,5 +1,23 @@
 [
   {
+    "id": "post-ado-00",
+    "youtubeUrl": "https://www.youtube.com/watch?v=gTYb8pTz3VU",
+    "title": "TMG / SAYONARA (feat. Ado)",
+    "slug": "spotlight",
+    "category": [
+      "Others"
+    ],
+    "tags": [
+      "spotlight"
+    ],
+    "customDate": "2026-10-05",
+    "notes": "Featured Track - TMG / SAYONARA (feat. Ado)  // ENJOY!",
+    "related": [
+      "sayonara-tmg"
+    ],
+    "likes": null
+  },
+  {
     "id": "post-ado-241",
     "youtubeUrl": "https://www.youtube.com/watch?v=545--kkEpuU",
     "title": "【INTERVIEW FOR THE FIRST TAKE】  Ado × ファントムシータ / V/S THE FIRST TAKE",
@@ -24,32 +42,6 @@
       "usseewa-the-first-take",
       "aiaia-the-first-take"
     ],
-    "likes": null,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-240",
-    "youtubeUrl": "https://www.youtube.com/watch?v=2t4FLH7wm30",
-    "title": "DND (feat. KUROMI)",
-    "slug": "dnd",
-    "category": [
-      "Collab",
-      "Original"
-    ],
-    "tags": [
-      "spotlight",
-      "NEW RELEASE",
-      "collaboration",
-      "kuromi",
-      "single",
-      "official audio",
-      "2026",
-      "外語"
-    ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2026-09-25",
-    "notes": "✦ Listen: [DND](https://ado.lnk.to/dnd) Released on 25/9✦\n\n作詞：Kanata Okajima, monii\n作曲：Johnny R, monii, Ari, KIRA\n編曲：Ari, KIRA, monii, Johnny R\n\nILLUST：ORIHARA",
-    "related": null,
     "likes": null,
     "thumbnailUrl": null
   },
@@ -146,6 +138,30 @@
     "thumbnailUrl": null
   },
   {
+    "id": "post-ado-240",
+    "youtubeUrl": "https://www.youtube.com/watch?v=2t4FLH7wm30",
+    "title": "DND (feat. KUROMI)",
+    "slug": "dnd-audio",
+    "category": [
+      "Collab",
+      "Audio"
+    ],
+    "tags": [
+      "collaboration",
+      "kuromi",
+      "single",
+      "official audio",
+      "2026",
+      "外語"
+    ],
+    "mood": "Anthem / エール",
+    "customDate": "2026-09-25",
+    "notes": "✦ Listen: [DND](https://ado.lnk.to/dnd) ✦\n\n作詞：Kanata Okajima, monii\n作曲：Johnny R, monii, Ari, KIRA\n編曲：Ari, KIRA, monii, Johnny R\n\nILLUST：ORIHARA",
+    "related": null,
+    "likes": null,
+    "thumbnailUrl": null
+  },
+  {
     "id": "post-ado-236",
     "youtubeUrl": "https://www.youtube.com/watch?v=yeSRd2Af1zo",
     "title": "「モンストロ」× ブルーロック 原作Ver. (Monstruo)(Blue Lock Original Manga Ver.)",
@@ -174,6 +190,61 @@
     "related": [
       "monstruo-nissan",
       "monstruo"
+    ],
+    "likes": null,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-242",
+    "youtubeUrl": "https://www.youtube.com/watch?v=__qvPGatwus",
+    "title": "DND feat. KUROMI",
+    "slug": "dnd",
+    "category": [
+      "MV",
+      "Collab"
+    ],
+    "tags": [
+      "MV",
+      "kuromi",
+      "collaboration",
+      "出張",
+      "duet",
+      "2026",
+      "single",
+      "外語"
+    ],
+    "mood": null,
+    "customDate": "2026-10-07",
+    "notes": "✦ Listen: [DND](https://ado.lnk.to/DND) ✦\n\n作詞：Kanata Okajima, monii\n作曲：Johnny R, monii, Ari, KIRA\n編曲：Ari, KIRA, monii, Johnny R\n\nILLUST：ORIHARA",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-243",
+    "youtubeUrl": "https://www.youtube.com/watch?v=gTYb8pTz3VU",
+    "title": "TMG / SAYONARA (feat. Ado)",
+    "slug": "sayonara-tmg",
+    "category": [
+      "Collab"
+    ],
+    "tags": [
+      "collaboration",
+      "出張",
+      "B'z",
+      "TMG",
+      "松本孝弘",
+      "takmatsumoto",
+      "さよなら",
+      "Bz",
+      "2026",
+      "外語"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2026-10-05",
+    "notes": "Title track of TMG (Tak Matsumoto Group) 3rd ALBUM『TMG Ⅲ SAYONARA』\nFeaturing Ado as the guest vocalist",
+    "related": [
+      "dignity"
     ],
     "likes": null,
     "thumbnailUrl": null
@@ -423,25 +494,21 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-20",
-    "youtubeUrl": "https://www.youtube.com/watch?v=GQrEitDFQos",
-    "title": "【LIVE映像】ギラギラ ＠さいたまスーパーアリーナ 【Ado】(Gira Gira)",
-    "slug": "giragira-saitama",
+    "id": "post-1789754272077",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xiDT6mvlJ-g",
+    "title": "Ado x Front Row Live Interview",
+    "slug": "interview-front-row-live-2026",
     "category": [
-      "Live",
-      "Original"
+      "Others"
     ],
     "tags": [
-      "Live",
-      "LIVE映像",
-      "saitama",
-      "hibana",
-      "2026"
+      "interview",
+      "others"
     ],
-    "mood": "Dark / ダーク",
-    "customDate": "2026-03-28",
+    "mood": null,
+    "customDate": "2026-09-14",
     "notes": "",
-    "related": [],
+    "related": null,
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -621,22 +688,33 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-1789754272077",
-    "youtubeUrl": "https://www.youtube.com/watch?v=xiDT6mvlJ-g",
-    "title": "Ado x Front Row Live Interview",
-    "slug": "interview-front-row-live-2026",
+    "id": "post-ado-234",
+    "youtubeUrl": "https://www.youtube.com/watch?v=o_opsP79Am0",
+    "title": "マトリョシカ (MATORYOSHKA)",
+    "slug": "matoryoshika-matoryoshka",
     "category": [
-      "Others"
+      "Cover",
+      "Collab",
+      "Audio"
     ],
     "tags": [
-      "interview",
-      "others"
+      "cover",
+      "collaboration",
+      "Vocaloid",
+      "ハチ",
+      "RiB",
+      "りぶ",
+      "2025",
+      "Kenshi Yonezu",
+      "official audio",
+      "duet",
+      "Hidden gem"
     ],
-    "mood": null,
-    "customDate": "2026-09-14",
-    "notes": "",
+    "mood": "Playful / 遊び心",
+    "customDate": "2025-08-05",
+    "notes": "作詞・作曲・編曲: ハチ\nAdo×りぶ「マトリョシカ（ハチ）」\nListen: [Album アルバム「Ratimeria」](https://www.jvcmusic.co.jp/-/Linkall/VEATP-44246.html)",
     "related": null,
-    "likes": null,
+    "likes": 0,
     "thumbnailUrl": null
   },
   {
@@ -665,29 +743,6 @@
     "thumbnailUrl": "https://nicovideo.cdn.nimg.jp/thumbnails/34895646/34895646.36204.L"
   },
   {
-    "id": "post-ado-228",
-    "youtubeUrl": "https://www.youtube.com/watch?v=xuTjCda8c1E",
-    "title": "テスト配信 (Test)",
-    "slug": "live-stream-2026-test",
-    "category": [
-      "Others"
-    ],
-    "tags": [
-      "live stream",
-      "2026",
-      "special",
-      "リズム天国",
-      "Rhythm Heaven",
-      "others"
-    ],
-    "mood": null,
-    "customDate": "2026-07-15",
-    "notes": "",
-    "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-1789754657607",
     "youtubeUrl": "https://www.youtube.com/watch?v=p4K_SpsqFaQ",
     "title": "Ado x Crunchyroll-Hime Interview 2024",
@@ -704,7 +759,7 @@
     "customDate": "2024-03-06",
     "notes": "[00:00] Introduction\n[01:05] First anime?\n[02:05] Last anime you watched?\n[02:38] If you could watch one anime for the first time again?\n[03:45] Favorite OP & ED?\n[04:16] Favorite anime composer?\n[05:12] Which anime would you spend a day in the world of?\n[06:50] Anime you wouldn’t want to be in the world of?\n[08:08] How do your live-streams connect you with fans?\n[09:30] The meaning behind “WISH”?\n[11:13] What are you most looking forward to do on your world tour?\n[13:14] What should fans look forward to in the WISH tour?\n[14:15] What would you like fans to take away from your concerts?\n[14:45] What theme should fans dress in for the WISH tour?\n[17:35] Did you get to speak with Eichiro Oda?\n[18:17] How did they approach you for Uta’s musical performances in Film Red?\n[19:05] Any memorable moments performing Uta’s songs?\n[19:46] What was it like collaborating with so many popular artists?\n[20:55] Were you a fan of One Piece before Film Red?\n[22:44] Who is your favorite One Piece character?\n[23:00] Which Devil Fruit would you eat?\n[24:29] Which 4 Straw Hats would you sail with?\n[25:45] Why should fans watch One Piece?\n[27:16] How was collaborating with Yoko Kanno on the SPY x FAMILY OP?\n[28:30] What was most fun about performing the SPY x FAMILY OP?\n[30:50] How familiar were you with SPY x FAMIY before working on the OP?\n[32:00] What do you find appealing about SPY x FAMILY?\n[33:04] Favorite SPY x FAMILY character?\n[33:27] What would Ado’s “waku waku” catchphrase be?\n[35:02] Would you rather be a spy, assassin, or esper?",
     "related": null,
-    "likes": null,
+    "likes": 0,
     "thumbnailUrl": null
   },
   {
@@ -763,90 +818,6 @@
     "customDate": "2023-12-13",
     "notes": "Listen: [Adoの歌ってみたアルバム](https://ado.lnk.to/utattemitaWE) (Track 6)",
     "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-234",
-    "youtubeUrl": "https://www.youtube.com/watch?v=o_opsP79Am0",
-    "title": "マトリョシカ (MATORYOSHKA)",
-    "slug": "matoryoshika-matoryoshka",
-    "category": [
-      "Cover",
-      "Collab",
-      "Audio"
-    ],
-    "tags": [
-      "cover",
-      "collaboration",
-      "Vocaloid",
-      "ハチ",
-      "RiB",
-      "りぶ",
-      "2025",
-      "Kenshi Yonezu",
-      "official audio",
-      "duet",
-      "Hidden gem"
-    ],
-    "mood": "Playful / 遊び心",
-    "customDate": "2025-08-05",
-    "notes": "作詞・作曲・編曲: ハチ\nAdo×りぶ「マトリョシカ（ハチ）」\nListen: [Album アルバム「Ratimeria」](https://www.jvcmusic.co.jp/-/Linkall/VEATP-44246.html)",
-    "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-63",
-    "youtubeUrl": "https://www.youtube.com/watch?v=aDQ_O24xcNU",
-    "title": "【カラオケ練習用】Episode X【off vocal】",
-    "slug": "episode-x-off-vocal",
-    "category": [
-      "Instrumental & Off-Vocal"
-    ],
-    "tags": [
-      "instrumental-off-vocal",
-      "off-vocal",
-      "karaoke"
-    ],
-    "mood": null,
-    "customDate": "2024-12-13",
-    "notes": "",
-    "related": [
-      "episode-x"
-    ],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-233",
-    "youtubeUrl": "https://www.youtube.com/watch?v=yyd5Cz6UjhI",
-    "title": "【ウタ】\"ウタ\" LIVE in 日本武道館 2022.07.22 配信特別ver.【UTA】",
-    "slug": "uta-live-budokan",
-    "category": [
-      "Live"
-    ],
-    "tags": [
-      "Live",
-      "LIVE映像",
-      "UTA",
-      "soundtrack",
-      "special",
-      "theme song",
-      "2022",
-      "anime",
-      "budokan",
-      "テーマソング",
-      "ONEPIECE",
-      "武道館",
-      "ウタ"
-    ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2022-07-29",
-    "notes": "Special live performance at Budokan 2022.\n『\"ウタ\" LIVE in 日本武道館』ノーカット配信特別ver.\n[00:00] overture\n[00:52] 新時代 (New Genesis)\n[04:40] MC1 \n[06:01] 逆光 (Backlight)\n[07:38] MC2\n[08:31] 私は最強 (I'm Invincible)\n[10:13] MC3",
-    "related": [
-      "shinjidai-new-genesis-uta-live"
-    ],
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -996,6 +967,38 @@
     "thumbnailUrl": null
   },
   {
+    "id": "post-ado-233",
+    "youtubeUrl": "https://www.youtube.com/watch?v=yyd5Cz6UjhI",
+    "title": "【ウタ】\"ウタ\" LIVE in 日本武道館 2022.07.22 配信特別ver.【UTA】",
+    "slug": "uta-live-budokan",
+    "category": [
+      "Live"
+    ],
+    "tags": [
+      "Live",
+      "LIVE映像",
+      "UTA",
+      "soundtrack",
+      "special",
+      "theme song",
+      "2022",
+      "anime",
+      "budokan",
+      "テーマソング",
+      "ONEPIECE",
+      "武道館",
+      "ウタ"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2022-07-29",
+    "notes": "Special live performance at Budokan 2022.\n『\"ウタ\" LIVE in 日本武道館』ノーカット配信特別ver.\n[00:00] overture\n[00:52] 新時代 (New Genesis)\n[04:40] MC1 \n[06:01] 逆光 (Backlight)\n[07:38] MC2\n[08:31] 私は最強 (I'm Invincible)\n[10:13] MC3",
+    "related": [
+      "shinjidai-new-genesis-uta-live"
+    ],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
     "id": "post-ado-165",
     "youtubeUrl": "https://www.youtube.com/watch?v=jTVSU-Lr1ew",
     "title": "会いたくて (Aitakute)",
@@ -1135,36 +1138,6 @@
     "customDate": "2021-10-17",
     "notes": "",
     "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-38",
-    "youtubeUrl": "https://www.youtube.com/watch?v=l0WArCNh6G0",
-    "title": "MAGIC",
-    "slug": "magic",
-    "category": [
-      "MV",
-      "Original"
-    ],
-    "tags": [
-      "MV",
-      "soundtrack",
-      "theme song",
-      "主題歌",
-      "CAT'S EYE",
-      "2025",
-      "anime",
-      "テーマソング",
-      "halloween",
-      "labyrinth"
-    ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2025-10-31",
-    "notes": "Opening theme song of Anime \"Cat's Eye\".\nListen: [MAGIC](https://ado.lnk.to/magicWE)",
-    "related": [
-      "cats-eye-official-audio"
-    ],
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -1696,7 +1669,6 @@
       "Original"
     ],
     "tags": [
-      "spotlight",
       "MV",
       "original",
       "オススメ",
@@ -2488,6 +2460,134 @@
     "thumbnailUrl": null
   },
   {
+    "id": "post-ado-32",
+    "youtubeUrl": "https://www.youtube.com/watch?v=TZYqDl19qLQ",
+    "title": "おどるポンポコリン (Odoru Pompokorin)",
+    "slug": "odoru-ponpokorin",
+    "category": [
+      "Cover",
+      "MV"
+    ],
+    "tags": [
+      "MV",
+      "soundtrack",
+      "theme song",
+      "ちびまる子ちゃん",
+      "anime",
+      "主題歌",
+      "cover",
+      "maruko",
+      "collaboration",
+      "2026",
+      "テーマソング",
+      "adofav"
+    ],
+    "mood": "Playful / 遊び心",
+    "customDate": "2026-01-11",
+    "notes": "Ado's version of the theme song of Anime \"Chibi Maruko-chan\"\n\nTVアニメ『ちびまる子ちゃん』オープニング主題歌\nListen: [「おどるポンポコリン」](https://ado.lnk.to/ponpokorinID)",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-20",
+    "youtubeUrl": "https://www.youtube.com/watch?v=GQrEitDFQos",
+    "title": "【LIVE映像】ギラギラ ＠さいたまスーパーアリーナ 【Ado】(Gira Gira)",
+    "slug": "giragira-saitama",
+    "category": [
+      "Live",
+      "Original"
+    ],
+    "tags": [
+      "Live",
+      "LIVE映像",
+      "saitama",
+      "hibana",
+      "2026"
+    ],
+    "mood": "Dark / ダーク",
+    "customDate": "2026-03-28",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-228",
+    "youtubeUrl": "https://www.youtube.com/watch?v=xuTjCda8c1E",
+    "title": "テスト配信 (Test)",
+    "slug": "live-stream-2026-test",
+    "category": [
+      "Others"
+    ],
+    "tags": [
+      "live stream",
+      "2026",
+      "special",
+      "リズム天国",
+      "Rhythm Heaven",
+      "others"
+    ],
+    "mood": null,
+    "customDate": "2026-07-15",
+    "notes": "",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-63",
+    "youtubeUrl": "https://www.youtube.com/watch?v=aDQ_O24xcNU",
+    "title": "【カラオケ練習用】Episode X【off vocal】",
+    "slug": "episode-x-off-vocal",
+    "category": [
+      "Instrumental & Off-Vocal"
+    ],
+    "tags": [
+      "instrumental-off-vocal",
+      "off-vocal",
+      "karaoke"
+    ],
+    "mood": null,
+    "customDate": "2024-12-13",
+    "notes": "",
+    "related": [
+      "episode-x"
+    ],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-38",
+    "youtubeUrl": "https://www.youtube.com/watch?v=l0WArCNh6G0",
+    "title": "MAGIC",
+    "slug": "magic",
+    "category": [
+      "MV",
+      "Original"
+    ],
+    "tags": [
+      "MV",
+      "soundtrack",
+      "theme song",
+      "主題歌",
+      "CAT'S EYE",
+      "2025",
+      "anime",
+      "テーマソング",
+      "halloween",
+      "labyrinth"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2025-10-31",
+    "notes": "Opening theme song of Anime \"Cat's Eye\".\nListen: [MAGIC](https://ado.lnk.to/magicWE)",
+    "related": [
+      "cats-eye-official-audio"
+    ],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
     "id": "post-ado-86",
     "youtubeUrl": "https://www.youtube.com/watch?v=zS2bYiGdfLE",
     "title": "【初オリジナル曲】イモでもいいじゃん/すいぽてっ！【新人歌い手グループ】(Imo Demo Iijyann)",
@@ -2596,27 +2696,25 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-129",
-    "youtubeUrl": "https://www.youtube.com/watch?v=hgyGhu49sGc",
-    "title": "FREEDOM",
-    "slug": "freedom",
+    "id": "post-ado-199",
+    "youtubeUrl": "https://www.youtube.com/watch?v=iHIrEqU5cwM",
+    "title": "恋愛裁判 歌いました (Love Trial)",
+    "slug": "renai-saihan-love-trial",
     "category": [
-      "MV",
-      "Original"
+      "Cover"
     ],
     "tags": [
-      "MV",
-      "jon-YAKITORY",
-      "狂言",
-      "kyogen",
-      "2022",
-      "Adoのベストアドバム",
-      "Ado's Best Adobum",
-      "adonobesutoadobamu"
+      "cover",
+      "歌いました",
+      "Vocaloid",
+      "40mP",
+      "Hatsune Miku",
+      "2018",
+      "初音ミク"
     ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2022-10-24",
-    "notes": "詞曲・編曲：jon-YAKITORY\nListen: [狂言 Kyogen](https://ado.lnk.to/kyogenEM) (Track 4)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)\n[歌詞 Lyrics](https://www.uta-net.com/song/313113/)",
+    "mood": "Playful / 遊び心",
+    "customDate": "2018-08-26",
+    "notes": "",
     "related": null,
     "likes": 0,
     "thumbnailUrl": null
@@ -3043,35 +3141,6 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-96",
-    "youtubeUrl": "https://www.youtube.com/watch?v=eZuDklxsaRg",
-    "title": "unravel 歌いました",
-    "slug": "unravel-2023",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "TK",
-      "2023",
-      "Adoの歌ってみたアルバム",
-      "Ado's Utattemita Album",
-      "Adoのベストアドバム",
-      "Ado's Best Adobum",
-      "adonobesutoadobamu",
-      "anime"
-    ],
-    "mood": "Dark / ダーク",
-    "customDate": "2023-11-15",
-    "notes": "Listen: [Adoの歌ってみたアルバム](https://ado.lnk.to/utattemitaWE) (Track 8)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
-    "related": [
-      "unravel-budokan"
-    ],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-ado-208",
     "youtubeUrl": "https://www.youtube.com/watch?v=Up0NYPUa1us",
     "title": "立ち入り禁止 (Live At Kアリーナ横浜, 2024) (No Trespassing)",
@@ -3270,85 +3339,6 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-137",
-    "youtubeUrl": "https://www.youtube.com/watch?v=hyV1AJiFNyo",
-    "title": "ウタカタララバイ（ウタ from ONE PIECE FILM RED）(Fleeting Lullaby)",
-    "slug": "utakata-lullaby-fleeting-lullaby-uta",
-    "category": [
-      "MV",
-      "Original"
-    ],
-    "tags": [
-      "MV",
-      "UTA",
-      "soundtrack",
-      "ONE PIECE FILM RED",
-      "FAKE TYPE.",
-      "ウタの歌",
-      "Adoのベストアドバム",
-      "Ado's Best Adobum",
-      "adonobesutoadobamu",
-      "2022",
-      "anime",
-      "Uta's Songs One Piece Film Red",
-      "ONEPIECE",
-      "ウタ"
-    ],
-    "mood": "Playful / 遊び心",
-    "customDate": "2022-08-06",
-    "notes": "\"Fleeting Lullaby\" - Written and Produced by FAKE TYPE. | Uta's Songs: One Piece Film Red (Track 4)\n楽曲提供：FAKE TYPE.\n\nListen: [ウタの歌 ONE PIECE FILM RED](https://ado.lnk.to/utanoutaID) (Track 4)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
-    "related": [
-      "tot-musica-uta"
-    ],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-nico-3",
-    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31324700",
-    "title": "Strangers歌いました【Adorment】",
-    "slug": "strangers-niconico",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "niconico",
-      "2017",
-      "初音ミク",
-      "Hatsune Miku",
-      "Vocaloid"
-    ],
-    "mood": "Chill / バラード",
-    "customDate": "2017-06-02",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-167",
-    "youtubeUrl": "https://www.youtube.com/watch?v=P12337hMnbI",
-    "title": "アンチシステム’s 歌いました (Antisystem's)",
-    "slug": "antisystems",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "jon-YAKITORY",
-      "2021"
-    ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2021-07-15",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-ado-220",
     "youtubeUrl": "https://www.youtube.com/watch?v=WpyOwylZHwo",
     "title": "「踊」のライブ映像を一緒に見よう",
@@ -3456,6 +3446,189 @@
     "thumbnailUrl": null
   },
   {
+    "id": "post-ado-51",
+    "youtubeUrl": "https://www.youtube.com/watch?v=iDvuZ7mRiJ0",
+    "title": "【LIVE映像】風のゆくえ （EXPO 2025 大阪・関西万博 ）【Ado】(Where The Wind Blows)",
+    "slug": "kaze-no-yukue-expo2025",
+    "category": [
+      "Original",
+      "Live"
+    ],
+    "tags": [
+      "Live",
+      "LIVE映像",
+      "EXPO 2025",
+      "UTA",
+      "Top 10 Playlist",
+      "Yuta Orisaka",
+      "秦基博",
+      "2025",
+      "ウタ"
+    ],
+    "mood": "Melancholy / 切ない",
+    "customDate": "2025-05-03",
+    "notes": "\"Where The Wind Blows\" - Written and Produced by Yuta Orisaka\n楽曲提供：秦基博",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-182",
+    "youtubeUrl": "https://www.youtube.com/watch?v=13dECLUD-5Q",
+    "title": "Limbo 歌いました",
+    "slug": "limbo",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "Vocaloid",
+      "立椅子かんな",
+      "2020"
+    ],
+    "mood": "Dark / ダーク",
+    "customDate": "2020-09-19",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-129",
+    "youtubeUrl": "https://www.youtube.com/watch?v=hgyGhu49sGc",
+    "title": "FREEDOM",
+    "slug": "freedom",
+    "category": [
+      "MV",
+      "Original"
+    ],
+    "tags": [
+      "MV",
+      "jon-YAKITORY",
+      "狂言",
+      "kyogen",
+      "2022",
+      "Adoのベストアドバム",
+      "Ado's Best Adobum",
+      "adonobesutoadobamu"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2022-10-24",
+    "notes": "詞曲・編曲：jon-YAKITORY\nListen: [狂言 Kyogen](https://ado.lnk.to/kyogenEM) (Track 4)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)\n[歌詞 Lyrics](https://www.uta-net.com/song/313113/)",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-96",
+    "youtubeUrl": "https://www.youtube.com/watch?v=eZuDklxsaRg",
+    "title": "unravel 歌いました",
+    "slug": "unravel-2023",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "TK",
+      "2023",
+      "Adoの歌ってみたアルバム",
+      "Ado's Utattemita Album",
+      "Adoのベストアドバム",
+      "Ado's Best Adobum",
+      "adonobesutoadobamu",
+      "anime"
+    ],
+    "mood": "Dark / ダーク",
+    "customDate": "2023-11-15",
+    "notes": "Listen: [Adoの歌ってみたアルバム](https://ado.lnk.to/utattemitaWE) (Track 8)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
+    "related": [
+      "unravel-budokan"
+    ],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-137",
+    "youtubeUrl": "https://www.youtube.com/watch?v=hyV1AJiFNyo",
+    "title": "ウタカタララバイ（ウタ from ONE PIECE FILM RED）(Fleeting Lullaby)",
+    "slug": "utakata-lullaby-fleeting-lullaby-uta",
+    "category": [
+      "MV",
+      "Original"
+    ],
+    "tags": [
+      "MV",
+      "UTA",
+      "soundtrack",
+      "ONE PIECE FILM RED",
+      "FAKE TYPE.",
+      "ウタの歌",
+      "Adoのベストアドバム",
+      "Ado's Best Adobum",
+      "adonobesutoadobamu",
+      "2022",
+      "anime",
+      "Uta's Songs One Piece Film Red",
+      "ONEPIECE",
+      "ウタ"
+    ],
+    "mood": "Playful / 遊び心",
+    "customDate": "2022-08-06",
+    "notes": "\"Fleeting Lullaby\" - Written and Produced by FAKE TYPE. | Uta's Songs: One Piece Film Red (Track 4)\n楽曲提供：FAKE TYPE.\n\nListen: [ウタの歌 ONE PIECE FILM RED](https://ado.lnk.to/utanoutaID) (Track 4)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
+    "related": [
+      "tot-musica-uta"
+    ],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-nico-3",
+    "youtubeUrl": "https://www.nicovideo.jp/watch/sm31324700",
+    "title": "Strangers歌いました【Adorment】",
+    "slug": "strangers-niconico",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "niconico",
+      "2017",
+      "初音ミク",
+      "Hatsune Miku",
+      "Vocaloid"
+    ],
+    "mood": "Chill / バラード",
+    "customDate": "2017-06-02",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-167",
+    "youtubeUrl": "https://www.youtube.com/watch?v=P12337hMnbI",
+    "title": "アンチシステム’s 歌いました (Antisystem's)",
+    "slug": "antisystems",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "jon-YAKITORY",
+      "2021"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2021-07-15",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
     "id": "post-ado-21",
     "youtubeUrl": "https://www.youtube.com/watch?v=UwXSwesRyZQ",
     "title": "【Ado×監督×プロデューサー】ビバリウム - スペシャル対談 (Vivarium Special Interview)",
@@ -3499,31 +3672,51 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-32",
-    "youtubeUrl": "https://www.youtube.com/watch?v=TZYqDl19qLQ",
-    "title": "おどるポンポコリン (Odoru Pompokorin)",
-    "slug": "odoru-ponpokorin",
+    "id": "post-ado-155",
+    "youtubeUrl": "https://www.youtube.com/watch?v=nuvNgt60km4",
+    "title": "Snow Song Show 歌いました",
+    "slug": "snow-song-show",
     "category": [
-      "Cover",
-      "MV"
+      "Cover"
     ],
     "tags": [
-      "MV",
-      "soundtrack",
-      "theme song",
-      "ちびまる子ちゃん",
-      "anime",
-      "主題歌",
       "cover",
-      "maruko",
-      "collaboration",
-      "2026",
-      "テーマソング",
-      "adofav"
+      "歌いました",
+      "Vocaloid",
+      "Hatsune Miku",
+      "Christmas",
+      "season-winter",
+      "2021",
+      "初音ミク",
+      "Hidden gem"
     ],
-    "mood": "Playful / 遊び心",
-    "customDate": "2026-01-11",
-    "notes": "Ado's version of the theme song of Anime \"Chibi Maruko-chan\"\n\nTVアニメ『ちびまる子ちゃん』オープニング主題歌\nListen: [「おどるポンポコリン」](https://ado.lnk.to/ponpokorinID)",
+    "mood": "Chill / バラード",
+    "customDate": "2021-12-25",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-194",
+    "youtubeUrl": "https://www.youtube.com/watch?v=N5cSFdGANVc",
+    "title": "乙女解剖 歌いました (Otome Kaibou)(Girl Dissection)",
+    "slug": "otome-kaibou",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "Vocaloid",
+      "DECO*27",
+      "Hatsune Miku",
+      "2019",
+      "初音ミク"
+    ],
+    "mood": "Dark / ダーク",
+    "customDate": "2019-02-11",
+    "notes": "",
     "related": null,
     "likes": 0,
     "thumbnailUrl": null
@@ -3777,33 +3970,6 @@
     "mood": "Chill / バラード",
     "customDate": "2021-06-14",
     "notes": "詞曲・編曲：biz\nIllust：ケイゴイノウエ、Movie：神宮司\nTheme song of drama \"1 Hour Until First Lovemaking\".\nドラマ「初情事まであと 1 時間」オープニング主題歌\n\nListen: [狂言 Kyogen](https://ado.lnk.to/kyogenEM) (Track 14)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)\n[歌詞 Lyrics](https://www.uta-net.com/song/303332/)",
-    "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-51",
-    "youtubeUrl": "https://www.youtube.com/watch?v=iDvuZ7mRiJ0",
-    "title": "【LIVE映像】風のゆくえ （EXPO 2025 大阪・関西万博 ）【Ado】(Where The Wind Blows)",
-    "slug": "kaze-no-yukue-expo2025",
-    "category": [
-      "Original",
-      "Live"
-    ],
-    "tags": [
-      "Live",
-      "LIVE映像",
-      "EXPO 2025",
-      "UTA",
-      "Top 10 Playlist",
-      "Yuta Orisaka",
-      "秦基博",
-      "2025",
-      "ウタ"
-    ],
-    "mood": "Melancholy / 切ない",
-    "customDate": "2025-05-03",
-    "notes": "\"Where The Wind Blows\" - Written and Produced by Yuta Orisaka\n楽曲提供：秦基博",
     "related": null,
     "likes": 0,
     "thumbnailUrl": null
@@ -4200,28 +4366,6 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-182",
-    "youtubeUrl": "https://www.youtube.com/watch?v=13dECLUD-5Q",
-    "title": "Limbo 歌いました",
-    "slug": "limbo",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "Vocaloid",
-      "立椅子かんな",
-      "2020"
-    ],
-    "mood": "Dark / ダーク",
-    "customDate": "2020-09-19",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-ado-nico-6",
     "youtubeUrl": "https://www.nicovideo.jp/watch/sm32677441",
     "title": "わたしのアール 歌ってみた【Adovice】(Watashi no R)(My R)",
@@ -4243,121 +4387,7 @@
     "customDate": "2018-02-02",
     "notes": "作詞作曲編曲：くらげP  ",
     "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-189",
-    "youtubeUrl": "https://www.youtube.com/watch?v=A4fcb5LV1F8",
-    "title": "バスケットワーム(Basket Worm) 歌いました【Cover】",
-    "slug": "basket-worm",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "2019"
-    ],
-    "mood": "Melancholy / 切ない",
-    "customDate": "2019-11-08",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-199",
-    "youtubeUrl": "https://www.youtube.com/watch?v=iHIrEqU5cwM",
-    "title": "恋愛裁判 歌いました (Love Trial)",
-    "slug": "renai-saihan-love-trial",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "Vocaloid",
-      "40mP",
-      "Hatsune Miku",
-      "2018",
-      "初音ミク"
-    ],
-    "mood": "Playful / 遊び心",
-    "customDate": "2018-08-26",
-    "notes": "",
-    "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-204",
-    "youtubeUrl": "https://www.youtube.com/watch?v=hOxAQO57zyY",
-    "title": "メーベル 歌いました【ワンコーラス】(Mabel)",
-    "slug": "mabel",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "2018"
-    ],
-    "mood": "Melancholy / 切ない",
-    "customDate": "2018-08-26",
-    "notes": "",
-    "related": null,
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-155",
-    "youtubeUrl": "https://www.youtube.com/watch?v=nuvNgt60km4",
-    "title": "Snow Song Show 歌いました",
-    "slug": "snow-song-show",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "Vocaloid",
-      "Hatsune Miku",
-      "Christmas",
-      "season-winter",
-      "2021",
-      "初音ミク",
-      "Hidden gem"
-    ],
-    "mood": "Chill / バラード",
-    "customDate": "2021-12-25",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-194",
-    "youtubeUrl": "https://www.youtube.com/watch?v=N5cSFdGANVc",
-    "title": "乙女解剖 歌いました (Otome Kaibou)(Girl Dissection)",
-    "slug": "otome-kaibou",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "Vocaloid",
-      "DECO*27",
-      "Hatsune Miku",
-      "2019",
-      "初音ミク"
-    ],
-    "mood": "Dark / ダーク",
-    "customDate": "2019-02-11",
-    "notes": "",
-    "related": null,
-    "likes": 0,
+    "likes": 1,
     "thumbnailUrl": null
   },
   {
@@ -4519,6 +4549,46 @@
     "customDate": "2020-12-11",
     "notes": "",
     "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-189",
+    "youtubeUrl": "https://www.youtube.com/watch?v=A4fcb5LV1F8",
+    "title": "バスケットワーム(Basket Worm) 歌いました【Cover】",
+    "slug": "basket-worm",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "2019"
+    ],
+    "mood": "Melancholy / 切ない",
+    "customDate": "2019-11-08",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-204",
+    "youtubeUrl": "https://www.youtube.com/watch?v=hOxAQO57zyY",
+    "title": "メーベル 歌いました【ワンコーラス】(Mabel)",
+    "slug": "mabel",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "2018"
+    ],
+    "mood": "Melancholy / 切ない",
+    "customDate": "2018-08-26",
+    "notes": "",
+    "related": null,
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -5620,26 +5690,6 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-184",
-    "youtubeUrl": "https://www.youtube.com/watch?v=UoGacSBPYPc",
-    "title": "ヒステリックナイトガール 歌いました (Hysteric Night Girl)",
-    "slug": "hysteric-night-girl",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "2020"
-    ],
-    "mood": "Chill / バラード",
-    "customDate": "2020-07-25",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-ado-171",
     "youtubeUrl": "https://www.youtube.com/watch?v=YnSW8ian29w",
     "title": "踊 (Odo)",
@@ -5785,6 +5835,26 @@
     "customDate": "2025-01-24",
     "notes": "Theme song of drama \"Who saw the peacock dance in the jungle?\".\nTBS系 金曜ドラマ『クジャクのダンス、誰が見た？』主題歌\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
     "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-184",
+    "youtubeUrl": "https://www.youtube.com/watch?v=UoGacSBPYPc",
+    "title": "ヒステリックナイトガール 歌いました (Hysteric Night Girl)",
+    "slug": "hysteric-night-girl",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "2020"
+    ],
+    "mood": "Chill / バラード",
+    "customDate": "2020-07-25",
+    "notes": "",
+    "related": [],
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -6881,31 +6951,6 @@
     "thumbnailUrl": null
   },
   {
-    "id": "post-ado-36",
-    "youtubeUrl": "https://www.youtube.com/watch?v=j3nwow5QXkw",
-    "title": "彗星列車のベルが鳴る 歌いました (The Sound of the Comet Train's Bell)",
-    "slug": "suisei-ressha-no-bell-ga-naru",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "After the rain",
-      "AtR",
-      "そらる",
-      "まふまふ",
-      "2025",
-      "mafumafu"
-    ],
-    "mood": "Melancholy / 切ない",
-    "customDate": "2025-12-12",
-    "notes": "",
-    "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
     "id": "post-ado-7",
     "youtubeUrl": "https://www.youtube.com/watch?v=WSuAVkaSC38",
     "title": "Love me forever!（Official Audio）",
@@ -6934,34 +6979,6 @@
     "related": [
       "live-stream-2026-rhythm-heaven-1"
     ],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-88",
-    "youtubeUrl": "https://www.youtube.com/watch?v=5iAQF_q6FSk",
-    "title": "Value",
-    "slug": "value",
-    "category": [
-      "MV",
-      "Original"
-    ],
-    "tags": [
-      "MV",
-      "Zanmu",
-      "残夢",
-      "Adoのベストアドバム",
-      "Ado's Best Adobum",
-      "adonobesutoadobamu",
-      "ポリスピカデリー",
-      "殘夢",
-      "collaboration",
-      "2024"
-    ],
-    "mood": "Chill / バラード",
-    "customDate": "2024-02-23",
-    "notes": "詞曲・編曲：ポリスピカデリー\nMovie: Gko (iPadでつくる - Made on iPad series)\nListen: [残夢 Zanmu](https://ado.lnk.to/zanmu) (Track 15)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
-    "related": null,
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -7032,6 +7049,34 @@
     "thumbnailUrl": null
   },
   {
+    "id": "post-ado-88",
+    "youtubeUrl": "https://www.youtube.com/watch?v=5iAQF_q6FSk",
+    "title": "Value",
+    "slug": "value",
+    "category": [
+      "MV",
+      "Original"
+    ],
+    "tags": [
+      "MV",
+      "Zanmu",
+      "残夢",
+      "Adoのベストアドバム",
+      "Ado's Best Adobum",
+      "adonobesutoadobamu",
+      "ポリスピカデリー",
+      "殘夢",
+      "collaboration",
+      "2024"
+    ],
+    "mood": "Chill / バラード",
+    "customDate": "2024-02-23",
+    "notes": "詞曲・編曲：ポリスピカデリー\nMovie: Gko (iPadでつくる - Made on iPad series)\nListen: [残夢 Zanmu](https://ado.lnk.to/zanmu) (Track 15)\nListen: [Adoのベストアドバム Ado's Best Adobum](https://ado.lnk.to/best_adobumWE)",
+    "related": null,
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
     "id": "post-ado-175",
     "youtubeUrl": "https://www.youtube.com/watch?v=QLsXgj4_gOc",
     "title": "君の体温 歌いました (Kimi no Taion)",
@@ -7047,6 +7092,57 @@
     "customDate": "2021-01-10",
     "notes": "",
     "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-36",
+    "youtubeUrl": "https://www.youtube.com/watch?v=j3nwow5QXkw",
+    "title": "彗星列車のベルが鳴る 歌いました (The Sound of the Comet Train's Bell)",
+    "slug": "suisei-ressha-no-bell-ga-naru",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "After the rain",
+      "AtR",
+      "そらる",
+      "まふまふ",
+      "2025",
+      "mafumafu"
+    ],
+    "mood": "Melancholy / 切ない",
+    "customDate": "2025-12-12",
+    "notes": "",
+    "related": [],
+    "likes": 0,
+    "thumbnailUrl": null
+  },
+  {
+    "id": "post-ado-53",
+    "youtubeUrl": "https://www.youtube.com/watch?v=EFsSYiNl2AQ",
+    "title": "ヒバナ 歌いました (Hibana)",
+    "slug": "hibana",
+    "category": [
+      "Cover"
+    ],
+    "tags": [
+      "cover",
+      "歌いました",
+      "Vocaloid",
+      "Hatsune Miku",
+      "DECO*27",
+      "2025",
+      "初音ミク"
+    ],
+    "mood": "Hype / アゲ曲",
+    "customDate": "2025-04-25",
+    "notes": "",
+    "related": [
+      "hibana-hibana-saitama"
+    ],
     "likes": 0,
     "thumbnailUrl": null
   },
@@ -7172,32 +7268,6 @@
     "customDate": "2022-08-23",
     "notes": "",
     "related": [],
-    "likes": 0,
-    "thumbnailUrl": null
-  },
-  {
-    "id": "post-ado-53",
-    "youtubeUrl": "https://www.youtube.com/watch?v=EFsSYiNl2AQ",
-    "title": "ヒバナ 歌いました (Hibana)",
-    "slug": "hibana",
-    "category": [
-      "Cover"
-    ],
-    "tags": [
-      "cover",
-      "歌いました",
-      "Vocaloid",
-      "Hatsune Miku",
-      "DECO*27",
-      "2025",
-      "初音ミク"
-    ],
-    "mood": "Hype / アゲ曲",
-    "customDate": "2025-04-25",
-    "notes": "",
-    "related": [
-      "hibana-hibana-saitama"
-    ],
     "likes": 0,
     "thumbnailUrl": null
   }
