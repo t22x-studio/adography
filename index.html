@@ -515,8 +515,9 @@
         <i class="fa-solid fa-magnifying-glass text-xs"></i>
         </button>
        <div id="searchExpandWrap" class="w-0 overflow-hidden transition-all duration-200 ease-out">
-        <input type="text" id="searchInput" placeholder="Search tracks, tags..."
-        oninput="app.handleSearch(this.value)"
+       <input type="text" id="searchInput" placeholder="Search tracks, tags..."
+        oninput="document.getElementById('clearSearchBtn')?.classList.toggle('hidden', !this.value.trim())"
+        onkeydown="if(event.key==='Enter') { app.submitSearch(); this.blur(); }"
         onblur="app.collapseSpotlightSearch()"
         class="w-40 sm:w-56 ml-1 pl-2 pr-6 py-1.5 bg-[#eae5db] border border-stone-300 rounded-lg text-xs text-stone-800 focus:outline-none focus:border-stone-600">
         </div>
@@ -4135,6 +4136,32 @@
         this.currentPage = page;
         this.renderCurrentView();
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      submitSearch() {
+        const input = document.getElementById('searchInput');
+        const val = input ? input.value.trim() : '';
+        this.searchQuery = val;
+        this.currentPage = 1;
+
+        // 1. If currently in detail view with a playing video, hand audio over to mini-player seamlessly
+        if (this.activeView === 'detail' && this.selectedPostId) {
+          const detailFrame = document.getElementById('detailLargeIframe');
+          if (detailFrame && this.isIframePlaying) {
+            const currentPost = this.posts.find(p => p.id === this.selectedPostId);
+            if (currentPost) {
+              this.mountPersistentTrack(currentPost);
+            }
+          }
+        }
+
+        // 2. Navigate to search results with full browser history tracking
+        if (['detail', 'playlists', 'tags'].includes(this.activeView)) {
+          this.navigateTo('main', null, true);
+        } else {
+          history.pushState({ view: this.activeView, query: val }, '', `#${this.activeView}`);
+          this.renderCurrentView();
+        }
       }
 
       handleSearch(val) {
