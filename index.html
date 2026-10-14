@@ -2582,6 +2582,7 @@
                     <option value="za" ${this.gridGrouping === 'za' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Title (Z → A)</option>
                     <option value="category" ${this.gridGrouping === 'category' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Category</option>
                     <option value="mood" ${this.gridGrouping === 'mood' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Mood</option>
+                    <option value="color" ${this.gridGrouping === 'color' ? 'selected' : ''} class="bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-200">By Color</option>
                   </select>
                 </div>
 
@@ -2875,6 +2876,34 @@
 
           Object.keys(groups).forEach(key => {
             sortByDateDesc(groups[key]);
+          });
+          return groups;
+
+        } else if (this.gridGrouping === 'color') {
+          // 6. Color Tag Grouping (First match + Mixed default)
+          const COLOR_ORDER = ["Blue","Dark","Violet", "Pink", "Red", "White", "Yellow", "Orange", "Green", "Colorful", "Mixed"];
+          COLOR_ORDER.forEach(c => { groups[c] = []; });
+
+          const COLOR_TARGETS = ["blue", "dark", "violet", "pink", "red", "white", "yellow", "orange", "green", "colorful"];
+
+          filteredPosts.forEach(post => {
+            const postTags = (post.tags || []).map(t => String(t).trim().toLowerCase());
+            let matchedColor = null;
+
+            for (const color of COLOR_TARGETS) {
+              if (postTags.includes(color)) {
+                matchedColor = color.charAt(0).toUpperCase() + color.slice(1);
+                break; // Option 2: Strictly assign to first matching color
+              }
+            }
+
+            const targetGroup = matchedColor || "Mixed";
+            groups[targetGroup].push(post);
+          });
+
+          Object.keys(groups).forEach(key => {
+            sortByDateDesc(groups[key]);
+            if (groups[key].length === 0) delete groups[key]; // Auto-hide empty colors
           });
           return groups;
 
